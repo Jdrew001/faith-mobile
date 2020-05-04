@@ -10,6 +10,20 @@
         ]
         },
       {
+          "id": "cordova-plugin-ionic.common",
+          "file": "plugins/cordova-plugin-ionic/dist/common.js",
+          "pluginId": "cordova-plugin-ionic",
+        "clobbers": [
+          "IonicCordova"
+        ]
+        },
+      {
+          "id": "cordova-plugin-ionic.guards",
+          "file": "plugins/cordova-plugin-ionic/dist/guards.js",
+          "pluginId": "cordova-plugin-ionic",
+        "runs": true
+        },
+      {
           "id": "es6-promise-plugin.Promise",
           "file": "plugins/es6-promise-plugin/www/promise.js",
           "pluginId": "es6-promise-plugin",
@@ -19,6 +33,7 @@
     module.exports.metadata =
     // TOP OF METADATA
     {
+      "cordova-plugin-ionic": "5.4.7",
       "cordova-plugin-screen-orientation": "3.0.2",
       "es6-promise-plugin": "4.2.2"
     };

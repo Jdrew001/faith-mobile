@@ -8,8 +8,9 @@
     s.authors = { 'Capacitor Generator' => 'hi@example.com' }
     s.source = { :git => 'https://github.com/ionic-team/does-not-exist.git', :tag => '2.0.0' }
     s.source_files = 'sourcesstatic/**/*.{swift,h,m,c,cc,mm,cpp}'
-    s.ios.deployment_target  = '11.0'
+    s.ios.deployment_target  = '11.3'
     s.dependency 'CapacitorCordova'
-    s.swift_version  = '5.0'
+    s.pod_target_xcconfig = { 'OTHER_LDFLAGS' => '-ObjC' }
+    s.swift_version  = '4.2'
     s.static_framework = true
   end
