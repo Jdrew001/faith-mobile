@@ -5,10 +5,6 @@
   "npmClient": "npm",
   "webDir": "www",
   "cordova": {},
-  "server": {
-    "url": "http://192.168.1.204:8100",
-    "cleartext": true
-  },
   "overrideUserAgent": "my custom user agent",
   "backgroundColor": "#ffffffff",
   "android": {
