@@ -32,7 +32,7 @@ export class RequestInterceptor implements HttpInterceptor {
 
     private handleError(error: HttpErrorResponse) {
         this.loaderService.toggleLoader(false);
-        this.presentToast();
+        this.presentToast(error.message);
         return throwError(error);
     }
 
@@ -42,10 +42,10 @@ export class RequestInterceptor implements HttpInterceptor {
         }, CoreConstants.LOAD_TIME);
     }
 
-    private presentToast() {
+    private presentToast(msg) {
         this.toastController.create({
-            message: 'An error has occurred',
-            duration: 2000,
+            message: msg,
+            duration: 20000,
             color: 'danger'
         }).then(val => val.present());
     }
