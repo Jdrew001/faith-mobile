@@ -1,0 +1,22 @@
+<div class="social-container">
+  <ng-container>
+    <ion-row *ngFor="let item of data.data; let i = index;">
+      <ion-card class="container-card" *ngIf="(getMedia(item) && getMedia(item).type === 'photo') || (getMedia(item) && getMedia(item).type === 'video')">
+        <ion-card-content class="container-content">
+          <ng-container *ngIf="getMedia(item) && getMedia(item).type === 'photo'">
+          <img [src]="getMedia(item).image.src" />
+        </ng-container>
+        <ng-container *ngIf="getMedia(item) && getMedia(item).type === 'video'">
+          <video #player controls [poster]="getMedia(item).image.src">
+            <source [src]="getMedia(item).media_source" type="video/mp4">
+          </video>
+        </ng-container>
+        </ion-card-content>
+        <ion-card-header>
+          <ion-card-subtitle>{{ convertToLocalDate(item.created_time) }}</ion-card-subtitle>
+          <ion-card-title *ngIf="item.message">{{ item.message }}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-row>
+  </ng-container>
+</div>

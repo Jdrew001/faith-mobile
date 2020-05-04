@@ -1,0 +1,124 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay" class="main-bg-color">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <img src="../assets/faith_tab_logo_white.png" />
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="menu">
+        <ion-grid>
+          <ion-row>
+            <ion-col [size]="6" [class.selected]="selectedIndex == 0">
+              <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+                <ion-item text-center *ngIf="i === 0 && getMenuItemStatus('Announcements')" (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false">
+                  <ion-label>
+                    <ion-row><ion-icon [name]="p.icon + '-outline'"></ion-icon></ion-row>
+                    <ion-row><span>{{ p.title }}</span></ion-row>
+                  </ion-label>
+                </ion-item>
+                <ion-item text-center *ngIf="i === 0 && !getMenuItemStatus('Announcements')" lines="none" detail="false">
+                  <ion-label>
+                    <ion-row><ion-icon [name]="p.icon + '-outline'"></ion-icon></ion-row>
+                    <ion-row><span>{{ p.title }}</span></ion-row>
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-col>
+            <ion-col [size]="6" [class.selected]="selectedIndex == 1">
+              <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+                <ion-item *ngIf="i === 1 && getMenuItemStatus('Events')" (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false">
+                  <ion-label>
+                    <ion-row><ion-icon [name]="p.icon + '-outline'"></ion-icon></ion-row>
+                    <ion-row><span>{{ p.title }}</span></ion-row>
+                  </ion-label>
+                </ion-item>
+                <ion-item *ngIf="i === 1 && !getMenuItemStatus('Events')" lines="none" detail="false">
+                  <ion-label class="disabled-label">
+                    <ion-row><ion-icon [name]="p.icon + '-outline'"></ion-icon></ion-row>
+                    <ion-row><span>{{ p.title }}</span></ion-row>
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col [size]="6" [class.selected]="selectedIndex == 2">
+              <ion-menu-toggle auto-hide="false" disable="true" *ngFor="let p of appPages; let i = index">
+                <ion-item *ngIf="i === 2 && getMenuItemStatus('PrayerRequest')" (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false">
+                  <ion-label>
+                    <ion-row><ion-icon [name]="p.icon + '-outline'"></ion-icon></ion-row>
+                    <ion-row><span>{{ p.title }}</span></ion-row>
+                  </ion-label>
+                </ion-item>
+                <ion-item *ngIf="i === 2 && !getMenuItemStatus('PrayerRequest')" lines="none" detail="false">
+                  <ion-label class="disabled-label">
+                    <ion-row><ion-icon [name]="p.icon + '-outline'"></ion-icon></ion-row>
+                    <ion-row><span>{{ p.title }}</span></ion-row>
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-col>
+            <ion-col [size]="6" [class.selected]="selectedIndex == 3">
+              <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+                <ion-item *ngIf="i === 3 && getMenuItemStatus('Ministries')" (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false">
+                  <ion-label>
+                    <ion-row><ion-icon [name]="p.icon + '-outline'"></ion-icon></ion-row>
+                    <ion-row><span>{{ p.title }}</span></ion-row>
+                  </ion-label>
+                </ion-item>
+                <ion-item *ngIf="i === 3 && !getMenuItemStatus('Ministries')" lines="none" detail="false">
+                  <ion-label class="disabled-label">
+                    <ion-row><ion-icon [name]="p.icon + '-outline'"></ion-icon></ion-row>
+                    <ion-row><span>{{ p.title }}</span></ion-row>
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+
+            <ion-col [size]="6" [class.selected]="selectedIndex == 4">
+              <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+                <ion-item *ngIf="i === 4 && getMenuItemStatus('Connect')" (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false">
+                  <ion-label>
+                    <ion-row><ion-icon [name]="p.icon + '-outline'"></ion-icon></ion-row>
+                    <ion-row><span>{{ p.title }}</span></ion-row>
+                  </ion-label>
+                </ion-item>
+
+                <ion-item *ngIf="i === 4 && !getMenuItemStatus('Connect')" lines="none" detail="false">
+                  <ion-label class="disabled-label">
+                    <ion-row><ion-icon [name]="p.icon + '-outline'"></ion-icon></ion-row>
+                    <ion-row><span>{{ p.title }}</span></ion-row>
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-col>
+
+            <ion-col [size]="6" [class.selected]="selectedIndex == 5"> 
+              <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+                <ion-item *ngIf="i === 5 && getMenuItemStatus('Give')" (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false">
+                  <ion-label>
+                    <ion-row><ion-icon [name]="p.icon + '-outline'"></ion-icon></ion-row>
+                    <ion-row><span>{{ p.title }}</span></ion-row>
+                  </ion-label>
+                </ion-item>
+
+                <ion-item *ngIf="i === 5 && !getMenuItemStatus('Give')" lines="none" detail="false">
+                  <ion-label class="disabled-label">
+                    <ion-row><ion-icon [name]="p.icon + '-outline'"></ion-icon></ion-row>
+                    <ion-row><span>{{ p.title }}</span></ion-row>
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
+<app-loader></app-loader>

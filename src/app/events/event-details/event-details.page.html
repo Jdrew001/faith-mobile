@@ -1,0 +1,7 @@
+<ion-header>
+  <app-nav-detail [title]="'Event'" (dismiss)="dismissDetail($event)"></app-nav-detail>
+</ion-header>
+
+<ion-content>
+  <app-detail *ngIf="details" [details]="details" [type]="'event'"></app-detail>
+</ion-content>

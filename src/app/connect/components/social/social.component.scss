@@ -1,0 +1,49 @@
+div.social-container {
+    height: auto;
+    margin-top: 20vh;
+}
+
+img {
+    border-radius: 0px !important;
+    width: 100%;
+    margin: auto;
+}
+
+video {
+    border-radius: 0px !important;
+    width: 100%;
+    margin: auto;
+}
+
+ion-card-content {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+ion-card {
+    margin: auto !important;
+    position: relative;
+    bottom: 2em !important;
+    min-height: 15vh;
+    margin: 10% 5% 0% 5% !important;
+}
+
+.bar {
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+    transform: translate(0%, -100%);
+    background-image: url('../../../../assets/images/grey-gradient.jpg');
+}
+
+ion-icon {
+    color: #516065 !important;
+}
+
+ion-card-title {
+    font-size: 13px !important;
+}
+
+ion-card-subtitle {
+    font-size: 10px !important;
+}

@@ -1,0 +1,35 @@
+<ion-header>
+  <app-navigation></app-navigation>
+</ion-header>
+
+<ion-content>
+  <div class="heading fixed">
+    <app-icon-bar [icon]="'calendar-outline'" [title]="'Events'"></app-icon-bar>
+  </div>
+  <ion-card class="top fixed animated fadeIn faster">
+    <ion-card-content>
+      <ion-row class="calendar-container" style="width: 100%">
+        <ion-button class="ion-activatable ripple-parent left-button controls" (click)="onPrev()">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-button>
+        <ion-button class="ion-activatable ripple-parent right-button controls" (click)="onNext()">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-button>
+        <ion-calendar #cal [(ngModel)]="date"
+                (change)="onSelect($event)"
+                [format]="'YYYY-MM-DD'">
+        </ion-calendar>
+      </ion-row>
+      
+    </ion-card-content>
+  </ion-card>
+  <ion-row class="empty-row animated fadeIn faster" *ngIf="events.length === 0">
+    <ion-icon name="sad-outline"></ion-icon>
+    <p style="text-align: center; padding-top: 5%">No Events</p>
+  </ion-row>
+  <ion-row>
+    <app-list-card-item [type]="'events'" [items]="events" [detailPage]="'event-details'" (detailNavigate)="navigationToDetail($event)"></app-list-card-item>
+  </ion-row>
+</ion-content>

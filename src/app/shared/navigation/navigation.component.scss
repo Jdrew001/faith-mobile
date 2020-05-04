@@ -1,0 +1,18 @@
+ion-buttons {
+    position: absolute !important;
+    top: 0px !important;
+    height: 100% !important;
+
+    ion-menu-button {
+        font-size: 3em;
+        height: 100%;
+    }
+}
+
+img {
+    width: 50%;
+    display: block;
+    margin: auto;
+    padding: 5px 0px;
+    width: calc(100% - 60vw);
+}

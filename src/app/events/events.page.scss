@@ -1,0 +1,70 @@
+ion-card.top {
+    margin-top: 20% !important;
+}
+
+ion-card.bottom {
+    min-height: 50%;
+}
+
+ion-button.controls {
+    --background: transparent !important;
+    --background-activated: #f3f3f3 !important;
+    --background-activated-opacity: 0.8;
+    position: absolute;
+}
+
+ion-button.left-button {
+    left: 5%;
+    top: 0%;
+}
+
+ion-button.right-button {
+    right: 5%;
+    top: 0%;
+}
+
+ion-icon {
+    color: var(--ion-color-primary);
+}
+
+:host ::ng-deep .days {
+    height: 30px !important;
+}
+
+:host ::ng-deep .back, :host ::ng-deep .forward {
+    display: none !important;
+}
+
+.forward-icon {
+    color: #E02E2E !important;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+:host ::ng-deep ion-calendar ion-icon {
+    display: none !important;
+}
+
+:host ::ng-deep ion-calendar {
+    padding-top: 0px !important;
+}
+
+ion-row.empty-row {
+    margin: 0% 10vh;
+    position: relative;
+    top: 5% !important;
+    color: #929292;
+
+    ion-icon {
+        width: 100%;
+        font-size: 3em;
+        color: #9292928c;
+    }
+
+    p {
+        text-align: center;
+        padding-top: 5%;
+        width: 100%;
+    }
+}

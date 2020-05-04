@@ -1,0 +1,52 @@
+{
+  "test": {
+      "item" : "test"
+  },
+  "announcements": [
+    {
+      "title" : "Cancel Poop",
+      "description" : "There will be no service this sunday. See you Wednesday.",
+      "month" : "4",
+      "year": "2020",
+      "date" : "4/11/2020",
+      "imageUrl": "../../assets/images/noservice.jpg",
+      "isActive": true
+    },
+    {
+      "title" : "Cancel Test",
+      "description" : "There will be no service this sunday. See you Wednesday.",
+      "month" : "4",
+      "year": "2020",
+      "date" : "4/23/2020",
+      "imageUrl": "../../assets/images/noservice.jpg",
+      "isActive": true
+    },
+    {
+      "title" : "Cancel Service",
+      "description" : "There will be no service this sunday. See you Wednesday.",
+      "month" : "4",
+      "year": "2020",
+      "date" : "4/23/2020",
+      "imageUrl": "../../assets/images/noservice.jpg",
+      "isActive": true
+    },
+    {
+      "title" : "Cancel Play",
+      "description" : "There will be no service this sunday. See you Wednesday.",
+      "month" : "4",
+      "year": "2020",
+      "date" : "4/21/2020",
+      "imageUrl": "../../assets/images/noservice.jpg",
+      "isActive": true
+    },
+    {
+      "title" : "Cancel Play",
+      "description" : "There will be no service this sunday. See you Wednesday.",
+      "month" : "5",
+      "year": "2020",
+      "date" : "5/04/2020",
+      "imageUrl": "../../assets/images/noservice.jpg",
+      "isActive": true
+    }
+  ]
+}

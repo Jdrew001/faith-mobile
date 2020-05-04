@@ -1,0 +1,38 @@
+.forward-icon {
+    color: #E02E2E !important;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+img {
+    border-radius: 15px !important;
+}
+
+ion-input {
+    margin: 0px 5%;
+    border-bottom: 1px solid #3171e05c;
+}
+
+.segment {
+    scroll-behavior: smooth;
+}
+
+ion-row.empty-row {
+    margin: 0% 10vh;
+    position: relative;
+    top: 45% !important;
+    color: #929292;
+
+    ion-icon {
+        width: 100%;
+        font-size: 3em;
+        color: #9292928c;
+    }
+
+    p {
+        text-align: center;
+        padding-top: 5%;
+        width: 100%;
+    }
+}

@@ -1,0 +1,27 @@
+ul {
+    width: 100vw;
+    list-style-type: none;
+    padding: 0px !important;
+    text-align: center;
+    margin-bottom: 0px !important;
+}
+
+li {
+    display: inline-block;
+}
+
+p {
+    margin: 0px !important;
+}
+
+p.right {
+    font-size: 15px;
+    color: #E02E2E;
+    position: relative;
+    bottom: 10px;
+}
+
+ion-icon {
+    font-size: 4vh;
+    color: #E02E2E;
+}

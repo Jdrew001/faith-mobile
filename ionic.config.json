@@ -1,0 +1,8 @@
+{
+  "name": "faith-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "3a86812d"
+}

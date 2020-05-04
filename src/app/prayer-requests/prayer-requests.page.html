@@ -1,0 +1,61 @@
+<ion-header>
+  <app-navigation></app-navigation>
+</ion-header>
+
+<ion-content>
+  <div class="heading fixed">
+    <app-icon-bar [icon]="'book-outline'" [title]="'Prayer Request'"></app-icon-bar>
+  </div>
+  <ion-card [formGroup]="formGroup" class="top fixed animated fadeIn faster">
+    <ion-row>
+      <h4 style="padding-left: 1em; font-size: 14px">Your Details</h4>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item mode="md">
+          <ion-label position="floating">First Name</ion-label>
+          <ion-input formControlName="firstname"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item mode="md">
+          <ion-label position="floating">Last Name</ion-label>
+          <ion-input formControlName="lastname"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item mode="md">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input inputmode="email" formControlName="email"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item mode="md">
+          <ion-label position="floating">Phone</ion-label>
+          <ion-input inputmode="number" formControlName="phone" appPhoneMask></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item mode="md">
+          <ion-label position="floating">Notes</ion-label>
+          <ion-textarea formControlName="notes" rows="6"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="danger" size="small" (click)="reset()"><ion-icon slot="icon-only" name="close-outline"></ion-icon></ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" color="danger" size="small" (click)="submit()"><ion-icon slot="icon-only" name="checkmark-outline"></ion-icon></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

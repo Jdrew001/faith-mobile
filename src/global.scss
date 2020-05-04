@@ -1,0 +1,78 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+@import '~animate.css/animate.min.css';
+
+
+/*Header and tool bar style*/
+ion-header {
+    height: 11% !important;
+    ion-toolbar {
+        height: 100% !important;
+    }
+}
+
+/*ion card*/
+ion-card {
+    border-radius: 15px !important;
+    margin: 2% 2% !important;
+}
+
+ion-card-content {
+    margin: 8px !important;
+    padding: 0px !important;
+}
+
+h4 {
+    color: black !important;
+}
+
+p {
+    font-size: 12px !important;
+}
+
+div.heading {
+    position: fixed;
+    width: 100vw;
+    z-index: 99999;
+    background: white;
+    box-shadow: rgba(145, 104, 104, 0.12) 0px 2px;
+}
+
+.day-style {
+    border: 1px solid #E02E2E !important;
+}
+
+/*ioninput*/
+ion-input {
+    font-size: 13px !important;
+}
+
+.ripple-parent {
+    position: relative;
+    overflow: hidden;
+  }

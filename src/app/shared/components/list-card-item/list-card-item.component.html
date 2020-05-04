@@ -1,0 +1,20 @@
+<ng-container *ngIf="items.length !== 0">
+  <ion-row *ngFor="let item of items; let i = index;">
+    <ion-card class="animated fadeInUp faster ion-activatable ripple-parent" (click)="navToDetail(detailPage + '/' + item._id)" [ngStyle]="{'animation-delay': (i * (110 + (i / 100))) + 'ms'}" *ngIf="item.isActive">
+      <ion-card-content>
+        <ion-row>
+          <ion-col [size]="5">
+            <img [src]="getImage(item.image.url)" onerror="this.src='./app/assets/images/placeholder.jpg';" (load)="imageLoad()" />
+          </ion-col>
+          <ion-col [size]="7">
+            <h4>{{ item.title }}</h4>
+            <p class="truncate-overflow" *ngIf="toShortDescription(item.description).isTrimmed">{{ toShortDescription(item.description).description }}...</p>
+            <p class="truncate-overflow" *ngIf="!toShortDescription(item.description).isTrimmed">{{ toShortDescription(item.description).description }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-icon class="forward-icon" ios="arrow-forward-outline" md="arrow-forward-sharp"></ion-icon>
+      </ion-card-content>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-card>
+  </ion-row>
+</ng-container>

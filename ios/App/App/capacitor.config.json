@@ -1,0 +1,8 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "faith-mobile",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}
