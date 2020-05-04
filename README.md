@@ -1,1 +1,1 @@
-faith-mobile
+faith-mobiles
