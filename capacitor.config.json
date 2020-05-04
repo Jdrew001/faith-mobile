@@ -22,7 +22,9 @@
     "contentInset": "always",
     "cordovaSwiftVersion": "4.2",
     "minVersion": "11.3",
-    "cordovaLinkerFlags": ["-ObjC"],
+    "cordovaLinkerFlags": [
+      "-ObjC"
+    ],
     "allowsLinkPreview": false,
     "hideLogs": true
   }

@@ -32,7 +32,7 @@ export class RequestInterceptor implements HttpInterceptor {
 
     private handleError(error: HttpErrorResponse) {
         this.loaderService.toggleLoader(false);
-        this.presentToast(error.message);
+        this.presentToast(error.error);
         return throwError(error);
     }
 
