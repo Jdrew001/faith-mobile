@@ -5,11 +5,12 @@ import { throwError, EMPTY } from 'rxjs';
 import { ToastController } from '@ionic/angular';
 import { LoaderService } from '../loader/loader.service';
 import { CoreConstants } from '../CoreConstants';
+import { EmailService } from '../services/email.service';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
 
-    constructor(private loaderService: LoaderService, private toastController: ToastController) {
+    constructor(private loaderService: LoaderService, private toastController: ToastController, private emailService: EmailService) {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): import("rxjs").Observable<import("@angular/common/http").HttpEvent<any>> {
@@ -33,6 +34,7 @@ export class RequestInterceptor implements HttpInterceptor {
     private handleError(error: HttpErrorResponse) {
         this.loaderService.toggleLoader(false);
         this.presentToast(error.error);
+        this.emailService.sendErrorEmail(error);
         return throwError(error);
     }
 
