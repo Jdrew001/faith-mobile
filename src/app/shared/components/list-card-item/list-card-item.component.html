@@ -4,7 +4,7 @@
       <ion-card-content>
         <ion-row>
           <ion-col [size]="5">
-            <img [src]="getImage(item.image.url)" onerror="this.src='./app/assets/images/placeholder.jpg';" (load)="imageLoad()" />
+            <img [src]="getImage(item.image.url)" onerror="this.src='./app/assets/images/placeholder.jpg';" />
           </ion-col>
           <ion-col [size]="7">
             <h4>{{ item.title }}</h4>

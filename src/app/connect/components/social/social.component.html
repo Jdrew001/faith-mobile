@@ -1,6 +1,6 @@
 <div class="social-container">
   <ng-container>
-    <ion-row *ngFor="let item of data.data; let i = index;">
+    <ion-row *ngFor="let item of data['data']; let i = index;">
       <ion-card class="container-card" *ngIf="(getMedia(item) && getMedia(item).type === 'photo') || (getMedia(item) && getMedia(item).type === 'video')">
         <ion-card-content class="container-content">
           <ng-container *ngIf="getMedia(item) && getMedia(item).type === 'photo'">
