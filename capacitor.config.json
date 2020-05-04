@@ -8,5 +8,24 @@
   "server": {
     "url": "http://192.168.1.204:8100",
     "cleartext": true
+  },
+  "android": {
+    "overrideUserAgent": "my custom user agent for Android",
+    "appendUserAgent": "string to append for Android",
+    "backgroundColor": "#ffffffff",
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
+  },
+  "ios": {
+    "overrideUserAgent": "my custom user agent for iOS",
+    "appendUserAgent": "string to append for iOS",
+    "backgroundColor": "#ffffffff",
+    "contentInset": "always",
+    "cordovaSwiftVersion": "4.2",
+    "minVersion": "11.3",
+    "cordovaLinkerFlags": ["-ObjC"],
+    "allowsLinkPreview": false,
+    "hideLogs": true
   }
 }
