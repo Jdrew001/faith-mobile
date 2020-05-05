@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { CalendarComponent, DayConfig, CalendarModalOptions, CalendarComponentOptions } from 'ion2-calendar';
 import { EventService } from './event.service';
 import * as moment from 'moment';
@@ -10,7 +10,7 @@ import { timeout } from 'rxjs/operators';
   templateUrl: './events.page.html',
   styleUrls: ['./events.page.scss'],
 })
-export class EventsPage implements OnInit {
+export class EventsPage implements OnInit, OnDestroy {
 
   @ViewChild('cal', null) cal: CalendarComponent;
   date = null;
@@ -97,6 +97,10 @@ export class EventsPage implements OnInit {
 
   navigationToDetail(url) {
     this.navController.navigateForward(url);
+  }
+
+  ngOnDestroy() {
+    this.eventService.event$.next(null);
   }
 
   private getMonthEvents(date) {
