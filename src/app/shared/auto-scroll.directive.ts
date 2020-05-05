@@ -19,7 +19,7 @@ export class AutoScrollDirective implements OnInit, AfterViewInit {
       setTimeout(() => {
         let location = item.getBoundingClientRect();
         segment.scrollLeft = location.left - 7;
-      }, 700);
+      }, 1000);
     }
   }
 
