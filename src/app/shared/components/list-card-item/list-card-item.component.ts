@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange, SimpleChanges, OnDestroy } from '@angular/core';
 import { SharedService } from '../../shared.service';
 
 enum ListType {
@@ -10,7 +10,7 @@ enum ListType {
   templateUrl: './list-card-item.component.html',
   styleUrls: ['./list-card-item.component.scss'],
 })
-export class ListCardItemComponent implements OnInit, OnChanges {
+export class ListCardItemComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input('type') type;
   @Input('items') items;
@@ -19,7 +19,7 @@ export class ListCardItemComponent implements OnInit, OnChanges {
 
   constructor(private sharedService: SharedService) { }
 
-  ngOnInit() {console.log(this.detailPage);console.log(this.items)}
+  ngOnInit() {this.items = []}
   ngOnChanges(changes: SimpleChanges) {console.log(this.items);}
 
   toShortDescription(description) {
@@ -39,4 +39,7 @@ export class ListCardItemComponent implements OnInit, OnChanges {
     this.detailNavigate.emit(`${this.type}/${url}`);
   }
 
+  ngOnDestroy() {
+    this.items = [];
+  }
 }

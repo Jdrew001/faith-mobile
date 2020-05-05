@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { AnnouncementService } from './announcement.service';
 import { LoadWorkerService } from '../core/load-worker.service';
 import { Announcement } from './announcement.model';
@@ -12,7 +12,7 @@ import { IonSegment, NavController } from '@ionic/angular';
   templateUrl: './announcements.page.html',
   styleUrls: ['./announcements.page.scss'],
 })
-export class AnnouncementsPage implements OnInit {
+export class AnnouncementsPage implements OnInit, OnDestroy {
 
   @ViewChild('btnSegment', null) btnSegment: IonSegment;
   dateUtils = new DateUtils();
@@ -59,5 +59,10 @@ export class AnnouncementsPage implements OnInit {
 
   navigationToDetail(val) {
     this.navController.navigateForward(val);
+  }
+
+  ngOnDestroy() {
+    console.log('on destroy');
+    this.announcementService.announcement$.next(null);
   }
 }
