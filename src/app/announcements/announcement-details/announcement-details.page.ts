@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AnnouncementService } from '../announcement.service';
 import { ActivatedRoute } from '@angular/router';
 import { Announcement } from '../announcement.model';
@@ -8,7 +8,7 @@ import { Announcement } from '../announcement.model';
   templateUrl: './announcement-details.page.html',
   styleUrls: ['./announcement-details.page.scss'],
 })
-export class AnnouncementDetailsPage implements OnInit {
+export class AnnouncementDetailsPage implements OnInit, OnDestroy {
 
   details: Announcement;
 
@@ -25,6 +25,10 @@ export class AnnouncementDetailsPage implements OnInit {
 
   dismissDetail(val) {
     this.details = null;
+  }
+
+  ngOnDestroy() {
+    this.announcementService.announcement$.next(null);
   }
 
 }

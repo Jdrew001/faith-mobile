@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EventService } from '../event.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './event-details.page.html',
   styleUrls: ['./event-details.page.scss'],
 })
-export class EventDetailsPage implements OnInit {
+export class EventDetailsPage implements OnInit, OnDestroy {
 
   details = null;
 
@@ -20,6 +20,10 @@ export class EventDetailsPage implements OnInit {
 
   dismissDetail(val) {
     this.details = null;
+  }
+
+  ngOnDestroy() {
+    this.eventService.event$.next(null);
   }
 
 }
