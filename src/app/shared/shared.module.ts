@@ -10,6 +10,7 @@ import { SharedService } from './shared.service';
 import { DetailComponent } from './components/detail/detail.component';
 import { PhoneMaskDirective } from './directives/phone-mask.directive';
 import { MenuService } from './services/menu.service';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 
@@ -25,7 +26,8 @@ import { MenuService } from './services/menu.service';
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    LazyLoadImageModule
   ],
   exports: [
     NavigationComponent,

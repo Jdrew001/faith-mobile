@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SharedService } from '../../shared.service';
 import * as moment from 'moment';
+import { HelperService } from 'src/app/core/helper.service';
 
 @Component({
   selector: 'app-detail',
@@ -11,10 +12,13 @@ export class DetailComponent implements OnInit {
 
   @Input('details') details;
   @Input('type') type;
+  placeHolderImg = '';
 
-  constructor(private sharedService: SharedService) { }
+  constructor(private sharedService: SharedService, private helperService: HelperService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);
+  }
 
   getImage(imgUrl) {
     return this.sharedService.getImage(imgUrl);

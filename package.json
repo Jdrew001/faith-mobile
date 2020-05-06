@@ -38,6 +38,7 @@
     "ion2-calendar": "^3.0.0-rc.0",
     "json-server": "^0.16.1",
     "moment": "^2.24.0",
+    "ng-lazyload-image": "^7.1.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

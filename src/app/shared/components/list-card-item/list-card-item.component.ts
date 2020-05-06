@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange, SimpleChanges, OnDestroy } from '@angular/core';
 import { SharedService } from '../../shared.service';
+import { HelperService } from 'src/app/core/helper.service';
 
 enum ListType {
   announcements, events
@@ -12,14 +13,16 @@ enum ListType {
 })
 export class ListCardItemComponent implements OnInit, OnChanges, OnDestroy {
 
+  hasLoaded = false;
+  placeHolderImg = '';
   @Input('type') type;
   @Input('items') items;
   @Input('detailPage') detailPage;
   @Output('detailNavigate') detailNavigate: EventEmitter<string> = new EventEmitter();
 
-  constructor(private sharedService: SharedService) { }
+  constructor(private sharedService: SharedService, private helperService: HelperService) { }
 
-  ngOnInit() {this.items = []}
+  ngOnInit() {this.items = []; this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);}
   ngOnChanges(changes: SimpleChanges) {console.log(this.items);}
 
   toShortDescription(description) {
@@ -33,6 +36,11 @@ export class ListCardItemComponent implements OnInit, OnChanges, OnDestroy {
 
   getImage(imgUrl) {
     return this.sharedService.getImage(imgUrl);
+  }
+
+  showImages() {
+    this.hasLoaded = true;
+    console.log('image loaded');
   }
 
   navToDetail(url) {

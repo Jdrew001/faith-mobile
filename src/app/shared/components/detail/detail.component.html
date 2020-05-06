@@ -1,6 +1,6 @@
 <div *ngIf="details" class="col-md-12" style="margin-top: 5vh" class="animated fadeIn faster">
   <ion-row>
-    <img [src]="getImage(details.image.url)" />
+    <img [defaultImage]="placeHolderImg" [lazyLoad]="getImage(details.image.url)" />
   </ion-row>
   <ion-row>
     <ion-card class="container-card">
