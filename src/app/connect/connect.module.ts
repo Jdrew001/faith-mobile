@@ -12,6 +12,8 @@ import { SocialComponent } from './components/social/social.component';
 import { BiblestudyComponent } from './components/biblestudy/biblestudy.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { SocialService } from './services/social.service';
+import { BiblestudyService } from './services/biblestudy.service';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   imports: [
@@ -22,7 +24,8 @@ import { SocialService } from './services/social.service';
     SharedModule
   ],
   providers: [
-    SocialService
+    SocialService,
+    BiblestudyService
   ],
   declarations: [ConnectPage, SocialComponent, BiblestudyComponent, ContactComponent]
 })

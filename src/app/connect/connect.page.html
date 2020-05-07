@@ -16,7 +16,7 @@
       </ion-col>
     </ion-row>
   </div>
-  <ion-slides #slides (ionSlideDidChange)="slideChanged()">
+  <ion-slides #slides [options]="options" (ionSlideDidChange)="slideChanged()">
     <ion-slide>
       <ng-container>
         <app-social [data]="fbFeedData" [scrolling]="scrolling" [view]="view"></app-social>
@@ -24,7 +24,7 @@
     </ion-slide>
     <ion-slide>
       <ng-container>
-        <app-biblestudy></app-biblestudy>
+        <app-biblestudy [data]="bStudies"></app-biblestudy>
       </ng-container>
     </ion-slide>
     <ion-slide>
@@ -33,7 +33,4 @@
       </ng-container>
     </ion-slide>
   </ion-slides>
-  <!-- <video width="320" height="240" controls>
-    <source src="https://video-dfw5-2.xx.fbcdn.net/v/t42.9040-2/10000000_169484051004398_2075530602055991296_n.mp4?_nc_cat=104&_nc_sid=985c63&efg=eyJybHIiOjMwMCwicmxhIjozMjQwLCJ2ZW5jb2RlX3RhZyI6ImxlZ2FjeV9zZCJ9&_nc_ohc=cg_1gi5hlMgAX_PWULl&rl=300&vabr=129&_nc_ht=video-dfw5-2.xx&oh=78aeee24db44bffdca51e229b9e34d7b&oe=5EAB85C9" type="video/mp4">
-  </video> -->
 </ion-content>

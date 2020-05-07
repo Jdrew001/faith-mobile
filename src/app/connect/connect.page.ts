@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { SocialService } from './services/social.service';
+import { BiblestudyService } from './services/biblestudy.service';
 
 @Component({
   selector: 'app-connect',
@@ -13,13 +14,18 @@ export class ConnectPage implements OnInit {
   segments = [{name: 'Social', value: 0}, {name: 'Bible Studies', value: 1}, {name: 'Contact', value: 2}];
   segment = 0;
   fbFeedData: any[] = [];
+  bStudies: any[] = [];
   scrolling;
   view;
+  options = {
+    autoHeight: true
+  }
 
-  constructor(private socialService: SocialService) { }
+  constructor(private socialService: SocialService, private bibleStudyService: BiblestudyService) { }
 
   ngOnInit() {
     this.socialService.fetchFBFeed().subscribe(val => {this.fbFeedData = val['posts']});
+    this.bibleStudyService.fetchAllStudies().subscribe(val => {this.bStudies = val});
   }
 
   segmentChanged() {

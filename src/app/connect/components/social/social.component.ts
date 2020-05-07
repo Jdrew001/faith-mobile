@@ -18,6 +18,7 @@ export class SocialComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     console.log(this.data);
+    window.scrollTo(0,0);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -26,8 +27,10 @@ export class SocialComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     if (this.view && this.view !== 0) {
-      this.currentPlaying.pause();
-      this.currentPlaying = null;
+      if (this.currentPlaying) {
+        this.currentPlaying.pause();
+        this.currentPlaying = null;
+      }
     }
   }
 
