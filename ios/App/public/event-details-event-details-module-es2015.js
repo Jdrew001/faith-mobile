@@ -139,6 +139,9 @@ let EventDetailsPage = class EventDetailsPage {
     dismissDetail(val) {
         this.details = null;
     }
+    ngOnDestroy() {
+        this.eventService.event$.next(null);
+    }
 };
 EventDetailsPage.ctorParameters = () => [
     { type: _event_service__WEBPACK_IMPORTED_MODULE_2__["EventService"] },

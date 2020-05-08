@@ -256,6 +256,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function dismissDetail(val) {
           this.details = null;
         }
+      }, {
+        key: "ngOnDestroy",
+        value: function ngOnDestroy() {
+          this.announcementService.announcement$.next(null);
+        }
       }]);
 
       return AnnouncementDetailsPage;

@@ -18,6 +18,15 @@
         ]
         },
       {
+          "id": "cordova-plugin-document-viewer.SitewaertsDocumentViewer",
+          "file": "plugins/cordova-plugin-document-viewer/www/sitewaertsdocumentviewer.js",
+          "pluginId": "cordova-plugin-document-viewer",
+        "clobbers": [
+          "cordova.plugins.SitewaertsDocumentViewer",
+          "SitewaertsDocumentViewer"
+        ]
+        },
+      {
           "id": "cordova-plugin-ionic.guards",
           "file": "plugins/cordova-plugin-ionic/dist/guards.js",
           "pluginId": "cordova-plugin-ionic",
@@ -33,6 +42,7 @@
     module.exports.metadata =
     // TOP OF METADATA
     {
+      "cordova-plugin-document-viewer": "0.9.13",
       "cordova-plugin-ionic": "5.4.7",
       "cordova-plugin-screen-orientation": "3.0.2",
       "es6-promise-plugin": "4.2.2"

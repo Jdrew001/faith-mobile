@@ -141,6 +141,9 @@ let AnnouncementDetailsPage = class AnnouncementDetailsPage {
     dismissDetail(val) {
         this.details = null;
     }
+    ngOnDestroy() {
+        this.announcementService.announcement$.next(null);
+    }
 };
 AnnouncementDetailsPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },

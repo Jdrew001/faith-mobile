@@ -14,6 +14,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { SocialService } from './services/social.service';
 import { BiblestudyService } from './services/biblestudy.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
   ],
   providers: [
     SocialService,
-    BiblestudyService
+    BiblestudyService,
+    DocumentViewer
   ],
   declarations: [ConnectPage, SocialComponent, BiblestudyComponent, ContactComponent]
 })

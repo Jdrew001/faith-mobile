@@ -1797,6 +1797,9 @@ let EventsPage = class EventsPage {
     navigationToDetail(url) {
         this.navController.navigateForward(url);
     }
+    ngOnDestroy() {
+        this.eventService.event$.next(null);
+    }
     getMonthEvents(date) {
         this.eventService.fetchEventsByMonth(date);
     }

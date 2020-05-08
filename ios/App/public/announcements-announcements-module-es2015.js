@@ -176,6 +176,10 @@ let AnnouncementsPage = class AnnouncementsPage {
     navigationToDetail(val) {
         this.navController.navigateForward(val);
     }
+    ngOnDestroy() {
+        console.log('on destroy');
+        this.announcementService.announcement$.next(null);
+    }
 };
 AnnouncementsPage.ctorParameters = () => [
     { type: _announcement_service__WEBPACK_IMPORTED_MODULE_2__["AnnouncementService"] },

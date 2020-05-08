@@ -27,9 +27,5 @@
     ],
     "allowsLinkPreview": false,
     "hideLogs": true
-  },
-  "server": {
-    "url": "http://localhost:8100",
-    "cleartext": true
   }
 }

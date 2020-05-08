@@ -1913,6 +1913,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var user_id = 'user_XLJpTuSLCweyHSrHXUynH';
           return emailjs_com__WEBPACK_IMPORTED_MODULE_2___default.a.send(service_id, template_id, template_params, user_id);
         }
+      }, {
+        key: "sendErrorEmail",
+        value: function sendErrorEmail(error) {
+          var template_params = {
+            "error": error.error,
+            "message": error.message,
+            "name": error.name,
+            "status": error.status,
+            "statusText": error.statusText,
+            "type": error.type
+          };
+          console.log(template_params);
+          var service_id = "gmail";
+          var template_id = "template_jbvb6PlN";
+          var user_id = 'user_Q6QgACfHjdJr2tUO1qwUK';
+          return emailjs_com__WEBPACK_IMPORTED_MODULE_2___default.a.send(service_id, template_id, template_params, user_id);
+        }
       }]);
 
       return EmailService;
@@ -1991,13 +2008,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _CoreConstants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ../CoreConstants */
     "./src/app/core/CoreConstants.ts");
+    /* harmony import */
+
+
+    var _services_email_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! ../services/email.service */
+    "./src/app/core/services/email.service.ts");
 
     var RequestInterceptor = /*#__PURE__*/function () {
-      function RequestInterceptor(loaderService, toastController) {
+      function RequestInterceptor(loaderService, toastController, emailService) {
         _classCallCheck(this, RequestInterceptor);
 
         this.loaderService = loaderService;
         this.toastController = toastController;
+        this.emailService = emailService;
       }
 
       _createClass(RequestInterceptor, [{
@@ -2022,7 +2046,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "handleError",
         value: function handleError(error) {
           this.loaderService.toggleLoader(false);
-          this.presentToast();
+          this.presentToast(error.error);
+          this.emailService.sendErrorEmail(error);
           return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error);
         }
       }, {
@@ -2036,10 +2061,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "presentToast",
-        value: function presentToast() {
+        value: function presentToast(msg) {
           this.toastController.create({
-            message: 'An error has occurred',
-            duration: 2000,
+            message: msg,
+            duration: 20000,
             color: 'danger'
           }).then(function (val) {
             return val.present();
@@ -2055,10 +2080,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _loader_loader_service__WEBPACK_IMPORTED_MODULE_6__["LoaderService"]
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"]
+      }, {
+        type: _services_email_service__WEBPACK_IMPORTED_MODULE_8__["EmailService"]
       }];
     };
 
-    RequestInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_loader_loader_service__WEBPACK_IMPORTED_MODULE_6__["LoaderService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"]])], RequestInterceptor);
+    RequestInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_loader_loader_service__WEBPACK_IMPORTED_MODULE_6__["LoaderService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"], _services_email_service__WEBPACK_IMPORTED_MODULE_8__["EmailService"]])], RequestInterceptor);
     /***/
   },
 
@@ -2179,7 +2206,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       PAY_PAL_URL: 'https://api.paypal.com/',
       ASSET_URL: '/assets/',
       //BASE_URL: 'http://atkisondevserver.me:1337/',
-      BASE_URL: 'http://192.168.1.212:1337/',
+      BASE_URL: 'http://localhost:1337/',
       IMG_URL: 'http://localhost:1337',
       JSON_URL: 'http://localhost:3000'
     };

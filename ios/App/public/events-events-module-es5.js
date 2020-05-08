@@ -2475,6 +2475,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.navController.navigateForward(url);
         }
       }, {
+        key: "ngOnDestroy",
+        value: function ngOnDestroy() {
+          this.eventService.event$.next(null);
+        }
+      }, {
         key: "getMonthEvents",
         value: function getMonthEvents(date) {
           this.eventService.fetchEventsByMonth(date);

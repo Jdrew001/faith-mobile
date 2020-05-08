@@ -18414,6 +18414,720 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   },
 
   /***/
+  "./node_modules/ng-lazyload-image/fesm2015/ng-lazyload-image.js":
+  /*!**********************************************************************!*\
+    !*** ./node_modules/ng-lazyload-image/fesm2015/ng-lazyload-image.js ***!
+    \**********************************************************************/
+
+  /*! exports provided: LazyLoadImageDirective, LazyLoadImageModule, intersectionObserverPreset, scrollPreset */
+
+  /***/
+  function node_modulesNgLazyloadImageFesm2015NgLazyloadImageJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "LazyLoadImageDirective", function () {
+      return LazyLoadImageDirective;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "LazyLoadImageModule", function () {
+      return LazyLoadImageModule;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "intersectionObserverPreset", function () {
+      return intersectionObserverPreset;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "scrollPreset", function () {
+      return scrollPreset;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/common */
+    "./node_modules/@angular/common/fesm2015/common.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! rxjs */
+    "./node_modules/rxjs/_esm2015/index.js");
+    /* harmony import */
+
+
+    var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! rxjs/operators */
+    "./node_modules/rxjs/_esm2015/operators/index.js");
+
+    var cssClassNames = {
+      loaded: 'ng-lazyloaded',
+      loading: 'ng-lazyloading',
+      failed: 'ng-failed-lazyloaded'
+    };
+
+    function removeCssClassName(element, cssClassName) {
+      element.className = element.className.replace(cssClassName, '');
+    }
+
+    function addCssClassName(element, cssClassName) {
+      if (!element.className.includes(cssClassName)) {
+        element.className += " ".concat(cssClassName);
+      }
+    }
+
+    function hasCssClassName(element, cssClassName) {
+      return element.className && element.className.includes(cssClassName);
+    }
+
+    function getNavigator() {
+      return typeof window !== 'undefined' ? window.navigator : undefined;
+    }
+
+    function isChildOfPicture(element) {
+      return Boolean(element.parentElement && element.parentElement.nodeName.toLowerCase() === 'picture');
+    }
+
+    function isImageElement(element) {
+      return element.nodeName.toLowerCase() === 'img';
+    }
+
+    function setImage(element, imagePath, useSrcset) {
+      if (isImageElement(element)) {
+        if (useSrcset && 'srcset' in element) {
+          element.srcset = imagePath;
+        } else {
+          element.src = imagePath;
+        }
+      } else {
+        element.style.backgroundImage = "url('".concat(imagePath, "')");
+      }
+
+      return element;
+    }
+
+    function setSources(attrName) {
+      return function (image) {
+        var sources = image.parentElement.getElementsByTagName('source');
+
+        for (var i = 0; i < sources.length; i++) {
+          var attrValue = sources[i].getAttribute(attrName);
+
+          if (attrValue) {
+            // Check if `srcset` is supported by the current browser
+            if ('srcset' in sources[i]) {
+              sources[i].srcset = attrValue;
+            } else {
+              sources[i].src = attrValue;
+            }
+          }
+        }
+      };
+    }
+
+    var setSourcesToDefault = setSources('defaultImage');
+    var setSourcesToLazy = setSources('lazyLoad');
+    var setSourcesToError = setSources('errorImage');
+
+    function setImageAndSources(setSourcesFn) {
+      return function (element, imagePath, useSrcset) {
+        if (isImageElement(element) && isChildOfPicture(element)) {
+          setSourcesFn(element);
+        }
+
+        if (imagePath) {
+          setImage(element, imagePath, useSrcset);
+        }
+      };
+    }
+
+    var setImageAndSourcesToDefault = setImageAndSources(setSourcesToDefault);
+    var setImageAndSourcesToLazy = setImageAndSources(setSourcesToLazy);
+    var setImageAndSourcesToError = setImageAndSources(setSourcesToError);
+
+    var end = function end(_ref) {
+      var element = _ref.element;
+      addCssClassName(element, cssClassNames.loaded);
+      removeCssClassName(element, cssClassNames.loading);
+    };
+
+    var ɵ0 = end;
+
+    var loadImage = function loadImage(_ref2) {
+      var element = _ref2.element,
+          useSrcset = _ref2.useSrcset,
+          imagePath = _ref2.imagePath,
+          decode = _ref2.decode;
+      var img;
+
+      if (isImageElement(element) && isChildOfPicture(element)) {
+        var parentClone = element.parentNode.cloneNode(true);
+        img = parentClone.getElementsByTagName('img')[0];
+        setSourcesToLazy(img);
+        setImage(img, imagePath, useSrcset);
+      } else {
+        img = new Image();
+
+        if (isImageElement(element) && element.sizes) {
+          img.sizes = element.sizes;
+        }
+
+        if (useSrcset && 'srcset' in img) {
+          img.srcset = imagePath;
+        } else {
+          img.src = imagePath;
+        }
+      }
+
+      if (decode && img.decode) {
+        return img.decode().then(function () {
+          return imagePath;
+        });
+      }
+
+      return new Promise(function (resolve, reject) {
+        img.onload = function () {
+          return resolve(imagePath);
+        };
+
+        img.onerror = function () {
+          return reject(null);
+        };
+      });
+    };
+
+    var setErrorImage = function setErrorImage(_ref3) {
+      var element = _ref3.element,
+          errorImagePath = _ref3.errorImagePath,
+          useSrcset = _ref3.useSrcset;
+      setImageAndSourcesToError(element, errorImagePath, useSrcset);
+      addCssClassName(element, cssClassNames.failed);
+    };
+
+    var ɵ1 = setErrorImage;
+
+    var setLoadedImage = function setLoadedImage(_ref4) {
+      var element = _ref4.element,
+          imagePath = _ref4.imagePath,
+          useSrcset = _ref4.useSrcset;
+      setImageAndSourcesToLazy(element, imagePath, useSrcset);
+    };
+
+    var ɵ2 = setLoadedImage;
+
+    var setup = function setup(_ref5) {
+      var element = _ref5.element,
+          defaultImagePath = _ref5.defaultImagePath,
+          useSrcset = _ref5.useSrcset;
+      setImageAndSourcesToDefault(element, defaultImagePath, useSrcset);
+      addCssClassName(element, cssClassNames.loading);
+
+      if (hasCssClassName(element, cssClassNames.loaded)) {
+        removeCssClassName(element, cssClassNames.loaded);
+      }
+    };
+
+    var ɵ3 = setup;
+
+    var isBot = function isBot(navigator) {
+      if (navigator && navigator.userAgent) {
+        return /googlebot|bingbot|yandex|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest\/0\.|pinterestbot|slackbot|vkShare|W3C_Validator|whatsapp|duckduckbot/i.test(navigator.userAgent);
+      }
+
+      return false;
+    };
+
+    var sharedPreset = {
+      "finally": end,
+      loadImage: loadImage,
+      setErrorImage: setErrorImage,
+      setLoadedImage: setLoadedImage,
+      setup: setup,
+      isBot: isBot
+    };
+    var observers = new WeakMap();
+    var intersectionSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+
+    function loadingCallback(entrys) {
+      entrys.forEach(function (entry) {
+        return intersectionSubject.next(entry);
+      });
+    }
+
+    var uniqKey = {};
+
+    var getIntersectionObserver = function getIntersectionObserver(attributes) {
+      var scrollContainerKey = attributes.scrollContainer || uniqKey;
+      var options = {
+        root: attributes.scrollContainer || null
+      };
+
+      if (attributes.offset) {
+        options.rootMargin = "".concat(attributes.offset, "px");
+      }
+
+      var observer = observers.get(scrollContainerKey);
+
+      if (!observer) {
+        observer = new IntersectionObserver(loadingCallback, options);
+        observers.set(scrollContainerKey, observer);
+      }
+
+      observer.observe(attributes.element);
+      return rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create(function (obs) {
+        var subscription = intersectionSubject.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (entry) {
+          return entry.target === attributes.element;
+        })).subscribe(obs);
+        return function () {
+          subscription.unsubscribe();
+          observer.unobserve(attributes.element);
+        };
+      });
+    };
+
+    var isVisible = function isVisible(_ref6) {
+      var event = _ref6.event;
+      return event.isIntersecting;
+    };
+
+    var getObservable = function getObservable(attributes) {
+      var _getInterObserver = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : getIntersectionObserver;
+
+      if (attributes.customObservable) {
+        return attributes.customObservable;
+      }
+
+      return _getInterObserver(attributes);
+    };
+
+    var intersectionObserverPreset = Object.assign({}, sharedPreset, {
+      isVisible: isVisible,
+      getObservable: getObservable
+    });
+
+    var isVisible$1 = function isVisible$1() {
+      return true;
+    };
+
+    var ɵ0$1 = isVisible$1;
+
+    var getObservable$1 = function getObservable$1() {
+      return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])('load');
+    };
+
+    var ɵ1$1 = getObservable$1;
+
+    var loadImage$1 = function loadImage$1(_ref7) {
+      var imagePath = _ref7.imagePath;
+      return [imagePath];
+    };
+
+    var ɵ2$1 = loadImage$1;
+    var ssrPreset = Object.assign({}, sharedPreset, {
+      isVisible: isVisible$1,
+      getObservable: getObservable$1,
+      loadImage: loadImage$1
+    });
+
+    function createHooks(platformId, options) {
+      var defaultPreset = intersectionObserverPreset;
+      var isBot = options && options.isBot ? options.isBot : defaultPreset.isBot;
+
+      if (isBot(getNavigator(), platformId)) {
+        return Object.assign(ssrPreset, {
+          isBot: isBot
+        });
+      } else if (!options) {
+        return defaultPreset;
+      }
+
+      var hooks = {};
+
+      if (options.preset) {
+        Object.assign(hooks, options.preset);
+      } else {
+        Object.assign(hooks, defaultPreset);
+      }
+
+      Object.keys(options).filter(function (key) {
+        return key !== 'preset';
+      }).forEach(function (key) {
+        hooks[key] = options[key];
+      });
+      return hooks;
+    }
+
+    function lazyLoadImage(hookSet, attributes) {
+      return function (evntObservable) {
+        return evntObservable.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (data) {
+          return attributes.onStateChange.emit({
+            reason: 'observer-emit',
+            data: data
+          });
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (event) {
+          return hookSet.isVisible({
+            element: attributes.element,
+            event: event,
+            offset: attributes.offset,
+            scrollContainer: attributes.scrollContainer
+          });
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function () {
+          return attributes.onStateChange.emit({
+            reason: 'start-loading'
+          });
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["mergeMap"])(function () {
+          return hookSet.loadImage(attributes);
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function () {
+          return attributes.onStateChange.emit({
+            reason: 'mount-image'
+          });
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (imagePath) {
+          return hookSet.setLoadedImage({
+            element: attributes.element,
+            imagePath: imagePath,
+            useSrcset: attributes.useSrcset
+          });
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function () {
+          return attributes.onStateChange.emit({
+            reason: 'loading-succeeded'
+          });
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function () {
+          return true;
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (error) {
+          attributes.onStateChange.emit({
+            reason: 'loading-failed',
+            data: error
+          });
+          hookSet.setErrorImage(attributes);
+          return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(false);
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function () {
+          attributes.onStateChange.emit({
+            reason: 'finally'
+          });
+          hookSet["finally"](attributes);
+        }));
+      };
+    }
+
+    var LazyLoadImageDirective = /*#__PURE__*/function () {
+      function LazyLoadImageDirective(el, ngZone, platformId, options) {
+        _classCallCheck(this, LazyLoadImageDirective);
+
+        this.onStateChange = new _angular_core__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"](); // Emits an event on every state change
+
+        this.onLoad = new _angular_core__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"](); // @deprecated use `onStateChange` instead.
+
+        this.elementRef = el;
+        this.ngZone = ngZone;
+        this.propertyChanges$ = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"]();
+        this.platformId = platformId;
+        this.hooks = createHooks(platformId, options);
+      }
+
+      _createClass(LazyLoadImageDirective, [{
+        key: "ngOnChanges",
+        value: function ngOnChanges() {
+          if (this.debug === true && !this.debugSubscription) {
+            this.debugSubscription = this.onStateChange.subscribe(function (e) {
+              return console.log(e);
+            });
+          }
+
+          this.propertyChanges$.next({
+            element: this.elementRef.nativeElement,
+            imagePath: this.lazyImage,
+            defaultImagePath: this.defaultImage,
+            errorImagePath: this.errorImage,
+            useSrcset: this.useSrcset,
+            offset: this.offset ? this.offset | 0 : 0,
+            scrollContainer: this.scrollTarget,
+            customObservable: this.customObservable,
+            decode: this.decode,
+            onStateChange: this.onStateChange
+          });
+        }
+      }, {
+        key: "ngAfterContentInit",
+        value: function ngAfterContentInit() {
+          var _this = this;
+
+          // Don't do anything if SSR and the user isn't a bot
+          if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformServer"])(this.platformId) && !this.hooks.isBot(getNavigator(), this.platformId)) {
+            return null;
+          }
+
+          this.ngZone.runOutsideAngular(function () {
+            _this.loadSubscription = _this.propertyChanges$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (attributes) {
+              return attributes.onStateChange.emit({
+                reason: 'setup'
+              });
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (attributes) {
+              return _this.hooks.setup(attributes);
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["switchMap"])(function (attributes) {
+              if (!attributes.imagePath) {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["never"])();
+              }
+
+              return _this.hooks.getObservable(attributes).pipe(lazyLoadImage(_this.hooks, attributes));
+            })).subscribe(function (success) {
+              return _this.onLoad.emit(success);
+            });
+          });
+        }
+      }, {
+        key: "ngOnDestroy",
+        value: function ngOnDestroy() {
+          var _a, _b;
+
+          (_a = this.loadSubscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+          (_b = this.debugSubscription) === null || _b === void 0 ? void 0 : _b.unsubscribe();
+        }
+      }]);
+
+      return LazyLoadImageDirective;
+    }();
+
+    LazyLoadImageDirective.ctorParameters = function () {
+      return [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ElementRef"]
+      }, {
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["NgZone"]
+      }, {
+        type: Object,
+        decorators: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Inject"],
+          args: [_angular_core__WEBPACK_IMPORTED_MODULE_2__["PLATFORM_ID"]]
+        }]
+      }, {
+        type: undefined,
+        decorators: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Optional"]
+        }, {
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Inject"],
+          args: ['options']
+        }]
+      }];
+    };
+
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])('lazyLoad')], LazyLoadImageDirective.prototype, "lazyImage", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])()], LazyLoadImageDirective.prototype, "defaultImage", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])()], LazyLoadImageDirective.prototype, "errorImage", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])()], LazyLoadImageDirective.prototype, "scrollTarget", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])()], LazyLoadImageDirective.prototype, "customObservable", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])()], LazyLoadImageDirective.prototype, "offset", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])()], LazyLoadImageDirective.prototype, "useSrcset", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])()], LazyLoadImageDirective.prototype, "decode", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])()], LazyLoadImageDirective.prototype, "debug", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Output"])()], LazyLoadImageDirective.prototype, "onStateChange", void 0);
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Output"])()], LazyLoadImageDirective.prototype, "onLoad", void 0);
+    LazyLoadImageDirective = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Directive"])({
+      selector: '[lazyLoad]'
+    }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__param"])(2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Inject"])(_angular_core__WEBPACK_IMPORTED_MODULE_2__["PLATFORM_ID"])), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__param"])(3, Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Optional"])()), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__param"])(3, Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Inject"])('options'))], LazyLoadImageDirective);
+    var LazyLoadImageModule_1;
+
+    var LazyLoadImageModule = LazyLoadImageModule_1 = /*#__PURE__*/function () {
+      function LazyLoadImageModule() {
+        _classCallCheck(this, LazyLoadImageModule);
+      }
+
+      _createClass(LazyLoadImageModule, null, [{
+        key: "forRoot",
+        value: function forRoot(options) {
+          return {
+            ngModule: LazyLoadImageModule_1,
+            providers: [{
+              provide: 'options',
+              useValue: options
+            }]
+          };
+        }
+      }]);
+
+      return LazyLoadImageModule;
+    }();
+
+    LazyLoadImageModule = LazyLoadImageModule_1 = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+      declarations: [LazyLoadImageDirective],
+      exports: [LazyLoadImageDirective]
+    })], LazyLoadImageModule);
+
+    var Rect = /*#__PURE__*/function () {
+      function Rect(left, top, right, bottom) {
+        _classCallCheck(this, Rect);
+
+        this.left = left;
+        this.top = top;
+        this.right = right;
+        this.bottom = bottom;
+      }
+
+      _createClass(Rect, [{
+        key: "inflate",
+        value: function inflate(inflateBy) {
+          this.left -= inflateBy;
+          this.top -= inflateBy;
+          this.right += inflateBy;
+          this.bottom += inflateBy;
+        }
+      }, {
+        key: "intersectsWith",
+        value: function intersectsWith(rect) {
+          return rect.left < this.right && this.left < rect.right && rect.top < this.bottom && this.top < rect.bottom;
+        }
+      }, {
+        key: "getIntersectionWith",
+        value: function getIntersectionWith(rect) {
+          var left = Math.max(this.left, rect.left);
+          var top = Math.max(this.top, rect.top);
+          var right = Math.min(this.right, rect.right);
+          var bottom = Math.min(this.bottom, rect.bottom);
+
+          if (right >= left && bottom >= top) {
+            return new Rect(left, top, right, bottom);
+          } else {
+            return Rect.empty;
+          }
+        }
+      }], [{
+        key: "fromElement",
+        value: function fromElement(element) {
+          var _element$getBoundingC = element.getBoundingClientRect(),
+              left = _element$getBoundingC.left,
+              top = _element$getBoundingC.top,
+              right = _element$getBoundingC.right,
+              bottom = _element$getBoundingC.bottom;
+
+          if (left === 0 && top === 0 && right === 0 && bottom === 0) {
+            return Rect.empty;
+          } else {
+            return new Rect(left, top, right, bottom);
+          }
+        }
+      }, {
+        key: "fromWindow",
+        value: function fromWindow(_window) {
+          return new Rect(0, 0, _window.innerWidth, _window.innerHeight);
+        }
+      }]);
+
+      return Rect;
+    }();
+
+    Rect.empty = new Rect(0, 0, 0, 0);
+    var scrollListeners = new WeakMap();
+
+    function sampleObservable(obs, scheduler) {
+      return obs.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["sampleTime"])(100, scheduler), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["share"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["startWith"])(''));
+    } // Only create one scroll listener per target and share the observable.
+    // Typical, there will only be one observable per application
+
+
+    var getScrollListener = function getScrollListener(scrollTarget) {
+      if (!scrollTarget || typeof scrollTarget.addEventListener !== 'function') {
+        console.warn('`addEventListener` on ' + scrollTarget + ' (scrollTarget) is not a function. Skipping this target');
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["empty"])();
+      }
+
+      var scrollListener = scrollListeners.get(scrollTarget);
+
+      if (scrollListener) {
+        return scrollListener;
+      }
+
+      var srollEvent = rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"].create(function (observer) {
+        var eventName = 'scroll';
+
+        var handler = function handler(event) {
+          return observer.next(event);
+        };
+
+        var options = {
+          passive: true,
+          capture: false
+        };
+        scrollTarget.addEventListener(eventName, handler, options);
+        return function () {
+          return scrollTarget.removeEventListener(eventName, handler, options);
+        };
+      });
+      var listener = sampleObservable(srollEvent);
+      scrollListeners.set(scrollTarget, listener);
+      return listener;
+    };
+
+    var isVisible$2 = function isVisible$2(_ref8) {
+      var element = _ref8.element,
+          offset = _ref8.offset,
+          scrollContainer = _ref8.scrollContainer;
+      var getWindow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {
+        return window;
+      };
+      var elementBounds = Rect.fromElement(element);
+
+      if (elementBounds === Rect.empty) {
+        return false;
+      }
+
+      var windowBounds = Rect.fromWindow(getWindow());
+      elementBounds.inflate(offset);
+
+      if (scrollContainer) {
+        var scrollContainerBounds = Rect.fromElement(scrollContainer);
+        var intersection = scrollContainerBounds.getIntersectionWith(windowBounds);
+        return elementBounds.intersectsWith(intersection);
+      } else {
+        return elementBounds.intersectsWith(windowBounds);
+      }
+    };
+
+    var getObservable$2 = function getObservable$2(attributes) {
+      if (attributes.customObservable) {
+        return attributes.customObservable.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["startWith"])(''));
+      }
+
+      if (attributes.scrollContainer) {
+        return getScrollListener(attributes.scrollContainer);
+      }
+
+      return getScrollListener(window);
+    };
+
+    var ɵ0$2 = getObservable$2;
+    var scrollPreset = Object.assign({}, sharedPreset, {
+      isVisible: isVisible$2,
+      getObservable: getObservable$2
+    });
+    var LazyLoadImageModule$1 = LazyLoadImageModule;
+    /**
+     * Generated bundle index. Do not edit.
+     */
+    //# sourceMappingURL=ng-lazyload-image.js.map
+
+    /***/
+  },
+
+  /***/
   "./node_modules/raw-loader/dist/cjs.js!./src/app/shared/components/detail/detail.component.html":
   /*!******************************************************************************************************!*\
     !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/shared/components/detail/detail.component.html ***!
@@ -18429,7 +19143,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div *ngIf=\"details\" class=\"col-md-12\" style=\"margin-top: 5vh\" class=\"animated fadeIn faster\">\r\n  <ion-row>\r\n    <img [src]=\"getImage(details.image.url)\" />\r\n  </ion-row>\r\n  <ion-row>\r\n    <ion-card class=\"container-card\">\r\n      <ion-card-content class=\"container-content\">\r\n        <h3>{{ details.title }}</h3>\r\n        <ng-container *ngIf=\"type === 'announcement'\"><h4>{{ details.month }} {{ details.year }}</h4></ng-container>\r\n        <ng-container *ngIf=\"type === 'event'\">\r\n          <h4 *ngIf=\"convertToLocalDate()\">{{ convertToLocalDate() }}</h4>\r\n          <h4 *ngIf=\"convertToLocalTime()\">{{convertToLocalTime()}}</h4>\r\n        </ng-container>\r\n        <hr>\r\n\r\n        <h4>{{ details.description }}</h4>\r\n      </ion-card-content>\r\n    </ion-card>\r\n  </ion-row>\r\n</div>";
+    __webpack_exports__["default"] = "<div *ngIf=\"details\" class=\"col-md-12\" style=\"margin-top: 5vh\" class=\"animated fadeIn faster\">\r\n  <ion-row>\r\n    <img [defaultImage]=\"placeHolderImg\" [lazyLoad]=\"getImage(details.image.url)\" />\r\n  </ion-row>\r\n  <ion-row>\r\n    <ion-card class=\"container-card\">\r\n      <ion-card-content class=\"container-content\">\r\n        <h3>{{ details.title }}</h3>\r\n        <ng-container *ngIf=\"type === 'announcement'\"><h4>{{ details.month }} {{ details.year }}</h4></ng-container>\r\n        <ng-container *ngIf=\"type === 'event'\">\r\n          <h4 *ngIf=\"convertToLocalDate()\">{{ convertToLocalDate() }}</h4>\r\n          <h4 *ngIf=\"convertToLocalTime()\">{{convertToLocalTime()}}</h4>\r\n        </ng-container>\r\n        <hr>\r\n\r\n        <h4>{{ details.description }}</h4>\r\n      </ion-card-content>\r\n    </ion-card>\r\n  </ion-row>\r\n</div>";
     /***/
   },
 
@@ -18449,7 +19163,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ng-container *ngIf=\"items.length !== 0\">\r\n  <ion-row *ngFor=\"let item of items; let i = index;\">\r\n    <ion-card class=\"animated fadeInUp faster ion-activatable ripple-parent\" (click)=\"navToDetail(detailPage + '/' + item._id)\" [ngStyle]=\"{'animation-delay': (i * (110 + (i / 100))) + 'ms'}\" *ngIf=\"item.isActive\">\r\n      <ion-card-content>\r\n        <ion-row>\r\n          <ion-col [size]=\"5\">\r\n            <img [src]=\"getImage(item.image.url)\" onerror=\"this.src='./app/assets/images/placeholder.jpg';\" />\r\n          </ion-col>\r\n          <ion-col [size]=\"7\">\r\n            <h4>{{ item.title }}</h4>\r\n            <p class=\"truncate-overflow\" *ngIf=\"toShortDescription(item.description).isTrimmed\">{{ toShortDescription(item.description).description }}...</p>\r\n            <p class=\"truncate-overflow\" *ngIf=\"!toShortDescription(item.description).isTrimmed\">{{ toShortDescription(item.description).description }}</p>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-icon class=\"forward-icon\" ios=\"arrow-forward-outline\" md=\"arrow-forward-sharp\"></ion-icon>\r\n      </ion-card-content>\r\n      <ion-ripple-effect></ion-ripple-effect>\r\n    </ion-card>\r\n  </ion-row>\r\n</ng-container>";
+    __webpack_exports__["default"] = "<ng-container *ngIf=\"items.length !== 0\">\r\n  <ion-row *ngFor=\"let item of items; let i = index;\">\r\n    <ion-card class=\"animated fadeInUp faster ion-activatable ripple-parent\" (click)=\"navToDetail(detailPage + '/' + item._id)\" [ngStyle]=\"{'animation-delay': (i * (110 + (i / 100))) + 'ms'}\" *ngIf=\"item.isActive\">\r\n      <ion-card-content style=\"width: 100%; height: 15vh !important\">\r\n        <ion-row>\r\n          <ion-col [size]=\"5\">\r\n            <img style=\"width: 100%; height: 100%\" [defaultImage]=\"placeHolderImg\" [lazyLoad]=\"getImage(item.image.url)\"/>\r\n          </ion-col>\r\n          <ion-col [size]=\"7\">\r\n            <h4>{{ item.title }}</h4>\r\n            <p class=\"truncate-overflow\" *ngIf=\"toShortDescription(item.description).isTrimmed\">{{ toShortDescription(item.description).description }}...</p>\r\n            <p class=\"truncate-overflow\" *ngIf=\"!toShortDescription(item.description).isTrimmed\">{{ toShortDescription(item.description).description }}</p>\r\n          </ion-col>\r\n        </ion-row>\r\n        <ion-icon class=\"forward-icon\" ios=\"arrow-forward-outline\" md=\"arrow-forward-sharp\"></ion-icon>\r\n      </ion-card-content>\r\n      <ion-ripple-effect></ion-ripple-effect>\r\n    </ion-card>\r\n  </ion-row>\r\n</ng-container>";
     /***/
   },
 
@@ -19394,7 +20108,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             setTimeout(function () {
               var location = item.getBoundingClientRect();
               segment.scrollLeft = location.left - 7;
-            }, 700);
+            }, 1000);
           }
         }
       }]);
@@ -19481,17 +20195,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
     var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+    /* harmony import */
+
+
+    var src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/app/core/helper.service */
+    "./src/app/core/helper.service.ts");
 
     var DetailComponent = /*#__PURE__*/function () {
-      function DetailComponent(sharedService) {
+      function DetailComponent(sharedService, helperService) {
         _classCallCheck(this, DetailComponent);
 
         this.sharedService = sharedService;
+        this.helperService = helperService;
+        this.placeHolderImg = '';
       }
 
       _createClass(DetailComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);
+        }
       }, {
         key: "getImage",
         value: function getImage(imgUrl) {
@@ -19520,6 +20244,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     DetailComponent.ctorParameters = function () {
       return [{
         type: _shared_service__WEBPACK_IMPORTED_MODULE_2__["SharedService"]
+      }, {
+        type: src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_4__["HelperService"]
       }];
     };
 
@@ -19533,7 +20259,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./detail.component.scss */
       "./src/app/shared/components/detail/detail.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_shared_service__WEBPACK_IMPORTED_MODULE_2__["SharedService"]])], DetailComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_shared_service__WEBPACK_IMPORTED_MODULE_2__["SharedService"], src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_4__["HelperService"]])], DetailComponent);
     /***/
   },
 
@@ -19553,7 +20279,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".forward-icon {\n  color: #E02E2E !important;\n  position: absolute;\n  right: 0px;\n  bottom: 0px;\n}\n\nimg {\n  border-radius: 15px !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL2NvbXBvbmVudHMvbGlzdC1jYXJkLWl0ZW0vQzpcXFVzZXJzXFxkdGF0a1xcUHJvamVjdHNcXGZhaXRoLW1vYmlsZS9zcmNcXGFwcFxcc2hhcmVkXFxjb21wb25lbnRzXFxsaXN0LWNhcmQtaXRlbVxcbGlzdC1jYXJkLWl0ZW0uY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3NoYXJlZC9jb21wb25lbnRzL2xpc3QtY2FyZC1pdGVtL2xpc3QtY2FyZC1pdGVtLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kseUJBQUE7RUFDQSxrQkFBQTtFQUNBLFVBQUE7RUFDQSxXQUFBO0FDQ0o7O0FERUE7RUFDSSw4QkFBQTtBQ0NKIiwiZmlsZSI6InNyYy9hcHAvc2hhcmVkL2NvbXBvbmVudHMvbGlzdC1jYXJkLWl0ZW0vbGlzdC1jYXJkLWl0ZW0uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZm9yd2FyZC1pY29uIHtcclxuICAgIGNvbG9yOiAjRTAyRTJFICFpbXBvcnRhbnQ7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICByaWdodDogMHB4O1xyXG4gICAgYm90dG9tOiAwcHg7XHJcbn1cclxuXHJcbmltZyB7XHJcbiAgICBib3JkZXItcmFkaXVzOiAxNXB4ICFpbXBvcnRhbnQ7XHJcbn0iLCIuZm9yd2FyZC1pY29uIHtcbiAgY29sb3I6ICNFMDJFMkUgIWltcG9ydGFudDtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICByaWdodDogMHB4O1xuICBib3R0b206IDBweDtcbn1cblxuaW1nIHtcbiAgYm9yZGVyLXJhZGl1czogMTVweCAhaW1wb3J0YW50O1xufSJdfQ== */";
+    __webpack_exports__["default"] = ".forward-icon {\n  color: #E02E2E !important;\n  position: absolute;\n  right: 20px;\n  bottom: 0px;\n}\n\nimg {\n  border-radius: 15px !important;\n  height: 14vh !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL2NvbXBvbmVudHMvbGlzdC1jYXJkLWl0ZW0vQzpcXFVzZXJzXFxkdGF0a1xcUHJvamVjdHNcXGZhaXRoLW1vYmlsZS9zcmNcXGFwcFxcc2hhcmVkXFxjb21wb25lbnRzXFxsaXN0LWNhcmQtaXRlbVxcbGlzdC1jYXJkLWl0ZW0uY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3NoYXJlZC9jb21wb25lbnRzL2xpc3QtY2FyZC1pdGVtL2xpc3QtY2FyZC1pdGVtLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kseUJBQUE7RUFDQSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxXQUFBO0FDQ0o7O0FERUE7RUFDSSw4QkFBQTtFQUNBLHVCQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9zaGFyZWQvY29tcG9uZW50cy9saXN0LWNhcmQtaXRlbS9saXN0LWNhcmQtaXRlbS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5mb3J3YXJkLWljb24ge1xyXG4gICAgY29sb3I6ICNFMDJFMkUgIWltcG9ydGFudDtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHJpZ2h0OiAyMHB4O1xyXG4gICAgYm90dG9tOiAwcHg7XHJcbn1cclxuXHJcbmltZyB7XHJcbiAgICBib3JkZXItcmFkaXVzOiAxNXB4ICFpbXBvcnRhbnQ7XHJcbiAgICBoZWlnaHQ6IDE0dmggIWltcG9ydGFudDtcclxufSIsIi5mb3J3YXJkLWljb24ge1xuICBjb2xvcjogI0UwMkUyRSAhaW1wb3J0YW50O1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHJpZ2h0OiAyMHB4O1xuICBib3R0b206IDBweDtcbn1cblxuaW1nIHtcbiAgYm9yZGVyLXJhZGl1czogMTVweCAhaW1wb3J0YW50O1xuICBoZWlnaHQ6IDE0dmggIWltcG9ydGFudDtcbn0iXX0= */";
     /***/
   },
 
@@ -19594,6 +20320,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _shared_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! ../../shared.service */
     "./src/app/shared/shared.service.ts");
+    /* harmony import */
+
+
+    var src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/app/core/helper.service */
+    "./src/app/core/helper.service.ts");
 
     var ListType;
 
@@ -19603,18 +20335,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     })(ListType || (ListType = {}));
 
     var ListCardItemComponent = /*#__PURE__*/function () {
-      function ListCardItemComponent(sharedService) {
+      function ListCardItemComponent(sharedService, helperService) {
         _classCallCheck(this, ListCardItemComponent);
 
         this.sharedService = sharedService;
+        this.helperService = helperService;
+        this.hasLoaded = false;
+        this.placeHolderImg = '';
         this.detailNavigate = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
       }
 
       _createClass(ListCardItemComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          console.log(this.detailPage);
-          console.log(this.items);
+          this.items = [];
+          this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);
         }
       }, {
         key: "ngOnChanges",
@@ -19645,9 +20380,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return this.sharedService.getImage(imgUrl);
         }
       }, {
+        key: "showImages",
+        value: function showImages() {
+          this.hasLoaded = true;
+          console.log('image loaded');
+        }
+      }, {
         key: "navToDetail",
         value: function navToDetail(url) {
           this.detailNavigate.emit("".concat(this.type, "/").concat(url));
+        }
+      }, {
+        key: "ngOnDestroy",
+        value: function ngOnDestroy() {
+          this.items = [];
         }
       }]);
 
@@ -19657,6 +20403,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     ListCardItemComponent.ctorParameters = function () {
       return [{
         type: _shared_service__WEBPACK_IMPORTED_MODULE_2__["SharedService"]
+      }, {
+        type: src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"]
       }];
     };
 
@@ -19672,7 +20420,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./list-card-item.component.scss */
       "./src/app/shared/components/list-card-item/list-card-item.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_shared_service__WEBPACK_IMPORTED_MODULE_2__["SharedService"]])], ListCardItemComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_shared_service__WEBPACK_IMPORTED_MODULE_2__["SharedService"], src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"]])], ListCardItemComponent);
     /***/
   },
 
@@ -20131,6 +20879,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _services_menu_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! ./services/menu.service */
     "./src/app/shared/services/menu.service.ts");
+    /* harmony import */
+
+
+    var ng_lazyload_image__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    /*! ng-lazyload-image */
+    "./node_modules/ng-lazyload-image/fesm2015/ng-lazyload-image.js");
 
     var SharedModule = function SharedModule() {
       _classCallCheck(this, SharedModule);
@@ -20138,7 +20892,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     SharedModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       declarations: [_navigation_navigation_component__WEBPACK_IMPORTED_MODULE_3__["NavigationComponent"], _icon_bar_icon_bar_component__WEBPACK_IMPORTED_MODULE_5__["IconBarComponent"], _auto_scroll_directive__WEBPACK_IMPORTED_MODULE_6__["AutoScrollDirective"], _nav_detail_nav_detail_component__WEBPACK_IMPORTED_MODULE_7__["NavDetailComponent"], _components_list_card_item_list_card_item_component__WEBPACK_IMPORTED_MODULE_8__["ListCardItemComponent"], _components_detail_detail_component__WEBPACK_IMPORTED_MODULE_10__["DetailComponent"], _directives_phone_mask_directive__WEBPACK_IMPORTED_MODULE_11__["PhoneMaskDirective"]],
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"]],
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], ng_lazyload_image__WEBPACK_IMPORTED_MODULE_13__["LazyLoadImageModule"]],
       exports: [_navigation_navigation_component__WEBPACK_IMPORTED_MODULE_3__["NavigationComponent"], _icon_bar_icon_bar_component__WEBPACK_IMPORTED_MODULE_5__["IconBarComponent"], _auto_scroll_directive__WEBPACK_IMPORTED_MODULE_6__["AutoScrollDirective"], _nav_detail_nav_detail_component__WEBPACK_IMPORTED_MODULE_7__["NavDetailComponent"], _components_list_card_item_list_card_item_component__WEBPACK_IMPORTED_MODULE_8__["ListCardItemComponent"], _components_detail_detail_component__WEBPACK_IMPORTED_MODULE_10__["DetailComponent"], _directives_phone_mask_directive__WEBPACK_IMPORTED_MODULE_11__["PhoneMaskDirective"]],
       providers: [_shared_service__WEBPACK_IMPORTED_MODULE_9__["SharedService"], _services_menu_service__WEBPACK_IMPORTED_MODULE_12__["MenuService"]],
       schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["NO_ERRORS_SCHEMA"]]

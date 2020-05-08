@@ -312,6 +312,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function navigationToDetail(val) {
           this.navController.navigateForward(val);
         }
+      }, {
+        key: "ngOnDestroy",
+        value: function ngOnDestroy() {
+          console.log('on destroy');
+          this.announcementService.announcement$.next(null);
+        }
       }]);
 
       return AnnouncementsPage;
