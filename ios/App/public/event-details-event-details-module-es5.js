@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <app-nav-detail [title]=\"'Event'\" (dismiss)=\"dismissDetail($event)\"></app-nav-detail>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <app-detail *ngIf=\"details\" [details]=\"details\" [type]=\"'event'\"></app-detail>\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <app-nav-detail [title]=\"'Event'\" (dismiss)=\"dismissDetail($event)\"></app-nav-detail>\n</ion-header>\n\n<ion-content>\n  <app-detail *ngIf=\"details\" [details]=\"details\" [type]=\"'event'\"></app-detail>\n</ion-content>\n";
     /***/
   },
 
