@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { BiblestudyService } from '../../services/biblestudy.service';
 import { HelperService } from 'src/app/core/helper.service';
-import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer/ngx';
 
 @Component({
   selector: 'app-biblestudy',
@@ -14,8 +13,7 @@ export class BiblestudyComponent implements OnInit {
   placeHolderImg = '';
 
   constructor(private bibleStudyService: BiblestudyService,
-    private helperService: HelperService,
-    private documentViewer: DocumentViewer) { }
+    private helperService: HelperService) { }
 
   ngOnInit() {
     this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true)
@@ -28,9 +26,9 @@ export class BiblestudyComponent implements OnInit {
   viewFile(item) {
     const url = item.file.url;
     const fileName = item.file.name;
-    const options: DocumentViewerOptions = {
-      title: fileName
-    }
-    this.documentViewer.viewDocument(url, 'pdf', options);
+    // const options: DocumentViewerOptions = {
+    //   title: fileName
+    // }
+    // this.documentViewer.viewDocument(url, 'pdf', options);
   }
 }

@@ -6,82 +6,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["connect-connect-module"], {
   /***/
-  "./node_modules/@ionic-native/document-viewer/ngx/index.js":
-  /*!*****************************************************************!*\
-    !*** ./node_modules/@ionic-native/document-viewer/ngx/index.js ***!
-    \*****************************************************************/
-
-  /*! exports provided: DocumentViewer */
-
-  /***/
-  function node_modulesIonicNativeDocumentViewerNgxIndexJs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "DocumentViewer", function () {
-      return DocumentViewer;
-    });
-    /* harmony import */
-
-
-    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! tslib */
-    "./node_modules/tslib/tslib.es6.js");
-    /* harmony import */
-
-
-    var _ionic_native_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! @ionic-native/core */
-    "./node_modules/@ionic-native/core/index.js");
-    /* harmony import */
-
-
-    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/fesm2015/core.js");
-
-    var DocumentViewer =
-    /** @class */
-    function (_super) {
-      Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(DocumentViewer, _super);
-
-      function DocumentViewer() {
-        return _super !== null && _super.apply(this, arguments) || this;
-      }
-
-      DocumentViewer.prototype.getSupportInfo = function () {
-        return Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_1__["cordova"])(this, "getSupportInfo", {}, arguments);
-      };
-
-      DocumentViewer.prototype.canViewDocument = function (url, contentType, options, onPossible, onMissingApp, onImpossible, onError) {
-        return Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_1__["cordova"])(this, "canViewDocument", {
-          "sync": true
-        }, arguments);
-      };
-
-      DocumentViewer.prototype.viewDocument = function (url, contentType, options, onShow, onClose, onMissingApp, onError) {
-        return Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_1__["cordova"])(this, "viewDocument", {
-          "sync": true
-        }, arguments);
-      };
-
-      DocumentViewer.pluginName = "Document Viewer";
-      DocumentViewer.plugin = "cordova-plugin-document-viewer";
-      DocumentViewer.pluginRef = "SitewaertsDocumentViewer";
-      DocumentViewer.repo = "https://github.com/sitewaerts/cordova-plugin-document-viewer";
-      DocumentViewer.platforms = ["Android", "iOS", "Windows"];
-      DocumentViewer = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])()], DocumentViewer);
-      return DocumentViewer;
-    }(_ionic_native_core__WEBPACK_IMPORTED_MODULE_1__["IonicNativePlugin"]); //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9zcmMvQGlvbmljLW5hdGl2ZS9wbHVnaW5zL2RvY3VtZW50LXZpZXdlci9uZ3gvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sOEJBQXNDLE1BQU0sb0JBQW9CLENBQUM7QUFDeEUsT0FBTyxFQUFFLFVBQVUsRUFBRSxNQUFNLGVBQWUsQ0FBQzs7SUE4RFAsa0NBQWlCOzs7O0lBUW5ELHVDQUFjO0lBZ0JkLHdDQUFlLGFBQUMsR0FBVyxFQUFFLFdBQW1CLEVBQUUsT0FBOEIsRUFBRSxVQUFxQixFQUFFLFlBQXVCLEVBQUUsWUFBdUIsRUFBRSxPQUFrQjtJQWU3SyxxQ0FBWSxhQUFDLEdBQVcsRUFBRSxXQUFtQixFQUFFLE9BQThCLEVBQUUsTUFBaUIsRUFBRSxPQUFrQixFQUFFLFlBQXVCLEVBQUUsT0FBa0I7Ozs7OztJQXZDdEosY0FBYztRQUQxQixVQUFVLEVBQUU7T0FDQSxjQUFjO3lCQS9EM0I7RUErRG9DLGlCQUFpQjtTQUF4QyxjQUFjIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ29yZG92YSwgSW9uaWNOYXRpdmVQbHVnaW4sIFBsdWdpbiB9IGZyb20gJ0Bpb25pYy1uYXRpdmUvY29yZSc7XG5pbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbmV4cG9ydCBpbnRlcmZhY2UgRG9jdW1lbnRWaWV3ZXJPcHRpb25zIHtcbiAgdGl0bGU/OiBzdHJpbmc7XG4gIGRvY3VtZW50Vmlldz86IHtcbiAgICBjbG9zZUxhYmVsOiBzdHJpbmc7XG4gIH07XG4gIG5hdmlnYXRpb25WaWV3Pzoge1xuICAgIGNsb3NlTGFiZWw6IHN0cmluZztcbiAgfTtcbiAgZW1haWw/OiB7XG4gICAgZW5hYmxlZDogYm9vbGVhbjtcbiAgfTtcbiAgcHJpbnQ/OiB7XG4gICAgZW5hYmxlZDogYm9vbGVhbjtcbiAgfTtcbiAgb3BlbldpdGg/OiB7XG4gICAgZW5hYmxlZDogYm9vbGVhbjtcbiAgfTtcbiAgYm9va21hcmtzPzoge1xuICAgIGVuYWJsZWQ6IGJvb2xlYW47XG4gIH07XG4gIHNlYXJjaD86IHtcbiAgICBlbmFibGVkOiBib29sZWFuO1xuICB9O1xuICBhdXRvQ2xvc2U/OiB7XG4gICAgb25QYXVzZTogYm9vbGVhbjtcbiAgfTtcbn1cblxuLyoqXG4gKiBAbmFtZSBEb2N1bWVudCBWaWV3ZXJcbiAqIEBkZXNjcmlwdGlvblxuICogVGhpcyBwbHVnaW4gb2ZmZXJzIGEgc2xpbSBBUEkgdG8gdmlldyBQREYgZmlsZXMgd2hpY2ggYXJlIGVpdGhlciBzdG9yZWQgaW4gdGhlIGFwcHMgYXNzZXRzIGZvbGRlciAoL3d3dy8qKSBvciBpbiBhbnkgb3RoZXIgZmlsZSBzeXN0ZW0gZGlyZWN0b3J5IGF2YWlsYWJsZSB2aWEgdGhlIGNvcmRvdmEgZmlsZSBwbHVnaW4uXG4gKlxuICogQHVzYWdlXG4gKiBgYGB0eXBlc2NyaXB0XG4gKiBpbXBvcnQgeyBEb2N1bWVudFZpZXdlciB9IGZyb20gJ0Bpb25pYy1uYXRpdmUvZG9jdW1lbnQtdmlld2VyL25neCc7XG4gKlxuICpcbiAqIGNvbnN0cnVjdG9yKHByaXZhdGUgZG9jdW1lbnQ6IERvY3VtZW50Vmlld2VyKSB7IH1cbiAqXG4gKiAuLi5cbiAqIGNvbnN0IG9wdGlvbnM6IERvY3VtZW50Vmlld2VyT3B0aW9ucyA9IHtcbiAqICAgdGl0bGU6ICdNeSBQREYnXG4gKiB9XG4gKlxuICogdGhpcy5kb2N1bWVudC52aWV3RG9jdW1lbnQoJ2Fzc2V0cy9teUZpbGUucGRmJywgJ2FwcGxpY2F0aW9uL3BkZicsIG9wdGlvbnMpXG4gKlxuICogYGBgXG4gKlxuICogQGludGVyZmFjZXNcbiAqIERvY3VtZW50Vmlld2VyT3B0aW9uc1xuICovXG5AUGx1Z2luKHtcbiAgcGx1Z2luTmFtZTogJ0RvY3VtZW50IFZpZXdlcicsXG4gIHBsdWdpbjogJ2NvcmRvdmEtcGx1Z2luLWRvY3VtZW50LXZpZXdlcicsXG4gIHBsdWdpblJlZjogJ1NpdGV3YWVydHNEb2N1bWVudFZpZXdlcicsXG4gIHJlcG86ICdodHRwczovL2dpdGh1Yi5jb20vc2l0ZXdhZXJ0cy9jb3Jkb3ZhLXBsdWdpbi1kb2N1bWVudC12aWV3ZXInLFxuICBwbGF0Zm9ybXM6IFsnQW5kcm9pZCcsICdpT1MnLCAnV2luZG93cyddXG59KVxuQEluamVjdGFibGUoKVxuZXhwb3J0IGNsYXNzIERvY3VtZW50Vmlld2VyIGV4dGVuZHMgSW9uaWNOYXRpdmVQbHVnaW4ge1xuXG4gIC8qKlxuICAgKiBEaXNwbGF5cyB0aGUgZW1haWwgY29tcG9zZXIgcHJlLWZpbGxlZCB3aXRoIGRhdGEuXG4gICAqXG4gICAqIEByZXR1cm5zIHtQcm9taXNlPGFueT59IFJlc29sdmVzIHByb21pc2Ugd2hlbiB0aGUgRW1haWxDb21wb3NlciBoYXMgYmVlbiBvcGVuZWRcbiAgICovXG4gIEBDb3Jkb3ZhKClcbiAgZ2V0U3VwcG9ydEluZm8oKTogUHJvbWlzZTxhbnk+IHtcbiAgICByZXR1cm47XG4gIH1cblxuICAvKipcbiAgICogQ2hlY2sgaWYgdGhlIGRvY3VtZW50IGNhbiBiZSBzaG93blxuICAgKlxuICAgKiBAcGFyYW0gdXJsIHtzdHJpbmd9IFVybCB0byB0aGUgZmlsZVxuICAgKiBAcGFyYW0gY29udGVudFR5cGUge3N0cmluZ30gQ29udGVudCB0eXBlIG9mIHRoZSBmaWxlXG4gICAqIEBwYXJhbSBvcHRpb25zIHtEb2N1bWVudFZpZXdlck9wdGlvbnN9IG9wdGlvbnNcbiAgICogQHBhcmFtIFtvblBvc3NpYmxlXSB7RnVuY3Rpb259XG4gICAqIEBwYXJhbSBbb25NaXNzaW5nQXBwXSB7RnVuY3Rpb259XG4gICAqIEBwYXJhbSBbb25JbXBvc3NpYmxlXSB7RnVuY3Rpb259XG4gICAqIEBwYXJhbSBbb25FcnJvcl0ge0Z1bmN0aW9ufVxuICAgKi9cbiAgQENvcmRvdmEoeyBzeW5jOiB0cnVlIH0pXG4gIGNhblZpZXdEb2N1bWVudCh1cmw6IHN0cmluZywgY29udGVudFR5cGU6IHN0cmluZywgb3B0aW9uczogRG9jdW1lbnRWaWV3ZXJPcHRpb25zLCBvblBvc3NpYmxlPzogRnVuY3Rpb24sIG9uTWlzc2luZ0FwcD86IEZ1bmN0aW9uLCBvbkltcG9zc2libGU/OiBGdW5jdGlvbiwgb25FcnJvcj86IEZ1bmN0aW9uKTogdm9pZCB7XG4gIH1cblxuICAvKipcbiAgICogT3BlbnMgdGhlIGZpbGVcbiAgICpcbiAgICogQHBhcmFtIHVybCB7c3RyaW5nfSBVcmwgdG8gdGhlIGZpbGVcbiAgICogQHBhcmFtIGNvbnRlbnRUeXBlIHtzdHJpbmd9IENvbnRlbnQgdHlwZSBvZiB0aGUgZmlsZVxuICAgKiBAcGFyYW0gb3B0aW9ucyB7RG9jdW1lbnRWaWV3ZXJPcHRpb25zfSBvcHRpb25zXG4gICAqIEBwYXJhbSBbb25TaG93XSB7RnVuY3Rpb259XG4gICAqIEBwYXJhbSBbb25DbG9zZV0ge0Z1bmN0aW9ufVxuICAgKiBAcGFyYW0gW29uTWlzc2luZ0FwcF0ge0Z1bmN0aW9ufVxuICAgKiBAcGFyYW0gW29uRXJyb3JdIHtGdW5jdGlvbn1cbiAgICovXG4gIEBDb3Jkb3ZhKHsgc3luYzogdHJ1ZSB9KVxuICB2aWV3RG9jdW1lbnQodXJsOiBzdHJpbmcsIGNvbnRlbnRUeXBlOiBzdHJpbmcsIG9wdGlvbnM6IERvY3VtZW50Vmlld2VyT3B0aW9ucywgb25TaG93PzogRnVuY3Rpb24sIG9uQ2xvc2U/OiBGdW5jdGlvbiwgb25NaXNzaW5nQXBwPzogRnVuY3Rpb24sIG9uRXJyb3I/OiBGdW5jdGlvbik6IHZvaWQge1xuICB9XG5cbn1cbiJdfQ==
-
-    /***/
-
-  },
-
-  /***/
   "./node_modules/raw-loader/dist/cjs.js!./src/app/connect/components/biblestudy/biblestudy.component.html":
   /*!***************************************************************************************************************!*\
     !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/connect/components/biblestudy/biblestudy.component.html ***!
@@ -224,20 +148,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! src/app/core/helper.service */
     "./src/app/core/helper.service.ts");
-    /* harmony import */
-
-
-    var _ionic_native_document_viewer_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-    /*! @ionic-native/document-viewer/ngx */
-    "./node_modules/@ionic-native/document-viewer/ngx/index.js");
 
     var BiblestudyComponent = /*#__PURE__*/function () {
-      function BiblestudyComponent(bibleStudyService, helperService, documentViewer) {
+      function BiblestudyComponent(bibleStudyService, helperService) {
         _classCallCheck(this, BiblestudyComponent);
 
         this.bibleStudyService = bibleStudyService;
         this.helperService = helperService;
-        this.documentViewer = documentViewer;
         this.placeHolderImg = '';
       }
 
@@ -255,11 +172,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "viewFile",
         value: function viewFile(item) {
           var url = item.file.url;
-          var fileName = item.file.name;
-          var options = {
-            title: fileName
-          };
-          this.documentViewer.viewDocument(url, 'pdf', options);
+          var fileName = item.file.name; // const options: DocumentViewerOptions = {
+          //   title: fileName
+          // }
+          // this.documentViewer.viewDocument(url, 'pdf', options);
         }
       }]);
 
@@ -271,8 +187,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         type: _services_biblestudy_service__WEBPACK_IMPORTED_MODULE_2__["BiblestudyService"]
       }, {
         type: src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"]
-      }, {
-        type: _ionic_native_document_viewer_ngx__WEBPACK_IMPORTED_MODULE_4__["DocumentViewer"]
       }];
     };
 
@@ -285,7 +199,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./biblestudy.component.scss */
       "./src/app/connect/components/biblestudy/biblestudy.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_biblestudy_service__WEBPACK_IMPORTED_MODULE_2__["BiblestudyService"], src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"], _ionic_native_document_viewer_ngx__WEBPACK_IMPORTED_MODULE_4__["DocumentViewer"]])], BiblestudyComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_biblestudy_service__WEBPACK_IMPORTED_MODULE_2__["BiblestudyService"], src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"]])], BiblestudyComponent);
     /***/
   },
 
@@ -730,12 +644,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _services_biblestudy_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! ./services/biblestudy.service */
     "./src/app/connect/services/biblestudy.service.ts");
-    /* harmony import */
-
-
-    var _ionic_native_document_viewer_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
-    /*! @ionic-native/document-viewer/ngx */
-    "./node_modules/@ionic-native/document-viewer/ngx/index.js");
 
     var ConnectPageModule = function ConnectPageModule() {
       _classCallCheck(this, ConnectPageModule);
@@ -743,7 +651,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     ConnectPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _connect_routing_module__WEBPACK_IMPORTED_MODULE_5__["ConnectPageRoutingModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_7__["SharedModule"]],
-      providers: [_services_social_service__WEBPACK_IMPORTED_MODULE_11__["SocialService"], _services_biblestudy_service__WEBPACK_IMPORTED_MODULE_12__["BiblestudyService"], _ionic_native_document_viewer_ngx__WEBPACK_IMPORTED_MODULE_13__["DocumentViewer"]],
+      providers: [_services_social_service__WEBPACK_IMPORTED_MODULE_11__["SocialService"], _services_biblestudy_service__WEBPACK_IMPORTED_MODULE_12__["BiblestudyService"]],
       declarations: [_connect_page__WEBPACK_IMPORTED_MODULE_6__["ConnectPage"], _components_social_social_component__WEBPACK_IMPORTED_MODULE_8__["SocialComponent"], _components_biblestudy_biblestudy_component__WEBPACK_IMPORTED_MODULE_9__["BiblestudyComponent"], _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_10__["ContactComponent"]]
     })], ConnectPageModule);
     /***/
