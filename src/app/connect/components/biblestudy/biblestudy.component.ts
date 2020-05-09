@@ -45,7 +45,7 @@ export class BiblestudyComponent implements OnInit {
       presentationstyle : 'pagesheet',//iOS only 
       fullscreen : 'yes',//Windows only    
   };
-    console.log(environment.IMG_URL + url);
-    const browser = this.inAppBrowser.create('www.google.com', '_system');
+    console.log();
+    const browser = this.inAppBrowser.create(environment.IMG_URL + url, '_system');
   }
 }
