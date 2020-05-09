@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,23 @@ export class BiblestudyService {
   }
 
   downloadAndOpenPdf(url, name) {
-    this.inAppBrowser.create(environment.IMG_URL + url, '_system', 'location=yes');
+    const options : InAppBrowserOptions = {
+      location : 'no',//Or 'no' 
+      hidden : 'no', //Or  'yes'
+      clearcache : 'yes',
+      clearsessioncache : 'yes',
+      zoom : 'yes',//Android only ,shows browser zoom controls 
+      hardwareback : 'yes',
+      mediaPlaybackRequiresUserAction : 'no',
+      shouldPauseOnSuspend : 'no', //Android only 
+      closebuttoncaption : 'Close', //iOS only
+      disallowoverscroll : 'no', //iOS only 
+      toolbar : 'yes', //iOS only 
+      enableViewportScale : 'no', //iOS only 
+      allowInlineMediaPlayback : 'no',//iOS only 
+      presentationstyle : 'pagesheet',//iOS only 
+      fullscreen : 'yes',//Windows only    
+  };
+    this.inAppBrowser.create(environment.IMG_URL + url, '_blank', options);
   }
 }

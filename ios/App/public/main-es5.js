@@ -1436,6 +1436,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _announcements_announcement_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! ./announcements/announcement.service */
     "./src/app/announcements/announcement.service.ts");
+    /* harmony import */
+
+
+    var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+    /*! @ionic-native/in-app-browser/ngx */
+    "./node_modules/@ionic-native/in-app-browser/ngx/index.js");
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
@@ -1445,7 +1451,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       declarations: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]],
       entryComponents: [],
       imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"], _core_core_module__WEBPACK_IMPORTED_MODULE_10__["CoreModule"]],
-      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_7__["ScreenOrientation"], {
+      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_7__["ScreenOrientation"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_12__["InAppBrowser"], {
         provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
         useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
       }, _announcements_announcement_service__WEBPACK_IMPORTED_MODULE_11__["AnnouncementService"]],
