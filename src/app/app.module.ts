@@ -11,12 +11,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { AnnouncementService } from './announcements/announcement.service';
-import { SharedModule } from './shared/shared.module';
-import { NavigationComponent } from './shared/navigation/navigation.component';
-import { AnnouncementsPage } from './announcements/announcements.page';
-import { AnnouncementsPageModule } from './announcements/announcements.module';
-
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +20,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     StatusBar,
     SplashScreen,
     ScreenOrientation,
-    InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AnnouncementService
   ],

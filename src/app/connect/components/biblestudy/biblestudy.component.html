@@ -14,11 +14,7 @@
                 <p>Salvation</p>
               </ion-col>
               <ion-col [size]="5">
-                <ion-fab>
-                  <ion-fab-button (click)="viewFile(item)">
-                    <ion-icon name="cloud-download-outline"></ion-icon>
-                  </ion-fab-button>
-                </ion-fab>
+                <ion-button (click)="viewFile(item)"><ion-icon name="cloud-download-outline"></ion-icon></ion-button>
               </ion-col>
             </ion-row>
           </ion-card-content>

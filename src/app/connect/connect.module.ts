@@ -14,6 +14,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { SocialService } from './services/social.service';
 import { BiblestudyService } from './services/biblestudy.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
   ],
   providers: [
     SocialService,
-    BiblestudyService
+    BiblestudyService,
+    InAppBrowser
   ],
   declarations: [ConnectPage, SocialComponent, BiblestudyComponent, ContactComponent]
 })
