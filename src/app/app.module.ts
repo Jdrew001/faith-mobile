@@ -6,7 +6,9 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
-
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +27,9 @@ import { AnnouncementsPageModule } from './announcements/announcements.module';
     StatusBar,
     SplashScreen,
     ScreenOrientation,
+    File,
+    FileOpener,
+    FileTransfer,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AnnouncementService
   ],

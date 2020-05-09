@@ -172,10 +172,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "viewFile",
         value: function viewFile(item) {
           var url = item.file.url;
-          var fileName = item.file.name; // const options: DocumentViewerOptions = {
-          //   title: fileName
-          // }
-          // this.documentViewer.viewDocument(url, 'pdf', options);
+          var fileName = item.file.name;
+          this.bibleStudyService.downloadAndOpenPdf(url, fileName);
         }
       }]);
 
@@ -885,14 +883,36 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var src_environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! src/environments/environment */
     "./src/environments/environment.ts");
+    /* harmony import */
+
+
+    var _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! @ionic-native/file-opener/ngx */
+    "./node_modules/@ionic-native/file-opener/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! @ionic-native/file/ngx */
+    "./node_modules/@ionic-native/file/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! @ionic-native/file-transfer/ngx */
+    "./node_modules/@ionic-native/file-transfer/ngx/index.js");
 
     var BiblestudyService = /*#__PURE__*/function () {
-      function BiblestudyService(helperService, http) {
+      function BiblestudyService(helperService, http, fileOpener, file, fileTransfer) {
         _classCallCheck(this, BiblestudyService);
 
         this.helperService = helperService;
         this.http = http;
+        this.fileOpener = fileOpener;
+        this.file = file;
+        this.fileTransfer = fileTransfer;
         this.allBibleStudies$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"]([]);
+        this.pdfFileType = 'application/pdf';
       }
 
       _createClass(BiblestudyService, [{
@@ -906,6 +926,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function getImage(imgUrl) {
           return src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].IMG_URL + imgUrl;
         }
+      }, {
+        key: "downloadAndOpenPdf",
+        value: function downloadAndOpenPdf(url, name) {
+          var _this3 = this;
+
+          var downloadUrl = url;
+          var path = this.file.dataDirectory;
+          var transfer = this.fileTransfer.create();
+          transfer.download(downloadUrl, "".concat(path).concat(name, ".pdf")).then(function (entry) {
+            var url = entry.toURL();
+
+            _this3.fileOpener.open(url, _this3.pdfFileType);
+          });
+        }
       }]);
 
       return BiblestudyService;
@@ -916,12 +950,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         type: src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_2__["HelperService"]
       }, {
         type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]
+      }, {
+        type: _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_7__["FileOpener"]
+      }, {
+        type: _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_8__["File"]
+      }, {
+        type: _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_9__["FileTransfer"]
       }];
     };
 
     BiblestudyService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
       providedIn: 'root'
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_2__["HelperService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]])], BiblestudyService);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_2__["HelperService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"], _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_7__["FileOpener"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_8__["File"], _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_9__["FileTransfer"]])], BiblestudyService);
     /***/
   },
 

@@ -1415,25 +1415,43 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! @ionic-native/file/ngx */
+    "./node_modules/@ionic-native/file/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! @ionic-native/file-opener/ngx */
+    "./node_modules/@ionic-native/file-opener/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    /*! @ionic-native/file-transfer/ngx */
+    "./node_modules/@ionic-native/file-transfer/ngx/index.js");
+    /* harmony import */
+
+
+    var _app_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! ./app.component */
     "./src/app/app.component.ts");
     /* harmony import */
 
 
-    var _app_routing_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _app_routing_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! ./app-routing.module */
     "./src/app/app-routing.module.ts");
     /* harmony import */
 
 
-    var _core_core_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    var _core_core_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! ./core/core.module */
     "./src/app/core/core.module.ts");
     /* harmony import */
 
 
-    var _announcements_announcement_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    var _announcements_announcement_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
     /*! ./announcements/announcement.service */
     "./src/app/announcements/announcement.service.ts");
 
@@ -1442,14 +1460,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     };
 
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]],
+      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_11__["AppComponent"]],
       entryComponents: [],
-      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"], _core_core_module__WEBPACK_IMPORTED_MODULE_10__["CoreModule"]],
-      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_7__["ScreenOrientation"], {
+      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_12__["AppRoutingModule"], _core_core_module__WEBPACK_IMPORTED_MODULE_13__["CoreModule"]],
+      providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_7__["ScreenOrientation"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_8__["File"], _ionic_native_file_opener_ngx__WEBPACK_IMPORTED_MODULE_9__["FileOpener"], _ionic_native_file_transfer_ngx__WEBPACK_IMPORTED_MODULE_10__["FileTransfer"], {
         provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
         useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
-      }, _announcements_announcement_service__WEBPACK_IMPORTED_MODULE_11__["AnnouncementService"]],
-      bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
+      }, _announcements_announcement_service__WEBPACK_IMPORTED_MODULE_14__["AnnouncementService"]],
+      bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_11__["AppComponent"]]
     })], AppModule);
     /***/
   },
@@ -2206,8 +2224,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       PAY_PAL_URL: 'https://api.paypal.com/',
       ASSET_URL: '/assets/',
       //BASE_URL: 'http://atkisondevserver.me:1337/',
-      BASE_URL: 'http://localhost:1337/',
-      IMG_URL: 'http://localhost:1337',
+      BASE_URL: 'http://192.168.1.212:1337/',
+      IMG_URL: 'http://192.168.1.212:1337',
       JSON_URL: 'http://localhost:3000'
     };
     /*

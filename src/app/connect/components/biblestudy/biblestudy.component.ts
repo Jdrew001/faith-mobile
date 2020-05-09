@@ -26,9 +26,6 @@ export class BiblestudyComponent implements OnInit {
   viewFile(item) {
     const url = item.file.url;
     const fileName = item.file.name;
-    // const options: DocumentViewerOptions = {
-    //   title: fileName
-    // }
-    // this.documentViewer.viewDocument(url, 'pdf', options);
+    this.bibleStudyService.downloadAndOpenPdf(url, fileName);
   }
 }

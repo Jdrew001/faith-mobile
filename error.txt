@@ -1,0 +1,2 @@
+android file opener build error
+replace contents with "androidx.core.content.FileProvider"
