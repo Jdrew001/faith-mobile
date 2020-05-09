@@ -46,6 +46,6 @@ export class BiblestudyComponent implements OnInit {
       fullscreen : 'yes',//Windows only    
   };
     console.log(environment.IMG_URL + url);
-    const browser = this.inAppBrowser.create(environment.IMG_URL + url, '_blank', options);
+    const browser = this.inAppBrowser.create('www.google.com', '_system');
   }
 }
