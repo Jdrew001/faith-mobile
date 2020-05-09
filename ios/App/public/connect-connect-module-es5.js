@@ -206,7 +206,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"biblestudy-container\">\n\n  <ng-container *ngFor=\"let item of data; let i = index;\">\n    <div class=\"animated fadeInUp faster\" [ngStyle]=\"{'animation-delay': (i * (110 + (i / 100))) + 'ms'}\">\n      <ion-row>\n        <img [src]=\"getImage(item.image.url)\" />\n      </ion-row>\n      <ion-row>\n        <ion-card class=\"container-card\">\n          <ion-card-content class=\"container-content\">\n            <ion-row>\n              <ion-col [size]=\"7\">\n                <h3>{{ item.title }}</h3>\n                <p>Salvation</p>\n              </ion-col>\n              \n            </ion-row>\n          </ion-card-content>\n        </ion-card>\n      </ion-row>\n    </div>\n  </ng-container>\n  \n</div>";
+    __webpack_exports__["default"] = "<div class=\"biblestudy-container\">\n\n  <ng-container *ngFor=\"let item of data; let i = index;\">\n    <div class=\"animated fadeInUp faster\" [ngStyle]=\"{'animation-delay': (i * (110 + (i / 100))) + 'ms'}\">\n      <ion-row>\n        <img [src]=\"getImage(item.image.url)\" />\n      </ion-row>\n      <ion-row>\n        <ion-card class=\"container-card\">\n          <ion-card-content class=\"container-content\">\n            <ion-row>\n              <ion-col [size]=\"7\">\n                <h3>{{ item.title }}</h3>\n                <p>Salvation</p>\n              </ion-col>\n              <ion-col [size]=\"5\">\n                <ion-button (click)=\"viewFile(item)\"><ion-icon name=\"cloud-download-outline\"></ion-icon></ion-button>\n              </ion-col>\n            </ion-row>\n          </ion-card-content>\n        </ion-card>\n      </ion-row>\n    </div>\n  </ng-container>\n  \n</div>";
     /***/
   },
 
@@ -345,21 +345,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @ionic-native/in-app-browser/ngx */
     "./node_modules/@ionic-native/in-app-browser/ngx/index.js");
-    /* harmony import */
-
-
-    var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-    /*! @ionic/angular */
-    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 
     var BiblestudyComponent = /*#__PURE__*/function () {
-      function BiblestudyComponent(bibleStudyService, helperService, inAppBrowser, toastController) {
+      function BiblestudyComponent(bibleStudyService, helperService, inAppBrowser) {
         _classCallCheck(this, BiblestudyComponent);
 
         this.bibleStudyService = bibleStudyService;
         this.helperService = helperService;
         this.inAppBrowser = inAppBrowser;
-        this.toastController = toastController;
         this.placeHolderImg = '';
       }
 
@@ -378,15 +371,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function viewFile(item) {
           var url = item.file.url;
           var fileName = item.file.name;
-          console.log(url);
-          var browser = this.inAppBrowser.create(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].IMG_URL + url, '_blank');
-          this.toastController.create({
-            message: ' This is firing',
-            duration: 20000,
-            color: 'danger'
-          }).then(function (val) {
-            return val.present();
-          });
+          var options = {
+            location: 'no',
+            hidden: 'no',
+            clearcache: 'yes',
+            clearsessioncache: 'yes',
+            zoom: 'yes',
+            hardwareback: 'yes',
+            mediaPlaybackRequiresUserAction: 'no',
+            shouldPauseOnSuspend: 'no',
+            closebuttoncaption: 'Close',
+            disallowoverscroll: 'no',
+            toolbar: 'yes',
+            enableViewportScale: 'no',
+            allowInlineMediaPlayback: 'no',
+            presentationstyle: 'pagesheet',
+            fullscreen: 'yes'
+          };
+          console.log(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].IMG_URL + url);
+          var browser = this.inAppBrowser.create(src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].IMG_URL + url, '_blank', options);
         }
       }]);
 
@@ -400,8 +403,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         type: src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"]
       }, {
         type: _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_5__["InAppBrowser"]
-      }, {
-        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"]
       }];
     };
 
@@ -414,7 +415,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./biblestudy.component.scss */
       "./src/app/connect/components/biblestudy/biblestudy.component.scss"))["default"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_biblestudy_service__WEBPACK_IMPORTED_MODULE_2__["BiblestudyService"], src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_5__["InAppBrowser"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"]])], BiblestudyComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_biblestudy_service__WEBPACK_IMPORTED_MODULE_2__["BiblestudyService"], src_app_core_helper_service__WEBPACK_IMPORTED_MODULE_3__["HelperService"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_5__["InAppBrowser"]])], BiblestudyComponent);
     /***/
   },
 
@@ -1137,7 +1138,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
       }, {
         key: "downloadAndOpenPdf",
-        value: function downloadAndOpenPdf(url, name) {}
+        value: function downloadAndOpenPdf(url, name) {
+          var options = {
+            location: 'no',
+            hidden: 'no',
+            clearcache: 'yes',
+            clearsessioncache: 'yes',
+            zoom: 'yes',
+            hardwareback: 'yes',
+            mediaPlaybackRequiresUserAction: 'no',
+            shouldPauseOnSuspend: 'no',
+            closebuttoncaption: 'Close',
+            disallowoverscroll: 'no',
+            toolbar: 'yes',
+            enableViewportScale: 'no',
+            allowInlineMediaPlayback: 'no',
+            presentationstyle: 'pagesheet',
+            fullscreen: 'yes'
+          };
+          console.log(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].IMG_URL + url);
+          var browser = this.inAppBrowser.create(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].IMG_URL + url, '_blank');
+        }
       }]);
 
       return BiblestudyService;
