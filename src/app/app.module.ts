@@ -6,9 +6,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { FileOpener } from '@ionic-native/file-opener/ngx';
-import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +16,8 @@ import { NavigationComponent } from './shared/navigation/navigation.component';
 import { AnnouncementsPage } from './announcements/announcements.page';
 import { AnnouncementsPageModule } from './announcements/announcements.module';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,9 +26,7 @@ import { AnnouncementsPageModule } from './announcements/announcements.module';
     StatusBar,
     SplashScreen,
     ScreenOrientation,
-    File,
-    FileOpener,
-    FileTransfer,
+    InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AnnouncementService
   ],

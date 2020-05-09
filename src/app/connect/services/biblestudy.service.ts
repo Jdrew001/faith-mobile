@@ -4,9 +4,8 @@ import { ConnectConstant } from '../connect.constant';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { FileOpener } from '@ionic-native/file-opener/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +17,7 @@ export class BiblestudyService {
 
   constructor(private helperService: HelperService,
     private http: HttpClient,
-    private fileOpener: FileOpener,
-    private file: File,
-    private fileTransfer: FileTransfer) { }
+    private inAppBrowser: InAppBrowser) { }
 
   fetchAllStudies() {
     const url = this.helperService.getResourceUrl(ConnectConstant.BIBLE_STUDY_URL, false);
@@ -32,13 +29,6 @@ export class BiblestudyService {
   }
 
   downloadAndOpenPdf(url, name) {
-    let downloadUrl = url;
-    let path = this.file.dataDirectory;
-    const transfer = this.fileTransfer.create();
-
-    transfer.download(downloadUrl, `${path}${name}.pdf`).then(entry => {
-      let url = entry.toURL();
-      this.fileOpener.open(url, this.pdfFileType);
-    });
+    this.inAppBrowser.create(environment.IMG_URL + url, '_system', 'location=yes');
   }
 }
