@@ -12,7 +12,7 @@
     "appendUserAgent": "string to append for Android",
     "backgroundColor": "#ffffffff",
     "allowMixedContent": true,
-    "captureInput": true,
+    "captureInput": false,
     "webContentsDebuggingEnabled": true
   },
   "ios": {

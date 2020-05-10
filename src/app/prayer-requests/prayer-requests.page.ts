@@ -31,6 +31,9 @@ export class PrayerRequestsPage implements OnInit {
 
   ngOnInit() {
     this.formGroup = this.createPRForm();
+    this.formGroup.valueChanges.subscribe(val => {
+      console.log(val);
+    });
   }
 
   createPRForm() {
