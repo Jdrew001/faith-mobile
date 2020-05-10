@@ -34,9 +34,8 @@ export class AppConstants {
             disabled: false
         },
         {
-            title: 'Give',
             url: '/give',
-            icon: 'heart',
+            icon: 'globe',
             disabled: false
         }
     ];
@@ -53,8 +52,8 @@ export class AppConstants {
         },
         title: {
             color: '#ffffff',
-            showPageTitle: true,
-            staticText: 'Giving'
+            showPageTitle: false,
+            staticText: 'Faith Website'
         },
         backButton: {
             wwwImage: 'assets/images/back.jpg',
@@ -73,5 +72,5 @@ export class AppConstants {
         },
         backButtonCanClose: true
     }
-    public static giveUrl = 'http://discoverfaitharlington.org/give/'
+    public static giveUrl = 'http://discoverfaitharlington.org/'
 }
