@@ -34,6 +34,7 @@ export class AppConstants {
             disabled: false
         },
         {
+            title: 'Website',
             url: '/give',
             icon: 'globe',
             disabled: false
@@ -56,17 +57,20 @@ export class AppConstants {
             staticText: 'Faith Website'
         },
         backButton: {
-            wwwImage: 'assets/images/back.jpg',
+            wwwImage: 'images/back.jpg',
+            wwwImageDensity: 2,
             align: 'left',
             event: 'backPressed'
         },
         forwardButton: {
-            wwwImage: 'assets/images/forward.jpg',
+            wwwImage: 'images/forward.jpg',
+            wwwImageDensity: 2,
             align: 'left',
             event: 'forwardPressed'
         },
         closeButton: {
-            wwwImage: 'assets/svg/close-outline.svg',
+            wwwImage: 'svg/close-outline.svg',
+            wwwImageDensity: 2,
             align: 'left',
             event: 'closePressed'
         },
