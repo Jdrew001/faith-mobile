@@ -14,11 +14,28 @@ import { LoaderService } from '../core/loader/loader.service';
 export class PrayerRequestsPage implements OnInit {
 
   formGroup: FormGroup;
+  get firstnameVal() { return this.formGroup.get('firstname').value; }
+  get lastnameVal() { return this.formGroup.get('lastname').value; }
+  get emailVal() { return this.formGroup.get('email').value; }
+  get phoneVal() { return this.formGroup.get('phone').value; }
+  get notesval() { return this.formGroup.get('notes').value; }
 
   constructor(private prayerRequestFormService: PrayerRequestFormService, private emailService: EmailService, private toastController: ToastController, private loaderService: LoaderService) { }
 
   ngOnInit() {
-    this.formGroup = this.prayerRequestFormService.createPRForm();
+    this.formGroup = this.createPRForm();
+  }
+
+  createPRForm() {
+    this.formGroup = new FormGroup({
+      firstname: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
+      notes: new FormControl('', [Validators.required])
+    });
+
+    return this.formGroup;
   }
 
   submit() {
