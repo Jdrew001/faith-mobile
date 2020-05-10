@@ -11,7 +11,7 @@ import { BiblestudyService } from './services/biblestudy.service';
 export class ConnectPage implements OnInit {
 
   @ViewChild('slides', { static: true }) slider: IonSlides;
-  segments = [{name: 'Social', value: 0}, {name: 'Bible Studies', value: 1}, {name: 'Contact', value: 2}];
+  segments = [{name: 'Social Media', value: 0}, {name: 'Bible Studies', value: 1}];
   segment = 0;
   fbFeedData: any[] = [];
   bStudies: any[] = [];
@@ -24,8 +24,8 @@ export class ConnectPage implements OnInit {
   constructor(private socialService: SocialService, private bibleStudyService: BiblestudyService) { }
 
   ngOnInit() {
-    this.socialService.fetchFBFeed().subscribe(val => {this.fbFeedData = val['posts']});
-    this.bibleStudyService.fetchAllStudies().subscribe(val => {this.bStudies = val});
+    this.socialService.fetchFBFeed().subscribe(val => this.fbFeedData = val['posts']);
+    this.bibleStudyService.fetchAllStudies().subscribe(val => this.bStudies = val);
   }
 
   segmentChanged() {
