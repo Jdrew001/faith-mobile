@@ -57,12 +57,12 @@ export class AppConstants {
             staticText: 'Giving'
         },
         backButton: {
-            wwwImage: 'assets/svg/chevron-back-outline.svg',
+            wwwImage: 'assets/images/back.jpg',
             align: 'left',
             event: 'backPressed'
         },
         forwardButton: {
-            wwwImage: 'assets/svg/chevron-forward-outline.svg',
+            wwwImage: 'assets/images/forward.jpg',
             align: 'left',
             event: 'forwardPressed'
         },
