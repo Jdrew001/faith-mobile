@@ -15,7 +15,7 @@
         <ion-list>
           <ion-item mode="md">
             <ion-label position="floating">First Name</ion-label>
-            <ion-input type="text" class="form-control" formControlName="firstname"></ion-input>
+            <ion-input type="text" class="form-control" formControlName="firstname" [(ngModel)]="data.firstName"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -23,7 +23,7 @@
         <ion-list>
           <ion-item mode="md">
             <ion-label position="floating">Last Name</ion-label>
-            <ion-input type="text" class="form-control" formControlName="lastname"></ion-input>
+            <ion-input type="text" class="form-control" formControlName="lastname" [(ngModel)]="data.lastName"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -34,7 +34,7 @@
         <ion-list>
           <ion-item mode="md">
             <ion-label position="floating">Email</ion-label>
-            <ion-input type="email" inputmode="email" formControlName="email"></ion-input>
+            <ion-input type="email" inputmode="email" formControlName="email" [(ngModel)]="data.email"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -42,7 +42,7 @@
         <ion-list>
           <ion-item mode="md">
             <ion-label position="floating">Phone</ion-label>
-            <ion-input type="text" class="form-control" inputmode="number" formControlName="phone" appPhoneMask></ion-input>
+            <ion-input type="text" class="form-control" inputmode="number" formControlName="phone" [(ngModel)]="data.phone" appPhoneMask></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -53,7 +53,7 @@
         <ion-list>
           <ion-item mode="md">
             <ion-label position="floating">Notes</ion-label>
-            <ion-textarea type="text" class="form-control" formControlName="notes" rows="6"></ion-textarea>
+            <ion-textarea type="text" class="form-control" formControlName="notes" rows="6" [(ngModel)]="data.notes"></ion-textarea>
           </ion-item>
         </ion-list>
       </ion-col>

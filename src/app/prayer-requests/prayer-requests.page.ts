@@ -19,6 +19,13 @@ export class PrayerRequestsPage implements OnInit {
   get emailVal() { return this.formGroup.get('email').value; }
   get phoneVal() { return this.formGroup.get('phone').value; }
   get notesval() { return this.formGroup.get('notes').value; }
+  data = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    notes: ''
+  };
 
   constructor(private prayerRequestFormService: PrayerRequestFormService, private emailService: EmailService, private toastController: ToastController, private loaderService: LoaderService) { }
 
