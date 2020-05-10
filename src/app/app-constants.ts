@@ -57,24 +57,21 @@ export class AppConstants {
             staticText: 'Giving'
         },
         backButton: {
-            image: 'back',
-            imagePressed: 'back_pressed',
+            wwwImage: 'assets/svg/chevron-back-outline.svg',
             align: 'left',
             event: 'backPressed'
         },
         forwardButton: {
-            image: 'forward',
-            imagePressed: 'forward_pressed',
+            wwwImage: 'assets/svg/chevron-forward-outline.svg',
             align: 'left',
             event: 'forwardPressed'
         },
         closeButton: {
-            image: 'close',
-            imagePressed: 'close_pressed',
+            wwwImage: 'assets/svg/close-outline.svg',
             align: 'left',
             event: 'closePressed'
         },
         backButtonCanClose: true
     }
-    public static giveUrl = 'http://discoverfaitharlington.org/give'
+    public static giveUrl = 'http://discoverfaitharlington.org/give/'
 }

@@ -11,6 +11,6 @@ export class ThemedBrowserService {
   constructor(private themeableBrowser: ThemeableBrowser) { }
 
   openBrowser(url, options) {
-    const browser: ThemeableBrowserObject = this.themeableBrowser.create(url, '_blank', options);
+    this.themeableBrowser.create(url, '_blank', options);
   } 
 }
