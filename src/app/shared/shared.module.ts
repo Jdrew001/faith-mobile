@@ -11,7 +11,7 @@ import { DetailComponent } from './components/detail/detail.component';
 import { PhoneMaskDirective } from './directives/phone-mask.directive';
 import { MenuService } from './services/menu.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-
+import { ThemedBrowserService } from './services/themed-browser.service';
 
 
 @NgModule({
@@ -40,7 +40,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
   ],
   providers: [
     SharedService,
-    MenuService
+    MenuService,
+    ThemedBrowserService
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })

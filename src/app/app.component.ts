@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { AppConstants } from './app-constants';
 import { MenuService } from './shared/services/menu.service';
+import { ThemedBrowserService } from './shared/services/themed-browser.service';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private screenOrientation: ScreenOrientation,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private ThemedBrowserService: ThemedBrowserService
   ) {
     this.initializeApp();
     this.setDefaultView();
@@ -54,5 +56,9 @@ export class AppComponent {
 
   getMenuItemStatus(name) {
     return this.menuItems.find(x => x.name === name) ? this.menuItems.find(x => x.name === name).status : false;
+  }
+
+  giveSelected() {
+    this.ThemedBrowserService.openBrowser(AppConstants.giveUrl, AppConstants.themedBrowserOptions);
   }
 }

@@ -97,8 +97,8 @@
             </ion-col>
 
             <ion-col [size]="6" [class.selected]="selectedIndex == 5"> 
-              <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-                <ion-item *ngIf="i === 5 && getMenuItemStatus('Give')" (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false">
+              <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index" (click)="giveSelected()">
+                <ion-item *ngIf="i === 5 && getMenuItemStatus('Give')" lines="none" detail="false">
                   <ion-label>
                     <ion-row><ion-icon [name]="p.icon + '-outline'"></ion-icon></ion-row>
                     <ion-row><span>{{ p.title }}</span></ion-row>

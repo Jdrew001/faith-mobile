@@ -22,11 +22,7 @@ const routes: Routes = [
   {
     path: 'connect',
     loadChildren: () => import('./connect/connect.module').then( m => m.ConnectPageModule)
-  },
-  {
-    path: 'give',
-    loadChildren: () => import('./give/give.module').then( m => m.GivePageModule)
-  },
+  }
 ];
 
 @NgModule({

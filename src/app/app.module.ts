@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { AnnouncementService } from './announcements/announcement.service';
+import { ThemeableBrowser } from '@ionic-native/themeable-browser/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,8 @@ import { AnnouncementService } from './announcements/announcement.service';
     SplashScreen,
     ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AnnouncementService
+    AnnouncementService,
+    ThemeableBrowser
   ],
   bootstrap: [AppComponent]
 })

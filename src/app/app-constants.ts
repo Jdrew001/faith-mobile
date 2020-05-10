@@ -1,3 +1,6 @@
+import { ThemeableBrowserOptions } from '@ionic-native/themeable-browser/ngx';
+
+
 export class AppConstants {
     public static PAGES = [
         {
@@ -39,4 +42,39 @@ export class AppConstants {
     ];
 
     public static MENU_URL = 'menus';
+
+    public static themedBrowserOptions: ThemeableBrowserOptions = {
+        statusbar: {
+            color: '#ffffffff'
+        },
+        toolbar: {
+            height: 44,
+            color: '#516065'
+        },
+        title: {
+            color: '#ffffff',
+            showPageTitle: true,
+            staticText: 'Giving'
+        },
+        backButton: {
+            image: 'back',
+            imagePressed: 'back_pressed',
+            align: 'left',
+            event: 'backPressed'
+        },
+        forwardButton: {
+            image: 'forward',
+            imagePressed: 'forward_pressed',
+            align: 'left',
+            event: 'forwardPressed'
+        },
+        closeButton: {
+            image: 'close',
+            imagePressed: 'close_pressed',
+            align: 'left',
+            event: 'closePressed'
+        },
+        backButtonCanClose: true
+    }
+    public static giveUrl = 'http://discoverfaitharlington.org/give'
 }

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { GivePageRoutingModule } from './give-routing.module';
 
 import { GivePage } from './give.page';
+import { ThemeableBrowser } from '@ionic-native/themeable-browser/ngx';
 
 @NgModule({
   imports: [
@@ -14,6 +15,9 @@ import { GivePage } from './give.page';
     FormsModule,
     IonicModule,
     GivePageRoutingModule
+  ],
+  providers: [
+    ThemeableBrowser
   ],
   declarations: [GivePage]
 })
