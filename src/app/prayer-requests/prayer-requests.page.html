@@ -14,7 +14,8 @@
       <ion-col>
         <ion-list>
           <ion-item mode="md">
-            <input type="text" />
+            <ion-label position="floating">First Name</ion-label>
+            <ion-input type="text" class="form-control" formControlName="firstname" [(ngModel)]="data.firstName"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
