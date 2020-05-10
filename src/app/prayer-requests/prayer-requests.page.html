@@ -12,39 +12,50 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-item mode="md">
-          <ion-input placeholder="Enter Input"></ion-input>
-        </ion-item>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label position="floating">First Name</ion-label>
+            <ion-input class="form-control" formControlName="firstname"></ion-input>
+          </ion-item>
+        </ion-list>
       </ion-col>
       <ion-col>
-        <ion-item mode="md">
-          <ion-label position="floating">Last Name</ion-label>
-          <ion-input formControlName="lastname"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-item mode="md">
-          <ion-label position="floating">Email</ion-label>
-          <ion-input inputmode="email" formControlName="email"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item mode="md">
-          <ion-label position="floating">Phone</ion-label>
-          <ion-input inputmode="number" formControlName="phone" appPhoneMask></ion-input>
-        </ion-item>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label position="floating">Last Name</ion-label>
+            <ion-input class="form-control" formControlName="lastname"></ion-input>
+          </ion-item>
+        </ion-list>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <ion-item mode="md">
-          <ion-label position="floating">Notes</ion-label>
-          <ion-textarea formControlName="notes" rows="6"></ion-textarea>
-        </ion-item>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input class="form-control" inputmode="email" formControlName="email"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label position="floating">Phone</ion-label>
+            <ion-input class="form-control" inputmode="number" formControlName="phone" appPhoneMask></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label position="floating">Notes</ion-label>
+            <ion-textarea class="form-control" formControlName="notes" rows="6"></ion-textarea>
+          </ion-item>
+        </ion-list>
       </ion-col>
     </ion-row>
 
