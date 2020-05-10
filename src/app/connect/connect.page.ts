@@ -1,14 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { SocialService } from './services/social.service';
 import { BiblestudyService } from './services/biblestudy.service';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-connect',
   templateUrl: './connect.page.html',
   styleUrls: ['./connect.page.scss'],
 })
-export class ConnectPage implements OnInit {
+export class ConnectPage implements OnInit, OnDestroy {
 
   @ViewChild('slides', { static: true }) slider: IonSlides;
   segments = [{name: 'Social Media', value: 0}, {name: 'Bible Studies', value: 1}];
@@ -21,9 +22,12 @@ export class ConnectPage implements OnInit {
     autoHeight: true
   }
 
-  constructor(private socialService: SocialService, private bibleStudyService: BiblestudyService) { }
+  constructor(private socialService: SocialService,
+    private bibleStudyService: BiblestudyService,
+    private screenOrientation: ScreenOrientation) { }
 
   ngOnInit() {
+    this.screenOrientation.unlock();
     this.socialService.fetchFBFeed().subscribe(val => this.fbFeedData = val['posts']);
     this.bibleStudyService.fetchAllStudies().subscribe(val => this.bStudies = val);
   }
@@ -39,5 +43,9 @@ export class ConnectPage implements OnInit {
 
   onScroll(event) {
     this.scrolling = event;
+  }
+
+  ngOnDestroy() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
   }
 }
