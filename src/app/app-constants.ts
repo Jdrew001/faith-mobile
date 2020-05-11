@@ -76,5 +76,10 @@ export class AppConstants {
         },
         backButtonCanClose: true
     }
-    public static giveUrl = 'http://discoverfaitharlington.org/'
+    public static giveUrl = 'http://discoverfaitharlington.org/';
+    public static networkAlertParams = {
+        header: 'Alert',
+        subHeader: 'Network Alert',
+        message: 'Your network connection got disconnected.'
+    };
 }

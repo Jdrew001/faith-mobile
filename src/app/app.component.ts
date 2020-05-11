@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -7,6 +7,8 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { AppConstants } from './app-constants';
 import { MenuService } from './shared/services/menu.service';
 import { ThemedBrowserService } from './shared/services/themed-browser.service';
+import { NetworkService } from './core/services/network.service';
+import { AlertService } from './core/services/alert.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,7 @@ import { ThemedBrowserService } from './shared/services/themed-browser.service';
   styleUrls: ['app.component.scss'],
   
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = AppConstants.PAGES;
   menuItems = [];
@@ -25,11 +27,17 @@ export class AppComponent {
     private statusBar: StatusBar,
     private screenOrientation: ScreenOrientation,
     private menuService: MenuService,
-    private ThemedBrowserService: ThemedBrowserService
+    private ThemedBrowserService: ThemedBrowserService,
+    private networkService: NetworkService,
+    private alertService: AlertService
   ) {
     this.initializeApp();
     this.setDefaultView();
     this.fetchMenuConfig();
+  }
+
+  ngOnInit() {
+    this.networkService.networkStatus$.subscribe(val => this.showHideNetworkModal(val));
   }
 
   initializeApp() {
@@ -60,5 +68,11 @@ export class AppComponent {
 
   giveSelected() {
     this.ThemedBrowserService.openBrowser(AppConstants.giveUrl, AppConstants.themedBrowserOptions);
+  }
+
+  showHideNetworkModal(val) {
+    console.log('Network connection: ', val);
+    const params = AppConstants.networkAlertParams;
+    !val ? this.alertService.presentAlert(params.header, params.subHeader, params.message) : null;
   }
 }

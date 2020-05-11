@@ -7,6 +7,8 @@ import { LoaderService } from './loader/loader.service';
 import { LoaderComponent } from './loader/loader.component';
 import { EmailService } from './services/email.service';
 import { SharedService } from '../shared/shared.service';
+import { NetworkService } from './services/network.service';
+import { AlertService } from './services/alert.service';
 
 
 
@@ -24,7 +26,9 @@ import { SharedService } from '../shared/shared.service';
       useClass: RequestInterceptor,
       multi: true
     },
-    EmailService
+    EmailService,
+    NetworkService,
+    AlertService
   ],
   exports: [LoaderComponent]
 })
