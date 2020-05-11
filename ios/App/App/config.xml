@@ -23,5 +23,9 @@
     <param name="ios-package" value="CDVOrientation"/>
   </feature>
 
+  <feature name="ThemeableBrowser">
+    <param name="ios-package" value="CDVThemeableBrowser"/>
+  </feature>
+
   
 </widget>

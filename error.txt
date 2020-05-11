@@ -1,2 +1,7 @@
 android file opener build error
 replace contents with "androidx.core.content.FileProvider"
+
+
+-- MissingSpecError: IOS SYNC
+Noticed that the fix is run: sudo gem install -n /usr/local/bin cocoapods
+Then sync again
