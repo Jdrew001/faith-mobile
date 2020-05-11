@@ -33,7 +33,7 @@ export class RequestInterceptor implements HttpInterceptor {
 
     private handleError(error: HttpErrorResponse) {
         this.loaderService.toggleLoader(false);
-        this.presentToast(error.error);
+        this.presentToast('Something has gone wrong!');
         this.emailService.sendErrorEmail(error);
         return throwError(error);
     }
