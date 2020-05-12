@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "375163325785",
+    "firebase_url": "https://faithtabernacle-985a0.firebaseio.com",
+    "project_id": "faithtabernacle-985a0",
+    "storage_bucket": "faithtabernacle-985a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375163325785:android:5313d1684f6a4a1333d048",
+        "android_client_info": {
+          "package_name": "com.atkison.faithmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375163325785-k182trsf706eafmfnvqvlpe3bad0fb2o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8i-imvdeR7cotQBaO67Tx3GI4M2JzWHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375163325785-k182trsf706eafmfnvqvlpe3bad0fb2o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

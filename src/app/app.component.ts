@@ -10,6 +10,7 @@ import { ThemedBrowserService } from './shared/services/themed-browser.service';
 import { NetworkService } from './core/services/network.service';
 import { AlertService } from './core/services/alert.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { PushNotificationService } from './core/services/push-notification.service';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,8 @@ export class AppComponent implements OnInit {
     private menuService: MenuService,
     private inAppBrowser: InAppBrowser,
     private networkService: NetworkService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private pushNotificationService: PushNotificationService
   ) {
     this.initializeApp();
     this.setDefaultView();

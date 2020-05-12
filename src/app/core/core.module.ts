@@ -9,6 +9,7 @@ import { EmailService } from './services/email.service';
 import { SharedService } from '../shared/shared.service';
 import { NetworkService } from './services/network.service';
 import { AlertService } from './services/alert.service';
+import { PushNotificationService } from './services/push-notification.service';
 
 
 
@@ -28,7 +29,8 @@ import { AlertService } from './services/alert.service';
     },
     EmailService,
     NetworkService,
-    AlertService
+    AlertService,
+    PushNotificationService
   ],
   exports: [LoaderComponent]
 })
