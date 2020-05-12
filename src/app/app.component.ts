@@ -9,6 +9,7 @@ import { MenuService } from './shared/services/menu.service';
 import { ThemedBrowserService } from './shared/services/themed-browser.service';
 import { NetworkService } from './core/services/network.service';
 import { AlertService } from './core/services/alert.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private screenOrientation: ScreenOrientation,
     private menuService: MenuService,
-    private ThemedBrowserService: ThemedBrowserService,
+    private inAppBrowser: InAppBrowser,
     private networkService: NetworkService,
     private alertService: AlertService
   ) {
@@ -66,8 +67,8 @@ export class AppComponent implements OnInit {
     return this.menuItems.find(x => x.name === name) ? this.menuItems.find(x => x.name === name).status : false;
   }
 
-  giveSelected() {
-    this.ThemedBrowserService.openBrowser(AppConstants.giveUrl, AppConstants.themedBrowserOptions);
+  giveSelected() {;
+    this.inAppBrowser.create(AppConstants.giveUrl, '_system', AppConstants.options);
   }
 
   showHideNetworkModal(val) {

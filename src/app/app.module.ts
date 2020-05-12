@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { AnnouncementService } from './announcements/announcement.service';
 import { ThemeableBrowser } from '@ionic-native/themeable-browser/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,7 @@ import { ThemeableBrowser } from '@ionic-native/themeable-browser/ngx';
     ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AnnouncementService,
-    ThemeableBrowser
+    InAppBrowser
   ],
   bootstrap: [AppComponent]
 })
