@@ -57,19 +57,19 @@ export class AppConstants {
             staticText: 'Faith Website'
         },
         backButton: {
-            wwwImage: 'images/back.jpg',
+            image: 'back',
             wwwImageDensity: 2,
             align: 'left',
             event: 'backPressed'
         },
         forwardButton: {
-            wwwImage: 'images/forward.jpg',
+            image: 'forward',
             wwwImageDensity: 2,
             align: 'left',
             event: 'forwardPressed'
         },
         closeButton: {
-            wwwImage: 'svg/close-outline.svg',
+            image: 'close',
             wwwImageDensity: 2,
             align: 'left',
             event: 'closePressed'
