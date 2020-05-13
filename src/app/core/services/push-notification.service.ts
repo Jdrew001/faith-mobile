@@ -4,6 +4,9 @@ import {
   PushNotification,
   PushNotificationToken,
   PushNotificationActionPerformed } from '@capacitor/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HelperService } from '../helper.service';
+import { CoreConstants } from '../CoreConstants';
 
 const { PushNotifications } = Plugins;
 
@@ -12,7 +15,7 @@ const { PushNotifications } = Plugins;
 })
 export class PushNotificationService {
 
-  constructor() {
+  constructor(private http: HttpClient, private helperService: HelperService) {
     console.log('initializing notifications');
     this.grantPermission();
     this.notificationSubscription();
@@ -34,6 +37,7 @@ export class PushNotificationService {
     PushNotifications.addListener('registration',
       (token: PushNotificationToken) => {
         console.log('Push registration success, token: ' + token.value);
+        this.sendTokenToService(token.value);
       }
     );
 
@@ -57,5 +61,18 @@ export class PushNotificationService {
         console.log('Push action performed: ' + JSON.stringify(notification));
       }
     );
+  }
+
+  private sendTokenToService(token) {
+    const url = this.helperService.getResourceUrl(`${CoreConstants.PHONE_TOKEN_URL}`);
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + CoreConstants.TOKEN
+    } 
+    this.http.post(url, {Token: token}, { headers: headers}).subscribe(res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+    });
   }
 }

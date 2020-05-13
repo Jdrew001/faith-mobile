@@ -14,21 +14,25 @@ export class RequestInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): import("rxjs").Observable<import("@angular/common/http").HttpEvent<any>> {
-        const timeout = this.createTimeout();
-        return next.handle(req).pipe(
-            tap((event: HttpEvent<any>) => {
-                if (event instanceof HttpResponse) {
-                    this.loaderService.toggleLoader(false);
-                }
-                return EMPTY;
-            }),
-            catchError((error) => {
-                return this.handleError(error);
-            }),
-            finalize(() => {
-                clearTimeout(timeout);
-            })
-        );
+        if (!req.url.includes(CoreConstants.PHONE_TOKEN_URL)) {
+            const timeout = this.createTimeout();
+            return next.handle(req).pipe(
+                tap((event: HttpEvent<any>) => {
+                    if (event instanceof HttpResponse) {
+                        this.loaderService.toggleLoader(false);
+                    }
+                    return EMPTY;
+                }),
+                catchError((error) => {
+                    return this.handleError(error);
+                }),
+                finalize(() => {
+                    clearTimeout(timeout);
+                })
+            );
+        }
+
+        return next.handle(req);
     }
 
     private handleError(error: HttpErrorResponse) {
