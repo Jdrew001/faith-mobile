@@ -9,6 +9,7 @@ import { HelperService } from '../helper.service';
 import { CoreConstants } from '../CoreConstants';
 import { AuthorizationService } from './authorization.service';
 import { ToastService } from './toast.service';
+import { EmailService } from './email.service';
 
 const { PushNotifications } = Plugins;
 
@@ -20,7 +21,8 @@ export class PushNotificationService {
   constructor(private http: HttpClient,
     private helperService: HelperService,
     private authorizationService: AuthorizationService,
-    private toastService: ToastService) {
+    private toastService: ToastService,
+    private emailService: EmailService) {
     this.grantPermission();
     this.notificationSubscription();
   }
@@ -45,6 +47,8 @@ export class PushNotificationService {
           if (val) {
             this.sendTokenToService(token.value, val['jwt']);
           }
+        }, err => {
+          this.emailService.sendErrorEmail(err);
         });
       }
     );
