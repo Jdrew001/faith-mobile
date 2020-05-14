@@ -7,6 +7,7 @@ import {
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HelperService } from '../helper.service';
 import { CoreConstants } from '../CoreConstants';
+import { AuthorizationService } from './authorization.service';
 
 const { PushNotifications } = Plugins;
 
@@ -15,8 +16,9 @@ const { PushNotifications } = Plugins;
 })
 export class PushNotificationService {
 
-  constructor(private http: HttpClient, private helperService: HelperService) {
-    console.log('initializing notifications');
+  constructor(private http: HttpClient,
+    private helperService: HelperService,
+    private authorizationService: AuthorizationService) {
     this.grantPermission();
     this.notificationSubscription();
   }
@@ -37,7 +39,11 @@ export class PushNotificationService {
     PushNotifications.addListener('registration',
       (token: PushNotificationToken) => {
         console.log('Push registration success, token: ' + token.value);
-        this.sendTokenToService(token.value);
+        this.authorizationService.retrieveToken().subscribe(val => {
+          if (val) {
+            this.sendTokenToService(token.value, val['jwt']);
+          }
+        });
       }
     );
 
@@ -52,6 +58,8 @@ export class PushNotificationService {
     PushNotifications.addListener('pushNotificationReceived',
       (notification: PushNotification) => {
         console.log('Push received: ' + JSON.stringify(notification));
+
+        // TODO: Should show notification
       }
     );
 
@@ -63,13 +71,13 @@ export class PushNotificationService {
     );
   }
 
-  private sendTokenToService(token) {
+  private sendTokenToService(token, appToken) {
     const url = this.helperService.getResourceUrl(`${CoreConstants.PHONE_TOKEN_URL}`);
     const headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + CoreConstants.TOKEN
+      'Authorization': 'Bearer ' + appToken
     } 
-    this.http.post(url, {Token: token}, { headers: headers}).subscribe(res => {
+    this.http.post(url, {Token: token}, {headers: headers}).subscribe(res => {
       console.log(res);
     }, err => {
       console.log(err);
