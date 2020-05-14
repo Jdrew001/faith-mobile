@@ -15,6 +15,7 @@ import { CoreModule } from '../core/core.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    CoreModule,
     IonicModule,
     SharedModule,
     PrayerRequestsPageRoutingModule

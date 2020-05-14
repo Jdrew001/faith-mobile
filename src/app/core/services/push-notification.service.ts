@@ -8,6 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HelperService } from '../helper.service';
 import { CoreConstants } from '../CoreConstants';
 import { AuthorizationService } from './authorization.service';
+import { ToastService } from './toast.service';
 
 const { PushNotifications } = Plugins;
 
@@ -18,7 +19,8 @@ export class PushNotificationService {
 
   constructor(private http: HttpClient,
     private helperService: HelperService,
-    private authorizationService: AuthorizationService) {
+    private authorizationService: AuthorizationService,
+    private toastService: ToastService) {
     this.grantPermission();
     this.notificationSubscription();
   }
@@ -58,8 +60,7 @@ export class PushNotificationService {
     PushNotifications.addListener('pushNotificationReceived',
       (notification: PushNotification) => {
         console.log('Push received: ' + JSON.stringify(notification));
-
-        // TODO: Should show notification
+        this.toastService.presetToast(notification.notification['body'], 'primary');
       }
     );
 

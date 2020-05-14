@@ -4,6 +4,7 @@ import { PrayerRequestFormService } from './prayer-request.form.service';
 import { EmailService } from '../core/services/email.service';
 import { ToastController } from '@ionic/angular';
 import { LoaderService } from '../core/loader/loader.service';
+import { ToastService } from '../core/services/toast.service';
 
 @Component({
   selector: 'app-prayer-requests',
@@ -27,7 +28,7 @@ export class PrayerRequestsPage implements OnInit {
     notes: ''
   };
 
-  constructor(private prayerRequestFormService: PrayerRequestFormService, private emailService: EmailService, private toastController: ToastController, private loaderService: LoaderService) { }
+  constructor(private prayerRequestFormService: PrayerRequestFormService, private emailService: EmailService, private toastService: ToastService, private loaderService: LoaderService) { }
 
   ngOnInit() {
     this.formGroup = this.createPRForm();
@@ -54,25 +55,17 @@ export class PrayerRequestsPage implements OnInit {
       this.loaderService.toggleLoader(true);
       this.emailService.sendEmail(this.prayerRequestFormService.firstnameVal, this.prayerRequestFormService.lastnameVal,
         this.prayerRequestFormService.emailVal, this.prayerRequestFormService.phoneVal, this.prayerRequestFormService.notesval).then(res => {
-          this.presentToast('Successfully submitted prayer request', 'success');
+          this.toastService.presetToast('Successfully submitted prayer request', 'success');
           this.loaderService.toggleLoader(false);
           this.formGroup.reset();
-        }, err => this.presentToast('An error has occurred', 'danger'));
+        }, err => this.toastService.presetToast('An error has occurred', 'danger'));
       return;
     }
 
-    this.presentToast('Please fill in all fields', 'danger');
+    this.toastService.presetToast('Please fill in all fields', 'danger');
   }
 
   reset() {
     this.formGroup.reset();
-  }
-
-  private presentToast(msg?, type?) {
-    this.toastController.create({
-        message: msg,
-        duration: 2000,
-        color: type
-    }).then(val => val.present());
   }
 }

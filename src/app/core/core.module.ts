@@ -11,6 +11,7 @@ import { NetworkService } from './services/network.service';
 import { AlertService } from './services/alert.service';
 import { PushNotificationService } from './services/push-notification.service';
 import { AuthorizationService } from './services/authorization.service';
+import { ToastService } from './services/toast.service';
 
 
 
@@ -32,7 +33,8 @@ import { AuthorizationService } from './services/authorization.service';
     NetworkService,
     AlertService,
     PushNotificationService,
-    AuthorizationService
+    AuthorizationService,
+    ToastService
   ],
   exports: [LoaderComponent]
 })
