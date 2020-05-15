@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AnnouncementService {
 
-  announcements$: BehaviorSubject<Announcement[]> = new BehaviorSubject([]);
+  announcements$: BehaviorSubject<Announcement[]> = new BehaviorSubject(null);
   announcement$: BehaviorSubject<Announcement> = new BehaviorSubject(null);
 
   constructor(

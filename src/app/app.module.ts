@@ -13,11 +13,12 @@ import { CoreModule } from './core/core.module';
 import { AnnouncementService } from './announcements/announcement.service';
 import { ThemeableBrowser } from '@ionic-native/themeable-browser/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CoreModule ],
+  imports: [BrowserModule, BrowserAnimationsModule, IonicModule.forRoot(), AppRoutingModule, CoreModule ],
   providers: [
     StatusBar,
     SplashScreen,

@@ -1,6 +1,6 @@
-<ng-container *ngIf="items.length !== 0">
-  <ion-row *ngFor="let item of items; let i = index;">
-    <ion-card class="animated fadeInUp faster ion-activatable ripple-parent" (click)="navToDetail(detailPage + '/' + item._id)" [ngStyle]="{'animation-delay': (i * (110 + (i / 100))) + 'ms'}" *ngIf="item.isActive">
+<ng-container>
+  <ion-row  [@listAnimation]="items.length">
+    <ion-card class="ion-activatable ripple-parent" *ngFor="let item of items; let i = index;" (click)="navToDetail(detailPage + '/' + item._id)">
       <ion-card-content style="width: 100%; height: 15vh !important">
         <ion-row>
           <ion-col [size]="5">

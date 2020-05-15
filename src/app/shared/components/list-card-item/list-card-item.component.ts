@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange, SimpleChanges, OnDestroy } from '@angular/core';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { SharedService } from '../../shared.service';
 import { HelperService } from 'src/app/core/helper.service';
 
@@ -10,6 +11,23 @@ enum ListType {
   selector: 'app-list-card-item',
   templateUrl: './list-card-item.component.html',
   styleUrls: ['./list-card-item.component.scss'],
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [ // each time the binding value changes
+        query(':leave', [
+          stagger(50, [
+            animate('0.1s', style({ opacity: 0 }))
+          ])
+        ], { optional: true }),
+        query(':enter', [
+          style({ opacity: 0 }),
+          stagger(100, [
+            animate('0.5s', style({ opacity: 1 }))
+          ])
+        ], { optional: true })
+      ])
+    ])
+  ]
 })
 export class ListCardItemComponent implements OnInit, OnChanges, OnDestroy {
 
