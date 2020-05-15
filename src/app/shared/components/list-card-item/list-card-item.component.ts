@@ -15,14 +15,14 @@ enum ListType {
     trigger('listAnimation', [
       transition('* => *', [ // each time the binding value changes
         query(':leave', [
-          stagger(50, [
-            animate('0.3s', style({ opacity: 0 }))
+          stagger(100, [
+            animate('0.2s', style({ opacity: 0 }))
           ])
         ], { optional: true }),
         query(':enter', [
           style({ opacity: 0 }),
           stagger(100, [
-            animate('0.5s', style({ opacity: 1 }))
+            animate('0.2s', style({ opacity: 1 }))
           ])
         ], { optional: true })
       ])

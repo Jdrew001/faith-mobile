@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HelperService } from '../core/helper.service';
 import { AnnouncementConst } from './announcement.constant';
 import { Announcement } from './announcement.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { LoadWorkerService } from '../core/load-worker.service';
 import { environment } from 'src/environments/environment';
 
@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AnnouncementService {
 
-  announcements$: BehaviorSubject<Announcement[]> = new BehaviorSubject(null);
+  announcements$: Subject<Announcement[]> = new Subject();
   announcement$: BehaviorSubject<Announcement> = new BehaviorSubject(null);
 
   constructor(

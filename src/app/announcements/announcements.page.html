@@ -2,23 +2,28 @@
   <app-navigation></app-navigation>
 </ion-header>
 <ion-content>
-  <div class="heading">
-    <app-icon-bar [icon]="'megaphone-outline'" [title]="'Announcement'"></app-icon-bar>
-    <ion-row class="fixed">
-      <ion-col size="12">
-        <ion-segment id="segment" class="segment" scrollable mode="md" [value]="activeDate.date" appAutoScroll (ionChange)="updateList($event)">
-          <ion-segment-button *ngFor="let val of dates" [value]="val.date" id="{{val.active ? 'active': ''}}">
-            <ion-label>{{ val.date }}</ion-label>
-          </ion-segment-button>
-        </ion-segment>
-      </ion-col>
-    </ion-row>
-  </div>
-  <ion-row class="empty-row animated fadeIn faster" *ngIf="!listUpdate && announcements && announcements.length === 0">
-    <ion-icon name="sad-outline"></ion-icon>
-    <p style="text-align: center; padding-top: 5%">No Announcements</p>
+  <ion-row>
+    <div class="heading">
+      <app-icon-bar [icon]="'megaphone-outline'" [title]="'Announcement'"></app-icon-bar>
+      <ion-row class="">
+        <ion-col size="12">
+          <ion-segment id="segment" class="segment" scrollable mode="md" [value]="activeDate.date" appAutoScroll (ionChange)="updateList($event)">
+            <ion-segment-button *ngFor="let val of dates" [value]="val.date" id="{{val.active ? 'active': ''}}">
+              <ion-label>{{ val.date }}</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-col>
+      </ion-row>
+    </div>
   </ion-row>
-  <div style="margin-top: 30% !important; position: relateve">
+  <ion-row class="empty-row animated fadeIn faster" *ngIf="announcements && announcements.length === 0">
+    <ion-icon name="sad-outline"></ion-icon>
+    <p style="text-align: center; padding-top: 5%;">No Announcements</p>
+  </ion-row>
+  <ion-row style="margin-top:35% !important">
     <app-list-card-item [type]="'announcements'" [items]="announcements" [detailPage]="'announcement-details'" (detailNavigate)="navigationToDetail($event)"></app-list-card-item>
-  </div>
+  </ion-row>
+  <!-- <div style="margin-top: 30% !important; position: relateve">
+    
+  </div> -->
 </ion-content>

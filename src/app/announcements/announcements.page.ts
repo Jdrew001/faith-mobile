@@ -12,7 +12,7 @@ import { IonSegment, NavController } from '@ionic/angular';
   templateUrl: './announcements.page.html',
   styleUrls: ['./announcements.page.scss'],
 })
-export class AnnouncementsPage implements OnInit, AfterViewInit, OnDestroy {
+export class AnnouncementsPage implements OnInit, OnDestroy {
 
   @ViewChild('btnSegment', null) btnSegment: IonSegment;
   dateUtils = new DateUtils();
@@ -24,23 +24,17 @@ export class AnnouncementsPage implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private announcementService: AnnouncementService,
     private loadWorkService: LoadWorkerService,
-    private navController: NavController) { }
+    private navController: NavController) {
+      this.announcementService.announcements$.subscribe(val => {
+        this.announcements = val;
+        this.listUpdate = false;
+      });
+    }
 
   ngOnInit() {
     this.dates = this.dateUtils.retrieveMonthAndYear(this.limit);
     this.activeDate = this.dates.find(x => x.active);
     this.loadAnnouncements(this.splitDate(this.activeDate['date']).month, this.splitDate(this.activeDate['date']).year);
-  }
-
-  ngAfterViewInit() {
-    this.announcementService.announcements$.subscribe(val => {
-      this.announcements = val;
-      this.listUpdate = false;
-    });
-  }
-
-  ionViewDidEnter() {
-    
   }
 
   loadAnnouncements(month, year) {
