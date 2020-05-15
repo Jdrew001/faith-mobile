@@ -19,11 +19,9 @@ ion-input {
 }
 
 ion-row.empty-row {
+    margin: auto;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -50px;
-    margin-left: -50px;
+    top: 0; left: 0; bottom: 0; right: 0;
 
     ion-icon {
         width: 100%;

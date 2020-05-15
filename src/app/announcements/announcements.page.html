@@ -16,7 +16,7 @@
       </ion-row>
     </div>
   </ion-row>
-  <ion-row class="empty-row animated fadeIn faster" *ngIf="announcements && announcements.length === 0">
+  <ion-row class="empty-row animated fadeIn faster ion-align-self-center" *ngIf="!listUpdate && announcements && announcements.length === 0">
     <ion-icon name="sad-outline"></ion-icon>
     <p style="text-align: center; padding-top: 5%;">No Announcements</p>
   </ion-row>

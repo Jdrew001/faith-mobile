@@ -45,7 +45,6 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
     let date = event.detail.value.split(' ');
     let month = date[0];
     let year = date[1];
-    this.announcements = [];
     this.listUpdate = true;
     this.announcementService.fetchFilteredAnnouncements(month, year);
   }
