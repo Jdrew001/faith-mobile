@@ -4,6 +4,8 @@ import { EventService } from './event.service';
 import * as moment from 'moment';
 import { NavController } from '@ionic/angular';
 import { timeout } from 'rxjs/operators';
+import { HelperService } from '../core/helper.service';
+import { EventConstant } from './EventConstant';
 
 @Component({
   selector: 'app-events',
@@ -19,7 +21,9 @@ export class EventsPage implements OnInit, OnDestroy {
   previousSelDate = null;
   daysConfig = [];
 
-  constructor(private eventService: EventService, private navController: NavController) {
+  constructor(private eventService: EventService,
+    private navController: NavController,
+    private helperService: HelperService) {
     this.eventService.events$.subscribe(data => {
       this.events = data;
       this.initializeCalendar(data);
@@ -100,6 +104,10 @@ export class EventsPage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.eventService.event$.next(null);
+  }
+
+  getEmptyImage() {
+    return this.helperService.getResourceUrl(EventConstant.EMPTY_EVENT_IMAGE, true);
   }
 
   private getMonthEvents(date) {

@@ -26,8 +26,7 @@
     </ion-card-content>
   </ion-card>
   <ion-row class="empty-row animated fadeIn faster" *ngIf="events && events.length === 0">
-    <ion-icon name="sad-outline"></ion-icon>
-    <p style="text-align: center; padding-top: 5%">No Events</p>
+    <img [src]="getEmptyImage()" />
   </ion-row>
   <ion-row>
     <app-list-card-item [type]="'events'" [items]="events" [detailPage]="'event-details'" (detailNavigate)="navigationToDetail($event)"></app-list-card-item>
