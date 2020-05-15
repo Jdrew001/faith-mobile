@@ -35,7 +35,6 @@ export class AppComponent implements OnInit {
     private pushNotificationService: PushNotificationService
   ) {
     this.initializeApp();
-    this.setDefaultView();
     this.fetchMenuConfig();
   }
 
@@ -49,13 +48,6 @@ export class AppComponent implements OnInit {
       this.splashScreen.hide();
       this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     });
-  }
-
-  setDefaultView() {
-    const path = window.location.pathname;
-    if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(page => page.url.toLowerCase() === path.toLowerCase());
-    }
   }
 
   fetchMenuConfig() {

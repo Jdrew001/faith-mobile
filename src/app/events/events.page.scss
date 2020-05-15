@@ -6,6 +6,10 @@ ion-card.bottom {
     min-height: 50%;
 }
 
+ion-button {
+    --box-shadow: none !important;
+}
+
 ion-button.controls {
     --background: transparent !important;
     --background-activated: #f3f3f3 !important;
