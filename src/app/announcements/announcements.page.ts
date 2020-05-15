@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
 import { AnnouncementService } from './announcement.service';
 import { LoadWorkerService } from '../core/load-worker.service';
 import { Announcement } from './announcement.model';
@@ -12,7 +12,7 @@ import { IonSegment, NavController } from '@ionic/angular';
   templateUrl: './announcements.page.html',
   styleUrls: ['./announcements.page.scss'],
 })
-export class AnnouncementsPage implements OnInit, OnDestroy {
+export class AnnouncementsPage implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('btnSegment', null) btnSegment: IonSegment;
   dateUtils = new DateUtils();
@@ -29,11 +29,18 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.dates = this.dateUtils.retrieveMonthAndYear(this.limit);
     this.activeDate = this.dates.find(x => x.active);
+    this.loadAnnouncements(this.splitDate(this.activeDate['date']).month, this.splitDate(this.activeDate['date']).year);
+  }
+
+  ngAfterViewInit() {
     this.announcementService.announcements$.subscribe(val => {
       this.announcements = val;
       this.listUpdate = false;
     });
-    this.loadAnnouncements(this.splitDate(this.activeDate['date']).month, this.splitDate(this.activeDate['date']).year);
+  }
+
+  ionViewDidEnter() {
+    
   }
 
   loadAnnouncements(month, year) {

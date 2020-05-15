@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, OnDestroy, AfterViewInit } from '@angular/core';
 import { CalendarComponent, DayConfig, CalendarModalOptions, CalendarComponentOptions } from 'ion2-calendar';
 import { EventService } from './event.service';
 import * as moment from 'moment';
@@ -19,10 +19,7 @@ export class EventsPage implements OnInit, OnDestroy {
   previousSelDate = null;
   daysConfig = [];
 
-  constructor(private eventService: EventService, private navController: NavController) { }
-
-  ngOnInit() {
-    this.getMonthEvents(new Date());
+  constructor(private eventService: EventService, private navController: NavController) {
     this.eventService.events$.subscribe(data => {
       this.events = data;
       this.initializeCalendar(data);
@@ -32,15 +29,17 @@ export class EventsPage implements OnInit, OnDestroy {
     });
   }
 
+  ngOnInit() {
+    this.getMonthEvents(new Date());
+  }
+
   onSelect(date) {
-    this.getDayEvents(date);
-    if (this.date === this.previousSelDate) {
-      console.log(this.date+' firing');
+    if (this.previousSelDate === date) {
       this.previousSelDate = null;
       this.unSelectDate();
       return;
     }
-
+    this.getDayEvents(date);
     this.previousSelDate = date;
   }
 
@@ -104,10 +103,12 @@ export class EventsPage implements OnInit, OnDestroy {
   }
 
   private getMonthEvents(date) {
+    this.events = null;
     this.eventService.fetchEventsByMonth(date);
   }
 
   private getDayEvents(date) {
+    this.events = null;
     this.eventService.fetchEventByDate(date);
   }
 

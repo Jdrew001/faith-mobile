@@ -16,7 +16,7 @@ enum ListType {
       transition('* => *', [ // each time the binding value changes
         query(':leave', [
           stagger(50, [
-            animate('0.1s', style({ opacity: 0 }))
+            animate('0.3s', style({ opacity: 0 }))
           ])
         ], { optional: true }),
         query(':enter', [

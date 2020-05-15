@@ -3,16 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { HelperService } from '../core/helper.service';
 import * as moment from 'moment';
 import { EventConstant } from './EventConstant';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  events$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  events$: Subject<any[]> = new Subject<any[]>();
   event$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  event_day$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  event_day$: Subject<any[]> = new Subject<any[]>();
 
   constructor(private httpClient: HttpClient, private helperService: HelperService) { }
 

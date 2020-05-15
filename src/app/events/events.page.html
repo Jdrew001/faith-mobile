@@ -25,7 +25,7 @@
       
     </ion-card-content>
   </ion-card>
-  <ion-row class="empty-row animated fadeIn faster" *ngIf="events.length === 0">
+  <ion-row class="empty-row animated fadeIn faster" *ngIf="events && events.length === 0">
     <ion-icon name="sad-outline"></ion-icon>
     <p style="text-align: center; padding-top: 5%">No Events</p>
   </ion-row>
