@@ -6,6 +6,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { isNullOrUndefined } from 'util';
 import { DateUtils } from '../core/utils/DateUtilities';
 import { IonSegment, NavController } from '@ionic/angular';
+import { HelperService } from '../core/helper.service';
+import { AnnouncementConst } from './announcement.constant';
 
 @Component({
   selector: 'app-announcements',
@@ -24,7 +26,8 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
 
   constructor(private announcementService: AnnouncementService,
     private loadWorkService: LoadWorkerService,
-    private navController: NavController) {
+    private navController: NavController,
+    private helperService: HelperService) {
       this.announcementService.announcements$.subscribe(val => {
         this.announcements = val;
         this.listUpdate = false;
@@ -59,6 +62,10 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
 
   navigationToDetail(val) {
     this.navController.navigateForward(val);
+  }
+
+  getEmptyImage() {
+    return this.helperService.getResourceUrl(AnnouncementConst.EMPTY_ANNOUNCEMENT_IMAGE, true);
   }
 
   ngOnDestroy() {
