@@ -1,7 +1,7 @@
 <ng-container>
   <ion-row  [@listAnimation]="items.length">
     <ion-card class="ion-activatable ripple-parent" *ngFor="let item of items; let i = index;" (click)="navToDetail(detailPage + '/' + item._id)">
-      <ion-card-content style="width: 100%; height: 15vh !important">
+      <ion-card-content style="height: 15vh !important">
         <ion-row>
           <ion-col [size]="5">
             <img style="width: 100%; height: 100%" [defaultImage]="placeHolderImg" [lazyLoad]="getImage(item.image.url)"/>
