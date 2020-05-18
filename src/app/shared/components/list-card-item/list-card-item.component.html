@@ -1,6 +1,6 @@
 <ng-container>
   <ion-row  [@listAnimation]="items.length">
-    <ion-card class="ion-activatable ripple-parent" *ngFor="let item of items; let i = index;" (click)="navToDetail(detailPage + '/' + item._id)">
+    <ion-card *ngFor="let item of items; let i = index;" (click)="navToDetail(detailPage + '/' + item._id)">
       <ion-card-content style="height: 15vh !important">
         <ion-row>
           <ion-col [size]="5">

@@ -28,7 +28,7 @@
   <ion-row class="empty-row animated fadeIn faster" *ngIf="events && events.length === 0">
     <img [src]="getEmptyImage()" />
   </ion-row>
-  <ion-row>
+  <ion-row style="width:100%">
     <app-list-card-item [type]="'events'" [items]="events" [detailPage]="'event-details'" (detailNavigate)="navigationToDetail($event)"></app-list-card-item>
   </ion-row>
 </ion-content>

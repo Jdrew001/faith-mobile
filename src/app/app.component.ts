@@ -58,7 +58,8 @@ export class AppComponent implements OnInit {
   }
 
   getMenuItemStatus(name) {
-    return this.menuItems.find(x => x.name === name) ? this.menuItems.find(x => x.name === name).status : false;
+    // return this.menuItems.find(x => x.name === name) ? this.menuItems.find(x => x.name === name).status : false;
+    return true;
   }
 
   giveSelected() {;

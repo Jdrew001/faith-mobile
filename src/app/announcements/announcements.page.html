@@ -3,7 +3,7 @@
 </ion-header>
 <ion-content>
   <ion-row>
-    <div class="heading">
+    <div class="heading fixed">
       <app-icon-bar [icon]="'megaphone-outline'" [title]="'Announcement'"></app-icon-bar>
       <ion-row class="">
         <ion-col size="12">
@@ -19,10 +19,7 @@
   <ion-row class="empty-row animated fadeIn faster ion-align-self-center" *ngIf="!listUpdate && announcements && announcements.length === 0">
     <img [src]="getEmptyImage()" />
   </ion-row>
-  <ion-row style="margin-top:35% !important">
+  <ion-row style="margin-top:0% !important">
     <app-list-card-item [type]="'announcements'" [items]="announcements" [detailPage]="'announcement-details'" (detailNavigate)="navigationToDetail($event)"></app-list-card-item>
   </ion-row>
-  <!-- <div style="margin-top: 30% !important; position: relateve">
-    
-  </div> -->
 </ion-content>
