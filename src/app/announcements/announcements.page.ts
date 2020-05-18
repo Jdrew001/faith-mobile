@@ -35,9 +35,11 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
     }
 
   ngOnInit() {
-    this.dates = this.dateUtils.retrieveMonthAndYear(this.limit);
+    this.dates = this.dateUtils.retrieveMonthAndYear();
     this.activeDate = this.dates.find(x => x.active);
-    this.loadAnnouncements(this.splitDate(this.activeDate['date']).month, this.splitDate(this.activeDate['date']).year);
+    let date = this.dates[1].split(' ');
+    this.activeDate = this.dates[1];
+    this.loadAnnouncements(this.splitDate(this.dates[1]).month, this.splitDate(this.dates[1]).year);
   }
 
   loadAnnouncements(month, year) {
