@@ -17,21 +17,19 @@ export class SocialComponent implements OnInit, OnChanges, OnDestroy {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.data);
-    window.scrollTo(0,0);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.scrolling) {
-      this.viewDidScroll();
-    }
+    // if (this.scrolling) {
+    //   this.viewDidScroll();
+    // }
 
-    if (this.view && this.view !== 0) {
-      if (this.currentPlaying) {
-        this.currentPlaying.pause();
-        this.currentPlaying = null;
-      }
-    }
+    // if (this.view && this.view !== 0) {
+    //   if (this.currentPlaying) {
+    //     this.currentPlaying.pause();
+    //     this.currentPlaying = null;
+    //   }
+    // }
   }
 
   viewDidScroll() {

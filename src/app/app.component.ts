@@ -50,10 +50,11 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    this.platform.ready().then((source) => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      alert('Platform: ' + source);
     });
   }
 
