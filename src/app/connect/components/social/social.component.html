@@ -3,13 +3,14 @@
     <ion-row *ngFor="let item of data['data']; let i = index;">
       <ion-card class="container-card animated fadeInUp faster" *ngIf="(getMedia(item) && getMedia(item).type === 'photo') || (getMedia(item) && getMedia(item).type === 'video')" [ngStyle]="{'animation-delay': (i * (110 + (i / 100))) + 'ms'}">
         <ion-card-content class="container-content">
-          <ng-container *ngIf="getMedia(item) && getMedia(item).type === 'photo'">
+          <ng-container *ngIf="getMedia(item) && getMedia(item).type === 'photo' || !getMedia(item).media_source">
           <img [src]="getMedia(item).image.src" />
         </ng-container>
-        <ng-container *ngIf="getMedia(item) && getMedia(item).type === 'video'">
-          <video #player controls [poster]="getMedia(item).image.src">
+        <ng-container *ngIf="getMedia(item) && getMedia(item).type === 'video' && getMedia(item).media_source">
+          <!-- <video #player controls [poster]="getMedia(item).image.src">
             <source [src]="getMedia(item).media_source" type="video/mp4">
-          </video>
+          </video> -->
+          <app-video [poster]="getMedia(item).image.src" [video]="getMedia(item).media_source"></app-video>
         </ng-container>
         </ion-card-content>
         <ion-card-header>

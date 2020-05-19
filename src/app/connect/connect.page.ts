@@ -19,7 +19,8 @@ export class ConnectPage implements OnInit, OnDestroy {
   scrolling;
   view;
   options = {
-    autoHeight: true
+    autoHeight: true,
+    allowTouchMove: false
   }
 
   constructor(private socialService: SocialService,
@@ -27,8 +28,8 @@ export class ConnectPage implements OnInit, OnDestroy {
     private screenOrientation: ScreenOrientation) { }
 
   ngOnInit() {
-    this.screenOrientation.unlock();
-    this.socialService.fetchFBFeed().subscribe(val => this.fbFeedData = val['posts']);
+    //this.screenOrientation.unlock();
+    this.socialService.fetchFBFeed().subscribe(val => {this.fbFeedData = val['posts']; console.log(val['posts'])});
     this.bibleStudyService.fetchAllStudies().subscribe(val => this.bStudies = val);
   }
 

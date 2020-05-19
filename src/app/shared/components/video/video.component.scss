@@ -1,0 +1,22 @@
+video {
+    border-radius: 0px !important;
+    width: 100%;
+    margin: auto;
+}
+
+div.bar {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    background-color: #0000007a;
+
+    ion-button {
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 13px !important;
+    }
+
+    ion-range {
+        width: 100%;
+    }
+}

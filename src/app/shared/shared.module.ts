@@ -12,6 +12,7 @@ import { PhoneMaskDirective } from './directives/phone-mask.directive';
 import { MenuService } from './services/menu.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ThemedBrowserService } from './services/themed-browser.service';
+import { VideoComponent } from './components/video/video.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ThemedBrowserService } from './services/themed-browser.service';
     NavDetailComponent,
     ListCardItemComponent,
     DetailComponent,
-    PhoneMaskDirective
+    PhoneMaskDirective,
+    VideoComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { ThemedBrowserService } from './services/themed-browser.service';
     NavDetailComponent,
     ListCardItemComponent,
     DetailComponent,
-    PhoneMaskDirective
+    PhoneMaskDirective,
+    VideoComponent
   ],
   providers: [
     SharedService,
