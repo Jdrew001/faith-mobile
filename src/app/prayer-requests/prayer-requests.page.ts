@@ -28,30 +28,17 @@ export class PrayerRequestsPage implements OnInit {
     notes: ''
   };
 
-  constructor(private prayerRequestFormService: PrayerRequestFormService, private emailService: EmailService, private toastService: ToastService, private loaderService: LoaderService) { }
+  constructor(private prayerRequestFormService: PrayerRequestFormService,
+    private emailService: EmailService,
+    private toastService: ToastService,
+    private loaderService: LoaderService) { }
 
   ngOnInit() {
-    this.formGroup = this.createPRForm();
-    this.formGroup.valueChanges.subscribe(val => {
-      console.log(val);
-    });
-  }
-
-  createPRForm() {
-    this.formGroup = new FormGroup({
-      firstname: new FormControl('', [Validators.required]),
-      lastname: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
-      phone: new FormControl('', [Validators.required]),
-      notes: new FormControl('', [Validators.required])
-    });
-
-    return this.formGroup;
+    this.formGroup = this.prayerRequestFormService.createPRForm();
   }
 
   submit() {
     if (this.formGroup.valid) {
-      console.log(this.formGroup.value);
       this.loaderService.toggleLoader(true);
       this.emailService.sendEmail(this.prayerRequestFormService.firstnameVal, this.prayerRequestFormService.lastnameVal,
         this.prayerRequestFormService.emailVal, this.prayerRequestFormService.phoneVal, this.prayerRequestFormService.notesval).then(res => {

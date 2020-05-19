@@ -13,5 +13,15 @@ export class PrayerRequestFormService {
 
   constructor() { }
 
-  
+  createPRForm() {
+    this.formGroup = new FormGroup({
+      firstname: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
+      notes: new FormControl('', [Validators.required])
+    });
+
+    return this.formGroup;
+  }
 }
