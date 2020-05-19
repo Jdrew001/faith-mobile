@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -11,6 +11,7 @@ import { NetworkService } from './core/services/network.service';
 import { AlertService } from './core/services/alert.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PushNotificationService } from './core/services/push-notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ import { PushNotificationService } from './core/services/push-notification.servi
   styleUrls: ['app.component.scss'],
   
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewChecked {
   public selectedIndex = 0;
   public appPages = AppConstants.PAGES;
   menuItems = [];
@@ -32,7 +33,8 @@ export class AppComponent implements OnInit {
     private inAppBrowser: InAppBrowser,
     private networkService: NetworkService,
     private alertService: AlertService,
-    private pushNotificationService: PushNotificationService
+    private pushNotificationService: PushNotificationService,
+    private router: Router
   ) {
     this.initializeApp();
     this.fetchMenuConfig();
@@ -40,6 +42,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.networkService.networkStatus$.subscribe(val => this.showHideNetworkModal(val));
+    
+  }
+
+  ngAfterViewChecked() {
+    this.updateMenuState();
   }
 
   initializeApp() {
@@ -70,5 +77,13 @@ export class AppComponent implements OnInit {
     console.log('Network connection: ', val);
     const params = AppConstants.networkAlertParams;
     !val ? this.alertService.presentAlert(params.header, params.subHeader, params.message) : null;
+  }
+
+  updateMenuState() {
+    const url = this.router['routerState'].snapshot.url;
+    if (url !== '') {
+      let result = AppConstants.PAGES.findIndex(x => x.url === url);
+      result !== -1 ? this.selectedIndex = result : this.selectedIndex = 0;
+    }
   }
 }
