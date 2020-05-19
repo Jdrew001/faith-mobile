@@ -20,6 +20,7 @@ export class PrayerRequestsPage implements OnInit {
   get emailVal() { return this.formGroup.get('email').value; }
   get phoneVal() { return this.formGroup.get('phone').value; }
   get notesval() { return this.formGroup.get('notes').value; }
+  charactersRemaining
   data = {
     firstName: '',
     lastName: '',
@@ -54,5 +55,6 @@ export class PrayerRequestsPage implements OnInit {
 
   reset() {
     this.formGroup.reset();
+    this.formGroup.get('notes').setValue('');
   }
 }
