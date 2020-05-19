@@ -19,6 +19,7 @@
         </ion-button>
         <ion-calendar #cal [(ngModel)]="date"
                 (change)="onSelect($event)"
+                (monthChange)="onChangeMonth($event)"
                 [format]="'YYYY-MM-DD'">
         </ion-calendar>
       </ion-row>

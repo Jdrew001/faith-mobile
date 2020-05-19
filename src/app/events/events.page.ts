@@ -47,6 +47,12 @@ export class EventsPage implements OnInit, OnDestroy {
     this.previousSelDate = date;
   }
 
+  onChangeMonth(date) {
+    if (date && date.newMonth) {
+      this.getMonthEvents(date.newMonth.string);
+    }
+  }
+
   onNext() {
     this.cal.next();
     this.getMonthEvents(this.cal.getViewDate());

@@ -51,7 +51,7 @@ export class RequestInterceptor implements HttpInterceptor {
     private presentToast(msg) {
         this.toastController.create({
             message: msg,
-            duration: 20000,
+            duration: 1000,
             color: 'danger'
         }).then(val => val.present());
     }

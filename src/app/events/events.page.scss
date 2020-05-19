@@ -56,22 +56,12 @@ ion-icon {
 }
 
 ion-row.empty-row {
-    margin: 0% 10vh;
-    position: relative;
-    top: 5% !important;
     color: #929292;
     width: 35%;
-    margin: auto;
+    margin: 0px auto;
 
-    ion-icon {
-        width: 100%;
-        font-size: 3em;
-        color: #9292928c;
-    }
-
-    p {
-        text-align: center;
-        padding-top: 5%;
-        width: 100%;
+    img { 
+        width: 75%;
+        margin: auto;
     }
 }
