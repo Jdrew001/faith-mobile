@@ -78,6 +78,7 @@ export class VideoComponent implements OnInit, AfterViewInit {
     this.player.nativeElement.currentTime = duration * (newVal / 100);
     this.updateTime();
     this.player.nativeElement.play();
+    this.videoPlaying = true;
   }
 
   pauseForDrag() {

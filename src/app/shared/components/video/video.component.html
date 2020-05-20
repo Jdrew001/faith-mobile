@@ -12,7 +12,7 @@
       </ion-button>
     </ion-col>
     <ion-col [size]="6">
-      <ion-range #range [(ngModel)]="progress" max="100" pin="false" color="danger" pin="true"
+      <ion-range #range [(ngModel)]="progress" max="100" color="danger" pin="false"
         (touchend)="seek()" (mouseup)="seek()" (touchstart)="pauseForDrag()" (mousedown)="pauseForDrag()"></ion-range>
     </ion-col>
     <ion-col [size]="2">
