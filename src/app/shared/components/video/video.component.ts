@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, NgZone, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { IonRange } from '@ionic/angular';
+import * as screenfull from 'screenfull';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-video',
@@ -8,30 +10,24 @@ import { IonRange } from '@ionic/angular';
 })
 export class VideoComponent implements OnInit, AfterViewInit {
 
-
-  /**
-   * TODO:
-    When the event for exiting out of browser fired, then emit false.
-
-
-    Remove the popup on range
-   */
-
-
   @Input('video') video: string;
   @Input('poster') poster: string;
+  @Input('platform') platform: string;
   @ViewChild('player', { static: false }) player: ElementRef;
   @ViewChild('range', { static: false }) range: IonRange;
+  @ViewChild('container', { static: false }) container: ElementRef;
   @Output() fullScreen$: EventEmitter<boolean> = new EventEmitter<boolean>();
   progress = 0;
+  fullScreen = false;
   videoPlaying = false;
   muted = true;
   videoTimer;
 
-  constructor(private zone: NgZone) { }
+  constructor(private screenOrientation: ScreenOrientation) { }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    
+  }
   ngAfterViewInit() {
     if (this.player) {
       this.player.nativeElement.muted = true;
@@ -62,14 +58,27 @@ export class VideoComponent implements OnInit, AfterViewInit {
   }
 
   openFullscreen() {
-    if (this.player.nativeElement.requestFullscreen) {
-      this.player.nativeElement.requestFullscreen()
-    } else if (this.player.nativeElement.webkitEnterFullscreen) {
-      this.player.nativeElement.webkitEnterFullscreen();
-      this.player.nativeElement.enterFullscreen();
+    if (screenfull.isEnabled) {
+      this.fullScreen = true;
+      screenfull.request(this.player.nativeElement);
     }
 
-    this.fullScreen$.emit(true);
+    setTimeout(() => {
+      this.fullScreen$.emit(true);
+    }, 200);
+  }
+
+  contractFullscreen() {
+    this.fullScreen$.emit(false);
+    setTimeout(() => {
+      if (document['exitFullscreen']) {
+        document['exitFullscreen']()
+      } else if (document['webkitCancelFullscreen']) {
+        document['webkitCancelFullscreen']();
+        document['exitFullscreen']()
+      }
+      this.fullScreen = false;
+    }, 200);
   }
 
   seek() {
@@ -106,4 +115,17 @@ export class VideoComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * IOS Specific functions
+   */
+
+  iosFullScreenStart(e) {
+    setTimeout(() => {
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    }, 200);
+  }
+  
+  iosFullScreenEnd(e) {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+  }
 }

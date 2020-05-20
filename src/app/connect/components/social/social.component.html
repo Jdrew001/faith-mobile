@@ -1,5 +1,5 @@
 <div class="social-container">
-  <ng-container>
+  <ng-container *ngIf="showList">
     <ion-row *ngFor="let item of data['data']; let i = index;">
       <ion-card class="container-card animated fadeInUp faster" *ngIf="(getMedia(item) && getMedia(item).type === 'photo') || (getMedia(item) && getMedia(item).type === 'video')" [ngStyle]="{'animation-delay': (i * (110 + (i / 100))) + 'ms'}">
         <ion-card-content class="container-content">
@@ -10,7 +10,7 @@
           <!-- <video #player controls [poster]="getMedia(item).image.src">
             <source [src]="getMedia(item).media_source" type="video/mp4">
           </video> -->
-          <app-video [poster]="getMedia(item).image.src" [video]="getMedia(item).media_source" (fullScreen$)="fullScreenInitiated($event)"></app-video>
+          <app-video [poster]="getMedia(item).image.src" [video]="getMedia(item).media_source" [platform]="platform" (fullScreen$)="fullScreenInitiated($event)"></app-video>
         </ng-container>
         </ion-card-content>
         <ion-card-header>

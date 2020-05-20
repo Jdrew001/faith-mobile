@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, HostListener } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { SocialService } from './services/social.service';
 import { BiblestudyService } from './services/biblestudy.service';
@@ -22,6 +22,7 @@ export class ConnectPage implements OnInit, OnDestroy {
     autoHeight: true,
     allowTouchMove: false
   }
+  showList = false;
 
   constructor(private socialService: SocialService,
     private bibleStudyService: BiblestudyService,
@@ -29,7 +30,7 @@ export class ConnectPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     //this.screenOrientation.unlock();
-    this.socialService.fetchFBFeed().subscribe(val => {this.fbFeedData = val['posts']; console.log(val['posts'])});
+    this.socialService.fetchFBFeed().subscribe(val => {this.fbFeedData = val['posts']; this.showList = true});
     this.bibleStudyService.fetchAllStudies().subscribe(val => this.bStudies = val);
   }
 
@@ -44,6 +45,15 @@ export class ConnectPage implements OnInit, OnDestroy {
 
   onScroll(event) {
     this.scrolling = event;
+  }
+
+  initiateOrentation(val) {
+    val ? this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE) :
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+
+    setTimeout(() => {
+      this.showList = true;
+    }, 200);
   }
 
   ngOnDestroy() {

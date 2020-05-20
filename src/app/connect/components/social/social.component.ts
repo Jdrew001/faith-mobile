@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChildren, QueryList, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChildren, QueryList, OnDestroy, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
+import { Device } from '@ionic-native/device/ngx';
+import { ConnectConstant } from '../../connect.constant';
 
 @Component({
   selector: 'app-social',
@@ -11,15 +13,23 @@ export class SocialComponent implements OnInit, OnChanges, OnDestroy {
   @Input('data') data: any[];
   @Input('scrolling') scrolling;
   @Input('view') view;
+  @Input('show') show;
+  @Output() fullscreen$: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChildren('player') videoPlayers: QueryList<any>;
   currentPlaying;
+  platform: string;
+  showList = false;
 
-  constructor() { }
+  constructor(private device: Device) { }
 
   ngOnInit() {
+    this.platform = ConnectConstant.DEVICE_PLATFORM[this.device.platform];
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (this.show) {
+      this.showList = true;
+    }
     // if (this.scrolling) {
     //   this.viewDidScroll();
     // }
@@ -58,7 +68,8 @@ export class SocialComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   fullScreenInitiated(val) {
-    console.log(val);
+    this.showList = false;
+    this.fullscreen$.emit(val);
   }
 
   getMedia(item) {

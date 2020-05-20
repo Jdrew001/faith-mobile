@@ -14,6 +14,7 @@ import { AnnouncementService } from './announcements/announcement.service';
 import { ThemeableBrowser } from '@ionic-native/themeable-browser/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Device } from '@ionic-native/device/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AnnouncementService,
-    InAppBrowser
+    InAppBrowser,
+    Device
   ],
   bootstrap: [AppComponent]
 })

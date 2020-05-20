@@ -14,6 +14,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { SocialService } from './services/social.service';
 import { BiblestudyService } from './services/biblestudy.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { AngularResizedEventModule } from 'angular-resize-event';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     FormsModule,
     IonicModule,
     ConnectPageRoutingModule,
-    SharedModule
+    SharedModule,
+    AngularResizedEventModule
   ],
   providers: [
     SocialService,
