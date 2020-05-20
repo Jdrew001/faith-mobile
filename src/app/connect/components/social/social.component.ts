@@ -2,11 +2,29 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChildren, Query
 import * as moment from 'moment';
 import { Device } from '@ionic-native/device/ngx';
 import { ConnectConstant } from '../../connect.constant';
+import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-social',
   templateUrl: './social.component.html',
   styleUrls: ['./social.component.scss'],
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [ // each time the binding value changes
+        query(':leave', [
+          stagger(75, [
+            animate('0.500s cubic-bezier(0.35, 0, 0.25, .45)', style({ opacity: 0 }))
+          ])
+        ], { optional: true }),
+        query(':enter', [
+          style({ opacity: 0 }),
+          stagger(75, [
+            animate('0.500s cubic-bezier(0.10, 0, 0.25, .45)', style({ opacity: 1 }))
+          ])
+        ], { optional: true })
+      ])
+    ])
+  ]
 })
 export class SocialComponent implements OnInit, OnChanges, OnDestroy {
 

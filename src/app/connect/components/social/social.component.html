@@ -1,7 +1,7 @@
-<div class="social-container">
-  <ng-container *ngIf="showList">
-    <ion-row *ngFor="let item of data['data']; let i = index;">
-      <ion-card class="container-card animated fadeInUp faster" *ngIf="(getMedia(item) && getMedia(item).type === 'photo') || (getMedia(item) && getMedia(item).type === 'video')" [ngStyle]="{'animation-delay': (i * (110 + (i / 100))) + 'ms'}">
+<div class="social-container" *ngIf="data['data']">
+  <ng-container>
+    <ion-row *ngFor="let item of data['data']; let i = index;" [@listAnimation]="data['data'].length">
+      <ion-card class="container-card" *ngIf="(getMedia(item) && getMedia(item).type === 'photo') || (getMedia(item) && getMedia(item).type === 'video')">
         <ion-card-content class="container-content">
           <ng-container *ngIf="getMedia(item) && getMedia(item).type === 'photo' || !getMedia(item).media_source">
           <img [src]="getMedia(item).image.src" />

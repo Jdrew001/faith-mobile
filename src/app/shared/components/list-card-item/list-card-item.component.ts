@@ -16,13 +16,13 @@ enum ListType {
       transition('* => *', [ // each time the binding value changes
         query(':leave', [
           stagger(75, [
-            animate('0.500s cubic-bezier(0.35, 0, 0.25, 1)', style({ opacity: 0 }))
+            animate('0.250s cubic-bezier(0.35, 0, 0.25, .45)', style({ opacity: 0 }))
           ])
         ], { optional: true }),
         query(':enter', [
           style({ opacity: 0 }),
           stagger(75, [
-            animate('0.500s cubic-bezier(0.10, 0, 0.25, .45)', style({ opacity: 1 }))
+            animate('0.250s cubic-bezier(0.10, 0, 0.25, .45)', style({ opacity: 1 }))
           ])
         ], { optional: true })
       ])
