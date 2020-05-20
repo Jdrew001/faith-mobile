@@ -4,23 +4,24 @@
 <div class="bar">
   <ion-row>
     <ion-col [size]="2">
-      <ion-button color="light" fill="clear" (click)="openFullscreen(player)">
+      <ion-button *ngIf="!videoPlaying" color="light" fill="clear" (click)="playVideo()">
         <ion-icon slot="icon-only" name="play-outline"></ion-icon>
       </ion-button>
-      <!-- <ion-button color="light" fill="clear" (click)="openFullscreen(player)">
+      <ion-button *ngIf="videoPlaying" color="light" fill="clear" (click)="pauseVideo()">
         <ion-icon slot="icon-only" name="pause-outline"></ion-icon>
-      </ion-button> -->
+      </ion-button>
     </ion-col>
     <ion-col [size]="6">
-      <ion-range  min="0" max="100" color="danger" pin="true" (ionChange)="onChange($event)"></ion-range>
+      <ion-range #range [(ngModel)]="progress" max="100" pin="false" color="danger" pin="true"
+        (touchend)="seek()" (mouseup)="seek()" (touchstart)="pauseForDrag()" (mousedown)="pauseForDrag()"></ion-range>
     </ion-col>
     <ion-col [size]="2">
-      <ion-button  color="light" fill="clear" (click)="openFullscreen(player)">
+      <ion-button *ngIf="!muted" color="light" fill="clear" (click)="volumeUpdate()">
         <ion-icon slot="icon-only" name="volume-medium-outline"></ion-icon>
       </ion-button>
-      <!-- <ion-button color="light" fill="clear" (click)="openFullscreen(player)">
+      <ion-button *ngIf="muted" color="light" fill="clear" (click)="volumeUpdate()">
         <ion-icon slot="icon-only" name="volume-off-outline"></ion-icon>
-      </ion-button> -->
+      </ion-button>
     </ion-col>
     <ion-col [size]="2">
       <ion-button  color="light" fill="clear" (click)="openFullscreen(player)">

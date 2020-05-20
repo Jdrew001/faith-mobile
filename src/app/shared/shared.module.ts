@@ -13,6 +13,7 @@ import { MenuService } from './services/menu.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ThemedBrowserService } from './services/themed-browser.service';
 import { VideoComponent } from './components/video/video.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { VideoComponent } from './components/video/video.component';
   imports: [
     CommonModule,
     IonicModule,
+    FormsModule,
     LazyLoadImageModule
   ],
   exports: [

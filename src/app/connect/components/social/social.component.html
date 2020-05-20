@@ -10,7 +10,7 @@
           <!-- <video #player controls [poster]="getMedia(item).image.src">
             <source [src]="getMedia(item).media_source" type="video/mp4">
           </video> -->
-          <app-video [poster]="getMedia(item).image.src" [video]="getMedia(item).media_source"></app-video>
+          <app-video [poster]="getMedia(item).image.src" [video]="getMedia(item).media_source" (fullScreen$)="fullScreenInitiated($event)"></app-video>
         </ng-container>
         </ion-card-content>
         <ion-card-header>

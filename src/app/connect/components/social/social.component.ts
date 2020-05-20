@@ -57,6 +57,10 @@ export class SocialComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
+  fullScreenInitiated(val) {
+    console.log(val);
+  }
+
   getMedia(item) {
     if (item.attachments) {
       const data = item.attachments.data[0];
