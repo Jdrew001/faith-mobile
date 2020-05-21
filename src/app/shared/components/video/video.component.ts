@@ -22,6 +22,8 @@ export class VideoComponent implements OnInit, AfterViewInit {
   videoPlaying = false;
   muted = true;
   videoTimer;
+  loading = false;
+  lastTime = 0;
 
   constructor(private screenOrientation: ScreenOrientation) { }
 
@@ -47,6 +49,7 @@ export class VideoComponent implements OnInit, AfterViewInit {
     if (!this.player.nativeElement.paused) {
       this.player.nativeElement.pause();
       this.videoPlaying = false;
+      this.loading = false;
       clearTimeout(this.videoTimer);
     }
   }
@@ -60,7 +63,7 @@ export class VideoComponent implements OnInit, AfterViewInit {
   openFullscreen() {
     if (screenfull.isEnabled) {
       this.fullScreen = true;
-      screenfull.request(this.player.nativeElement);
+      screenfull.request(this.container.nativeElement);
     }
 
     setTimeout(() => {
@@ -100,6 +103,12 @@ export class VideoComponent implements OnInit, AfterViewInit {
       const seek = this.player.nativeElement.currentTime;
       const vid = this.player.nativeElement;
       this.progress = (seek / this.player.nativeElement.duration) * 100 || 0;
+      if (this.progress == this.lastTime) {
+        this.loading = true;
+      } else {
+        this.loading = false;
+        this.lastTime = this.progress;
+      }
       if (this.progress === 100) {
         vid.pause();
         vid.currentTime = 0;
