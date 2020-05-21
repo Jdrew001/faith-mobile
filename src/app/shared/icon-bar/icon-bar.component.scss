@@ -14,6 +14,10 @@ p {
     margin: 0px !important;
 }
 
+p.left {
+    position: relative;
+}
+
 p.right {
     font-size: 15px;
     color: #E02E2E;
@@ -22,6 +26,6 @@ p.right {
 }
 
 ion-icon {
-    font-size: 4vh;
+    font-size: 28px;
     color: #E02E2E;
 }

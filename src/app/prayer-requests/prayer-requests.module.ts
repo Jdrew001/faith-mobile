@@ -9,16 +9,17 @@ import { PrayerRequestsPageRoutingModule } from './prayer-requests-routing.modul
 import { PrayerRequestsPage } from './prayer-requests.page';
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
+import { LoaderService } from '../core/loader/loader.service';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    CoreModule,
     IonicModule,
     SharedModule,
-    PrayerRequestsPageRoutingModule
+    PrayerRequestsPageRoutingModule,
+    CoreModule
   ],
   declarations: [PrayerRequestsPage]
 })

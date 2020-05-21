@@ -16,6 +16,8 @@ export class RequestInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): import("rxjs").Observable<import("@angular/common/http").HttpEvent<any>> {
         if (!req.url.includes(CoreConstants.PHONE_TOKEN_URL)) {
             const timeout = this.createTimeout();
+            this.handlePrayerRequest(req, timeout);
+            console.log(req.url);
             return next.handle(req).pipe(
                 tap((event: HttpEvent<any>) => {
                     if (event instanceof HttpResponse) {
@@ -33,6 +35,14 @@ export class RequestInterceptor implements HttpInterceptor {
         }
 
         return next.handle(req);
+    }
+
+    private handlePrayerRequest(req, timeout) {
+        if (req.url.includes(CoreConstants.PRAYER_REQUEST)) {
+            console.log('test!');
+            this.loaderService.toggleLoader(true);
+            clearTimeout(timeout);
+        }
     }
 
     private handleError(error: HttpErrorResponse) {

@@ -44,8 +44,8 @@ export class PrayerRequestsPage implements OnInit {
       this.emailService.sendEmail(this.prayerRequestFormService.firstnameVal, this.prayerRequestFormService.lastnameVal,
         this.prayerRequestFormService.emailVal, this.prayerRequestFormService.phoneVal, this.prayerRequestFormService.notesval).then(res => {
           this.toastService.presetToast('Successfully submitted prayer request', 'success');
-          this.loaderService.toggleLoader(false);
           this.formGroup.reset();
+          this.loaderService.toggleLoader(false);
         }, err => this.toastService.presetToast('An error has occurred', 'danger'));
       return;
     }

@@ -17,8 +17,8 @@ export class PrayerRequestFormService {
     this.formGroup = new FormGroup({
       firstname: new FormControl('', [Validators.required]),
       lastname: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
-      phone: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      phone: new FormControl('', [Validators.required, Validators.minLength(14)]),
       notes: new FormControl('', [Validators.required])
     });
 
