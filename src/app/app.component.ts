@@ -42,7 +42,6 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     this.networkService.networkStatus$.subscribe(val => this.showHideNetworkModal(val));
-    
   }
 
   ngAfterViewChecked() {
