@@ -3,7 +3,7 @@
   <ng-container *ngFor="let item of data; let i = index;">
     <div class="animated fadeInUp faster" [ngStyle]="{'animation-delay': (i * (110 + (i / 100))) + 'ms'}">
       <ion-row>
-        <img [src]="getImage(item.image.url)" />
+        <img [defaultImage]="placeHolderImg" [lazyLoad]="getImage(item.image.url)" />
       </ion-row>
       <ion-row>
         <ion-card class="container-card">

@@ -30,7 +30,6 @@ export class ConnectPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     //this.screenOrientation.unlock();
-    //this.socialService.fetchFBFeed().subscribe(val => {this.fbFeedData = val['posts']; this.showList = true});
     this.bibleStudyService.fetchAllStudies().subscribe(val => this.bStudies = val);
   }
 

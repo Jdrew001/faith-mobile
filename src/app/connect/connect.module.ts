@@ -23,7 +23,8 @@ import { AngularResizedEventModule } from 'angular-resize-event';
     IonicModule,
     ConnectPageRoutingModule,
     SharedModule,
-    AngularResizedEventModule
+    AngularResizedEventModule,
+    LazyLoadImageModule
   ],
   providers: [
     SocialService,
