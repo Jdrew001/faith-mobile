@@ -12,7 +12,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 export class ConnectPage implements OnInit, OnDestroy {
 
   @ViewChild('slides', { static: true }) slider: IonSlides;
-  segments = [{name: 'Social Media', value: 0}, {name: 'Bible Studies', value: 1}];
+  segments = [{name: 'Sermons', value: 0}, {name: 'Bible Studies', value: 1}];
   segment = 0;
   fbFeedData: any[] = [];
   bStudies: any[] = [];
@@ -30,7 +30,7 @@ export class ConnectPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     //this.screenOrientation.unlock();
-    this.socialService.fetchFBFeed().subscribe(val => {this.fbFeedData = val['posts']; this.showList = true});
+    //this.socialService.fetchFBFeed().subscribe(val => {this.fbFeedData = val['posts']; this.showList = true});
     this.bibleStudyService.fetchAllStudies().subscribe(val => this.bStudies = val);
   }
 
