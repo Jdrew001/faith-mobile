@@ -48,6 +48,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
       src: [this.getFile(sermon.audio.url)],
       autoplay: true,
       volume: 1.0,
+      html5: true,
       format: ['mp3'],
       onplay: () => {
         this.audioPlaying = true;
