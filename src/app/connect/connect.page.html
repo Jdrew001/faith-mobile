@@ -17,11 +17,11 @@
     </ion-row>
   </div>
   <ion-slides #slides [options]="options" (ionSlideDidChange)="slideChanged()">
-    <!-- <ion-slide (resized)="slides.update()">
-      <ng-container>
-        <app-social [data]="fbFeedData" [scrolling]="scrolling" [view]="view" [show]="showList" (fullscreen$)="initiateOrentation($event)"></app-social>
+    <ion-slide (resized)="slides.update()">
+      <ng-container style="width: 100%">
+        <app-sermons style="width: 100%;"></app-sermons>
       </ng-container>
-    </ion-slide> -->
+    </ion-slide>
     <ion-slide (resized)="slides.update()">
       <ng-container>
         <app-biblestudy [data]="bStudies"></app-biblestudy>

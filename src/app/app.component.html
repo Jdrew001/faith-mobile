@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-split-pane contentId="main-content">
+  <ion-content>
     <ion-menu contentId="main-content" type="overlay" class="main-bg-color">
       <ion-header>
         <ion-toolbar color="primary">
@@ -118,7 +118,10 @@
         </ion-grid>
       </ion-content>
     </ion-menu>
-    <ion-router-outlet id="main-content"></ion-router-outlet>
-  </ion-split-pane>
+    <app-audio-player [showAudio]="showAudio"></app-audio-player>
+    <ion-router-outlet id="main-content">
+        
+    </ion-router-outlet>
+  </ion-content>
 </ion-app>
 <app-loader></app-loader>

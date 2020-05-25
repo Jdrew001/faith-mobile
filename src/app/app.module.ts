@@ -15,11 +15,14 @@ import { ThemeableBrowser } from '@ionic-native/themeable-browser/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Device } from '@ionic-native/device/ngx';
+import { AudioPlayerComponent } from './shared/components/audio-player/audio-player.component';
+import { AudioPlayerService } from './shared/services/audio-player.service';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, BrowserAnimationsModule, IonicModule.forRoot(), AppRoutingModule, CoreModule ],
+  imports: [BrowserModule, BrowserAnimationsModule, IonicModule.forRoot(), AppRoutingModule, CoreModule, SharedModule ],
   providers: [
     StatusBar,
     SplashScreen,
@@ -27,7 +30,8 @@ import { Device } from '@ionic-native/device/ngx';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AnnouncementService,
     InAppBrowser,
-    Device
+    Device,
+    AudioPlayerService
   ],
   bootstrap: [AppComponent]
 })

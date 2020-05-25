@@ -15,6 +15,8 @@ import { SocialService } from './services/social.service';
 import { BiblestudyService } from './services/biblestudy.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { AngularResizedEventModule } from 'angular-resize-event';
+import { SermonService } from './components/sermons/sermon.service';
+import { SermonsComponent } from './components/sermons/sermons.component';
 
 @NgModule({
   imports: [
@@ -28,8 +30,9 @@ import { AngularResizedEventModule } from 'angular-resize-event';
   ],
   providers: [
     SocialService,
-    BiblestudyService
+    BiblestudyService,
+    SermonService
   ],
-  declarations: [ConnectPage, SocialComponent, BiblestudyComponent, ContactComponent]
+  declarations: [ConnectPage, SocialComponent, BiblestudyComponent, ContactComponent, SermonsComponent]
 })
 export class ConnectPageModule {}

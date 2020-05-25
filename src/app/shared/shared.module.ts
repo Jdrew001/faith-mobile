@@ -14,6 +14,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ThemedBrowserService } from './services/themed-browser.service';
 import { VideoComponent } from './components/video/video.component';
 import { FormsModule } from '@angular/forms';
+import { AudioPlayerComponent } from './components/audio-player/audio-player.component';
+import { AudioPlayerService } from './services/audio-player.service';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     ListCardItemComponent,
     DetailComponent,
     PhoneMaskDirective,
-    VideoComponent
+    VideoComponent,
+    AudioPlayerComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +44,8 @@ import { FormsModule } from '@angular/forms';
     ListCardItemComponent,
     DetailComponent,
     PhoneMaskDirective,
-    VideoComponent
+    VideoComponent,
+    AudioPlayerComponent
   ],
   providers: [
     SharedService,

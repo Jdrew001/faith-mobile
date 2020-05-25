@@ -12,6 +12,7 @@ import { AlertService } from './core/services/alert.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PushNotificationService } from './core/services/push-notification.service';
 import { Router } from '@angular/router';
+import { AudioPlayerService } from './shared/services/audio-player.service';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit, AfterViewChecked {
   public selectedIndex = 0;
   public appPages = AppConstants.PAGES;
+  public showAudio = false;
   menuItems = [];
 
   constructor(
@@ -34,7 +36,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
     private networkService: NetworkService,
     private alertService: AlertService,
     private pushNotificationService: PushNotificationService,
-    private router: Router
+    private router: Router,
+    private audioPlayerService: AudioPlayerService
   ) {
     this.initializeApp();
     this.fetchMenuConfig();
@@ -42,6 +45,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     this.networkService.networkStatus$.subscribe(val => this.showHideNetworkModal(val));
+    this.initSubscriptions();
   }
 
   ngAfterViewChecked() {
@@ -56,6 +60,17 @@ export class AppComponent implements OnInit, AfterViewChecked {
     });
   }
 
+  initSubscriptions() {
+    this.audioPlayerService.audioPlayer$.subscribe(item => {
+      console.log(item.audio.url);
+      if (item) {
+        this.showAudio = true;
+      } else {
+        this.showAudio = false;
+      }
+    });
+  }
+
   fetchMenuConfig() {
     this.menuService.fetchMenuReference().subscribe(ref => {
       console.log(ref);
@@ -64,7 +79,6 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   getMenuItemStatus(name) {
-    // return this.menuItems.find(x => x.name === name) ? this.menuItems.find(x => x.name === name).status : false;
     return true;
   }
 

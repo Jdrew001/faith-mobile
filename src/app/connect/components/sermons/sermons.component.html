@@ -1,0 +1,30 @@
+<div class="sermon-container">
+    <ng-container>
+        <ion-row *ngFor="let item of sermons">
+            <ion-card>
+                <ion-card-content>
+                    <ion-row class="ion-align-items-center">
+                        <ion-col [size]="2">
+                            <ion-button (click)="playAudio(item)">
+                                <ion-icon slot="icon-only" name="play-outline"></ion-icon>
+                            </ion-button>
+                        </ion-col>
+                        <ion-col [size]="8">
+                            <ion-row>
+                                <h3 style="text-align: start;" class="ion-text-wrap">{{ item.title }}</h3>
+                            </ion-row>
+                            <ion-row>
+                                <p>{{ convertToLocalDate(item) }}</p>
+                            </ion-row>
+                            <ion-row>
+                                <p><ion-icon name="pricetag-outline"></ion-icon> <span *ngFor="let tag of item.study_tags">
+                                    {{ tag.name }}
+                                </span> </p>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row>
+                </ion-card-content>
+            </ion-card>
+        </ion-row>
+    </ng-container>
+</div>
