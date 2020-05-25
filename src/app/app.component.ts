@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, IonContent, AnimationController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
@@ -13,6 +13,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PushNotificationService } from './core/services/push-notification.service';
 import { Router } from '@angular/router';
 import { AudioPlayerService } from './shared/services/audio-player.service';
+import { Sermon } from './connect/components/sermons/sermons.model';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
   public appPages = AppConstants.PAGES;
   public showAudio = false;
   menuItems = [];
+  sermon: Sermon;
+  @ViewChild('content', { static: false }) content: IonContent;
 
   constructor(
     private platform: Platform,
@@ -37,7 +40,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
     private alertService: AlertService,
     private pushNotificationService: PushNotificationService,
     private router: Router,
-    private audioPlayerService: AudioPlayerService
+    private audioPlayerService: AudioPlayerService,
+    private animationCtrl: AnimationController
   ) {
     this.initializeApp();
     this.fetchMenuConfig();
@@ -62,9 +66,16 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
   initSubscriptions() {
     this.audioPlayerService.audioPlayer$.subscribe(item => {
-      console.log(item.audio.url);
       if (item) {
         this.showAudio = true;
+        this.sermon = item;
+
+        const anim = this.animationCtrl.create()
+          .addElement(document.querySelector('.audioPlayer'))
+          .duration(300)
+          .easing('ease-in')
+          .fromTo('transform', 'translateY(200px)', 'translateY(0px)');
+          anim.play();
       } else {
         this.showAudio = false;
       }
@@ -97,6 +108,28 @@ export class AppComponent implements OnInit, AfterViewChecked {
     if (url !== '') {
       let result = AppConstants.PAGES.findIndex(x => x.url === url);
       result !== -1 ? this.selectedIndex = result : this.selectedIndex = 0;
+    }
+  }
+
+  audioClosed(val) {
+    if (val) {
+      console.log('closed', document.querySelector('.audioPlayer'));
+      let animation = this.animationCtrl.create()
+        .addElement(document.querySelector('.audioPlayer'))
+        .duration(300)
+        .easing('ease-in')
+        .fromTo('transform', 'translateY(0px)', 'translateY(200px)');
+
+      animation.play().then(val => {
+        console.log('animation finished');
+        this.audioPlayerService.audioPlayer$.next(null);
+      });
+    }
+  }
+
+  audioMinimized(val) {
+    if (val) {
+      console.log('minimized');
     }
   }
 }

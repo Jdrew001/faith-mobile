@@ -19,6 +19,15 @@ main-bg-color {
     background-color: blue;
 }
 
+ion-app {
+    background-color: white !important;
+}
+
+.audio-player {
+    position: relative;
+    top: 200px;
+}
+
 .selected {
     box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 16px;
 }

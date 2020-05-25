@@ -1,7 +1,54 @@
 <ng-container *ngIf="showAudio">
-  <ion-footer class="ion-no-border" style="position: fixed; bottom: 0px;">
+  <ion-footer #audioPlayer class="ion-no-border audio-player">
     <ion-toolbar color="primary">
-      <ion-title>Footer - No Border</ion-title>
+      <div class="title">
+        <h4>Title</h4>
+      </div>
+      <div class="subtitle">
+        <p>Preacher</p>
+      </div>
+      <ion-row>
+        <ion-col>
+          <ion-button color="light" fill="clear" (click)="playVideo()">
+            <ion-icon slot="icon-only" name="play-skip-back-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button *ngIf="!audioPlaying" color="light" fill="clear" (click)="playVideo()">
+            <ion-icon slot="icon-only" name="play-outline"></ion-icon>
+          </ion-button>
+          <ion-button *ngIf="audioPlaying" color="light" fill="clear" (click)="pauseVideo()">
+            <ion-icon slot="icon-only" name="pause-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="light" fill="clear" (click)="playVideo()">
+            <ion-icon slot="icon-only" name="play-skip-forward-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-row>
+            <ion-range #range [(ngModel)]="progress" max="100" color="secondary" mode="md" pin="false"
+            (touchend)="seek()" (mouseup)="seek()" (touchstart)="pauseForDrag()" (mousedown)="pauseForDrag()"></ion-range>
+          </ion-row>
+          <div class="left-duration">
+            <p><strong>0</strong></p>
+          </div>
+          <div class="right-duration">
+            <p><strong>13:25</strong></p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <div class="container-buttons">
+        <ion-button class="remove-button" color="light" fill="clear" (click)="minimizePlayer()">
+          <ion-icon slot="icon-only" name="remove-outline"></ion-icon>
+        </ion-button>
+        <ion-button class="close-button" color="light" fill="clear" (click)="closePlayer()">
+          <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+        </ion-button>
+      </div>
     </ion-toolbar>
   </ion-footer>
 </ng-container>

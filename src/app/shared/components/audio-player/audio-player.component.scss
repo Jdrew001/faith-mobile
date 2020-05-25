@@ -1,0 +1,70 @@
+ion-toolbar {
+    height: 100% !important;
+}
+
+ion-col {
+    padding: 0px 10px;
+    font-size: 12px;
+    text-align: center;
+}
+
+ion-range {
+    padding-top: 0px;
+    padding-bottom: 5px;
+}
+
+ion-button {
+    font-size: 15px !important;
+    margin: 0px !important;
+}
+
+div.title {
+    text-align: center;
+}
+
+div.title h4 {
+    color: white !important;
+    margin-top: 5px !important
+}
+
+div.subtitle {
+    text-align: center;
+}
+
+div.subtitle p {
+    margin-bottom: 5px !important;
+}
+
+div.left-duration {
+    float: left;
+    position: absolute;
+    left: 20px;
+    bottom: -10px;
+}
+
+div.right-duration {
+    float: right;
+    position: absolute;
+    right: 20px;
+    bottom: -10px;
+}
+
+div.container-buttons {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    padding-right: 3px !important;
+
+    ion-button.close-button {
+        float: right;
+    }
+
+    ion-button.remove-button {
+        float: left;
+    }
+
+    ion-icon {
+        font-size: 20px !important;
+    }
+}
+
