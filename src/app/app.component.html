@@ -121,6 +121,6 @@
     <ion-router-outlet id="main-content">
     </ion-router-outlet>
   </ion-content>
-  <app-audio-player class="audioPlayer" [showAudio]="showAudio" [sermon]="sermon" (closed$)="audioClosed($event)" (minimized$)="audioMinimized($event)"></app-audio-player>
+  <app-audio-player class="audioPlayer" [showAudio]="showAudio" [isForward]="isForward" [isBack]="isBack" [sermon]="currentPlaying" (back$)="backPressed($event)" (next$)="nextPressed($event)" (closed$)="audioClosed($event)" (minimized$)="audioMinimized($event)"></app-audio-player>
 </ion-app>
 <app-loader></app-loader>

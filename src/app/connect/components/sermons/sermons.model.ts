@@ -16,3 +16,10 @@ export interface Tags {
 export interface Audio {
     url: string;
 }
+
+export interface SermonData {
+    prev: Sermon;
+    current: Sermon;
+    next: Sermon;
+    data: Sermon[];
+}

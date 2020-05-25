@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Sermon } from 'src/app/connect/components/sermons/sermons.model';
+import { Sermon, SermonData } from 'src/app/connect/components/sermons/sermons.model';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 })
 export class AudioPlayerService {
 
-  public audioPlayer$: Subject<Sermon> = new Subject();
+  public audioPlayer$: Subject<{data: Array<Sermon>, currentPlaying: Sermon}> = new Subject();
 
   constructor() { }
 }

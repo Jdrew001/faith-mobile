@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SermonService } from './sermon.service';
-import { Sermon } from './sermons.model';
+import { Sermon, SermonData } from './sermons.model';
 import * as moment from 'moment';
 import { AudioPlayerService } from 'src/app/shared/services/audio-player.service';
 
@@ -26,7 +26,10 @@ export class SermonsComponent implements OnInit {
   }
 
   playAudio(item) {
-    this.audioPlayerService.audioPlayer$.next(item);
+    this.audioPlayerService.audioPlayer$.next({data: this.sermons, currentPlaying: item});
   }
 
+  private retrieveIndex(item: Sermon) {
+    return this.sermons.findIndex(x => x.id === item.id);
+  }
 }

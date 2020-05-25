@@ -13,7 +13,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PushNotificationService } from './core/services/push-notification.service';
 import { Router } from '@angular/router';
 import { AudioPlayerService } from './shared/services/audio-player.service';
-import { Sermon } from './connect/components/sermons/sermons.model';
+import { Sermon, SermonData } from './connect/components/sermons/sermons.model';
 
 @Component({
   selector: 'app-root',
@@ -25,8 +25,13 @@ export class AppComponent implements OnInit, AfterViewChecked {
   public selectedIndex = 0;
   public appPages = AppConstants.PAGES;
   public showAudio = false;
+  shouldRunShowAnimation = true;
   menuItems = [];
-  sermon: Sermon;
+  sermons: Sermon[];
+  currentPlaying: Sermon;
+  isBack = false;
+  isForward = false;
+
   @ViewChild('content', { static: false }) content: IonContent;
 
   constructor(
@@ -66,25 +71,25 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
   initSubscriptions() {
     this.audioPlayerService.audioPlayer$.subscribe(item => {
+      console.log(item);
       if (item) {
         this.showAudio = true;
-        this.sermon = item;
+        this.sermons = item.data;
+        this.currentPlaying = item.currentPlaying;
+        this.isBack = this.sermonData(item.currentPlaying).prev ? false : true;
+        this.isForward = this.sermonData(item.currentPlaying).next ? false : true;
 
-        const anim = this.animationCtrl.create()
-          .addElement(document.querySelector('.audioPlayer'))
-          .duration(300)
-          .easing('ease-in')
-          .fromTo('transform', 'translateY(200px)', 'translateY(0px)');
-          anim.play();
-      } else {
-        this.showAudio = false;
+        if (this.shouldRunShowAnimation) {
+          this.showAnimation();
+        }
+
+        this.shouldRunShowAnimation = false;
       }
     });
   }
 
   fetchMenuConfig() {
     this.menuService.fetchMenuReference().subscribe(ref => {
-      console.log(ref);
       this.menuItems = ref;
     });
   }
@@ -111,9 +116,15 @@ export class AppComponent implements OnInit, AfterViewChecked {
     }
   }
 
+
+  /**
+   * BEGIN AUDIO LOGIC
+   *  
+   * 
+   */
   audioClosed(val) {
     if (val) {
-      console.log('closed', document.querySelector('.audioPlayer'));
+
       let animation = this.animationCtrl.create()
         .addElement(document.querySelector('.audioPlayer'))
         .duration(300)
@@ -122,7 +133,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
       animation.play().then(val => {
         console.log('animation finished');
-        this.audioPlayerService.audioPlayer$.next(null);
+        this.showAudio = false;
+        this.shouldRunShowAnimation = true;
+        this.currentPlaying = null;
       });
     }
   }
@@ -131,5 +144,44 @@ export class AppComponent implements OnInit, AfterViewChecked {
     if (val) {
       console.log('minimized');
     }
+  }
+
+  nextPressed(val) {
+    if (val) {
+      const next = this.sermonData(this.currentPlaying).next;
+      this.audioPlayerService.audioPlayer$.next({ data: this.sermons, currentPlaying: next});
+    }
+  }
+
+  backPressed(val) {
+    if (val) {
+      const prev = this.sermonData(this.currentPlaying).prev;
+      this.audioPlayerService.audioPlayer$.next({ data: this.sermons, currentPlaying: prev});
+    }
+  }
+
+  private sermonData(currentPlaying) {
+    const index = this.retrieveIndex(currentPlaying);
+    const audioData: SermonData = {
+      prev: index === 0 ? null : this.sermons[index - 1],
+      current: currentPlaying,
+      next: index === (this.sermons.length - 1) ? null : this.sermons[index + 1],
+      data: this.sermons
+    }
+
+    return audioData;
+  }
+
+  private retrieveIndex(item: Sermon) {
+    return this.sermons.findIndex(x => x.id === item.id);
+  }
+
+  private showAnimation() {
+    const anim = this.animationCtrl.create()
+    .addElement(document.querySelector('.audioPlayer'))
+    .duration(300)
+    .easing('ease-in')
+    .fromTo('transform', 'translateY(200px)', 'translateY(0px)');
+    anim.play();
   }
 }

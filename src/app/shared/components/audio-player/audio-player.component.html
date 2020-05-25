@@ -2,27 +2,27 @@
   <ion-footer #audioPlayer class="ion-no-border audio-player">
     <ion-toolbar color="primary">
       <div class="title">
-        <h4>Title</h4>
+        <h4>{{ sermon.title }}</h4>
       </div>
       <div class="subtitle">
-        <p>Preacher</p>
+        <p>{{ sermon.preacher }}</p>
       </div>
       <ion-row>
         <ion-col>
-          <ion-button color="light" fill="clear" (click)="playVideo()">
+          <ion-button color="light" fill="clear" (click)="previousAudio()" [disabled]="isBack">
             <ion-icon slot="icon-only" name="play-skip-back-outline"></ion-icon>
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button *ngIf="!audioPlaying" color="light" fill="clear" (click)="playVideo()">
+          <ion-button *ngIf="!audioPlaying" color="light" fill="clear" (click)="playAudio()">
             <ion-icon slot="icon-only" name="play-outline"></ion-icon>
           </ion-button>
-          <ion-button *ngIf="audioPlaying" color="light" fill="clear" (click)="pauseVideo()">
+          <ion-button *ngIf="audioPlaying" color="light" fill="clear" (click)="pauseAudio()">
             <ion-icon slot="icon-only" name="pause-outline"></ion-icon>
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button color="light" fill="clear" (click)="playVideo()">
+          <ion-button color="light" fill="clear" (click)="nextAudio()" [disabled]="isForward">
             <ion-icon slot="icon-only" name="play-skip-forward-outline"></ion-icon>
           </ion-button>
         </ion-col>
@@ -33,12 +33,6 @@
             <ion-range #range [(ngModel)]="progress" max="100" color="secondary" mode="md" pin="false"
             (touchend)="seek()" (mouseup)="seek()" (touchstart)="pauseForDrag()" (mousedown)="pauseForDrag()"></ion-range>
           </ion-row>
-          <div class="left-duration">
-            <p><strong>0</strong></p>
-          </div>
-          <div class="right-duration">
-            <p><strong>13:25</strong></p>
-          </div>
         </ion-col>
       </ion-row>
       <div class="container-buttons">
