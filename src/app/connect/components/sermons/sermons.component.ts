@@ -12,12 +12,23 @@ import { AudioPlayerService } from 'src/app/shared/services/audio-player.service
 export class SermonsComponent implements OnInit {
 
   sermons: Sermon[] = [];
+  currentPlaying: Sermon;
 
   constructor(private sermonService: SermonService, private audioPlayerService: AudioPlayerService) { }
 
   ngOnInit() {
     this.sermonService.fetchSermons().subscribe(data => {
       this.sermons = data;
+    });
+
+    this.audioPlayerService.audioState$.subscribe(value => {
+      console.log('audio state',value);
+      if (!value) {
+        this.currentPlaying = null;
+        return;
+      }
+
+      this.currentPlaying = value;
     });
   }
 
@@ -26,7 +37,19 @@ export class SermonsComponent implements OnInit {
   }
 
   playAudio(item) {
+    this.currentPlaying = item;
     this.audioPlayerService.audioPlayer$.next({data: this.sermons, currentPlaying: item});
+    this.audioPlayerService.audioState$.next(item);
+  }
+
+  stopAudio() {
+    this.currentPlaying = null;
+    this.audioPlayerService.audioPlayer$.next(null);
+    this.audioPlayerService.audioState$.next(null);
+  }
+
+  checkForPlayer(item: Sermon) {
+    return this.currentPlaying ? item.id === this.currentPlaying.id : false;
   }
 
   private retrieveIndex(item: Sermon) {

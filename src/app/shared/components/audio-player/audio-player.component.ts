@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { IonRange } from '@ionic/angular';
 import { LoaderService } from 'src/app/core/loader/loader.service';
 import * as moment from 'moment';
+import { AudioPlayerService } from '../../services/audio-player.service';
 
 @Component({
   selector: 'app-audio-player',
@@ -32,7 +33,9 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   audioTimeout = null;
   isSeeking = false;
 
-  constructor(private helperService: HelperService, private loaderService: LoaderService) { }
+  constructor(private helperService: HelperService,
+    private loaderService: LoaderService,
+    private audioService: AudioPlayerService) { }
 
   ngOnInit() {}
 
@@ -43,6 +46,10 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
           this.player.stop();
         }
         this.start(this.sermon);
+      } else {
+        if (this.player) {
+          this.player.stop();
+        }
       }
     }
   }
@@ -78,13 +85,15 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
 
   updateProgress() {
     if (this.player && !this.isSeeking) {
-        let seek = +this.player.seek() || 0;
-        const formattedTime = moment.duration(seek, 'seconds');
-        this.progress = (seek / this.player.duration()) * 100 || this.progress;
-        this.audioStartProgress = `${formattedTime.hours() == 0 ? '' : formattedTime.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${formattedTime.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${formattedTime.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
-        this.audioTimeout = setTimeout(() => {
-        this.updateProgress();
-      }, 1000);
+        let seek = +this.player.seek();
+        if (!isNaN(+this.player.seek())) {
+          const formattedTime = moment.duration(seek, 'seconds');
+          this.progress = (seek / this.player.duration()) * 100 || this.progress;
+          this.audioStartProgress = `${formattedTime.hours() == 0 ? '' : formattedTime.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${formattedTime.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${formattedTime.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
+          this.audioTimeout = setTimeout(() => {
+            this.updateProgress();
+          }, 1000); 
+        }
     }
   }
 
@@ -125,6 +134,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
 
   closePlayer() {
     this.closed$.next(true);
+    this.audioService.audioState$.next(null);
     this.audioPlaying = false;
     this.player.stop();
     this.player.unload();

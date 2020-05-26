@@ -84,6 +84,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
         }
 
         this.shouldRunShowAnimation = false;
+      } else {
+        this.showAudio = false;
+        this.currentPlaying = null;
       }
     });
   }
