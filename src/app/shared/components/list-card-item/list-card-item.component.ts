@@ -44,7 +44,7 @@ export class ListCardItemComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {console.log(this.items);}
 
   toShortDescription(description) {
-    var maxLength = 50;
+    var maxLength = 75;
     if(description.length > maxLength){
         var trimmed = description.substr(0, maxLength);
         return { isTrimmed: true, description: trimmed = trimmed.substr(0, Math.min(trimmed.length, trimmed.lastIndexOf(" ")))}

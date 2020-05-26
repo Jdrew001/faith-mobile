@@ -7,7 +7,7 @@
             <img style="width: 100%; height: 100%" [defaultImage]="placeHolderImg" [lazyLoad]="getImage(item.image.url)"/>
           </ion-col>
           <ion-col [size]="7">
-            <h4>{{ item.title }}</h4>
+            <h4 class="ion-text-nowrap">{{ item.title }}</h4>
             <p class="truncate-overflow" *ngIf="toShortDescription(item.description).isTrimmed">{{ toShortDescription(item.description).description }}...</p>
             <p class="truncate-overflow" *ngIf="!toShortDescription(item.description).isTrimmed">{{ toShortDescription(item.description).description }}</p>
           </ion-col>
