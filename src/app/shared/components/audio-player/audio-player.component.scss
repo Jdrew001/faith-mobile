@@ -42,14 +42,22 @@ div.left-duration {
     float: left;
     position: absolute;
     left: 20px;
-    bottom: -10px;
+    bottom: -5px;
+
+    p {
+        font-size: 9px !important;
+    }
 }
 
 div.right-duration {
     float: right;
     position: absolute;
     right: 20px;
-    bottom: -10px;
+    bottom: -5px;
+
+    p {
+        font-size: 9px !important;
+    }
 }
 
 div.container-buttons {
