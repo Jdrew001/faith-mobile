@@ -79,7 +79,6 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   updateProgress() {
     if (this.player && !this.isSeeking) {
         let seek = +this.player.seek() || 0;
-        console.log(seek);
         const formattedTime = moment.duration(seek, 'seconds');
         this.progress = (seek / this.player.duration()) * 100 || this.progress;
         this.audioStartProgress = `${formattedTime.hours() == 0 ? '' : formattedTime.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${formattedTime.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${formattedTime.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
