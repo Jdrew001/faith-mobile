@@ -22,9 +22,11 @@ div.title {
     text-align: center;
 }
 
-div.title h4 {
+div.title h5 {
     color: white !important;
-    margin-top: 5px !important
+    margin-top: 10px !important;
+    font-size: 10px !important;
+    margin-bottom: 0px !important;
 }
 
 div.subtitle {
@@ -32,7 +34,8 @@ div.subtitle {
 }
 
 div.subtitle p {
-    margin-bottom: 5px !important;
+    font-size: 10px !important;
+    margin: 5px 0px !important;
 }
 
 div.left-duration {

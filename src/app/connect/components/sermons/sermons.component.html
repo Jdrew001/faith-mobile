@@ -11,10 +11,10 @@
                         </ion-col>
                         <ion-col [size]="8">
                             <ion-row>
-                                <h3 style="text-align: start;" class="ion-text-wrap">{{ item.preacher }} - {{ item.title }}</h3>
+                                <h3 style="text-align: start;" class="ion-text-nowrap">{{ item.title }}</h3>
                             </ion-row>
                             <ion-row>
-                                <p>{{ convertToLocalDate(item) }}</p>
+                                <p>{{ item.preacher }} - {{ convertToLocalDate(item) }}</p>
                             </ion-row>
                             <ion-row>
                                 <p><ion-icon name="pricetag-outline"></ion-icon> <span *ngFor="let tag of item.study_tags">

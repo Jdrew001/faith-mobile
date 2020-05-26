@@ -29,6 +29,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   audioPlaying = false;
   player: Howl = null;
   audioTimeout = null;
+  isSeeking = false;
 
   constructor(private helperService: HelperService, private loaderService: LoaderService) { }
 
@@ -37,6 +38,9 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes) {
       if (this.sermon) {
+        if (this.player) {
+          this.player.stop();
+        }
         this.start(this.sermon);
       }
     }
@@ -50,27 +54,31 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
       volume: 1.0,
       html5: true,
       format: ['mp3'],
-      onplay: () => {
+      onload: () => {
+        console.log('onload called');
         this.audioPlaying = true;
-        this.audioDuration = this.player.duration();
         this.updateProgress();
         this.loaderService.toggleLoader(false);
       },
       onloaderror: () => {
         this.loaderService.toggleLoader(false);
+      },
+      onend: () => {
+        clearTimeout(this.audioTimeout);
+        this.audioPlaying = false;
+        this.progress = 0;
       }
     });
     this.player.play();
   }
 
   updateProgress() {
-    if (this.player) {
+    if (this.player && !this.isSeeking) {
         let seek = this.player.seek();
-        this.progress = (+seek / this.player.duration()) * 100 || 0;
-        this.audioStartProgress = this.player.duration() - this.progress;
+        this.progress = (+seek / this.player.duration()) * 100 || this.progress;
         this.audioTimeout = setTimeout(() => {
         this.updateProgress();
-      }, 50);
+      }, 200);
     }
   }
 
@@ -78,12 +86,13 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
     let newValue = +this.range.value;
     let duration = this.player.duration();
     this.player.seek(duration * (newValue / 100));
+    this.isSeeking = false;
     this.updateProgress();
-    this.player.play();
   }
 
   pauseForDrag() {
-    this.player.pause();
+    this.isSeeking = true;
+    console.log('pause for drag');
     clearTimeout(this.audioTimeout);
   }
 
