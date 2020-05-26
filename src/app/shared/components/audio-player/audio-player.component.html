@@ -33,6 +33,12 @@
             <ion-range #range [(ngModel)]="progress" max="100" color="secondary" mode="md" pin="false"
             (touchend)="seek()" (mouseup)="seek()" (touchstart)="pauseForDrag()" (mousedown)="pauseForDrag()"></ion-range>
           </ion-row>
+          <div class="left-duration">
+            <p><strong>{{ audioStartProgress }}</strong></p>
+          </div>
+          <div class="right-duration">
+            <p><strong>{{ audioDuration }}</strong></p>
+          </div>
         </ion-col>
       </ion-row>
       <div class="container-buttons">

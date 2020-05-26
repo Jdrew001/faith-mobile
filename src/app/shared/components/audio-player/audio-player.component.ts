@@ -5,6 +5,7 @@ import { HelperService } from 'src/app/core/helper.service';
 import { environment } from 'src/environments/environment';
 import { IonRange } from '@ionic/angular';
 import { LoaderService } from 'src/app/core/loader/loader.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-audio-player',
@@ -24,8 +25,8 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   @ViewChild('audioPlayer', { static: false }) audioPlayer: Element;
   @ViewChild('range', { static: false }) range: IonRange;
   progress = 0;
-  audioStartProgress = 0;
-  audioDuration = 0;
+  audioStartProgress = '';
+  audioDuration = '';
   audioPlaying = false;
   player: Howl = null;
   audioTimeout = null;
@@ -55,10 +56,13 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
       html5: true,
       format: ['mp3'],
       onload: () => {
-        console.log('onload called');
+        const formattedTime = moment.duration(this.player.duration(), 'seconds');
         this.audioPlaying = true;
         this.updateProgress();
         this.loaderService.toggleLoader(false);
+        console.log(moment.duration(this.player.duration(), 'seconds'));
+        this.audioDuration = `${formattedTime.hours() == 0 ? '' : formattedTime.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${formattedTime.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${formattedTime.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
+        //console.log(moment((this.player.duration() / 60).toString(), 'HHmmss').format('HH:mm:ss'));
       },
       onloaderror: () => {
         this.loaderService.toggleLoader(false);
@@ -74,11 +78,14 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
 
   updateProgress() {
     if (this.player && !this.isSeeking) {
-        let seek = this.player.seek();
-        this.progress = (+seek / this.player.duration()) * 100 || this.progress;
+        let seek = +this.player.seek() || 0;
+        console.log(seek);
+        const formattedTime = moment.duration(seek, 'seconds');
+        this.progress = (seek / this.player.duration()) * 100 || this.progress;
+        this.audioStartProgress = `${formattedTime.hours() == 0 ? '' : formattedTime.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${formattedTime.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${formattedTime.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
         this.audioTimeout = setTimeout(() => {
         this.updateProgress();
-      }, 200);
+      }, 1000);
     }
   }
 
@@ -92,7 +99,6 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
 
   pauseForDrag() {
     this.isSeeking = true;
-    console.log('pause for drag');
     clearTimeout(this.audioTimeout);
   }
 
@@ -125,6 +131,8 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
     this.player.unload();
     this.player = null;
     this.progress = 0;
+    this.audioStartProgress = '';
+    this.audioDuration = '';
     clearTimeout(this.audioTimeout);
   }
 
