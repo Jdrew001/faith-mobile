@@ -153,6 +153,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
     if (val) {
       const next = this.sermonData(this.currentPlaying).next;
       this.audioPlayerService.audioPlayer$.next({ data: this.sermons, currentPlaying: next});
+      this.audioPlayerService.audioState$.next(next);
     }
   }
 
@@ -160,6 +161,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
     if (val) {
       const prev = this.sermonData(this.currentPlaying).prev;
       this.audioPlayerService.audioPlayer$.next({ data: this.sermons, currentPlaying: prev});
+      this.audioPlayerService.audioState$.next(prev);
     }
   }
 
