@@ -16,6 +16,7 @@ import { VideoComponent } from './components/video/video.component';
 import { FormsModule } from '@angular/forms';
 import { AudioPlayerComponent } from './components/audio-player/audio-player.component';
 import { AudioPlayerService } from './services/audio-player.service';
+import { PopoverComponent } from './components/popover/popover.component';
 
 
 @NgModule({
@@ -28,7 +29,11 @@ import { AudioPlayerService } from './services/audio-player.service';
     DetailComponent,
     PhoneMaskDirective,
     VideoComponent,
-    AudioPlayerComponent
+    AudioPlayerComponent,
+    PopoverComponent
+  ],
+  entryComponents: [
+    PopoverComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +50,8 @@ import { AudioPlayerService } from './services/audio-player.service';
     DetailComponent,
     PhoneMaskDirective,
     VideoComponent,
-    AudioPlayerComponent
+    AudioPlayerComponent,
+    PopoverComponent
   ],
   providers: [
     SharedService,

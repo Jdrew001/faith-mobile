@@ -10,3 +10,10 @@ ion-input {
 ion-slide {
     width: 100% !important;
 }
+
+ion-badge {
+    position: absolute;
+    z-index: 9999;
+    top: 0px;
+    right: 0px;
+}

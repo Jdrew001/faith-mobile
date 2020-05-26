@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SermonService } from './sermon.service';
 import { Sermon, SermonData } from './sermons.model';
 import * as moment from 'moment';
@@ -13,16 +13,17 @@ export class SermonsComponent implements OnInit {
 
   sermons: Sermon[] = [];
   currentPlaying: Sermon;
+  tempSermons: Sermon[] = [];
 
   constructor(private sermonService: SermonService, private audioPlayerService: AudioPlayerService) { }
 
   ngOnInit() {
     this.sermonService.fetchSermons().subscribe(data => {
       this.sermons = data;
+      this.tempSermons = data;
     });
 
     this.audioPlayerService.audioState$.subscribe(value => {
-      console.log('audio state',value);
       if (!value) {
         this.currentPlaying = null;
         return;
@@ -50,6 +51,16 @@ export class SermonsComponent implements OnInit {
 
   checkForPlayer(item: Sermon) {
     return this.currentPlaying ? item.id === this.currentPlaying.id : false;
+  }
+
+  searchFilter(val) {
+    this.sermons = this.tempSermons;
+    this.sermons = this.sermons.filter(x => x.title.toLowerCase().includes(val.toLocaleLowerCase()));
+  }
+
+  clearSearch(val) {
+    console.log(val);
+    this.sermons = this.tempSermons;
   }
 
   private retrieveIndex(item: Sermon) {

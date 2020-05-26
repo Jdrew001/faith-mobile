@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, OnDestroy, HostListener } from '@angular/core';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, PopoverController } from '@ionic/angular';
 import { SocialService } from './services/social.service';
 import { BiblestudyService } from './services/biblestudy.service';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { PopoverComponent } from '../shared/components/popover/popover.component';
 
 @Component({
   selector: 'app-connect',
@@ -26,7 +27,8 @@ export class ConnectPage implements OnInit, OnDestroy {
 
   constructor(private socialService: SocialService,
     private bibleStudyService: BiblestudyService,
-    private screenOrientation: ScreenOrientation) { }
+    private screenOrientation: ScreenOrientation,
+    public popoverController: PopoverController) { }
 
   ngOnInit() {
     //this.screenOrientation.unlock();
@@ -35,6 +37,16 @@ export class ConnectPage implements OnInit, OnDestroy {
 
   segmentChanged() {
     this.slider.slideTo(this.segment, 500);
+  }
+
+  async showAudioFilter(ev) {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   async slideChanged() {
