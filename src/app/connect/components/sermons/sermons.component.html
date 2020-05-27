@@ -3,26 +3,6 @@
         <ion-row>
             <ion-searchbar #searchBar placeholder="Search by title" debounce="500" (ionInput)="searchFilter(searchBar.value)" (ionClear)="clearSearch($event)"></ion-searchbar>
         </ion-row>
-        <ion-row class="ion-justify-content-center">
-            <ion-col [size]="4">
-                <!--Month;Year-->
-                <ion-button size="small">
-                    <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
-                </ion-button>
-            </ion-col>
-            <ion-col [size]="4">
-                <!--Preacher-->
-                <ion-button size="small">
-                    <ion-icon slot="icon-only" name="person-outline"></ion-icon>
-                </ion-button>
-            </ion-col>
-            <ion-col [size]="4">
-                <!--Type-->
-                <ion-button size="small">
-                    <ion-icon slot="icon-only" name="pricetag-outline"></ion-icon>
-                </ion-button>
-            </ion-col>
-        </ion-row>
     </div>
     <ng-container>
         <ion-row *ngFor="let item of sermons">
