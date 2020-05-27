@@ -32,6 +32,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   player: Howl = null;
   audioTimeout = null;
   isSeeking = false;
+  lastTime = 0;
 
   constructor(private helperService: HelperService,
     private loaderService: LoaderService,
@@ -85,15 +86,14 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
 
   updateProgress() {
     if (this.player && !this.isSeeking) {
-        let seek = +this.player.seek();
-        if (!isNaN(+this.player.seek())) {
-          const formattedTime = moment.duration(seek, 'seconds');
-          this.progress = (seek / this.player.duration()) * 100 || this.progress;
-          this.audioStartProgress = `${formattedTime.hours() == 0 ? '' : formattedTime.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${formattedTime.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${formattedTime.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
-          this.audioTimeout = setTimeout(() => {
-            this.updateProgress();
-          }, 1000); 
-        }
+        let seek = +this.player.seek() || this.lastTime;
+        const formattedTime = moment.duration(seek, 'seconds');
+        this.progress = (seek / this.player.duration()) * 100 || this.progress;
+        this.audioStartProgress = `${formattedTime.hours() == 0 ? '' : formattedTime.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${formattedTime.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${formattedTime.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
+        this.lastTime = seek;
+        this.audioTimeout = setTimeout(() => {
+          this.updateProgress();
+        }, 1000); 
     }
   }
 
