@@ -66,11 +66,17 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
       onload: () => {
         const formattedTime = moment.duration(this.player.duration(), 'seconds');
         this.audioPlaying = true;
-        this.updateProgress();
         this.loaderService.toggleLoader(false);
         console.log(moment.duration(this.player.duration(), 'seconds'));
         this.audioDuration = `${formattedTime.hours() == 0 ? '' : formattedTime.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${formattedTime.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${formattedTime.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
-        //console.log(moment((this.player.duration() / 60).toString(), 'HHmmss').format('HH:mm:ss'));
+      },
+      onplay: () => {
+        this.updateProgress();
+        this.player.state()
+      },
+      onplayerror: () => {
+        this.audioPlaying = false;
+        this.progress = 0;
       },
       onloaderror: () => {
         this.loaderService.toggleLoader(false);
@@ -85,16 +91,17 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   }
 
   updateProgress() {
-    if (this.player && !this.isSeeking) {
+    if (this.player && !this.isSeeking && this.player.state() === 'loaded') {
         let seek = +this.player.seek() || this.lastTime;
         const formattedTime = moment.duration(seek, 'seconds');
         this.progress = (seek / this.player.duration()) * 100 || this.progress;
         this.audioStartProgress = `${formattedTime.hours() == 0 ? '' : formattedTime.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${formattedTime.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${formattedTime.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
         this.lastTime = seek;
-        this.audioTimeout = setTimeout(() => {
-          this.updateProgress();
-        }, 1000); 
     }
+
+    this.audioTimeout = setTimeout(() => {
+      this.updateProgress();
+    }, 1000); 
   }
 
   seek() {
