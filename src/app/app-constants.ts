@@ -100,4 +100,6 @@ export class AppConstants {
         subHeader: 'Network Alert',
         message: 'Your network connection got disconnected.'
     };
+    public static PREACHERS = 'preachers';
+    public static TAGS = 'study-tags';
 }

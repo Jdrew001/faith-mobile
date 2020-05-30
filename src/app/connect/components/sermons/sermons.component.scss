@@ -15,8 +15,20 @@ ion-card {
 
 div.filter-container {
     background-color: #f3f3f3;
+    ion-col {
+        padding: 0px 3px !important;
+    }
+
+    .filter-btn-container {
+        margin: 0px 10px !important;
+        padding-bottom: 5px;
+    }
+
     ion-button {
         width: 100%;
+        text-transform: none !important;
+        font-size: 10px !important;
+        margin: 0 !important;
     }
 }
 

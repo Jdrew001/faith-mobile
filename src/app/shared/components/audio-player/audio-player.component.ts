@@ -33,6 +33,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   audioTimeout = null;
   isSeeking = false;
   lastTime = 0;
+  audioId = 0;
 
   constructor(private helperService: HelperService,
     private loaderService: LoaderService,
@@ -49,7 +50,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
         this.start(this.sermon);
       } else {
         if (this.player) {
-          this.player.stop();
+          this.player.stop(this.audioId);
         }
       }
     }
@@ -64,40 +65,20 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
       html5: true,
       format: ['mp3'],
       onload: () => {
-        console.log('loaded');
         const formattedTime = moment.duration(this.player.duration(), 'seconds');
         this.audioPlaying = true;
         this.loaderService.toggleLoader(false);
         this.updateProgress();
-        console.log(moment.duration(this.player.duration(), 'seconds'));
         this.audioDuration = `${formattedTime.hours() == 0 ? '' : formattedTime.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${formattedTime.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${formattedTime.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
       },
-      onplay: () => {
-        this.player.state()
-      },
-      onseek :() => {
-        setTimeout(() => {
-          this.isSeeking = false;
-          this.updateProgress();
-          this.loaderService.toggleLoader(false);
-        }, 1000);
-      },
       onplayerror: (error) => {
-        this.audioPlaying = false;
-        this.progress = 0;
         console.log(error);
       },
       onloaderror: (error) => {
         this.loaderService.toggleLoader(false);
-        console.log(error);
-      },
-      onend: () => {
-        clearTimeout(this.audioTimeout);
-        this.audioPlaying = false;
-        this.progress = 0;
       }
     });
-    this.player.play();
+    this.audioId = this.player.play();
   }
 
   updateProgress() {
@@ -115,11 +96,17 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   }
 
   seek() {
-    this.loaderService.toggleLoader(true);
     let newValue = +this.range.value;
     let duration = this.player.duration();
     this.player.seek(duration * (newValue / 100));
-    console.log('seek method', this.player.seek());
+    let seek = Number(this.player.seek());
+    let howl = this.player.seek();
+    if (isNaN(seek)) {
+      seek = howl['_sounds'][0]['_seek'];
+    }
+    this.progress = (seek / this.player.duration()) * 100 || this.progress;
+    this.updateProgress();
+    this.isSeeking = false;
   }
 
   pauseForDrag() {
@@ -128,17 +115,21 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   }
 
   playAudio() {
-    this.player.play();
-    this.audioPlaying = true;
+    if (!this.player.playing(this.audioId)) {
+      this.audioPlaying = true;
+      this.player.play(this.audioId);
+    }
   }
 
   pauseAudio() {
-    this.player.pause();
-    this.audioPlaying = false;
+    if (this.player.playing(this.audioId)) {
+      this.audioPlaying = false;
+      this.player.pause(this.audioId);
+    }
   }
 
   nextAudio() {
-    this.player.stop();
+    this.player.stop(this.audioId);
     this.player.unload();
     this.progress = 0;
     this.audioStartProgress = '';
@@ -147,7 +138,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   }
 
   previousAudio() {
-    this.player.stop();
+    this.player.stop(this.audioId);
     this.player.unload();
     this.progress = 0;
     this.audioStartProgress = '';
@@ -159,7 +150,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
     this.closed$.next(true);
     this.audioService.audioState$.next(null);
     this.audioPlaying = false;
-    this.player.stop();
+    this.player.stop(this.audioId);
     this.player.unload();
     this.player = null;
     this.progress = 0;

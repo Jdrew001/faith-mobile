@@ -6,7 +6,7 @@ export interface Sermon {
     title: string;
     updatedAt: string;
     audio: Audio;
-    preacher: string;
+    preacher: Preacher;
 }
 
 export interface Tags {
@@ -15,6 +15,10 @@ export interface Tags {
 
 export interface Audio {
     url: string;
+}
+
+export interface Preacher {
+    Name: string;
 }
 
 export interface SermonData {

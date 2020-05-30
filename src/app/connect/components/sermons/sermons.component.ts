@@ -3,6 +3,7 @@ import { SermonService } from './sermon.service';
 import { Sermon, SermonData } from './sermons.model';
 import * as moment from 'moment';
 import { AudioPlayerService } from 'src/app/shared/services/audio-player.service';
+import { PickerController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sermons',
@@ -15,7 +16,10 @@ export class SermonsComponent implements OnInit {
   currentPlaying: Sermon;
   tempSermons: Sermon[] = [];
 
-  constructor(private sermonService: SermonService, private audioPlayerService: AudioPlayerService) { }
+  constructor(
+    private sermonService: SermonService,
+    private audioPlayerService: AudioPlayerService,
+    private pickerController: PickerController) { }
 
   ngOnInit() {
     this.sermonService.fetchSermons().subscribe(data => {
@@ -59,7 +63,6 @@ export class SermonsComponent implements OnInit {
   }
 
   clearSearch(val) {
-    console.log(val);
     this.sermons = this.tempSermons;
   }
 

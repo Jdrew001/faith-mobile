@@ -4,6 +4,9 @@ import { SocialService } from './services/social.service';
 import { BiblestudyService } from './services/biblestudy.service';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { PopoverComponent } from '../shared/components/popover/popover.component';
+import { SharedService } from '../shared/shared.service';
+import { combineLatest } from 'rxjs';
+import { Preacher, Tags } from './components/sermons/sermons.model';
 
 @Component({
   selector: 'app-connect',
@@ -24,29 +27,33 @@ export class ConnectPage implements OnInit, OnDestroy {
     allowTouchMove: false
   }
   showList = false;
+  filterTypes = [
+    {
+      type: 'Preachers',
+      data: [],
+      expanded: false
+    },
+    {
+      type: 'Categories',
+      data: [],
+      expanded: false
+    }
+  ]
 
   constructor(private socialService: SocialService,
     private bibleStudyService: BiblestudyService,
     private screenOrientation: ScreenOrientation,
-    public popoverController: PopoverController) { }
+    public popoverController: PopoverController,
+    private sharedService: SharedService) { }
 
   ngOnInit() {
     //this.screenOrientation.unlock();
     this.bibleStudyService.fetchAllStudies().subscribe(val => this.bStudies = val);
+    this.fetchPreachersAndTags();
   }
 
   segmentChanged() {
     this.slider.slideTo(this.segment, 500);
-  }
-
-  async showAudioFilter(ev) {
-    const popover = await this.popoverController.create({
-      component: PopoverComponent,
-      cssClass: 'my-custom-class',
-      event: ev,
-      translucent: true
-    });
-    return await popover.present();
   }
 
   async slideChanged() {
@@ -65,6 +72,16 @@ export class ConnectPage implements OnInit, OnDestroy {
     setTimeout(() => {
       this.showList = true;
     }, 200);
+  }
+
+  private fetchPreachersAndTags() {
+    const preachers$ = this.sharedService.fetchPreachers();
+    const tags$ = this.sharedService.fetchTags();
+    combineLatest([preachers$, tags$]).subscribe(res => {
+      this.filterTypes[0].data = res[0];
+      this.filterTypes[1].data = res[1];
+      this.sharedService.filterTypes$.next(this.filterTypes);
+    });
   }
 
   ngOnDestroy() {
