@@ -27,7 +27,7 @@ div.filter-container {
     ion-button {
         width: 100%;
         text-transform: none !important;
-        font-size: 10px !important;
+        font-size: 9px !important;
         margin: 0 !important;
     }
 }
@@ -44,4 +44,26 @@ h3 {
 
 p {
     font-size: 10px !important;
+}
+
+ion-badge {
+    font-size: 8px;
+    border-radius: 20px;
+    position: absolute;
+    right: 0px;
+    z-index: 9999;
+}
+.date-button ion-button {
+    ion-icon {
+        position: relative;
+        right: 10px;
+    }
+}
+
+ion-datetime {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    padding-top: 11px !important;
+    width: 100%;
+    --placeholder-color: white !important;
 }

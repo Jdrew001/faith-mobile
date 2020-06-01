@@ -49,7 +49,6 @@ export class ConnectPage implements OnInit, OnDestroy {
   ngOnInit() {
     //this.screenOrientation.unlock();
     this.bibleStudyService.fetchAllStudies().subscribe(val => this.bStudies = val);
-    this.fetchPreachersAndTags();
   }
 
   segmentChanged() {
@@ -72,16 +71,6 @@ export class ConnectPage implements OnInit, OnDestroy {
     setTimeout(() => {
       this.showList = true;
     }, 200);
-  }
-
-  private fetchPreachersAndTags() {
-    const preachers$ = this.sharedService.fetchPreachers();
-    const tags$ = this.sharedService.fetchTags();
-    combineLatest([preachers$, tags$]).subscribe(res => {
-      this.filterTypes[0].data = res[0];
-      this.filterTypes[1].data = res[1];
-      this.sharedService.filterTypes$.next(this.filterTypes);
-    });
   }
 
   ngOnDestroy() {
