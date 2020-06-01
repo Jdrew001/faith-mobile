@@ -73,12 +73,12 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
       this.tempSermons = data;
       this.preacherFilters = this.sermonService.retrieveFilters(FilterType.preachers, data);
       this.categoryFilters = this.sermonService.retrieveFilters(FilterType.categories, data);
-      this.dateFilter = this.sermonService.retrieveDateFilter(data);
+      this.dateFilter = this.sermonService.retrieveDateFilter(data) ? this.sermonService.retrieveDateFilter(data) : this.dateFilter;
     });
   }
 
   convertToLocalDate(item) {
-    return item.date ? moment(item.date).format('MM/DD/YY') : null;//test
+    return item.date ? moment(item.date).format('MM/DD/YY') : null;
   }
 
   playAudio(item) {
@@ -113,7 +113,7 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
       let newDate = moment(`${yearSelected}-${monthSelected}-01`).toISOString();
       this.selectedDate = newDate;
     }
-
+    console.log('Selected date', this.selectedDate);
     this.fetchSermons(this.selectedDate);
     this.searchText = '';
   }

@@ -47,12 +47,16 @@ export class SermonService {
   retrieveDateFilter(data: Sermon[]): {min: string, max: string} {
     let obj = { start: '', end: '' };
     let tempDates = [];
-    data.forEach(val => {
-      tempDates.push(new Date(val.date));
-    });
-    var maxDate = new Date(Math.max.apply(null, tempDates));
-    var minDate = new Date(Math.min.apply(null, tempDates));
-    return {min: moment(minDate).year().toString(), max: moment(maxDate).year().toString()};
+    if (data.length !== 0) {
+      data.forEach(val => {
+        tempDates.push(new Date(val.date));
+      });
+      var maxDate = new Date(Math.max.apply(null, tempDates));
+      var minDate = new Date(Math.min.apply(null, tempDates));
+      return {min: moment(minDate).year().toString(), max: moment(maxDate).year().toString()};
+    }
+
+    return null;
   }
 
   private extractPreachers(sermons: Sermon[]): Array<string> {
