@@ -3,17 +3,31 @@ import { SermonService, FilterType } from './sermon.service';
 import { Sermon, SermonData } from './sermons.model';
 import * as moment from 'moment';
 import { AudioPlayerService } from 'src/app/shared/services/audio-player.service';
-import { PickerController, IonDatetime } from '@ionic/angular';
+import { PickerController, IonDatetime, IonSearchbar } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-sermons',
   templateUrl: './sermons.component.html',
   styleUrls: ['./sermons.component.scss'],
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [ // each time the binding value changes
+        query(':enter', [
+          style({ opacity: 0 }),
+          stagger(75, [
+            animate('0.250s cubic-bezier(0.10, 0, 0.25, .45)', style({ opacity: 1 }))
+          ])
+        ], { optional: true })
+      ])
+    ])
+  ]
 })
 export class SermonsComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('datePicker', { static: false }) datePicker: IonDatetime;
+  @ViewChild('search', { static: false }) search: IonSearchbar;
   sermons: Sermon[] = [];
   currentPlaying: Sermon;
   tempSermons: Sermon[] = [];
@@ -25,6 +39,7 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
     min: '', 
     max: '',
   };
+  searchText = '';
   selectedDays = [1];
   preacherFilters = [];
   categoryFilters = [];
@@ -92,7 +107,7 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
   }
 
   datePickerSelected(val) {
-    if (!moment(this.selectedDate).isValid()) {
+    if (this.selectedDate && !moment(this.selectedDate).isValid()) {
       const yearSelected = this.selectedDate.substring(0, 4);
       const monthSelected = this.selectedDate.substring(5, 7);
       let newDate = moment(`${yearSelected}-${monthSelected}-01`).toISOString();
@@ -100,6 +115,7 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
     }
 
     this.fetchSermons(this.selectedDate);
+    this.searchText = '';
   }
 
   async selectPreacher() {
@@ -130,6 +146,7 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
           handler: (val) => {
             this.selectedFilters.selectedPreachers = val;
             this.fetchSermons(this.selectedDate);
+            this.searchText = '';
           }
         }
       ]
@@ -165,6 +182,7 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
           handler: (val) => {
             this.selectedFilters.selectedCategories = val;
             this.fetchSermons(this.selectedDate);
+            this.searchText = '';
           }
         }
       ]
@@ -183,6 +201,7 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
     this.selectedFilters.selectedPreachers = [];
     this.selectedDate = null;
     this.fetchSermons(this.selectedDate);
+    this.searchText = '';
   }
 
   private retrieveIndex(item: Sermon) {
