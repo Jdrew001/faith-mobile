@@ -113,7 +113,6 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
       let newDate = moment(`${yearSelected}-${monthSelected}-01`).toISOString();
       this.selectedDate = newDate;
     }
-    console.log('Selected date', this.selectedDate);
     this.fetchSermons(this.selectedDate);
     this.searchText = '';
   }

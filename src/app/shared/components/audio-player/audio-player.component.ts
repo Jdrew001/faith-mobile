@@ -19,6 +19,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   @Input('sermon') sermon: Sermon;
   @Input('isBack') isBack:boolean;
   @Input('isForward') isForward: boolean;
+  @Input('isMinimized') isMinimized: boolean;
   @Output('closed$') closed$: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output('minimized$') minimized$: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output('back$') back$: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -42,7 +43,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes) {
+    if (changes['sermon']) {
       if (this.sermon) {
         if (this.player) {
           this.player.stop();
@@ -163,7 +164,13 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   }
 
   minimizePlayer() {
+    this.isMinimized = true;
     this.minimized$.next(true);
+  }
+
+  maximizePlayer() {
+    this.isMinimized = false;
+    this.minimized$.next(false);
   }
 
   getFile(url) {

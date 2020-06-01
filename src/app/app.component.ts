@@ -31,6 +31,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
   currentPlaying: Sermon;
   isBack = false;
   isForward = false;
+  isMinimized = false;
+  audioHeight = '135px';
 
   @ViewChild('content', { static: false }) content: IonContent;
 
@@ -127,25 +129,46 @@ export class AppComponent implements OnInit, AfterViewChecked {
    */
   audioClosed(val) {
     if (val) {
-
+      let beginPos = this.isMinimized ? 'translateY(80px)' : 'translate(0px)';
       let animation = this.animationCtrl.create()
         .addElement(document.querySelector('.audioPlayer'))
         .duration(300)
         .easing('ease-in')
-        .fromTo('transform', 'translateY(0px)', 'translateY(200px)');
+        .fromTo('transform', beginPos, 'translateY(200px)')
+        .fromTo('height', this.audioHeight, '0px');
 
       animation.play().then(val => {
         console.log('animation finished');
         this.showAudio = false;
         this.shouldRunShowAnimation = true;
         this.currentPlaying = null;
+        this.isMinimized = false;
       });
     }
   }
 
   audioMinimized(val) {
     if (val) {
-      console.log('minimized');
+      this.isMinimized = true;
+      let animation = this.animationCtrl.create()
+        .addElement(document.querySelector('.audioPlayer'))
+        .duration(300)
+        .easing('ease-in')
+        .fromTo('height', '135px', '45px');
+
+      animation.play();
+      this.audioHeight = '45px';
+    } else {
+      this.isMinimized = false;
+      let animation = this.animationCtrl.create()
+        .addElement(document.querySelector('.audioPlayer'))
+        .duration(300)
+        .easing('ease-in')
+        .fromTo('height', '45px', '135px');
+
+      animation.play();
+
+      this.audioHeight = '135px';
     }
   }
 
@@ -186,7 +209,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
     .addElement(document.querySelector('.audioPlayer'))
     .duration(300)
     .easing('ease-in')
-    .fromTo('transform', 'translateY(200px)', 'translateY(0px)');
+    .fromTo('transform', 'translateY(200px)', 'translateY(0px)')
+    .fromTo('height', '0px', '135px');
     anim.play();
+    this.audioHeight = '135px';
   }
 }
