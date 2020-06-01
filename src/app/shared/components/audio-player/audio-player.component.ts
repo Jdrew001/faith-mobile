@@ -69,6 +69,9 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
         this.audioPlaying = true;
         this.loaderService.toggleLoader(false);
         this.updateProgress();
+        this.progress = 0;
+        this.audioStartProgress = '00:00';
+        this.audioDuration = '00:00';
         this.audioDuration = `${formattedTime.hours() == 0 ? '' : formattedTime.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${formattedTime.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${formattedTime.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
       },
       onplayerror: (error) => {
