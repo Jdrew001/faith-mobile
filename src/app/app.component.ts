@@ -107,6 +107,10 @@ export class AppComponent implements OnInit, AfterViewChecked {
     this.inAppBrowser.create(AppConstants.giveUrl, '_system', AppConstants.options);
   }
 
+  navigateToFeedback() {
+    this.inAppBrowser.create(AppConstants.feedbackUrl, '_system', AppConstants.options);
+  }
+
   showHideNetworkModal(val) {
     console.log('Network connection: ', val);
     const params = AppConstants.networkAlertParams;

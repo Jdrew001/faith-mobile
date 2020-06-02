@@ -74,6 +74,17 @@ ion-label.disabled-label {
     opacity: 0.7;
 }
 
+ion-footer {
+    ion-toolbar {
+        text-align: center;
+    }
+}
+
+ion-button {
+    font-size: 10px !important;
+    color: #E02E2E;
+}
+
 @media (max-width: 340px) {
     ion-item {
         direction: rtl !important;

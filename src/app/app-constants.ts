@@ -95,6 +95,7 @@ export class AppConstants {
         backButtonCanClose: true
     }
     public static giveUrl = 'http://discoverfaitharlington.org/';
+    public static feedbackUrl = 'https://forms.gle/2qMbwfyGtjY1Eqc36';
     public static networkAlertParams = {
         header: 'Alert',
         subHeader: 'Network Alert',
