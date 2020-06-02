@@ -11,9 +11,10 @@
                 </ion-button>
             </ion-col>
 
-            <ion-col class="date-button" [size]="3">
-                <ion-button>
-                    <ion-datetime #datePicker placeholder="Date" displayFormat="MMM YYYY" dayValues="selectedDays" [(ngModel)]="selectedDate" (ionChange)="datePickerSelected($event)" [max]="dateFilter.max" [min]="dateFilter.min"></ion-datetime>
+            <ion-col [size]="3">
+                <ion-badge *ngIf="selectedFilters.selectedPreachers.length !== 0" color="danger">{{ selectedFilters.selectedPreachers.length }}</ion-badge>
+                <ion-button (click)="selectPreacher()">
+                    Preachers
                     <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
                 </ion-button>
             </ion-col>
@@ -26,10 +27,9 @@
                 </ion-button>
             </ion-col>
 
-            <ion-col [size]="3">
-                <ion-badge *ngIf="selectedFilters.selectedPreachers.length !== 0" color="danger">{{ selectedFilters.selectedPreachers.length }}</ion-badge>
-                <ion-button (click)="selectPreacher()">
-                    Preachers
+            <ion-col class="date-button" [size]="3">
+                <ion-button>
+                    <ion-datetime #datePicker placeholder="Date" displayFormat="MMM YYYY" dayValues="selectedDays" [(ngModel)]="selectedDate" (ionChange)="datePickerSelected($event)" [max]="dateFilter.max" [min]="dateFilter.min"></ion-datetime>
                     <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
                 </ion-button>
             </ion-col>
@@ -67,6 +67,9 @@
                     </ion-card-content>
                 </ion-card>
             </ion-row>
+        </div>
+        <div class="empty-row animated fadeIn faster ion-align-self-center" *ngIf="sermons && sermons.length === 0">
+            <img [src]="getEmptyImage()" />
         </div>
     </ng-container>
 </div>

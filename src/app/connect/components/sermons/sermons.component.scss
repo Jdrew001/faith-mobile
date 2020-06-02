@@ -67,3 +67,13 @@ ion-datetime {
     width: 100%;
     --placeholder-color: white !important;
 }
+
+div.empty-row {
+    margin: auto;
+    margin-top: 10vh !important;
+
+    img {
+        width: 30%;
+        margin: auto;
+    }
+}

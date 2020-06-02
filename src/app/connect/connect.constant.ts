@@ -3,6 +3,7 @@ export class ConnectConstant {
     public static BIBLE_STUDY_URL = 'biblestudies';
     public static SERMON_URL = 'sermons';
     public static SERMON_FILTERED_URL = 'sermons/filter';
+    public static EMPTY_SERMON_IMAGE = 'images/empty_sermons.png';
     public static DEVICE_PLATFORM = {
         Android: 'android',
         iOS: 'ios',

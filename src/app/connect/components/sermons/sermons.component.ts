@@ -6,6 +6,8 @@ import { AudioPlayerService } from 'src/app/shared/services/audio-player.service
 import { PickerController, IonDatetime, IonSearchbar } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
+import { HelperService } from 'src/app/core/helper.service';
+import { ConnectConstant } from '../../connect.constant';
 
 @Component({
   selector: 'app-sermons',
@@ -49,7 +51,8 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
     private sermonService: SermonService,
     private audioPlayerService: AudioPlayerService,
     private pickerController: PickerController,
-    public alertController: AlertController) { }
+    public alertController: AlertController,
+    private helperService: HelperService) { }
 
   ngOnInit() {
     
@@ -201,6 +204,10 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
     this.selectedDate = null;
     this.fetchSermons(this.selectedDate);
     this.searchText = '';
+  }
+
+  getEmptyImage() {
+    return this.helperService.getResourceUrl(ConnectConstant.EMPTY_SERMON_IMAGE, true); 
   }
 
   private retrieveIndex(item: Sermon) {
