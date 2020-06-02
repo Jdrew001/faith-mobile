@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.1</string>
+	<string>1.0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -31,18 +31,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>IonApi</key>
-	<string>https://api.ionicjs.com</string>
-	<key>IonAppId</key>
-	<string>3a86812d</string>
-	<key>IonChannelName</key>
-	<string>Master</string>
-	<key>IonMaxVersions</key>
-	<string>2</string>
-	<key>IonMinBackgroundDuration</key>
-	<string>30</string>
-	<key>IonUpdateMethod</key>
-	<string>auto</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
