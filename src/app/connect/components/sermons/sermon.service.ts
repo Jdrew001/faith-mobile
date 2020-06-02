@@ -26,6 +26,8 @@ export class SermonService {
     let url = this.helperService.getResourceUrl(ConnectConstant.SERMON_FILTERED_URL, false);
     if (!!date) {
       url += this.getMonthFilter(date);
+    } else {
+      url += '?_sort=date:DESC';
     }
     return this.http.post<Sermon[]>(url, body).pipe(map(res => res));
   }
@@ -82,7 +84,7 @@ export class SermonService {
   }
 
   private getMonthFilter(date) {
-    return '?_sort=date:ASC&date_gte=' + moment(date).startOf('month').format('YYYY-MM-DD') +
+    return '?_sort=date:DESC&date_gte=' + moment(date).startOf('month').format('YYYY-MM-DD') +
       '&date_lt=' + moment(date).add(1, 'M').startOf('month').format('YYYY-MM-DD');
   }
 }
