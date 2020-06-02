@@ -51,7 +51,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
         this.start(this.sermon);
       } else {
         if (this.player) {
-          this.player.stop(this.audioId);
+          this.closePlayer();
         }
       }
     }
