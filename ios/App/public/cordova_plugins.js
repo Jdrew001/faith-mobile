@@ -34,6 +34,15 @@
         ]
         },
       {
+          "id": "cordova-plugin-background-mode.BackgroundMode",
+          "file": "plugins/cordova-plugin-background-mode/www/background-mode.js",
+          "pluginId": "cordova-plugin-background-mode",
+        "clobbers": [
+          "cordova.plugins.backgroundMode",
+          "plugin.backgroundMode"
+        ]
+        },
+      {
           "id": "cordova-plugin-inappbrowser.inappbrowser",
           "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
           "pluginId": "cordova-plugin-inappbrowser",
@@ -58,6 +67,7 @@
     module.exports.metadata =
     // TOP OF METADATA
     {
+      "cordova-plugin-background-mode": "0.7.3",
       "cordova-plugin-device": "2.0.3",
       "cordova-plugin-inappbrowser": "3.2.0",
       "cordova-plugin-ionic": "5.4.7",
