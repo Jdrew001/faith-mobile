@@ -1,5 +1,5 @@
 {
-  "appId": "com-atkison.faithmobile",
+  "appId": "com.atkison.faithmobile",
   "appName": "Faith Mobile",
   "bundledWebRuntime": false,
   "npmClient": "npm",
@@ -27,9 +27,5 @@
     ],
     "allowsLinkPreview": false,
     "hideLogs": true
-  },
-  "server": {
-    "url": "http://192.168.43.90:8100",
-    "cleartext": true
   }
 }
