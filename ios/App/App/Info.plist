@@ -54,6 +54,18 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>IonApi</key>
+	<string>https://api.ionicjs.com</string>
+	<key>IonAppId</key>
+	<string>3a86812d</string>
+	<key>IonChannelName</key>
+	<string>Master</string>
+	<key>IonMaxVersions</key>
+	<string>2</string>
+	<key>IonMinBackgroundDuration</key>
+	<string>30</string>
+	<key>IonUpdateMethod</key>
+	<string>auto</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
