@@ -7,6 +7,7 @@ import { IonRange } from '@ionic/angular';
 import { LoaderService } from 'src/app/core/loader/loader.service';
 import * as moment from 'moment';
 import { AudioPlayerService } from '../../services/audio-player.service';
+import { Media, MediaObject } from '@ionic-native/media/ngx';
 
 @Component({
   selector: 'app-audio-player',
@@ -30,7 +31,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   audioStartProgress = '';
   audioDuration = '';
   audioPlaying = false;
-  player: Howl = null;
+  player: MediaObject = null;
   audioTimeout = null;
   isSeeking = false;
   lastTime = 0;
@@ -38,9 +39,11 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
 
   constructor(private helperService: HelperService,
     private loaderService: LoaderService,
-    private audioService: AudioPlayerService) { }
+    private audioService: AudioPlayerService,
+    private media: Media) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['sermon']) {
@@ -50,67 +53,61 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
         }
         this.start(this.sermon);
       } else {
-        if (this.player) {
-          this.closePlayer();
-        }
+        this.endAudio();
       }
     }
   }
 
   start(sermon: Sermon) {
+    this.player = this.media.create(this.getFile(sermon.audio.url));
+    const iosOptions = {
+      numberOfLoops: 0,
+      playAudioWhenScreenIsLocked: true
+    };
+    this.openSubscriptions();
+    this.player.play(iosOptions);
+    this.audioPlaying = true;
     this.loaderService.toggleLoader(true);
-    this.player = new Howl({
-      src: [this.getFile(sermon.audio.url)],
-      autoplay: false,
-      volume: 1.0,
-      html5: true,
-      format: ['mp3'],
-      onload: () => {
-        const formattedTime = moment.duration(this.player.duration(), 'seconds');
-        this.audioPlaying = true;
-        this.loaderService.toggleLoader(false);
-        this.updateProgress();
-        this.progress = 0;
-        this.audioStartProgress = '00:00';
-        this.audioDuration = '00:00';
-        this.audioDuration = `${formattedTime.hours() == 0 ? '' : formattedTime.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${formattedTime.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${formattedTime.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
-      },
-      onplayerror: (error) => {
-        console.log(error);
-      },
-      onloaderror: (error) => {
-        this.loaderService.toggleLoader(false);
-      }
-    });
-    this.audioId = this.player.play();
+    this.audioStartProgress = '00:00';
+    this.audioDuration = '00:00';
+
+    this.updateProgress();
   }
 
   updateProgress() {
-    if (this.player && !this.isSeeking && this.player.state() === 'loaded') {
-        let seek = +this.player.seek() || this.lastTime;
-        const formattedTime = moment.duration(seek, 'seconds');
-        this.progress = (seek / this.player.duration()) * 100 || this.progress;
-        this.audioStartProgress = `${formattedTime.hours() == 0 ? '' : formattedTime.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${formattedTime.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${formattedTime.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
-        this.lastTime = seek;
-    }
-
-    this.audioTimeout = setTimeout(() => {
-      this.updateProgress();
-    }, 1000); 
+    let that = this;
+    this.audioTimeout = setInterval(() => {
+      if (this.audioPlaying || !this.isSeeking) {
+        if (that.player.getDuration() !== -1) {
+          this.loaderService.toggleLoader(false);
+          let duration = moment.duration(that.player.getDuration(), 'seconds');
+          this.audioDuration = `${duration.hours() == 0 ? '' : duration.hours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ':'}${duration.minutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}:${duration.seconds().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`;
+          this.player.getCurrentPosition().then(val => {
+            let dur = that.player.getDuration();
+            if (val !== -1) {
+              let value = val;
+              this.progress = value >= dur ? dur : (value / that.player.getDuration()) * 100;
+              that.audioStartProgress = this.toHHMMSS(value >= dur ? dur : value, dur);
+            }
+          });
+        }
+      }
+    }, 1000);
   }
 
   seek() {
     let newValue = +this.range.value;
-    let duration = this.player.duration();
-    this.player.seek(duration * (newValue / 100));
-    let seek = Number(this.player.seek());
-    let howl = this.player.seek();
-    if (isNaN(seek)) {
-      seek = howl['_sounds'][0]['_seek'];
-    }
-    this.progress = (seek / this.player.duration()) * 100 || this.progress;
-    this.updateProgress();
+    let duration = this.player.getDuration() * 1000;
+    let seek = duration * (newValue / 100);
+    this.player.seekTo(seek);
+    this.progress = (seek / duration) * 100;
     this.isSeeking = false;
+
+    if (seek >= duration) {
+      this.endAudio();
+    } else {
+      this.updateProgress();
+    }
   }
 
   pauseForDrag() {
@@ -119,48 +116,49 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
   }
 
   playAudio() {
-    if (!this.player.playing(this.audioId)) {
+    if (!this.audioPlaying) {
+      this.player.play();
       this.audioPlaying = true;
-      this.player.play(this.audioId);
     }
   }
 
   pauseAudio() {
-    if (this.player.playing(this.audioId)) {
+    if (this.audioPlaying) {
+      this.player.pause();
       this.audioPlaying = false;
-      this.player.pause(this.audioId);
     }
   }
 
   nextAudio() {
-    this.player.stop(this.audioId);
-    this.player.unload();
-    this.progress = 0;
-    this.audioStartProgress = '';
-    this.audioDuration = '';
+    this.player.stop();
+    this.player.release();
     this.next$.next(true);
-  }
-
-  previousAudio() {
-    this.player.stop(this.audioId);
-    this.player.unload();
-    this.progress = 0;
-    this.audioStartProgress = '';
-    this.audioDuration = '';
-    this.back$.next(true);
-  }
-
-  closePlayer() {
-    this.closed$.next(true);
-    this.audioService.audioState$.next(null);
-    this.audioPlaying = false;
-    this.player.stop(this.audioId);
-    this.player.unload();
-    this.player = null;
     this.progress = 0;
     this.audioStartProgress = '';
     this.audioDuration = '';
     clearTimeout(this.audioTimeout);
+  }
+
+  previousAudio() {
+    this.player.stop();
+    this.player.release();
+    this.back$.next(true);
+    this.progress = 0;
+    this.audioStartProgress = '';
+    this.audioDuration = '';
+    clearTimeout(this.audioTimeout);
+  }
+
+  closePlayer() {
+    clearTimeout(this.audioTimeout);
+    this.closed$.next(true);
+    this.audioService.audioState$.next(null);
+    this.player.stop();
+    this.player.release();
+    this.audioPlaying = false;
+    this.progress = 0;
+    this.audioStartProgress = '';
+    this.audioDuration = '';
   }
 
   minimizePlayer() {
@@ -173,8 +171,63 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
     this.minimized$.next(false);
   }
 
+  endAudio() {
+    // reset to beginning
+    this.progress = 0;
+    if (this.player) {
+      this.player.release();
+    }
+    this.audioStartProgress = '00:00';
+    this.audioDuration = '00:00';
+    clearTimeout(this.audioTimeout);
+  }
+
   getFile(url) {
     return environment.IMG_URL + url;
+  }
+
+  openSubscriptions() {
+    this.player.onSuccess.subscribe(val => {
+      console.log(val);
+    });
+    this.player.onError.subscribe(val => {
+      console.log(val);
+    });
+    this.player.onStatusUpdate.subscribe(val => {
+      if (!val) {
+        this.audioPlaying = false;
+        this.endAudio();
+      }
+    });
+  }
+
+  toHHMMSS(sec, duration) {
+    let sec_num = parseInt(sec, 10); // don't forget the second parm
+    let sec_duration = parseInt(duration, 10);
+    let hours  = Math.floor(sec_num / 3600);
+    let durHours = Math.floor(sec_duration / 3600);
+    let minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    let seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    let Ohours = hours + '';
+    let Ominutes = minutes + '';
+    let Oseconds = seconds + '';
+    if (hours < 10) {
+        Ohours = "0" + hours;
+    }
+    if (minutes < 10) {
+        Ominutes = "0" + minutes;
+    }
+    if (seconds < 10) {
+        Oseconds = "0" + seconds;
+    }
+    var time = '';
+    if (durHours !== 0 && durHours !== -1) {
+      time = Ohours + ':' + Ominutes + ':' + Oseconds;
+    } else {
+      time = Ominutes + ':' + Oseconds;
+    }
+    return time;
   }
 
 }

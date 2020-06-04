@@ -12,5 +12,5 @@
     s.dependency 'CapacitorCordova'
     s.pod_target_xcconfig = { 'OTHER_LDFLAGS' => '-ObjC' }
     s.swift_version  = '4.2'
-    s.frameworks = 'CoreGraphics'
+    s.frameworks = 'AssetsLibrary', 'MobileCoreServices', 'CoreGraphics'
   end

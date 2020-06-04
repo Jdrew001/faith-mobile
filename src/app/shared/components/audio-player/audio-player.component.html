@@ -14,10 +14,10 @@
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button *ngIf="!audioPlaying" color="light" fill="clear" (click)="playAudio()" [disabled]="isSeeking">
+          <ion-button *ngIf="!audioPlaying" color="light" fill="clear" (click)="playAudio()">
             <ion-icon slot="icon-only" name="play-outline"></ion-icon>
           </ion-button>
-          <ion-button *ngIf="audioPlaying" color="light" fill="clear" (click)="pauseAudio()" [disabled]="isSeeking">
+          <ion-button *ngIf="audioPlaying" color="light" fill="clear" (click)="pauseAudio()">
             <ion-icon slot="icon-only" name="pause-outline"></ion-icon>
           </ion-button>
         </ion-col>

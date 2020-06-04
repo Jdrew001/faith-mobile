@@ -18,6 +18,7 @@ import { Device } from '@ionic-native/device/ngx';
 import { AudioPlayerComponent } from './shared/components/audio-player/audio-player.component';
 import { AudioPlayerService } from './shared/services/audio-player.service';
 import { SharedModule } from './shared/shared.module';
+import { Media } from '@ionic-native/media/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,8 @@ import { SharedModule } from './shared/shared.module';
     AnnouncementService,
     InAppBrowser,
     Device,
-    AudioPlayerService
+    AudioPlayerService,
+    Media
   ],
   bootstrap: [AppComponent]
 })
