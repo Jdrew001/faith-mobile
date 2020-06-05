@@ -135,7 +135,7 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
       );
     });
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: 'alert-dialog',
       header: 'Preachers',
       inputs: obj,
       buttons: [
@@ -171,7 +171,7 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
       );
     });
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: 'alert-dialog',
       header: 'Categories',
       inputs: obj,
       buttons: [

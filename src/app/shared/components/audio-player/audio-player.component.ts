@@ -53,7 +53,7 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
         }
         this.start(this.sermon);
       } else {
-        this.endAudio();
+        this.endAudio(true);
       }
     }
   }
@@ -171,11 +171,15 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
     this.minimized$.next(false);
   }
 
-  endAudio() {
+  endAudio(animate = false) {
     // reset to beginning
     this.progress = 0;
     if (this.player) {
       this.player.release();
+    }
+    if (animate) {
+      this.audioService.audioState$.next(null);
+      this.closed$.next(true);
     }
     this.audioStartProgress = '00:00';
     this.audioDuration = '00:00';

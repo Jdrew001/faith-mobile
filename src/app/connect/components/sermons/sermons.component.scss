@@ -68,6 +68,11 @@ ion-datetime {
     --placeholder-color: white !important;
 }
 
+::ng-deep .alert-dialog .alert-wrapper {
+    width: 85% !important;
+    max-width: 85% !important;
+}
+
 div.empty-row {
     margin: auto;
     margin-top: 10vh !important;
