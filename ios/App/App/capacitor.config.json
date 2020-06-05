@@ -29,8 +29,13 @@
     "allowsLinkPreview": false,
     "hideLogs": true
   },
-  "server": {
-    "url": "http://192.168.43.90:8100",
-    "cleartext": true
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
+    }
   }
 }

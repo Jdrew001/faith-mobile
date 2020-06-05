@@ -7,5 +7,12 @@ export class CoreConstants {
     public static APP_USER = {
         "identifier": "appUser",
         "password": "Onegodchurch1"
+    };
+
+    public static PUSH_IDS = {
+        announcement: 'announcement',
+        event: 'event',
+        biblestudy: 'biblestudy',
+        sermon: 'sermon'
     }
 }

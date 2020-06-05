@@ -10,6 +10,7 @@ import { CoreConstants } from '../CoreConstants';
 import { AuthorizationService } from './authorization.service';
 import { ToastService } from './toast.service';
 import { EmailService } from './email.service';
+import { Router } from '@angular/router';
 
 const { PushNotifications } = Plugins;
 
@@ -22,7 +23,8 @@ export class PushNotificationService {
     private helperService: HelperService,
     private authorizationService: AuthorizationService,
     private toastService: ToastService,
-    private emailService: EmailService) {
+    private emailService: EmailService,
+    private router: Router) {
     this.grantPermission();
     this.notificationSubscription();
   }
@@ -63,8 +65,6 @@ export class PushNotificationService {
     // Show us the notification payload if the app is open on our device
     PushNotifications.addListener('pushNotificationReceived',
       (notification: PushNotification) => {
-        console.log('Push received: ' + JSON.stringify(notification));
-        this.toastService.presetToast(notification.notification['body'], 'primary');
       }
     );
 
@@ -72,8 +72,26 @@ export class PushNotificationService {
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: PushNotificationActionPerformed) => {
         console.log('Push action performed: ' + JSON.stringify(notification));
+        //this.navigateToApp(notification.notification.data['id']);
       }
     );
+  }
+
+  private navigateToApp(e) {
+    switch (e) {
+      case CoreConstants.PUSH_IDS.announcement: 
+      this.router.navigate(['/announcements'])
+      break;
+      case CoreConstants.PUSH_IDS.event:
+        this.router.navigate(['/events'])
+      break
+      case CoreConstants.PUSH_IDS.biblestudy:
+        this.router.navigate(['/connect', { section: {id: 'biblestudy'} }])
+      break;
+      case CoreConstants.PUSH_IDS.sermon:
+        this.router.navigate(['/connect', { section: 'sermon' }])
+      break;
+    }
   }
 
   private sendTokenToService(token, appToken) {

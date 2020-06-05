@@ -34,15 +34,6 @@
         ]
         },
       {
-          "id": "cordova-plugin-background-mode.BackgroundMode",
-          "file": "plugins/cordova-plugin-background-mode/www/background-mode.js",
-          "pluginId": "cordova-plugin-background-mode",
-        "clobbers": [
-          "cordova.plugins.backgroundMode",
-          "plugin.backgroundMode"
-        ]
-        },
-      {
           "id": "cordova-plugin-file.DirectoryEntry",
           "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
           "pluginId": "cordova-plugin-file",
@@ -256,7 +247,6 @@
     module.exports.metadata =
     // TOP OF METADATA
     {
-      "cordova-plugin-background-mode": "0.7.3",
       "cordova-plugin-device": "2.0.3",
       "cordova-plugin-file": "6.0.2",
       "cordova-plugin-inappbrowser": "3.2.0",

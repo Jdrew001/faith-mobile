@@ -28,5 +28,14 @@
     ],
     "allowsLinkPreview": false,
     "hideLogs": true
+  },
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
+    }
   }
 }

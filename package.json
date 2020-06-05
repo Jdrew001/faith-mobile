@@ -37,7 +37,6 @@
     "@types/howler": "^2.1.2",
     "angular-resize-event": "^1.2.1",
     "animate.css": "^3.7.2",
-    "cordova-plugin-background-mode": "^0.7.3",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-inappbrowser": "^3.2.0",
