@@ -19,7 +19,7 @@ export class AppConstants {
         {
             title: 'Prayer Requests',
             url: '/prayer-requests',
-            icon: 'book',
+            icon: 'chatbubbles',
             disabled: false
         },
         {
@@ -31,7 +31,7 @@ export class AppConstants {
         {
             title: 'Connect',
             url: '/connect',
-            icon: 'chatbubbles',
+            icon: 'book',
             disabled: false
         },
         {
