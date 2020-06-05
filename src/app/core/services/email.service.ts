@@ -19,7 +19,6 @@ export class EmailService {
       "phone": phone,
       "notes": notes
    }
-    console.log(template_params);
     var service_id = "gmail";
     var template_id = "app_prayer_request";
     var user_id  = 'user_XLJpTuSLCweyHSrHXUynH';
@@ -35,7 +34,6 @@ export class EmailService {
       "statusText": error.statusText,
       "type": error.type
    }
-    console.log(template_params);
     var service_id = "gmail";
     var template_id = "template_jbvb6PlN";
     var user_id  = 'user_Q6QgACfHjdJr2tUO1qwUK';

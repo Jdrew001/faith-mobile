@@ -22,7 +22,6 @@ export class PhoneMaskDirective {
 
   onInputChange(event, backspace) {
     if (event.which < 48 || event.which > 57) {
-      console.log('number', event);
     }
     if (!isNullOrUndefined(event)) {
       let newVal = event.replace(/\D/g, '');

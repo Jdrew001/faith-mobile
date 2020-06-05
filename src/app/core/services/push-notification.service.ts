@@ -44,7 +44,6 @@ export class PushNotificationService {
     // On success, we should be able to receive notifications
     PushNotifications.addListener('registration',
       (token: PushNotificationToken) => {
-        console.log('Push registration success, token: ' + token.value);
         this.authorizationService.retrieveToken().subscribe(val => {
           if (val) {
             this.sendTokenToService(token.value, val['jwt']);
@@ -58,7 +57,6 @@ export class PushNotificationService {
     // Some issue with our setup and push will not work
     PushNotifications.addListener('registrationError',
       (error: any) => {
-        console.log('Error on registration: ' + JSON.stringify(error));
       }
     );
 
@@ -71,7 +69,6 @@ export class PushNotificationService {
     // Method called when tapping on a notification
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: PushNotificationActionPerformed) => {
-        console.log('Push action performed: ' + JSON.stringify(notification));
         //this.navigateToApp(notification.notification.data['id']);
       }
     );
@@ -101,7 +98,6 @@ export class PushNotificationService {
       'Authorization': 'Bearer ' + appToken
     } 
     this.http.post(url, {Token: token}, {headers: headers}).subscribe(res => {
-      console.log(res);
     }, err => {
       console.log(err);
     });

@@ -73,7 +73,6 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
   initSubscriptions() {
     this.audioPlayerService.audioPlayer$.subscribe(item => {
-      console.log(item);
       if (item) {
         this.showAudio = true;
         this.sermons = item.data;
@@ -112,7 +111,6 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   showHideNetworkModal(val) {
-    console.log('Network connection: ', val);
     const params = AppConstants.networkAlertParams;
     !val ? this.alertService.presentAlert(params.header, params.subHeader, params.message) : null;
   }
@@ -142,7 +140,6 @@ export class AppComponent implements OnInit, AfterViewChecked {
         .fromTo('height', this.audioHeight, '0px');
 
       animation.play().then(val => {
-        console.log('animation finished');
         this.showAudio = false;
         this.shouldRunShowAnimation = true;
         this.currentPlaying = null;

@@ -16,9 +16,7 @@ export class NetworkService {
   }
 
   private async watchNetworkDisconnect() {
-    console.log('network watch: running');
     let handler = Network.addListener('networkStatusChange', (status) => {
-      console.log("Network status changed", status);
       this.networkStatus$.next(status.connected);
     });
   }

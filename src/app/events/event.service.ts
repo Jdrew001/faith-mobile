@@ -36,7 +36,7 @@ export class EventService {
       '&date_lt=' + moment(date).add(1, 'M').startOf('month').format(EventConstant.DATE_FORMAT);
   }
 
-  private getDayFilter(date) {console.log(moment(date).startOf('day').format(EventConstant.DATE_FORMAT));
+  private getDayFilter(date) {
     return '?_sort=date:asc&date_gte=' + moment(date).startOf('day').format(EventConstant.DATE_FORMAT) +
       '&date_lt=' + moment(date).add(1,'days').startOf('day').format(EventConstant.DATE_FORMAT)
   }

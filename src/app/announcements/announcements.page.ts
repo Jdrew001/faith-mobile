@@ -71,7 +71,6 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('on destroy');
     this.announcementService.announcement$.next(null);
   }
 }

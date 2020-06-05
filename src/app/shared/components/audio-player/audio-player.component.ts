@@ -192,10 +192,8 @@ export class AudioPlayerComponent implements OnInit, OnChanges {
 
   openSubscriptions() {
     this.player.onSuccess.subscribe(val => {
-      console.log(val);
     });
     this.player.onError.subscribe(val => {
-      console.log(val);
     });
     this.player.onStatusUpdate.subscribe(val => {
       if (!val) {

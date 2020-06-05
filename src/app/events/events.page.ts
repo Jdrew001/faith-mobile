@@ -85,7 +85,6 @@ export class EventsPage implements OnInit, OnDestroy {
   }
 
   animateAwayDates() {
-    console.log(this.daysConfig.length);
     if (this.daysConfig.length > 0) {
       this.daysConfig.forEach(val => {
         setTimeout(() => {

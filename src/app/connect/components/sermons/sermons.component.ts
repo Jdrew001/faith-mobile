@@ -123,7 +123,6 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
   async selectPreacher() {
     let obj = [];
     this.preacherFilters.forEach(val => {
-      console.log(val);
       obj.push(
         {
           name: val,

@@ -46,7 +46,6 @@ export class BiblestudyService {
       presentationstyle : 'pagesheet',//iOS only 
       fullscreen : 'yes',//Windows only    
   };
-    console.log(environment.IMG_URL + url);
     const browser = this.inAppBrowser.create(environment.IMG_URL + url, '_blank');
   }
 }
