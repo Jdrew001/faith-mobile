@@ -14,11 +14,6 @@ enum ListType {
   animations: [
     trigger('listAnimation', [
       transition('* => *', [ // each time the binding value changes
-        query(':leave', [
-          stagger(75, [
-            animate('0.250s cubic-bezier(0.35, 0, 0.25, .45)', style({ opacity: 0 }))
-          ])
-        ], { optional: true }),
         query(':enter', [
           style({ opacity: 0 }),
           stagger(75, [
@@ -35,13 +30,15 @@ export class ListCardItemComponent implements OnInit, OnChanges, OnDestroy {
   placeHolderImg = '';
   @Input('type') type;
   @Input('items') items;
+  tempItems: Array<any> = [];
   @Input('detailPage') detailPage;
   @Output('detailNavigate') detailNavigate: EventEmitter<string> = new EventEmitter();
 
   constructor(private sharedService: SharedService, private helperService: HelperService) { }
 
   ngOnInit() {this.items = []; this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);}
-  ngOnChanges(changes: SimpleChanges) {console.log(this.items);}
+  ngOnChanges(changes: SimpleChanges) {
+  }
 
   toShortDescription(description) {
     var maxLength = 75;
@@ -58,7 +55,6 @@ export class ListCardItemComponent implements OnInit, OnChanges, OnDestroy {
 
   showImages() {
     this.hasLoaded = true;
-    console.log('image loaded');
   }
 
   navToDetail(url) {
