@@ -144,7 +144,7 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
           role: 'cancel',
           cssClass: 'secondary'
         }, {
-          text: 'Ok',
+          text: 'Apply',
           handler: (val) => {
             this.selectedFilters.selectedPreachers = val;
             this.fetchSermons(this.selectedDate);
@@ -180,7 +180,7 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
           role: 'cancel',
           cssClass: 'secondary'
         }, {
-          text: 'Ok',
+          text: 'Apply',
           handler: (val) => {
             this.selectedFilters.selectedCategories = val;
             this.fetchSermons(this.selectedDate);
