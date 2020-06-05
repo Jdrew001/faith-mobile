@@ -27,18 +27,6 @@ export class ConnectPage implements OnInit, OnDestroy {
     allowTouchMove: false
   }
   showList = false;
-  filterTypes = [
-    {
-      type: 'Preachers',
-      data: [],
-      expanded: false
-    },
-    {
-      type: 'Categories',
-      data: [],
-      expanded: false
-    }
-  ]
 
   constructor(private socialService: SocialService,
     private bibleStudyService: BiblestudyService,
