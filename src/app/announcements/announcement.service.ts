@@ -30,7 +30,7 @@ export class AnnouncementService {
   }
   
   fetchFilteredAnnouncements(month, year) {
-    const url = this.helperService.getResourceUrl(`${AnnouncementConst.ANNOUNCEMENTS}?_sort=createdAt:ASC&month=${month}&year=${year}`, false);
+    const url = this.helperService.getResourceUrl(`${AnnouncementConst.ANNOUNCEMENTS}?_sort=createdAt:DESC&month=${month}&year=${year}`, false);
     return this.httpClient.get<any[]>(url).subscribe(val => {
       this.announcements$.next(val);
       this.loadWorkerService.announcementLoad$.next(false);

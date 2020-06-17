@@ -11,7 +11,6 @@ import { DetailComponent } from './components/detail/detail.component';
 import { PhoneMaskDirective } from './directives/phone-mask.directive';
 import { MenuService } from './services/menu.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { ThemedBrowserService } from './services/themed-browser.service';
 import { VideoComponent } from './components/video/video.component';
 import { FormsModule } from '@angular/forms';
 import { AudioPlayerComponent } from './components/audio-player/audio-player.component';
@@ -55,8 +54,7 @@ import { PopoverComponent } from './components/popover/popover.component';
   ],
   providers: [
     SharedService,
-    MenuService,
-    ThemedBrowserService
+    MenuService
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })

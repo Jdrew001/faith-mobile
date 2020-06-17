@@ -10,14 +10,6 @@
         ]
         },
       {
-          "id": "cordova-plugin-themeablebrowser.themeablebrowser",
-          "file": "plugins/cordova-plugin-themeablebrowser/www/themeablebrowser.js",
-          "pluginId": "cordova-plugin-themeablebrowser",
-        "clobbers": [
-          "cordova.ThemeableBrowser"
-        ]
-        },
-      {
           "id": "cordova-plugin-device.device",
           "file": "plugins/cordova-plugin-device/www/device.js",
           "pluginId": "cordova-plugin-device",
@@ -165,15 +157,6 @@
         ]
         },
       {
-          "id": "cordova-plugin-inappbrowser.inappbrowser",
-          "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-          "pluginId": "cordova-plugin-inappbrowser",
-        "clobbers": [
-          "cordova.InAppBrowser.open",
-          "window.open"
-        ]
-        },
-      {
           "id": "cordova-plugin-file.ProgressEvent",
           "file": "plugins/cordova-plugin-file/www/ProgressEvent.js",
           "pluginId": "cordova-plugin-file",
@@ -249,11 +232,9 @@
     {
       "cordova-plugin-device": "2.0.3",
       "cordova-plugin-file": "6.0.2",
-      "cordova-plugin-inappbrowser": "3.2.0",
       "cordova-plugin-ionic": "5.4.7",
       "cordova-plugin-media": "5.0.3",
       "cordova-plugin-screen-orientation": "3.0.2",
-      "cordova-plugin-themeablebrowser": "0.2.17",
       "es6-promise-plugin": "4.2.2"
     };
     // BOTTOM OF METADATA

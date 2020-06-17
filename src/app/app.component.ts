@@ -6,14 +6,15 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { AppConstants } from './app-constants';
 import { MenuService } from './shared/services/menu.service';
-import { ThemedBrowserService } from './shared/services/themed-browser.service';
 import { NetworkService } from './core/services/network.service';
 import { AlertService } from './core/services/alert.service';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PushNotificationService } from './core/services/push-notification.service';
 import { Router } from '@angular/router';
 import { AudioPlayerService } from './shared/services/audio-player.service';
 import { Sermon, SermonData } from './connect/components/sermons/sermons.model';
+import { Plugins } from '@capacitor/core';
+
+const { Browser } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -42,7 +43,6 @@ export class AppComponent implements OnInit, AfterViewChecked {
     private statusBar: StatusBar,
     private screenOrientation: ScreenOrientation,
     private menuService: MenuService,
-    private inAppBrowser: InAppBrowser,
     private networkService: NetworkService,
     private alertService: AlertService,
     private pushNotificationService: PushNotificationService,
@@ -102,12 +102,12 @@ export class AppComponent implements OnInit, AfterViewChecked {
     return true;
   }
 
-  giveSelected() {;
-    this.inAppBrowser.create(AppConstants.giveUrl, '_system', AppConstants.options);
+  async giveSelected() {
+    await Browser.open({ url: AppConstants.giveUrl });
   }
 
-  navigateToFeedback() {
-    this.inAppBrowser.create(AppConstants.feedbackUrl, '_system', AppConstants.options);
+  async navigateToFeedback() {
+    await Browser.open({ url: AppConstants.feedbackUrl });
   }
 
   showHideNetworkModal(val) {

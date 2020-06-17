@@ -11,8 +11,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { AnnouncementService } from './announcements/announcement.service';
-import { ThemeableBrowser } from '@ionic-native/themeable-browser/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Device } from '@ionic-native/device/ngx';
 import { AudioPlayerComponent } from './shared/components/audio-player/audio-player.component';
@@ -30,7 +28,6 @@ import { Media } from '@ionic-native/media/ngx';
     ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AnnouncementService,
-    InAppBrowser,
     Device,
     AudioPlayerService,
     Media

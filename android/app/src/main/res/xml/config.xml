@@ -27,10 +27,6 @@
     <param name="android-package" value="cordova.plugins.screenorientation.CDVOrientation"/>
   </feature>
 
-  <feature name="ThemeableBrowser">
-    <param name="android-package" value="com.initialxy.cordova.themeablebrowser.ThemeableBrowser"/>
-  </feature>
-
   <feature name="Whitelist">
     <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin"/>
     <param name="onload" value="true"/>

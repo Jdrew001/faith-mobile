@@ -4,8 +4,10 @@ import { ConnectConstant } from '../connect.constant';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Plugins } from '@capacitor/core';
+import { AppConstants } from 'src/app/app-constants';
 
-import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
+const { Browser } = Plugins;
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +18,7 @@ export class BiblestudyService {
   private pdfFileType = 'application/pdf';
 
   constructor(private helperService: HelperService,
-    private http: HttpClient,
-    private inAppBrowser: InAppBrowser) { }
+    private http: HttpClient) { }
 
   fetchAllStudies() {
     const url = this.helperService.getResourceUrl(ConnectConstant.BIBLE_STUDY_URL, false);
@@ -28,24 +29,7 @@ export class BiblestudyService {
     return environment.IMG_URL + imgUrl;
   }
 
-  downloadAndOpenPdf(url, name) {
-    const options : InAppBrowserOptions = {
-      location : 'no',//Or 'no' 
-      hidden : 'no', //Or  'yes'
-      clearcache : 'yes',
-      clearsessioncache : 'yes',
-      zoom : 'yes',//Android only ,shows browser zoom controls 
-      hardwareback : 'yes',
-      mediaPlaybackRequiresUserAction : 'no',
-      shouldPauseOnSuspend : 'no', //Android only 
-      closebuttoncaption : 'Close', //iOS only
-      disallowoverscroll : 'no', //iOS only 
-      toolbar : 'yes', //iOS only 
-      enableViewportScale : 'no', //iOS only 
-      allowInlineMediaPlayback : 'no',//iOS only 
-      presentationstyle : 'pagesheet',//iOS only 
-      fullscreen : 'yes',//Windows only    
-  };
-    const browser = this.inAppBrowser.create(environment.IMG_URL + url, '_blank');
+  async downloadAndOpenPdf(url, name) {
+    await Browser.open({ url: environment.IMG_URL + url });
   }
 }
