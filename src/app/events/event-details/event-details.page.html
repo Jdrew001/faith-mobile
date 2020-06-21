@@ -2,5 +2,5 @@
   <ion-button (click)="dismissPage()">
     <ion-icon slot="icon-only" name="close-outline"></ion-icon>
   </ion-button>
-  <app-detail *ngIf="details" [details]="details" [type]="'event'"></app-detail>
+  <app-detail *ngIf="details" [details]="details" [childdetails]="details['items']" [type]="'event'"></app-detail>
 </ion-content>
