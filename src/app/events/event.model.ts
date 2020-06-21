@@ -5,7 +5,7 @@ export interface Event {
     createdAt: string;
     updatedAt: string;
     image: Image;
-    item: Array<Item>;
+    items: Array<Item>;
 }
 
 export interface Image {
