@@ -16,14 +16,6 @@ ion-header {
     position: absolute !important;
 }
 
-ion-toolbar > toolbar-container {
-    background-color: transparent !important;
-}
-
-:host ::ng-deep toolbar-background {
-    background-color: transparent !important;
-}
-
 ion-button {
     --background: transparent !important;
 }

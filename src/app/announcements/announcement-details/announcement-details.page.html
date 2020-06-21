@@ -1,7 +1,6 @@
-<ion-header>
-  <app-nav-detail [title]="'Announcement'" (dismiss)="dismissDetail($event)"></app-nav-detail>
-</ion-header>
-
 <ion-content>
+  <ion-button (click)="dismissPage()">
+    <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+  </ion-button>
   <app-detail [details]="details" [type]="'announcement'"></app-detail>
 </ion-content>

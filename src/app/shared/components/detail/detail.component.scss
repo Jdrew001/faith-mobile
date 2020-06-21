@@ -6,12 +6,11 @@ img {
 ion-card {
     text-align: left !important;
     width: 100% !important;
-    position: relative;
-    bottom: 3vh !important;
 }
 
 ion-card-content {
-    padding: 8% 3% !important;
+    padding: 2% 3% !important;
+    padding-bottom: 10% !important;
 }
 
 h3 {
@@ -35,6 +34,22 @@ h4 {
     display: block;
     margin: auto;
     line-height: 1.8;
+}
+
+
+.upcoming-container {
+    margin: 2% 2% !important;
+
+    h3 {
+        color: #E02E2E !important;
+    }
+    h3:after {
+        content: ""; /* This is necessary for the pseudo element to work. */ 
+        display: block; /* This will put the pseudo element on its own line. */
+        width: 50%; /* Change this to whatever width you want. */
+        padding-top: 10px; /* This creates some space between the element and the border. */
+        border-bottom: 1px solid #E02E2E; /* This creates the border. Replace black with whatever color you want. */
+    }
 }
 
 // ion-card.container-card {
