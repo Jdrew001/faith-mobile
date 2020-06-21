@@ -1,6 +1,6 @@
 <ng-container>
   <ion-row  [@listAnimation]="items && items.length">
-    <ion-card *ngFor="let item of items; let i = index;" (click)="navToDetail(detailPage + '/' + item._id)">
+    <ion-card *ngFor="let item of items; let i = index;" (click)="navToDetail(item._id)">
       <ion-card-content style="height: 15vh !important">
         <ion-row>
           <ion-col [size]="5">

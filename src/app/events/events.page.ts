@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, OnDestroy, Afte
 import { CalendarComponent, DayConfig, CalendarModalOptions, CalendarComponentOptions } from 'ion2-calendar';
 import { EventService } from './event.service';
 import * as moment from 'moment';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { timeout } from 'rxjs/operators';
 import { HelperService } from '../core/helper.service';
 import { EventConstant } from './EventConstant';
+import { EventDetailsPage } from './event-details/event-details.page';
 
 @Component({
   selector: 'app-events',
@@ -23,7 +24,8 @@ export class EventsPage implements OnInit, OnDestroy {
 
   constructor(private eventService: EventService,
     private navController: NavController,
-    private helperService: HelperService) {
+    private helperService: HelperService,
+    private modalCtrl: ModalController) {
     this.eventService.events$.subscribe(data => {
       this.events = data;
       this.initializeCalendar(data);
@@ -103,8 +105,15 @@ export class EventsPage implements OnInit, OnDestroy {
     return `${moment(date).format('dd')} : ${moment(date).format('DD')}`
   }
 
-  navigationToDetail(url) {
-    this.navController.navigateForward(url);
+  async navigationToDetail(id) {
+    const modal = await this.modalCtrl.create({
+      component: EventDetailsPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'params': id 
+      }
+    });
+    return await modal.present();
   }
 
   ngOnDestroy() {

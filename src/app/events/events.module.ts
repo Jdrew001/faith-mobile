@@ -10,6 +10,7 @@ import { EventsPage } from './events.page';
 import { SharedModule } from '../shared/shared.module';
 import { CalendarModule } from "ion2-calendar";
 import { EventService } from './event.service';
+import { EventDetailsPage } from './event-details/event-details.page';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { EventService } from './event.service';
   providers: [
     EventService
   ],
-  declarations: [EventsPage]
+  declarations: [EventsPage, EventDetailsPage],
+  entryComponents: [EventDetailsPage]
 })
 export class EventsPageModule {}
