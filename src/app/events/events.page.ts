@@ -7,6 +7,7 @@ import { timeout } from 'rxjs/operators';
 import { HelperService } from '../core/helper.service';
 import { EventConstant } from './EventConstant';
 import { EventDetailsPage } from './event-details/event-details.page';
+import { Event } from './event.model';
 
 @Component({
   selector: 'app-events',
@@ -17,7 +18,7 @@ export class EventsPage implements OnInit, OnDestroy {
 
   @ViewChild('cal', null) cal: CalendarComponent;
   date = null;
-  events: any[] = [];
+  events: Event[] = [];
   daySelected = false;
   previousSelDate = null;
   daysConfig = [];
@@ -106,11 +107,13 @@ export class EventsPage implements OnInit, OnDestroy {
   }
 
   async navigationToDetail(id) {
+    const eDetail: Event = this.events.find(x => x.id === id.split('events/')[1]);
+    console.log(eDetail);
     const modal = await this.modalCtrl.create({
       component: EventDetailsPage,
       cssClass: 'my-custom-class',
       componentProps: {
-        'params': id 
+        'event': eDetail 
       }
     });
     return await modal.present();

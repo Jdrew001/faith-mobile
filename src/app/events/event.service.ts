@@ -32,12 +32,13 @@ export class EventService {
   }
 
   private getMonthFilter(date) {
-    return '?_sort=date:ASC&date_gte=' + moment(date).startOf('month').format(EventConstant.DATE_FORMAT) +
-      '&date_lt=' + moment(date).add(1, 'M').startOf('month').format(EventConstant.DATE_FORMAT);
+    let params = `?_sort=updatedAt:ASC&month=${moment(date).format(EventConstant.MONTH_FORMAT)}&year=${moment(date).format(EventConstant.YEAR_FORMAT) }`;
+    return params;
   }
 
+  // TODO: NEED TO DO
   private getDayFilter(date) {
-    return '?_sort=date:asc&date_gte=' + moment(date).startOf('day').format(EventConstant.DATE_FORMAT) +
-      '&date_lt=' + moment(date).add(1,'days').startOf('day').format(EventConstant.DATE_FORMAT)
+    let params = `?_sort=date:asc&date_gte=${moment(date).startOf('day').format(EventConstant.MONTH_FORMAT)}&date_lt=${moment(date).add(1,'days').startOf('day').format(EventConstant.YEAR_FORMAT)}`;
+    return params;
   }
 }

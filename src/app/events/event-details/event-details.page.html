@@ -2,5 +2,15 @@
   <ion-button (click)="dismissPage()">
     <ion-icon slot="icon-only" name="close-outline"></ion-icon>
   </ion-button>
-  <app-detail *ngIf="details" [details]="details" [childdetails]="details['items']" [type]="'event'"></app-detail>
+  <ng-container [ngSwitch]="type">
+    <ng-container *ngSwitchCase="typeConstant.single">
+      <app-event-single [details]="details"></app-event-single>
+    </ng-container>
+    <ng-container *ngSwitchCase="typeConstant.multi">
+      <app-event-multi [details]="details"></app-event-multi>
+    </ng-container>
+    <ng-container *ngSwitchCase="typeConstant.schedule">
+      <app-event-schedule [details]="details"></app-event-schedule>
+    </ng-container>
+  </ng-container>
 </ion-content>

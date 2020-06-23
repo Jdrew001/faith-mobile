@@ -3,6 +3,7 @@ import { EventService } from '../event.service';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Event } from '../event.model';
+import { EventConstant } from '../EventConstant';
 
 @Component({
   selector: 'app-event-details',
@@ -12,20 +13,17 @@ import { Event } from '../event.model';
 export class EventDetailsPage implements OnInit, OnDestroy {
 
   details: Event = null;
-  @Input() params: string;
+  @Input() event: Event;
+  type: string;
+  typeConstant = EventConstant.EVENT_TYPES;
 
   constructor(private eventService: EventService,
     private actRoute: ActivatedRoute,
     private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    const id = this.params.split('/')[1];
-    this.eventService.fetchEvent(id);
-    this.eventService.event$.subscribe(val => {this.details = val;
-      if (this.details) {
-        console.log(this.details.items)
-      }
-    });
+    this.type = this.event.calendar_type;
+    this.details = this.event;
   }
 
   dismissPage() {
