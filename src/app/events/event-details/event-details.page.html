@@ -1,7 +1,7 @@
 <ion-content fullscreen="true">
   <div class="exit-container">
     <ion-button (click)="dismissPage()">
-      <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      <ion-icon [ngStyle]="{'color': isDark ? 'white' : 'black' }" slot="icon-only" name="close-outline"></ion-icon>
     </ion-button>
   </div>
   <ng-container [ngSwitch]="type">

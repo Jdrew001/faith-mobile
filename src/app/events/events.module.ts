@@ -11,10 +11,8 @@ import { SharedModule } from '../shared/shared.module';
 import { CalendarModule } from "ion2-calendar";
 import { EventService } from './event.service';
 import { EventDetailsPage } from './event-details/event-details.page';
-import { EventSingleComponent } from './event-details/event-single/event-single.component';
-import { EventScheduleComponent } from './event-details/event-schedule/event-schedule.component';
-import { EventMultiComponent } from './event-details/event-multi/event-multi.component';
 import {LazyLoadImageModule} from 'ng-lazyload-image';
+import { EventDetailsPageModule } from './event-details/event-details.module';
 
 @NgModule({
   imports: [
@@ -22,14 +20,13 @@ import {LazyLoadImageModule} from 'ng-lazyload-image';
     FormsModule,
     IonicModule,
     EventsPageRoutingModule,
+    EventDetailsPageModule,
     SharedModule,
-    CalendarModule,
-    LazyLoadImageModule
+    CalendarModule
   ],
   providers: [
     EventService
   ],
-  declarations: [EventsPage, EventDetailsPage, EventSingleComponent, EventScheduleComponent, EventMultiComponent],
-  entryComponents: [EventDetailsPage, EventSingleComponent, EventScheduleComponent, EventMultiComponent]
+  declarations: [EventsPage]
 })
 export class EventsPageModule {}

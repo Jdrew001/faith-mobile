@@ -46,7 +46,7 @@
             </ng-container>
             <hr>
     
-            <h4>{{ item.description }}</h4>
+            <div style="text-align: center;" [innerHtml]="getConvertedToHtml(item.description)"></div>
           </ion-card-content>
         </ion-card>
       </ng-container>
