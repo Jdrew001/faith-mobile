@@ -119,7 +119,6 @@ export class EventsPage implements OnInit, OnDestroy {
 
   async navigationToDetail(id) {
     const eDetail: Event = this.events.find(x => x.id === id.split('events/')[1]);
-    console.log(eDetail);
     const modal = await this.modalCtrl.create({
       component: EventDetailsPage,
       cssClass: 'my-custom-class',

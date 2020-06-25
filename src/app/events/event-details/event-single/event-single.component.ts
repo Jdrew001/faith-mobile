@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Item } from '../../event.model';
+import { Item, Event } from '../../event.model';
 import { SharedService } from 'src/app/shared/shared.service';
 import { HelperService } from 'src/app/core/helper.service';
 import * as moment from 'moment';
@@ -12,6 +12,7 @@ import * as moment from 'moment';
 export class EventSingleComponent implements OnInit {
 
   @Input('details') details: Event;
+  item: Item;
   placeHolderImg = '';
 
   constructor(
@@ -21,20 +22,19 @@ export class EventSingleComponent implements OnInit {
 
   ngOnInit() {
     this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);
+    this.item = this.details.items[0];
   }
 
   getImage(imgUrl) {
     return this.sharedService.getImage(imgUrl);
   }
 
-  convertToLocalTime(item) {
-    console.log(item);
+  convertToLocalTime(item: Item) {
     return item.date ? moment(new Date(item.date), 'HH:mm').zone("America/Chicago").format('hh:mm A') : null;
   }
 
-  convertToLocalDate(item) {
-    console.log(item);
-    return item.date ? moment(item.date).format('dddd, MMMM Do YYYY') : null;//test
+  convertToLocalDate(item: Item) {
+    return item.date ? moment(item.date).format('dddd, MMMM Do YYYY') : null;
   }
 
 }

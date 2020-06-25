@@ -4,6 +4,7 @@ import { HelperService } from '../core/helper.service';
 import * as moment from 'moment';
 import { EventConstant } from './EventConstant';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { Event } from './event.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,17 @@ export class EventService {
 
   fetchEventsByMonth(date) {
     const url = this.helperService.getResourceUrl(EventConstant.EVENT_URL + this.getMonthFilter(date));
-    this.httpClient.get(url).subscribe(val => this.events$.next(val as any[]));
+    this.httpClient.get(url).subscribe(val => this.events$.next(val as Event[]));
   }
 
   fetchEventByDate(date) {
-    const url = this.helperService.getResourceUrl(EventConstant.EVENT_URL + this.getDayFilter(date));
-    this.httpClient.get(url).subscribe(val => this.event_day$.next(val as any[]));
+    const url = this.helperService.getResourceUrl(`${EventConstant.EVENT_DAY_URL}`);
+    const body = {
+      month: moment(date).format(EventConstant.MONTH_FORMAT),
+      year: moment(date).format(EventConstant.YEAR_FORMAT),
+      date: date
+    };
+    this.httpClient.post(url, body).subscribe(val => this.event_day$.next(val as Event[]));
   }
 
   fetchEvent(id) {
