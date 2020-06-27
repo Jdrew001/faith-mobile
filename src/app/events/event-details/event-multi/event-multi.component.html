@@ -22,20 +22,20 @@
             </ng-container>
             <hr>
     
-            <h4>{{ item.description }}</h4>
+            <div style="text-align: center;" [innerHtml]="getConvertedToHtml(item.description)"></div>
           </ion-card-content>
         </ion-card>
       </ng-container>
     </ion-row>
   
-    <ion-row>
+    <ion-row *ngIf="getRecentEvents().length > 0">
       <div class="upcoming-container">
         <h3>Recent</h3>
         <span class="half-border"></span>
       </div>
     </ion-row>
   
-    <ion-row class="recent-events" *ngIf="childDetails && childDetails.length > 0">
+    <ion-row class="recent-events" *ngIf="childDetails && childDetails.length > 0 && getRecentEvents().length > 0">
       <ng-container *ngFor="let item of getRecentEvents()">
         <ion-card class="container-card recent-event-card">
           <ion-card-content class="container-content">
@@ -46,7 +46,7 @@
             </ng-container>
             <hr>
     
-            <h4>{{ item.description }}</h4>
+            <div style="text-align: center;" [innerHtml]="getConvertedToHtml(item.description)"></div>
           </ion-card-content>
         </ion-card>
       </ng-container>

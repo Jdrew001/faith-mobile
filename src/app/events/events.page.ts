@@ -75,21 +75,12 @@ export class EventsPage implements OnInit, OnDestroy {
   initializeCalendar(data: Event[]) {
     for (let i = 0; i < data.length; i++) {
       let val = data[i].calendar_type;
-      if (val === EventConstant.EVENT_TYPES.single || val === EventConstant.EVENT_TYPES.multi) {
-        data[i].items.forEach(item => {
-          this.daysConfig.push({
-            date: item.date,
-            cssClass: 'day-style animated fadeIn faster'
-          })
-        });
-      } else if (val === EventConstant.EVENT_TYPES.schedule) {
-        data[i].schedule.forEach(item => {
-          this.daysConfig.push({
-            date: item.date,
-            cssClass: 'day-style animated fadeIn faster'
-          })
-        });
-      }
+      data[i].items.forEach(item => {
+        this.daysConfig.push({
+          date: item.date,
+          cssClass: 'day-style animated fadeIn faster'
+        })
+      });
     }
     const options: CalendarModalOptions = {
       daysConfig: this.daysConfig,

@@ -12,6 +12,7 @@ import { EventSingleComponent } from './event-single/event-single.component';
 import { EventScheduleComponent } from './event-schedule/event-schedule.component';
 import { EventMultiComponent } from './event-multi/event-multi.component';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { EventBaseComponent } from './event-base/event-base.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     LazyLoadImageModule,
     EventDetailsPageRoutingModule
   ],
-  declarations: [EventDetailsPage, EventSingleComponent, EventScheduleComponent, EventMultiComponent],
+  declarations: [EventDetailsPage, EventSingleComponent, EventScheduleComponent, EventMultiComponent, EventBaseComponent],
   entryComponents: [EventDetailsPage]
 })
 export class EventDetailsPageModule {}

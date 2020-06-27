@@ -3,38 +3,28 @@ import { Item, Event } from '../../event.model';
 import { SharedService } from 'src/app/shared/shared.service';
 import { HelperService } from 'src/app/core/helper.service';
 import * as moment from 'moment';
+import marked from 'marked';
+import { EventBaseComponent } from '../event-base/event-base.component';
 
 @Component({
   selector: 'app-event-single',
   templateUrl: './event-single.component.html',
   styleUrls: ['./event-single.component.scss'],
 })
-export class EventSingleComponent implements OnInit {
+export class EventSingleComponent extends EventBaseComponent implements OnInit {
 
-  @Input('details') details: Event;
   item: Item;
   placeHolderImg = '';
 
   constructor(
-    private sharedService: SharedService,
-    private helperService: HelperService
-  ) { }
+    protected sharedService: SharedService,
+    protected helperService: HelperService
+  ) {
+    super(sharedService, helperService);
+  }
 
   ngOnInit() {
     this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);
     this.item = this.details.items[0];
   }
-
-  getImage(imgUrl) {
-    return this.sharedService.getImage(imgUrl);
-  }
-
-  convertToLocalTime(item: Item) {
-    return item.date ? moment(new Date(item.date), 'HH:mm').zone("America/Chicago").format('hh:mm A') : null;
-  }
-
-  convertToLocalDate(item: Item) {
-    return item.date ? moment(item.date).format('dddd, MMMM Do YYYY') : null;
-  }
-
 }
