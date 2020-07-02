@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'connect',
     loadChildren: () => import('./connect/connect.module').then( m => m.ConnectPageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   }
 ];
 

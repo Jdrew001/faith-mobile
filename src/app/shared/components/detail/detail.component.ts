@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SharedService } from '../../shared.service';
 import * as moment from 'moment';
 import { HelperService } from 'src/app/core/helper.service';
+import { Item, Event } from 'src/app/events/event.model';
 
 @Component({
   selector: 'app-detail',
@@ -10,7 +11,8 @@ import { HelperService } from 'src/app/core/helper.service';
 })
 export class DetailComponent implements OnInit {
 
-  @Input('details') details;
+  @Input('details') details: Event;
+  @Input('childdetails') childDetails: Item[];
   @Input('type') type;
   placeHolderImg = '';
 
@@ -28,12 +30,36 @@ export class DetailComponent implements OnInit {
     this.details = null;
   }
 
-  convertToLocalTime() {
-    return this.details.date ? moment(new Date(this.details.date), 'HH:mm').zone("America/Chicago").format('hh:mm A') : null;
+  convertToLocalTime(item) {
+    console.log(item);
+    return item.date ? moment(new Date(item.date), 'HH:mm').zone("America/Chicago").format('hh:mm A') : null;
   }
 
-  convertToLocalDate() {
-    return this.details.date ? moment(this.details.date).format('dddd, MMMM Do YYYY') : null;//test
+  convertToLocalDate(item) {
+    console.log(item);
+    return item.date ? moment(item.date).format('dddd, MMMM Do YYYY') : null;//test
+  }
+
+  getUpcomingEvents() {
+    let events = [];
+    if (this.childDetails) {
+      events = this.childDetails.filter(x => {
+        return moment(new Date()).diff(x.date) <= 0;
+      });
+
+      return events;
+    }
+  }
+
+  getRecentEvents() {
+    let events = [];
+    if (this.childDetails) {
+      events = this.childDetails.filter(x => {
+        return moment(new Date()).diff(x.date) > 0;
+      });
+
+      return events;
+    }
   }
 
 }

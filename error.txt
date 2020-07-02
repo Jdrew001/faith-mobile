@@ -5,3 +5,7 @@ replace contents with "androidx.core.content.FileProvider"
 -- MissingSpecError: IOS SYNC
 Noticed that the fix is run: sudo gem install -n /usr/local/bin cocoapods
 Then sync again
+
+
+-- livereload
+ionic cap run ios -l -address=0.0.0.0 --external

@@ -10,6 +10,9 @@ import { EventsPage } from './events.page';
 import { SharedModule } from '../shared/shared.module';
 import { CalendarModule } from "ion2-calendar";
 import { EventService } from './event.service';
+import { EventDetailsPage } from './event-details/event-details.page';
+import {LazyLoadImageModule} from 'ng-lazyload-image';
+import { EventDetailsPageModule } from './event-details/event-details.module';
 
 @NgModule({
   imports: [
@@ -17,6 +20,7 @@ import { EventService } from './event.service';
     FormsModule,
     IonicModule,
     EventsPageRoutingModule,
+    EventDetailsPageModule,
     SharedModule,
     CalendarModule
   ],

@@ -1,0 +1,24 @@
+<div *ngIf="details" class="col-md-12" class="animated fadeIn faster">
+  <ion-row>
+    <img [defaultImage]="placeHolderImg" [lazyLoad]="getImage(details.image.url)"/>
+  </ion-row>
+
+  <ng-container>
+    <ion-row>
+      <ng-container>
+        <ion-card class="container-card">
+          <ion-card-content class="container-content">
+            <h3>{{ item.title }}</h3>
+            <ng-container>
+              <h4 *ngIf="convertToLocalDate(item)">{{ convertToLocalDate(item) }}</h4>
+              <h4 *ngIf="convertToLocalTime(item)">{{ convertToLocalTime(item) }}</h4>
+            </ng-container>
+            <hr>
+    
+            <h4>{{ item.description }}</h4>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+    </ion-row>
+  </ng-container>
+</div>

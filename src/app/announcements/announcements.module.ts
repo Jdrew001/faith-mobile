@@ -9,6 +9,8 @@ import { AnnouncementsPageRoutingModule } from './announcements-routing.module';
 import { AnnouncementsPage } from './announcements.page';
 import { SharedModule } from '../shared/shared.module';
 import { AutoScrollDirective } from '../shared/auto-scroll.directive';
+import { AnnouncementDetailsPage } from './announcement-details/announcement-details.page';
+import { AnnouncementDetailsPageModule } from './announcement-details/announcement-details.module';
 
 @NgModule({
   imports: [
@@ -16,9 +18,11 @@ import { AutoScrollDirective } from '../shared/auto-scroll.directive';
     FormsModule,
     IonicModule,
     AnnouncementsPageRoutingModule,
+    AnnouncementDetailsPageModule,
     SharedModule,
     ReactiveFormsModule
   ],
-  declarations: [AnnouncementsPage]
+  declarations: [AnnouncementsPage],
+  entryComponents: [AnnouncementDetailsPage]
 })
 export class AnnouncementsPageModule {}

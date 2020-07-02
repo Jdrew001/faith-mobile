@@ -57,8 +57,8 @@ export class ListCardItemComponent implements OnInit, OnChanges, OnDestroy {
     this.hasLoaded = true;
   }
 
-  navToDetail(url) {
-    this.detailNavigate.emit(`${this.type}/${url}`);
+  navToDetail(id) {
+    this.detailNavigate.emit(`${this.type}/${id}`);
   }
 
   ngOnDestroy() {

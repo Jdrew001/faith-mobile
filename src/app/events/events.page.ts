@@ -2,10 +2,12 @@ import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, OnDestroy, Afte
 import { CalendarComponent, DayConfig, CalendarModalOptions, CalendarComponentOptions } from 'ion2-calendar';
 import { EventService } from './event.service';
 import * as moment from 'moment';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { timeout } from 'rxjs/operators';
 import { HelperService } from '../core/helper.service';
 import { EventConstant } from './EventConstant';
+import { EventDetailsPage } from './event-details/event-details.page';
+import { Event } from './event.model';
 
 @Component({
   selector: 'app-events',
@@ -16,14 +18,15 @@ export class EventsPage implements OnInit, OnDestroy {
 
   @ViewChild('cal', null) cal: CalendarComponent;
   date = null;
-  events: any[] = [];
+  events: Event[] = [];
   daySelected = false;
   previousSelDate = null;
   daysConfig = [];
 
   constructor(private eventService: EventService,
     private navController: NavController,
-    private helperService: HelperService) {
+    private helperService: HelperService,
+    private modalCtrl: ModalController) {
     this.eventService.events$.subscribe(data => {
       this.events = data;
       this.initializeCalendar(data);
@@ -69,13 +72,15 @@ export class EventsPage implements OnInit, OnDestroy {
     this.getMonthEvents(this.cal.getViewDate());
   }
 
-  initializeCalendar(data) {
-    this.animateAwayDates();
+  initializeCalendar(data: Event[]) {
     for (let i = 0; i < data.length; i++) {
-      this.daysConfig.push({
-        date: data[i].date,
-        cssClass: 'day-style animated fadeIn faster'
-      })
+      let val = data[i].calendar_type;
+      data[i].items.forEach(item => {
+        this.daysConfig.push({
+          date: item.date,
+          cssClass: 'day-style animated fadeIn faster'
+        })
+      });
     }
     const options: CalendarModalOptions = {
       daysConfig: this.daysConfig,
@@ -103,8 +108,16 @@ export class EventsPage implements OnInit, OnDestroy {
     return `${moment(date).format('dd')} : ${moment(date).format('DD')}`
   }
 
-  navigationToDetail(url) {
-    this.navController.navigateForward(url);
+  async navigationToDetail(id) {
+    const eDetail: Event = this.events.find(x => x.id === id.split('events/')[1]);
+    const modal = await this.modalCtrl.create({
+      component: EventDetailsPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'event': eDetail 
+      }
+    });
+    return await modal.present();
   }
 
   ngOnDestroy() {

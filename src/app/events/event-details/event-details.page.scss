@@ -1,0 +1,21 @@
+ion-toolbar {
+    --background: transparent;
+}
+
+ion-button {
+    --box-shadow: none !important;
+    position: absolute;
+    z-index: 9999;
+}
+
+  .scroll-content {
+    padding-top: 0px !important;
+  }
+
+ion-header {
+    position: absolute !important;
+}
+
+ion-button {
+    --background: transparent !important;
+}

@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { AnnouncementService } from '../announcement.service';
 import { ActivatedRoute } from '@angular/router';
 import { Announcement } from '../announcement.model';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-announcement-details',
@@ -11,11 +12,15 @@ import { Announcement } from '../announcement.model';
 export class AnnouncementDetailsPage implements OnInit, OnDestroy {
 
   details: Announcement;
+  @Input() params;
 
-  constructor(private activatedRoute: ActivatedRoute, private announcementService: AnnouncementService) { }
+  constructor(private activatedRoute: ActivatedRoute,
+    private announcementService: AnnouncementService,
+    private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    this.announcementService.fetchAnnouncement(this.activatedRoute.snapshot.paramMap.get('id'));
+    const id = this.params.split('/')[1];
+    this.announcementService.fetchAnnouncement(id);
     this.announcementService.announcement$.subscribe(val => this.details = val);
   }
 
@@ -23,7 +28,8 @@ export class AnnouncementDetailsPage implements OnInit, OnDestroy {
     return this.announcementService.getImage(this.details['image']['url']);
   }
 
-  dismissDetail(val) {
+  dismissPage() {
+    this.modalCtrl.dismiss();
     this.details = null;
   }
 

@@ -17,6 +17,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule,
     AnnouncementDetailsPageRoutingModule
   ],
-  declarations: [AnnouncementDetailsPage]
+  declarations: [AnnouncementDetailsPage],
+  entryComponents: [AnnouncementDetailsPage]
 })
 export class AnnouncementDetailsPageModule {}

@@ -4,6 +4,7 @@ import { HelperService } from '../core/helper.service';
 import * as moment from 'moment';
 import { EventConstant } from './EventConstant';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { Event } from './event.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,17 @@ export class EventService {
 
   fetchEventsByMonth(date) {
     const url = this.helperService.getResourceUrl(EventConstant.EVENT_URL + this.getMonthFilter(date));
-    this.httpClient.get(url).subscribe(val => this.events$.next(val as any[]));
+    this.httpClient.get(url).subscribe(val => this.events$.next(val as Event[]));
   }
 
   fetchEventByDate(date) {
-    const url = this.helperService.getResourceUrl(EventConstant.EVENT_URL + this.getDayFilter(date));
-    this.httpClient.get(url).subscribe(val => this.event_day$.next(val as any[]));
+    const url = this.helperService.getResourceUrl(`${EventConstant.EVENT_DAY_URL}`);
+    const body = {
+      month: moment(date).format(EventConstant.MONTH_FORMAT),
+      year: moment(date).format(EventConstant.YEAR_FORMAT),
+      date: date
+    };
+    this.httpClient.post(url, body).subscribe(val => this.event_day$.next(val as Event[]));
   }
 
   fetchEvent(id) {
@@ -32,12 +38,13 @@ export class EventService {
   }
 
   private getMonthFilter(date) {
-    return '?_sort=date:ASC&date_gte=' + moment(date).startOf('month').format(EventConstant.DATE_FORMAT) +
-      '&date_lt=' + moment(date).add(1, 'M').startOf('month').format(EventConstant.DATE_FORMAT);
+    let params = `?_sort=updatedAt:ASC&month=${moment(date).format(EventConstant.MONTH_FORMAT)}&year=${moment(date).format(EventConstant.YEAR_FORMAT) }`;
+    return params;
   }
 
+  // TODO: NEED TO DO
   private getDayFilter(date) {
-    return '?_sort=date:asc&date_gte=' + moment(date).startOf('day').format(EventConstant.DATE_FORMAT) +
-      '&date_lt=' + moment(date).add(1,'days').startOf('day').format(EventConstant.DATE_FORMAT)
+    let params = `?_sort=date:asc&date_gte=${moment(date).startOf('day').format(EventConstant.MONTH_FORMAT)}&date_lt=${moment(date).add(1,'days').startOf('day').format(EventConstant.YEAR_FORMAT)}`;
+    return params;
   }
 }

@@ -1,7 +1,18 @@
-<ion-header>
-  <app-nav-detail [title]="'Event'" (dismiss)="dismissDetail($event)"></app-nav-detail>
-</ion-header>
-
-<ion-content>
-  <app-detail *ngIf="details" [details]="details" [type]="'event'"></app-detail>
+<ion-content fullscreen="true">
+  <div class="exit-container">
+    <ion-button (click)="dismissPage()">
+      <ion-icon [ngStyle]="{'color': isDark ? 'white' : 'black' }" slot="icon-only" name="close-outline"></ion-icon>
+    </ion-button>
+  </div>
+  <ng-container [ngSwitch]="type">
+    <ng-container *ngSwitchCase="typeConstant.single">
+      <app-event-single [details]="details"></app-event-single>
+    </ng-container>
+    <ng-container *ngSwitchCase="typeConstant.multi">
+      <app-event-multi [details]="details"></app-event-multi>
+    </ng-container>
+    <ng-container *ngSwitchCase="typeConstant.schedule">
+      <app-event-schedule [details]="details"></app-event-schedule>
+    </ng-container>
+  </ng-container>
 </ion-content>
