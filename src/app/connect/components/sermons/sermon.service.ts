@@ -27,7 +27,7 @@ export class SermonService {
     if (!!date) {
       url += this.getMonthFilter(date);
     } else {
-      url += '?_sort=date:DESC';
+      url += '?_sort=date:DESC&active=true';
     }
     return this.http.post<Sermon[]>(url, body).pipe(map(res => res));
   }
