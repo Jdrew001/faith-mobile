@@ -73,6 +73,7 @@ export class EventsPage implements OnInit, OnDestroy {
   }
 
   initializeCalendar(data: Event[]) {
+    this.daysConfig = [];
     for (let i = 0; i < data.length; i++) {
       let val = data[i].calendar_type;
       data[i].items.forEach(item => {
