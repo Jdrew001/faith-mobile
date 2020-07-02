@@ -13,7 +13,7 @@ import { Event, Item } from '../../event.model';
 export class EventBaseComponent implements OnInit {
 
   @Input('details') details: Event;
-  protected childDetails: Item[];
+  public childDetails: Item[];
 
   constructor(
     protected sharedService: SharedService,
