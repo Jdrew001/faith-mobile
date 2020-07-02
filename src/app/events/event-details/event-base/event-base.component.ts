@@ -44,7 +44,6 @@ export class EventBaseComponent implements OnInit {
       events = this.childDetails.filter(x => {
         return moment(new Date()).diff(x.date) <= 0;
       });
-
       return events;
     }
   }

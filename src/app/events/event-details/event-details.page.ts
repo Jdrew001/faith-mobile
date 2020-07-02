@@ -48,9 +48,12 @@ export class EventDetailsPage implements OnInit, OnDestroy {
     var imgObj = new Image();
     const fac = new FastAverageColor();
     var c = this;
+    imgObj.crossOrigin = "Anonymous";
     imgObj.src = this.sharedService.getImage(this.event.image.url);
-    imgObj.setAttribute('crossOrigin', '');
-    fac.getColorAsync(imgObj).then(val => c.colorSub.next(val));
+    fac.getColorAsync(imgObj).then(val => {
+      //alert(JSON.stringify(val));
+      c.colorSub.next(val); 
+    });
   }
 
 }

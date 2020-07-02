@@ -4,14 +4,14 @@
   </ion-row>
 
   <ng-container>
-    <ion-row>
+    <ion-row *ngIf="getUpcomingEvents().length > 0">
       <div class="upcoming-container">
         <h3>Upcoming</h3>
         <span class="half-border"></span>
       </div>
     </ion-row>
   
-    <ion-row *ngIf="childDetails && childDetails.length > 0">
+    <ion-row *ngIf="getUpcomingEvents().length > 0">
       <ng-container *ngFor="let item of getUpcomingEvents()">
         <ion-card class="container-card">
           <ion-card-content class="container-content">
