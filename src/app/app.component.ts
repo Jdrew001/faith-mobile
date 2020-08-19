@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
 
-import { Platform, IonContent, AnimationController } from '@ionic/angular';
+import { Platform, IonContent, AnimationController, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { AudioPlayerService } from './shared/services/audio-player.service';
 import { Sermon, SermonData } from './connect/components/sermons/sermons.model';
 import { Plugins } from '@capacitor/core';
+import { AuthenticationComponent } from './core/components/authentication/authentication.component';
 
 const { Browser } = Plugins;
 
@@ -48,7 +49,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
     private pushNotificationService: PushNotificationService,
     private router: Router,
     private audioPlayerService: AudioPlayerService,
-    private animationCtrl: AnimationController
+    private animationCtrl: AnimationController,
+    private modalCtrl: ModalController
   ) {
     this.initializeApp();
     this.fetchMenuConfig();
@@ -121,6 +123,17 @@ export class AppComponent implements OnInit, AfterViewChecked {
       let result = AppConstants.PAGES.findIndex(x => x.url === url);
       result !== -1 ? this.selectedIndex = result : this.selectedIndex = 0;
     }
+  }
+
+  async navigationToDetail() {
+    const modal = await this.modalCtrl.create({
+      component: AuthenticationComponent,
+      cssClass: 'my-custom-class'
+      // componentProps: {
+      //   'event': eDetail 
+      // }
+    });
+    return await modal.present();
   }
 
 

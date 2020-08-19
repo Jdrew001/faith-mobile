@@ -46,6 +46,7 @@ export class PushNotificationService {
       (token: PushNotificationToken) => {
         this.authorizationService.retrieveToken().subscribe(val => {
           if (val) {
+            this.authorizationService.phoneToken$.next(token.value);
             this.sendTokenToService(token.value, val['jwt']);
           }
         }, err => {
