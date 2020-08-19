@@ -1,3 +1,21 @@
-<p>
-  authentication works!
-</p>
+<ion-content fullscreen="true">
+  <div class="exit-container">
+    <ion-button (click)="dismissPage()">
+      <ion-icon [ngStyle]="{'color': 'black' }" slot="icon-only" name="close-outline"></ion-icon>
+    </ion-button>
+  </div>
+  <div class="image-container">
+    <img src="../assets/images/placeholder-image.jpg" />
+  </div>
+  <ng-container [ngSwitch]="activeForm">
+    <ng-container *ngSwitchCase="formTypes.code">
+      <app-validation-code></app-validation-code>
+    </ng-container>
+    <ng-container *ngSwitchCase="formTypes.login">
+      <app-login-form></app-login-form>
+    </ng-container>
+    <ng-container *ngSwitchCase="formTypes.registration">
+      <app-registration-form></app-registration-form>
+    </ng-container>
+  </ng-container>
+</ion-content>

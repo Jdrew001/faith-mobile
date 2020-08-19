@@ -10,3 +10,7 @@ export interface Login {
     username: string;
     password: string;
 }
+
+export enum FormTypes {
+    login = 'login', registration = 'registration', code = 'code'
+}
