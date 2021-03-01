@@ -5,7 +5,7 @@
   <ion-row>
     <div class="heading fixed">
       <app-icon-bar [icon]="'megaphone-outline'" [title]="'Announcement'"></app-icon-bar>
-      <ion-row class="">
+      <!-- <ion-row class="">
         <ion-col size="12">
           <ion-segment id="segment" class="segment" scrollable mode="md" [value]="activeDate" (ionChange)="updateList($event)">
             <ion-segment-button *ngFor="let val of dates" [value]="val" id="{{val === activeDate ? 'active': ''}}">
@@ -13,7 +13,7 @@
             </ion-segment-button>
           </ion-segment>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
     </div>
   </ion-row>
   <ion-row class="empty-row animated fadeIn faster ion-align-self-center" *ngIf="!listUpdate && announcements && announcements.length === 0">
