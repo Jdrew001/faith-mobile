@@ -19,7 +19,13 @@
   <ion-row class="empty-row animated fadeIn faster ion-align-self-center" *ngIf="!listUpdate && announcements && announcements.length === 0">
     <img [src]="getEmptyImage()" />
   </ion-row>
-  <ion-row style="margin-top:0% !important">
-    <app-list-card-item [type]="'announcements'" [items]="announcements" [detailPage]="'announcement-details'" (detailNavigate)="navigationToDetail($event)"></app-list-card-item>
-  </ion-row>
+  <ion-row *ngFor="let item of announcements" style="margin-top:0% !important">
+    <!-- <app-list-card-item [type]="'announcements'" [items]="announcements" [detailPage]="'announcement-details'" (detailNavigate)="navigationToDetail($event)"></app-list-card-item>
+     -->
+     <ion-card>   
+      <ion-card-content>
+        <img [src]="loadImage(item?.image?.url)" alt=""/>
+      </ion-card-content>
+    </ion-card>
+    </ion-row>
 </ion-content>

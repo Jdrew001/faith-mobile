@@ -13,4 +13,8 @@ export class HelperService {
   public getPayPalURL(resourceUrl: string): string {
     return environment.PAY_PAL_URL + resourceUrl;
   }
+
+  public getCMSResource(resourceUrl: string) {
+    return environment.CMS_URL + resourceUrl;
+  }
 }

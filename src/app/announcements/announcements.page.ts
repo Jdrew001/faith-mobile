@@ -45,7 +45,7 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
   }
 
   loadAnnouncements(month, year) {
-    this.announcementService.fetchFilteredAnnouncements(month, year)
+    this.announcementService.fetchAnnouncements();
   }
 
   updateList(event) {
@@ -53,7 +53,7 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
     let month = date[0];
     let year = date[1];
     this.listUpdate = true;
-    this.announcementService.fetchFilteredAnnouncements(month, year);
+    this.announcementService.fetchAnnouncements();
   }
 
   splitDate(date) {
@@ -75,8 +75,16 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
     return await modal.present();
   }
 
+  getImage() {
+    return this.helperService.getResourceUrl(AnnouncementConst.EMPTY_ANNOUNCEMENT_IMAGE, true);
+  }
+
   getEmptyImage() {
     return this.helperService.getResourceUrl(AnnouncementConst.EMPTY_ANNOUNCEMENT_IMAGE, true);
+  }
+
+  loadImage(url) {
+    return this.helperService.getCMSResource(url);
   }
 
   ngOnDestroy() {
