@@ -22,10 +22,12 @@
   <ion-row *ngFor="let item of announcements" style="margin-top:0% !important">
     <!-- <app-list-card-item [type]="'announcements'" [items]="announcements" [detailPage]="'announcement-details'" (detailNavigate)="navigationToDetail($event)"></app-list-card-item>
      -->
-     <ion-card>   
+     <!-- <ion-card>   
+      
       <ion-card-content>
-        <img [src]="loadImage(item?.image?.url)" alt=""/>
+        
       </ion-card-content>
-    </ion-card>
+    </ion-card> -->
+    <img class="announcement-image" [src]="loadImage(item?.image?.url)" alt=""/>
     </ion-row>
 </ion-content>
