@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'moment';
 import marked from 'marked';
-import { Item, Event } from '../../event.model';
 import { SharedService } from 'src/app/shared/shared.service';
 import { HelperService } from 'src/app/core/helper.service';
 import { EventBaseComponent } from '../event-base/event-base.component';
@@ -23,7 +22,9 @@ export class EventMultiComponent extends EventBaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);
-    this.childDetails = this.details.items;
+    // this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);
+    // this.childDetails = this.details.items;
+    console.log('test!', this.childDetails);
+    this.setUpcomingEvents();
   }
 }

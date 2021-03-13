@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import * as moment from 'moment';
 
 export enum Frequency {
+    NONE = "NONE",
     MONTHLY = "MONTHLY",
     WEEKLY = "WEEKLY"
 }
@@ -12,7 +13,6 @@ export class DateUtils {
     // GET DATE RANGE 
     getDateRange(frequency: Frequency, startDate: string, endDate: string) {
         let result: Array<String>;
-        console.log('freq', frequency);
         switch(frequency) {
             case Frequency.MONTHLY:
                 return this.getMonthlyDates(startDate, endDate);
@@ -46,7 +46,7 @@ export class DateUtils {
         let startDate = moment(start);
         let endDate = moment(end);
         let arr = [];
-        let temp = startDate.clone().day(start);
+        let temp = startDate.day(startDate.day());
         arr.push(temp.format('YYYY-MM-DD'));
 
         while(temp.isBefore(endDate)) {
@@ -54,6 +54,7 @@ export class DateUtils {
             arr.push(temp.format('YYYY-MM-DD'));
         }
 
+        console.log('arr', arr);
         return arr;
     }
 }

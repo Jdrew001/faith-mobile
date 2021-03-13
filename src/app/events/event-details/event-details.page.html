@@ -6,13 +6,13 @@
   </div>
   <ng-container [ngSwitch]="type">
     <ng-container *ngSwitchCase="typeConstant.single">
-      <app-event-single [details]="details"></app-event-single>
+      <app-event-single [details]="details" [activeMonth]="activeMonth"></app-event-single>
     </ng-container>
     <ng-container *ngSwitchCase="typeConstant.multi">
-      <app-event-multi [details]="details"></app-event-multi>
+      <app-event-multi [details]="details" [activeMonth]="activeMonth"></app-event-multi>
     </ng-container>
     <ng-container *ngSwitchCase="typeConstant.schedule">
-      <app-event-schedule [details]="details"></app-event-schedule>
+      <app-event-schedule [details]="details" [activeMonth]="activeMonth"></app-event-schedule>
     </ng-container>
   </ng-container>
 </ion-content>

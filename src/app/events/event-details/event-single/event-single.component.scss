@@ -10,13 +10,16 @@ ion-card {
 
 ion-card-content {
     padding: 2% 3% !important;
-    padding-bottom: 10% !important;
 }
 
 h3 {
     font-size: 18px;
-    text-align: center;
     margin-top: 1.5vh;
+}
+
+h3.description {
+    font-size: 15px !important;
+    margin-left: 5px !important;
 }
 
 hr {
@@ -29,11 +32,11 @@ hr {
 }
 
 h4 {
-    text-align: center;
-    width: 85%;
+    width: 100%;
     display: block;
     margin: auto;
     line-height: 1.8;
+    margin-left: 5px !important;
 }
 
 
@@ -54,4 +57,9 @@ h4 {
 
 .recent-events {
     margin-bottom: 15px !important;
+}
+
+.recent-event-card {
+    background-color: #f8f8f8;
+    opacity: 0.5;
 }

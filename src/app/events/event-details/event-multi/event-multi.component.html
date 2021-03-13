@@ -4,6 +4,16 @@
   </ion-row>
 
   <ng-container>
+    <ion-row>
+      <div class="upcoming-container">
+        <h3>Description</h3>
+        <span class="half-border"></span>
+      </div>
+      <h3 class="description">{{details.description}}</h3>
+    </ion-row>
+  </ng-container>
+
+  <ng-container>
     <ion-row *ngIf="getUpcomingEvents().length > 0">
       <div class="upcoming-container">
         <h3>Upcoming</h3>
@@ -15,14 +25,12 @@
       <ng-container *ngFor="let item of getUpcomingEvents()">
         <ion-card class="container-card">
           <ion-card-content class="container-content">
-            <h3>{{ item.title }}</h3>
-            <ng-container>
-              <h4 *ngIf="convertToLocalDate(item)">{{ convertToLocalDate(item) }}</h4>
-              <h4 *ngIf="convertToLocalTime(item)">{{ convertToLocalTime(item) }}</h4>
-            </ng-container>
-            <hr>
-    
-            <div style="text-align: center;" [innerHtml]="getConvertedToHtml(item.description)"></div>
+            <div style="text-align: center;">
+              <h2 *ngIf="convertToLocalDate(item.date)"><strong>{{ convertToLocalDate(item.date) }}</strong></h2>
+              <ng-container *ngFor="let e of item.occuranceEvents">
+                <h4>{{ e.title }} <span *ngIf="convertToLocalTime(e.time)">{{ convertToLocalTime(e.time) }}</span></h4>
+              </ng-container>
+            </div>
           </ion-card-content>
         </ion-card>
       </ng-container>
@@ -39,14 +47,12 @@
       <ng-container *ngFor="let item of getRecentEvents()">
         <ion-card class="container-card recent-event-card">
           <ion-card-content class="container-content">
-            <h3>{{ item.title }}</h3>
-            <ng-container>
-              <h4 *ngIf="convertToLocalDate(item)">{{ convertToLocalDate(item) }}</h4>
-              <h4 *ngIf="convertToLocalTime(item)">{{ convertToLocalTime(item) }}</h4>
-            </ng-container>
-            <hr>
-    
-            <div style="text-align: center;" [innerHtml]="getConvertedToHtml(item.description)"></div>
+            <div style="text-align: center;">
+              <h2 *ngIf="convertToLocalDate(item.date)"><strong>{{ convertToLocalDate(item.date) }}</strong></h2>
+              <ng-container *ngFor="let e of item.occuranceEvents">
+                <h4>{{ e.title }} <span *ngIf="convertToLocalTime(e.time)">{{ convertToLocalTime(e.time) }}</span></h4>
+              </ng-container>
+            </div>
           </ion-card-content>
         </ion-card>
       </ng-container>

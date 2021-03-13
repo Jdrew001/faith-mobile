@@ -7,7 +7,7 @@ export class AppConstants {
             disabled: false
         },
         {
-            title: 'Events',
+            title: 'Calendar',
             url: '/events',
             icon: 'calendar',
             disabled: false

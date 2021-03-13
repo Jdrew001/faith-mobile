@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Item, Event } from '../../event.model';
 import { SharedService } from 'src/app/shared/shared.service';
 import { HelperService } from 'src/app/core/helper.service';
 import * as moment from 'moment';
@@ -13,7 +12,7 @@ import { EventBaseComponent } from '../event-base/event-base.component';
 })
 export class EventSingleComponent extends EventBaseComponent implements OnInit {
 
-  item: Item;
+  //item: Item;
   placeHolderImg = '';
 
   constructor(
@@ -24,7 +23,8 @@ export class EventSingleComponent extends EventBaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);
-    this.item = this.details.items[0];
+    // this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);
+    // this.item = this.details.items[0];
+    console.log('cal details', this.details);
   }
 }
