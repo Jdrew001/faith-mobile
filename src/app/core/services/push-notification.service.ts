@@ -49,7 +49,7 @@ export class PushNotificationService {
             this.sendTokenToService(token.value, val['jwt']);
           }
         }, err => {
-          this.emailService.sendErrorEmail(err);
+          //this.emailService.sendErrorEmail(err);
         });
       }
     );

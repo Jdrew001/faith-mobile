@@ -93,9 +93,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   fetchMenuConfig() {
-    this.menuService.fetchMenuReference().subscribe(ref => {
-      this.menuItems = ref;
-    });
+    // this.menuService.fetchMenuReference().subscribe(ref => {
+    //   this.menuItems = ref;
+    // });
   }
 
   getMenuItemStatus(name) {
