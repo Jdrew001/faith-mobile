@@ -5,4 +5,5 @@ export const environment = {
   BASE_URL: 'https://discoverfaitharlington.org:1447/',
   //BASE_URL: 'http://192.168.1.212:1337/',
   IMG_URL: 'https://discoverfaitharlington.org:1447',
+  CMS_URL: 'https://discoverfaitharlington.org:1447',
 };
