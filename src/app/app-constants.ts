@@ -25,8 +25,8 @@ export class AppConstants {
             disabled: false
         },
         {
-            title: 'Connect',
-            url: '/connect',
+            title: 'Bible Studies',
+            url: '/biblestudy',
             icon: 'book',
             disabled: false
         },

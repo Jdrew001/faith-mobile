@@ -56,7 +56,7 @@ export class SermonsComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     
-    this.fetchSermons(this.selectedDate);
+    //this.fetchSermons(this.selectedDate);
     this.audioPlayerService.audioState$.subscribe(value => {
       if (!value) {
         this.currentPlaying = null;

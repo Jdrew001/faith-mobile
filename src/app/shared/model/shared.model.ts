@@ -17,3 +17,9 @@ export class Image {
     url: string = '';
     width: number = 100;
 }
+
+export interface File {
+    id: number;
+    name: string;
+    url: string;
+}

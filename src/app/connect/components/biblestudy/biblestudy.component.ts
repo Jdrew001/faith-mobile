@@ -30,6 +30,6 @@ export class BiblestudyComponent implements OnInit {
 
   async viewFile(item) {
     const url = item.file.url;
-    await Browser.open({ url: environment.IMG_URL + url });
+    await Browser.open({ url: environment.CMS_URL + url });
   }
 }
