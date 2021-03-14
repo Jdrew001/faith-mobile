@@ -8,6 +8,7 @@ import { MinistriesPageRoutingModule } from './ministries-routing.module';
 
 import { MinistriesPage } from './ministries.page';
 import { SharedModule } from '../shared/shared.module';
+import { MinistriesService } from './ministries.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { SharedModule } from '../shared/shared.module';
     MinistriesPageRoutingModule,
     SharedModule
   ],
-  declarations: [MinistriesPage]
+  declarations: [MinistriesPage],
+  providers: [MinistriesService]
 })
 export class MinistriesPageModule {}
