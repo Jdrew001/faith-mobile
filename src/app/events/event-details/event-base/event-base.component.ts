@@ -14,7 +14,7 @@ export class EventBaseComponent implements OnInit {
 
   @Input('details') details: Calendar;
   @Input('activeMonth') activeMonth;
-  protected childDetails: any[] = [];
+  childDetails: any[] = [];
 
   constructor(
     protected sharedService: SharedService,
