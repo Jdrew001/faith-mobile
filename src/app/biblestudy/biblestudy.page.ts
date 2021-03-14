@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Browser } from '@capacitor/core';
 import { environment } from 'src/environments/environment';
+import { HelperService } from '../core/helper.service';
 import { BibleStudy } from './biblestudy.model';
 import { BiblestudyService } from './biblestudy.service';
 
@@ -12,12 +13,15 @@ import { BiblestudyService } from './biblestudy.service';
 export class BiblestudyPage implements OnInit {
 
   bibleStudies: Array<BibleStudy>;
+  placeHolderImg = '';
 
   constructor(
-    private bibleStudyService: BiblestudyService
+    private bibleStudyService: BiblestudyService,
+    private helperService: HelperService
   ) { }
 
   ngOnInit() {
+    this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true)
     this.fetchBibleStudies();
   }
 
