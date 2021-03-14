@@ -19,7 +19,7 @@ export class PrayerRequestsPage implements OnInit {
   get lastnameVal() { return this.formGroup.get('lastname').value; }
   get emailVal() { return this.formGroup.get('email').value; }
   get phoneVal() { return this.formGroup.get('phone').value; }
-  get notesval() { return this.formGroup.get('notes').value; }
+  get descriptionVal() { return this.formGroup.get('description').value; }
   charactersRemaining
   data = {
     firstName: '',
@@ -41,12 +41,11 @@ export class PrayerRequestsPage implements OnInit {
   submit() {
     if (this.formGroup.valid) {
       this.loaderService.toggleLoader(true);
-      this.emailService.sendEmail(this.prayerRequestFormService.firstnameVal, this.prayerRequestFormService.lastnameVal,
-        this.prayerRequestFormService.emailVal, this.prayerRequestFormService.phoneVal, this.prayerRequestFormService.notesval).then(res => {
-          this.toastService.presetToast('Successfully submitted prayer request', 'success');
-          this.formGroup.reset();
-          this.loaderService.toggleLoader(false);
-        }, err => this.toastService.presetToast('An error has occurred', 'danger'));
+      this.prayerRequestFormService.uploadContact(this.formGroup.getRawValue()).subscribe(res => {
+        this.toastService.presetToast('Successfully submitted contact request', 'success');
+        this.loaderService.toggleLoader(false);
+        this.reset();
+      });
       return;
     }
 
@@ -55,6 +54,6 @@ export class PrayerRequestsPage implements OnInit {
 
   reset() {
     this.formGroup.reset();
-    this.formGroup.get('notes').setValue('');
+    this.formGroup.get('description').setValue('');
   }
 }

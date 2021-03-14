@@ -13,7 +13,7 @@ export class AppConstants {
             disabled: false
         },
         {
-            title: 'Prayer Requests',
+            title: 'Contact Us',
             url: '/prayer-requests',
             icon: 'chatbubbles',
             disabled: false
