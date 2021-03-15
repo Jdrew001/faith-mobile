@@ -97,7 +97,7 @@ export class PushNotificationService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + appToken
     } 
-    this.http.post(url, {Token: token}, {headers: headers}).subscribe(res => {
+    this.http.post(url, {token: token}, {headers: headers}).subscribe(res => {
     }, err => {
       console.log(err);
     });
