@@ -23,8 +23,5 @@ export class EventSingleComponent extends EventBaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);
-    // this.item = this.details.items[0];
-    console.log('cal details', this.details);
   }
 }

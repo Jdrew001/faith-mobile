@@ -4,7 +4,8 @@ import * as moment from 'moment';
 export enum Frequency {
     NONE = "NONE",
     MONTHLY = "MONTHLY",
-    WEEKLY = "WEEKLY"
+    WEEKLY = "WEEKLY",
+    DAILY = "DAILY"
 }
 
 @Injectable()
@@ -18,6 +19,8 @@ export class DateUtils {
                 return this.getMonthlyDates(startDate, endDate);
             case Frequency.WEEKLY:
                 return this.getWeeklyDates(startDate, endDate);
+            case Frequency.DAILY:
+                return this.getDailyDates(startDate, endDate);
         }
     }
 
@@ -54,7 +57,20 @@ export class DateUtils {
             arr.push(temp.format('YYYY-MM-DD'));
         }
 
-        console.log('arr', arr);
+        return arr;
+    }
+
+    private getDailyDates(start: string, end: string) {
+        let startDate = moment(start);
+        let endDate = moment(end);
+        let temp = startDate.day(startDate.day());
+        let arr = [];
+        arr.push(temp.format('YYYY-MM-DD'));
+
+        while(temp.isBefore(endDate)) {
+            temp.add(1, 'days');
+            arr.push(temp.format('YYYY-MM-DD'));
+        }
         return arr;
     }
 }
