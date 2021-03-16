@@ -8,7 +8,7 @@
         <ng-container>
           <ion-row>
             <div class="upcoming-container">
-              <h3>Title</h3>
+              <h3>What</h3>
               <span class="half-border"></span>
             </div>
           </ion-row>
@@ -31,7 +31,7 @@
             </div>
           </ion-row>
           <ion-row>
-            <h4 *ngIf="convertToLocalDate(details.start)">{{ convertToLocalDate(details.start) }}<br> {{ convertToLocalTime(details.start) }}</h4>
+            <h4 *ngIf="convertToLocalDate(details.start)">{{ convertToLocalDate(details.start) }}<br> {{ convertToLocalTimeFromDate(details.start) }}</h4>
           </ion-row>
         </ng-container>
       </ion-card-content>
@@ -55,20 +55,4 @@
       </ion-card-content>
     </ion-card>
   </ion-row>
-  
-  
-
-  <!-- <ng-container>
-    <ion-row>
-      <ng-container>
-        <ion-card class="container-card">
-          <ion-card-content class="container-content">
-            <ng-container>
-             
-            </ng-container>
-          </ion-card-content>
-        </ion-card>
-      </ng-container>
-    </ion-row>
-  </ng-container> -->
 </div>
