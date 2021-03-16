@@ -27,7 +27,7 @@ export class EventsPage implements OnInit, OnDestroy {
   tempCalItems: Array<Calendar>;
 
   private _activeMonth: number;
-  set activeMonth(val: CalendarComponentPayloadTypes) { this._activeMonth =  moment(val).month() +1;}
+  set activeMonth(val: CalendarComponentPayloadTypes | Date) { this._activeMonth =  moment(val).month() +1;}
   get activeMonth() { return this._activeMonth; }
 
   constructor(private eventService: EventService,
@@ -81,7 +81,8 @@ export class EventsPage implements OnInit, OnDestroy {
     });
     const options: CalendarModalOptions = {
       daysConfig: this.daysConfig,
-      canBackwardsSelected: true
+      canBackwardsSelected: true,
+      showAdjacentMonthDay: false
     };
     this.cal.options = options;
     this.activeMonth = this.cal.getViewDate();
@@ -116,11 +117,12 @@ export class EventsPage implements OnInit, OnDestroy {
     this.tempCalItems = this.calendarItems;
     this.daySelected = false;
     this.date = null;
+    this.getMonthEvents();
   }
 
   onChangeMonth(e) {
-    this.daySelected = false;
-    this.date = null;
+    this.activeMonth = new Date(e['newMonth']['dateObj']);
+    this.unSelectDate();
   }
 
   async navigationToDetail(obj) {

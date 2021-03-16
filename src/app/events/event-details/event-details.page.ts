@@ -35,7 +35,6 @@ export class EventDetailsPage implements OnInit, OnDestroy {
     this.type = this.calendar.repeatable === Frequency.NONE ? EventConstant.EVENT_TYPES.single : EventConstant.EVENT_TYPES.multi;
     this.getImageColor();
     this.colorSub.subscribe(val => this.isDark = val.isDark);
-    console.log('active month', this.activeMonth);
   }
 
   dismissPage() {
