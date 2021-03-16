@@ -30,6 +30,10 @@ export class EventsPage implements OnInit, OnDestroy {
   set activeMonth(val: CalendarComponentPayloadTypes | Date) { this._activeMonth =  moment(val).month() +1;}
   get activeMonth() { return this._activeMonth; }
 
+  private _activeYear: number;
+  set activeYear(val: CalendarComponentPayloadTypes | Date) { this._activeYear =  moment(val).year();}
+  get activeYear() { return this._activeYear; }
+
   constructor(private eventService: EventService,
     private navController: NavController,
     private helperService: HelperService,
@@ -60,14 +64,11 @@ export class EventsPage implements OnInit, OnDestroy {
   addAllDatesToCalItems(items: Array<Calendar>) {
     items.forEach(val => {
       if (val.repeatable !== Frequency.NONE) {
-        console.log(val);
         val.allDates = this.dateUtils.getDateRange(val.repeatable, val.start, val.end)
       } else {
         val.allDates = [moment(val.start).format('YYYY-MM-DD')];
       }
     });
-
-    console.log('items', items);
   }
 
   initializeCalendar(cals: Calendar[]) {
@@ -86,17 +87,20 @@ export class EventsPage implements OnInit, OnDestroy {
     };
     this.cal.options = options;
     this.activeMonth = this.cal.getViewDate();
+    this.activeYear = this.cal.getViewDate();
   }
 
   onNext() {
     this.cal.next();
     this.activeMonth = this.cal.getViewDate();
+    this.activeYear = this.cal.getViewDate();
     this.getMonthEvents();
   }
 
   onPrev() {
     this.cal.prev();
     this.activeMonth = this.cal.getViewDate();
+    this.activeYear = this.cal.getViewDate();
     this.getMonthEvents();
   }
 
@@ -122,6 +126,7 @@ export class EventsPage implements OnInit, OnDestroy {
 
   onChangeMonth(e) {
     this.activeMonth = new Date(e['newMonth']['dateObj']);
+    this.activeYear = new Date(e['newMonth']['dateObj']);
     this.unSelectDate();
   }
 
@@ -131,7 +136,8 @@ export class EventsPage implements OnInit, OnDestroy {
       cssClass: 'my-custom-class',
       componentProps: {
         'calendar': obj,
-        'activeMonth': this.activeMonth
+        'activeMonth': this.activeMonth,
+        'activeYear': this.activeYear
       }
     });
     return await modal.present();
@@ -154,7 +160,7 @@ export class EventsPage implements OnInit, OnDestroy {
 
   private getMonthEvents() {
     this.tempCalItems = this.calendarItems.filter(x => {
-      return x.allDates.find(i => (moment(i).month() + 1) == this.activeMonth);
+      return x.allDates.find(i => (moment(i).month() + 1) == this.activeMonth && (moment(i).year()) == this.activeYear);
     });
   }
 
