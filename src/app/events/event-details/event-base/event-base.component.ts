@@ -54,7 +54,8 @@ export class EventBaseComponent implements OnInit {
           time: item.time,
           cancelledDates: item.cancelledDates,
           image: item.image,
-          date: item.date
+          date: item.date,
+          cancelled: this.cancelEvent(eventDates[i], item)
         }
         event.date = eventDates[i];
         occuranceEvents.push(event);
@@ -88,6 +89,17 @@ export class EventBaseComponent implements OnInit {
     }
 
     return events;
+  }
+
+  private cancelEvent(date: string, item: Event) {
+    let result = false;
+    item && item.cancelledDates ? item.cancelledDates.forEach(obj => {
+      let d = moment(obj.date).format('YYYY-MM-DD');
+
+      result = date == d;
+    }): '';
+
+    return result;
   }
 
 }

@@ -64,7 +64,8 @@ export class EventsPage implements OnInit, OnDestroy {
   addAllDatesToCalItems(items: Array<Calendar>) {
     items.forEach(val => {
       if (val.repeatable !== Frequency.NONE) {
-        val.allDates = this.dateUtils.getDateRange(val.repeatable, val.start, val.end)
+        val.allDates = this.dateUtils.getDateRange(val.repeatable, val.start, val.end);
+        this.updateAllDatesFromCancelled(val);
       } else {
         val.allDates = [moment(val.start).format('YYYY-MM-DD')];
       }
@@ -161,6 +162,13 @@ export class EventsPage implements OnInit, OnDestroy {
   private getMonthEvents() {
     this.tempCalItems = this.calendarItems.filter(x => {
       return x.allDates.find(i => (moment(i).month() + 1) == this.activeMonth && (moment(i).year()) == this.activeYear);
+    });
+  }
+
+  private updateAllDatesFromCancelled(val) {
+    val.cancelledDates.forEach(item => {
+      let index = val.allDates.findIndex(x => x == moment(item['date']).format('YYYY-MM-DD'));
+      index != -1 ? val.allDates.splice(index, 1): '';
     });
   }
 

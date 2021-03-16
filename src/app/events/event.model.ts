@@ -8,7 +8,7 @@ export interface Calendar {
     repeatable: Frequency;
     start: string;
     end: string;
-    cancelledDates: Array<String>;
+    cancelledDates: any[];
     image: Image;
     events: Array<Event>;
     allDates: Array<string>;
@@ -19,9 +19,10 @@ export interface Event {
     description: string;
     title: string;
     time: string;
-    cancelledDates: Array<String>;
+    cancelledDates: Array<any>;
     image: Image;
     date: string;
+    cancelled: boolean;
 }
 
 export interface Image {

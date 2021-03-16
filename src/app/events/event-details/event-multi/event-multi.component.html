@@ -28,7 +28,7 @@
             <div style="text-align: center;">
               <h2 *ngIf="convertToLocalDate(item.date)"><strong>{{ convertToLocalDate(item.date) }}</strong></h2>
               <ng-container *ngFor="let e of item.occuranceEvents">
-                <h4>{{ e.title }} <span *ngIf="convertToLocalTime(e.time)">{{ convertToLocalTime(e.time) }}</span></h4>
+                <h4><span [ngStyle]="{'text-decoration': e.cancelled ? 'line-through' : 'none'}">{{ e.title }} <span *ngIf="convertToLocalTime(e.time)">{{ convertToLocalTime(e.time) }}</span></span><span style="color: #E02E2E !important; font-weight: 800;" *ngIf="e.cancelled"> - CANCELLED</span></h4>
               </ng-container>
             </div>
           </ion-card-content>
@@ -50,7 +50,7 @@
             <div style="text-align: center;">
               <h2 *ngIf="convertToLocalDate(item.date)"><strong>{{ convertToLocalDate(item.date) }}</strong></h2>
               <ng-container *ngFor="let e of item.occuranceEvents">
-                <h4>{{ e.title }} <span *ngIf="convertToLocalTime(e.time)">{{ convertToLocalTime(e.time) }}</span></h4>
+                <h4><span [ngStyle]="{'text-decoration': e.cancelled ? 'line-through' : 'none'}">{{ e.title }} <span *ngIf="convertToLocalTime(e.time)">{{ convertToLocalTime(e.time) }}</span></span><span *ngIf="e.cancelled"> - CANCELLED</span></h4>
               </ng-container>
             </div>
           </ion-card-content>

@@ -22,9 +22,6 @@ export class EventMultiComponent extends EventBaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);
-    // this.childDetails = this.details.items;
-    console.log('test!', this.childDetails);
     this.setUpcomingEvents();
   }
 }
