@@ -16,7 +16,7 @@ import { Frequency } from '../utils/date.utils';
 })
 export class EventDetailsPage implements OnInit, OnDestroy {
 
-  details: Calendar = null;
+  calDetails: Calendar = null;
   @Input() calendar: Calendar;
   @Input() activeMonth: number;
   type: string;
@@ -31,7 +31,7 @@ export class EventDetailsPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     // let that = this;
-    this.details = this.calendar;
+    this.calDetails = this.calendar;
     this.type = this.calendar.repeatable === Frequency.NONE ? EventConstant.EVENT_TYPES.single : EventConstant.EVENT_TYPES.multi;
     this.getImageColor();
     this.colorSub.subscribe(val => this.isDark = val.isDark);
@@ -39,7 +39,7 @@ export class EventDetailsPage implements OnInit, OnDestroy {
 
   dismissPage() {
     this.modalCtrl.dismiss();
-    this.details = null;
+    this.calDetails = null;
   }
 
   ngOnDestroy() {
@@ -51,7 +51,7 @@ export class EventDetailsPage implements OnInit, OnDestroy {
     const fac = new FastAverageColor();
     var c = this;
     imgObj.crossOrigin = "Anonymous";
-    imgObj.src = this.sharedService.getImage(this.details.image.url);
+    imgObj.src = this.sharedService.getImage(this.calDetails.image.url);
     fac.getColorAsync(imgObj).then(val => {
       c.colorSub.next(val); 
     });

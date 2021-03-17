@@ -54,9 +54,9 @@ export class EventsPage implements OnInit, OnDestroy {
     this.eventService.fetchCalendar().subscribe(res => {
       this.calendarItems = res;
       this.tempCalItems = res;
-      this.addAllDatesToCalItems(this.calendarItems);
+      //this.addAllDatesToCalItems(this.calendarItems); // remove code
       this.initializeCalendar(this.calendarItems);
-      this.getAllEventsFromCal(this.calendarItems);
+      //this.getAllEventsFromCal(this.calendarItems); // remove code
       this.getMonthEvents();
     });
   }
@@ -70,16 +70,18 @@ export class EventsPage implements OnInit, OnDestroy {
         val.allDates = [moment(val.start).format('YYYY-MM-DD')];
       }
     });
+
+    console.log('items', JSON.stringify(items));
   }
 
   initializeCalendar(cals: Calendar[]) {
     cals.forEach(item => {
-      item.allDates.forEach(d => {
+      item.details.forEach(d => {
         this.daysConfig.push({
-          date: d,
+          date: d.date,
           cssClass: 'day-style animated fadeIn faster'
         });
-      })
+      });
     });
     const options: CalendarModalOptions = {
       daysConfig: this.daysConfig,

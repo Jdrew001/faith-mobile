@@ -12,6 +12,7 @@ export interface Calendar {
     image: Image;
     events: Array<Event>;
     allDates: Array<string>;
+    details: Array<Detail>;
 }
 
 export interface Event {
@@ -29,4 +30,20 @@ export interface Image {
     id: string;
     name: string;
     url: string;
+}
+
+export interface Detail {
+    title: string;
+    description: string;
+    repeatable: string;
+    isCancelled: boolean;
+    events: Array<DetailEvent>;
+    image: Image;
+    date: string;
+}
+
+export interface DetailEvent {
+    title: string;
+    time: string;
+    isCancelled: boolean;
 }
