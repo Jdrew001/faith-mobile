@@ -14,11 +14,30 @@
           </ion-row>
           <ion-row>
             <h3 class="description">{{ details.title }}</h3>
+            <h3 class="description">{{details.description}}</h3>
           </ion-row>
         </ng-container>
       </ion-card-content>
     </ion-card>
   </ion-row>
+
+  <!-- <ion-row>
+    <ion-card class="container-card">
+      <ion-card-content class="container-content">
+        <ng-container>
+          <ion-row>
+            <div class="upcoming-container">
+              <h3>Description</h3>
+              <span class="half-border"></span>
+            </div>
+          </ion-row>
+          <ion-row>
+            
+          </ion-row>
+        </ng-container>
+      </ion-card-content>
+    </ion-card>
+  </ion-row> -->
   
   <ion-row>
     <ion-card class="container-card">
@@ -32,24 +51,6 @@
           </ion-row>
           <ion-row>
             <h4 *ngIf="convertToLocalDate(details.start)">{{ convertToLocalDate(details.start) }}<br> {{ convertToLocalTimeFromDate(details.start) }}</h4>
-          </ion-row>
-        </ng-container>
-      </ion-card-content>
-    </ion-card>
-  </ion-row>
-  
-  <ion-row>
-    <ion-card class="container-card">
-      <ion-card-content class="container-content">
-        <ng-container>
-          <ion-row>
-            <div class="upcoming-container">
-              <h3>Description</h3>
-              <span class="half-border"></span>
-            </div>
-          </ion-row>
-          <ion-row>
-            <h3 class="description">{{details.description}}</h3>
           </ion-row>
         </ng-container>
       </ion-card-content>

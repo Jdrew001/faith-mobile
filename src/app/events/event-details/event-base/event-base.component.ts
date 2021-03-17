@@ -43,34 +43,13 @@ export class EventBaseComponent implements OnInit {
   //   return marked(item);
   // }
   setUpcomingEvents() {
-    let eventDates = this.details.allDates.filter(x => (moment(x).month() + 1) == this.activeMonth);
-    for (let i = 0; i < eventDates.length; i++) {
-      let occuranceEvents = [];
-      this.details.events.forEach(item => {
-        let event: Event = {
-          id: item.id,
-          description: item.description,
-          title: item.title,
-          time: item.time,
-          cancelledDates: item.cancelledDates,
-          image: item.image,
-          date: item.date,
-          cancelled: this.cancelEvent(eventDates[i], item)
-        }
-        event.date = eventDates[i];
-        occuranceEvents.push(event);
-      });
-      let occurance = {
-        description: this.details.description,
-        date: eventDates[i],
-        occuranceEvents: occuranceEvents
-      }
-      this.childDetails.push(occurance);
-    }
+    let eventDates = this.details.details.filter(x => (moment(x.date).month() + 1) == this.activeMonth);
+    this.childDetails = eventDates
   }
 
   getUpcomingEvents() {
     let events = [];
+    console.log(this.childDetails)
     if (this.childDetails) {
       events = this.childDetails.filter(x => {
         return moment(new Date()).diff(x.date) <= 0;

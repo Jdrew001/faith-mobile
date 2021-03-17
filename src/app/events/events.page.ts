@@ -3,7 +3,7 @@ import { CalendarComponent, DayConfig, CalendarModalOptions, CalendarComponentOp
 import { EventService } from './event.service';
 import { NavController, ModalController } from '@ionic/angular';
 import { HelperService } from '../core/helper.service';
-import { Calendar, Event } from './event.model';
+import { Calendar, Detail, Event } from './event.model';
 import * as moment from 'moment';
 import { DateUtils, Frequency } from './utils/date.utils';
 import { EventConstant } from './EventConstant';
@@ -42,7 +42,6 @@ export class EventsPage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    //this.getMonthEvents(new Date());
     this.fetchCalendar();
   }
 
@@ -54,28 +53,15 @@ export class EventsPage implements OnInit, OnDestroy {
     this.eventService.fetchCalendar().subscribe(res => {
       this.calendarItems = res;
       this.tempCalItems = res;
-      //this.addAllDatesToCalItems(this.calendarItems); // remove code
       this.initializeCalendar(this.calendarItems);
-      //this.getAllEventsFromCal(this.calendarItems); // remove code
       this.getMonthEvents();
     });
   }
 
-  addAllDatesToCalItems(items: Array<Calendar>) {
-    items.forEach(val => {
-      if (val.repeatable !== Frequency.NONE) {
-        val.allDates = this.dateUtils.getDateRange(val.repeatable, val.start, val.end);
-        this.updateAllDatesFromCancelled(val);
-      } else {
-        val.allDates = [moment(val.start).format('YYYY-MM-DD')];
-      }
-    });
-
-    console.log('items', JSON.stringify(items));
-  }
-
   initializeCalendar(cals: Calendar[]) {
     cals.forEach(item => {
+      // remove any cancelled items
+      this.updateAllDatesFromCancelled(item);
       item.details.forEach(d => {
         this.daysConfig.push({
           date: d.date,
@@ -150,11 +136,6 @@ export class EventsPage implements OnInit, OnDestroy {
     return this.helperService.getResourceUrl(EventConstant.EMPTY_EVENT_IMAGE, true);
   }
 
-  getAllEventsFromCal(calendarItems: Array<Calendar>) {
-    this.events = [];
-    calendarItems.forEach(item => item.events.forEach(val => this.events.push(val)));
-  }
-
   private getDayEvents(date) {
     this.tempCalItems = this.calendarItems.filter(x => {
       return x.allDates.find(i => i === date);
@@ -167,11 +148,13 @@ export class EventsPage implements OnInit, OnDestroy {
     });
   }
 
-  private updateAllDatesFromCancelled(val) {
+  private updateAllDatesFromCancelled(val: Calendar) {
     val.cancelledDates.forEach(item => {
       let index = val.allDates.findIndex(x => x == moment(item['date']).format('YYYY-MM-DD'));
       index != -1 ? val.allDates.splice(index, 1): '';
     });
+
+    val.details = val.details.filter(x => !x.isCancelled);
   }
 
 }
