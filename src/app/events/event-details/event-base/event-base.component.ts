@@ -15,13 +15,16 @@ export class EventBaseComponent implements OnInit {
   @Input('details') details: Calendar;
   @Input('activeMonth') activeMonth;
   childDetails: any[] = [];
+  placeHolderImg = '';
 
   constructor(
     protected sharedService: SharedService,
     protected helperService: HelperService
     ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.placeHolderImg = this.helperService.getResourceUrl('images/placeholder-image.jpg', true);
+  }
 
   getImage(imgUrl) {
     return this.sharedService.getImage(imgUrl);

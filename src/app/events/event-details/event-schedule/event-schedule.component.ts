@@ -12,8 +12,6 @@ import { EventBaseComponent } from '../event-base/event-base.component';
 })
 export class EventScheduleComponent extends EventBaseComponent implements OnInit {
 
-  placeHolderImg = '';
-
   constructor(
     protected sharedService: SharedService,
     protected helperService: HelperService

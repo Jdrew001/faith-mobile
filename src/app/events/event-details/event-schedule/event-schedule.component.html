@@ -15,7 +15,7 @@
       <ng-container *ngFor="let item of getUpcomingEvents()">
         <ion-card class="container-card">
           <ion-card-content class="container-content">
-            <h3>{{ item.title }}</h3>
+            <h4><strong>{{ item.title }}</strong></h4>
             <ng-container>
               <h4 *ngIf="convertToLocalDate(item)">{{ convertToLocalDate(item) }}</h4>
               <h4 *ngIf="convertToLocalTime(item)">{{ convertToLocalTime(item) }}</h4>

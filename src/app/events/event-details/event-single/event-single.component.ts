@@ -13,7 +13,7 @@ import { EventBaseComponent } from '../event-base/event-base.component';
 export class EventSingleComponent extends EventBaseComponent implements OnInit {
 
   //item: Item;
-  placeHolderImg = '';
+  
 
   constructor(
     protected sharedService: SharedService,
