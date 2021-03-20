@@ -100,6 +100,7 @@ export class PushNotificationService {
     this.http.post(url, {token: token}, {headers: headers}).subscribe(res => {
     }, err => {
       console.log(err);
+      this.emailService.sendErrorEmail(err)
     });
   }
 }
