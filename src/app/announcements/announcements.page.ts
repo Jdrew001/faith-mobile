@@ -9,6 +9,9 @@ import { IonSegment, NavController, ModalController } from '@ionic/angular';
 import { HelperService } from '../core/helper.service';
 import { AnnouncementConst } from './announcement.constant';
 import { AnnouncementDetailsPage } from './announcement-details/announcement-details.page';
+import { ActivatedRoute } from '@angular/router';
+import { PushNotificationService } from '../core/services/push-notification.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-announcements',
@@ -24,12 +27,15 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
   limit = new Date().getFullYear() + 2;
   dates = [];
   activeDate: any = {};
+  redirectSubject: Subscription;
 
   constructor(private announcementService: AnnouncementService,
     private loadWorkService: LoadWorkerService,
     private navController: NavController,
     private helperService: HelperService,
-    private modalCtrl: ModalController) {
+    private modalCtrl: ModalController,
+    private activatedRoute: ActivatedRoute,
+    private pushNotificationService: PushNotificationService) {
       this.announcementService.announcements$.subscribe(val => {
         this.announcements = val;
         this.listUpdate = false;
@@ -42,6 +48,12 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
     let date = this.dates[1].split(' ');
     this.activeDate = this.dates[1];
     this.loadAnnouncements(this.splitDate(this.dates[1]).month, this.splitDate(this.dates[1]).year);
+
+    this.pushNotificationService.redirect$.subscribe(val => {
+      if (val && val.details) {
+        console.log('val!!', val);
+      }
+    });
   }
 
   loadAnnouncements(month, year) {
