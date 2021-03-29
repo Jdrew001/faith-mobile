@@ -12,7 +12,6 @@ import { ToastService } from './toast.service';
 import { EmailService } from './email.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-
 const { PushNotifications } = Plugins;
 
 @Injectable({
@@ -21,6 +20,7 @@ const { PushNotifications } = Plugins;
 export class PushNotificationService {
 
   redirect$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  pushModalShow$: BehaviorSubject<any> = new BehaviorSubject<any>(false);
 
   constructor(private http: HttpClient,
     private helperService: HelperService,
@@ -79,12 +79,21 @@ export class PushNotificationService {
       (notification: PushNotificationActionPerformed) => {
         if (notification) {
           const data = notification.notification.data;
-          let obj = JSON.parse(data.details);
-          this.redirect$.next({'details': obj, 'type': data.type});
-          this.navigateToApp(data.type);
+          if (data.type === 'firebase') {
+            this.pushModalShow$.next({show: true, data: data.id});
+          } else {
+            let obj = data && data.details ? JSON.parse(data.details): '';
+            this.redirect$.next({'details': obj, 'type': data.type});
+            this.navigateToApp(data.type);
+          }          
         }
       }
     );
+  }
+
+  fetchNotification(id) {
+    const url = this.helperService.getResourceUrl(`notifications/${id}`);
+    return this.http.get(url);
   }
 
   private navigateToApp(e) {

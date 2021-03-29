@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { AudioPlayerComponent } from './components/audio-player/audio-player.component';
 import { AudioPlayerService } from './services/audio-player.service';
 import { PopoverComponent } from './components/popover/popover.component';
+import { PushDetailsComponent } from './components/push-details/push-details.component';
 
 
 @NgModule({
@@ -29,10 +30,12 @@ import { PopoverComponent } from './components/popover/popover.component';
     PhoneMaskDirective,
     VideoComponent,
     AudioPlayerComponent,
-    PopoverComponent
+    PopoverComponent,
+    PushDetailsComponent
   ],
   entryComponents: [
-    PopoverComponent
+    PopoverComponent,
+    PushDetailsComponent
   ],
   imports: [
     CommonModule,
