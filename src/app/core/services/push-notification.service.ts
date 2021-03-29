@@ -77,27 +77,20 @@ export class PushNotificationService {
     // Method called when tapping on a notification
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: PushNotificationActionPerformed) => {
-
-        /**
-         * TODO:
-         * 
-         * Depending on the type do the following
-         * 
-         * 1. navigate to the respective page
-         * 2. open up that specific item
-         */
-        const data = notification.notification.data;
-        console.log('notification', data.dataType);
-        console.log('notification!!!', data.detailsId);
-        this.redirect$.next({'details': data.detailsId, 'dataType': data.dataType});
+        if (notification) {
+          const data = notification.notification.data;
+          let obj = JSON.parse(data.details);
+          this.redirect$.next({'details': obj, 'type': data.type});
+          this.navigateToApp(data.type);
+        }
       }
     );
   }
 
-  private navigateToApp(e, details) {
-    switch (details) {
+  private navigateToApp(e) {
+    switch (e) {
       case CoreConstants.PUSH_IDS.announcement: 
-      this.router.navigateByUrl('/announcements', { queryParams: { data: e } })
+      this.router.navigateByUrl('/announcements')
       break;
       case CoreConstants.PUSH_IDS.event:
         this.router.navigateByUrl('/events', )

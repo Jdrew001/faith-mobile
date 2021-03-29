@@ -132,7 +132,8 @@ ion-input {
 
 .ribbon-holder {
     overflow: hidden;
-    position: relative
+    position: relative;
+    width: 100%;
   }
   .ribbon {
     position: absolute;
@@ -145,5 +146,81 @@ ion-input {
     left: auto;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
-    width: 45%;
+    width: 40%;
   }
+
+.ribbon p {
+    font-family: 'Oswald', sans-serif !important;
+}
+
+@media screen and (max-width: 1025px) {
+    .ribbon {
+        width: 32% !important;
+        top: 26px !important;
+        right: -115px !important;
+    }
+
+    .ribbon p {
+        font-size: 25px !important;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .ribbon {
+        width: 40% !important;
+        top: 26px !important;
+        right: -115px !important;
+    }
+
+    .ribbon p {
+        font-size: 17px !important;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .ribbon {
+        width: 40% !important;
+        top: 20px !important;
+        right: -50px !important;
+    }
+
+    .ribbon p {
+        font-size: 12px !important;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .ribbon {
+        width: 43% !important;
+        top: 20px !important;
+        right: -50px !important;
+    }
+
+    .ribbon p {
+        font-size: 12px !important;
+    }
+}
+
+@media screen and (max-width: 365px) {
+    .ribbon {
+        width: 46% !important;
+        top: 20px !important;
+        right: -50px !important;
+    }
+
+    .ribbon p {
+        font-size: 12px !important;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .ribbon {
+        width: 50% !important;
+        top: 20px !important;
+        right: -50px !important;
+    }
+
+    .ribbon p {
+        font-size: 12px !important;
+    }
+}

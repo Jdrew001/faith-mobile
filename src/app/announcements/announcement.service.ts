@@ -20,13 +20,9 @@ export class AnnouncementService {
     private helperService: HelperService,
     private loadWorkerService: LoadWorkerService) { }
 
-  fetchAnnouncements(event = null) {
+  fetchAnnouncements() {
     const url = this.helperService.getResourceUrl(AnnouncementConst.ANNOUNCEMENTS, false);
-    return this.httpClient.get<any[]>(url).subscribe(val => {
-      this.announcements$.next(val);
-      this.loadWorkerService.announcementLoad$.next(false);
-      this.cancelRefresh(event);
-    }, err => this.handleError(err));
+    return this.httpClient.get<any[]>(url);
   }
   
   fetchFilteredAnnouncements(month, year) {

@@ -13,7 +13,7 @@
   <ion-row *ngFor="let item of announcements" style="margin-top:0% !important; padding: 10px;">
 
     <div class="ribbon-holder">
-      <div class="ribbon ribbon-holder"><P>NEW</P></div>
+      <div *ngIf="item['isNew']" class="ribbon ribbon-holder"><P>NEW</P></div>
       <ion-img class="announcement-image" [src]="loadImage(item?.image?.url)"></ion-img>
     </div>
     </ion-row>

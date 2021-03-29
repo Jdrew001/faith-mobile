@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { AnnouncementService } from './announcement.service';
 import { LoadWorkerService } from '../core/load-worker.service';
 import { Announcement } from './announcement.model';
@@ -35,11 +35,8 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
     private helperService: HelperService,
     private modalCtrl: ModalController,
     private activatedRoute: ActivatedRoute,
-    private pushNotificationService: PushNotificationService) {
-      this.announcementService.announcements$.subscribe(val => {
-        this.announcements = val;
-        this.listUpdate = false;
-      });
+    private pushNotificationService: PushNotificationService,
+    private changeDetection: ChangeDetectorRef) {
     }
 
   ngOnInit() {
@@ -47,17 +44,25 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
     this.activeDate = this.dates.find(x => x.active);
     let date = this.dates[1].split(' ');
     this.activeDate = this.dates[1];
-    this.loadAnnouncements(this.splitDate(this.dates[1]).month, this.splitDate(this.dates[1]).year);
 
     this.pushNotificationService.redirect$.subscribe(val => {
       if (val && val.details) {
-        console.log('val!!', val);
+        this.announcements = [];
+        this.loadAnnouncements();
       }
     });
   }
 
-  loadAnnouncements(month, year) {
-    this.announcementService.fetchAnnouncements();
+  ionViewDidEnter() {
+    this.loadAnnouncements();
+  }
+
+  loadAnnouncements() {
+    this.announcementService.fetchAnnouncements().subscribe(res => {
+      this.announcements = res;
+      this.listUpdate = false;
+      this.changeDetection.detectChanges();
+    });
   }
 
   updateList(event) {
