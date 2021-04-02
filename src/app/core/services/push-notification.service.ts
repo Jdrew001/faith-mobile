@@ -11,7 +11,7 @@ import { AuthorizationService } from './authorization.service';
 import { ToastService } from './toast.service';
 import { EmailService } from './email.service';
 import { Router } from '@angular/router';
-
+import { BehaviorSubject } from 'rxjs';
 const { PushNotifications } = Plugins;
 
 @Injectable({
@@ -19,12 +19,18 @@ const { PushNotifications } = Plugins;
 })
 export class PushNotificationService {
 
+  redirect$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  pushModalShow$: BehaviorSubject<any> = new BehaviorSubject<any>(false);
+
   constructor(private http: HttpClient,
     private helperService: HelperService,
     private authorizationService: AuthorizationService,
     private toastService: ToastService,
     private emailService: EmailService,
     private router: Router) {
+  }
+
+  init() {
     this.grantPermission();
     this.notificationSubscription();
   }
@@ -46,6 +52,7 @@ export class PushNotificationService {
       (token: PushNotificationToken) => {
         this.authorizationService.retrieveToken().subscribe(val => {
           if (val) {
+            console.log('success');
             this.sendTokenToService(token.value, val['jwt']);
           }
         }, err => {
@@ -57,6 +64,7 @@ export class PushNotificationService {
     // Some issue with our setup and push will not work
     PushNotifications.addListener('registrationError',
       (error: any) => {
+        console.log('error', error);
       }
     );
 
@@ -69,24 +77,38 @@ export class PushNotificationService {
     // Method called when tapping on a notification
     PushNotifications.addListener('pushNotificationActionPerformed',
       (notification: PushNotificationActionPerformed) => {
-        //this.navigateToApp(notification.notification.data['id']);
+        if (notification) {
+          const data = notification.notification.data;
+          if (data.type === 'firebase') {
+            this.pushModalShow$.next({show: true, data: data.id});
+          } else {
+            let obj = data && data.details ? JSON.parse(data.details): '';
+            this.redirect$.next({'details': obj, 'type': data.type});
+            this.navigateToApp(data.type);
+          }          
+        }
       }
     );
+  }
+
+  fetchNotification(id) {
+    const url = this.helperService.getResourceUrl(`notifications/${id}`);
+    return this.http.get(url);
   }
 
   private navigateToApp(e) {
     switch (e) {
       case CoreConstants.PUSH_IDS.announcement: 
-      this.router.navigate(['/announcements'])
+      this.router.navigateByUrl('/announcements')
       break;
       case CoreConstants.PUSH_IDS.event:
-        this.router.navigate(['/events'])
+        this.router.navigateByUrl('/events', )
       break
       case CoreConstants.PUSH_IDS.biblestudy:
-        this.router.navigate(['/connect', { section: {id: 'biblestudy'} }])
+        this.router.navigateByUrl('/connect')
       break;
       case CoreConstants.PUSH_IDS.sermon:
-        this.router.navigate(['/connect', { section: 'sermon' }])
+        this.router.navigateByUrl('/connect')
       break;
     }
   }

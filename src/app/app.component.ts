@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
 
-import { Platform, IonContent, AnimationController } from '@ionic/angular';
+import { Platform, IonContent, AnimationController, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { AudioPlayerService } from './shared/services/audio-player.service';
 import { Sermon, SermonData } from './connect/components/sermons/sermons.model';
 import { Plugins } from '@capacitor/core';
+import { PushDetailsComponent } from './shared/components/push-details/push-details.component';
 
 const { Browser } = Plugins;
 
@@ -48,7 +49,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
     private pushNotificationService: PushNotificationService,
     private router: Router,
     private audioPlayerService: AudioPlayerService,
-    private animationCtrl: AnimationController
+    private animationCtrl: AnimationController,
+    private modalController: ModalController
   ) {
     this.initializeApp();
     this.fetchMenuConfig();
@@ -68,6 +70,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      this.pushNotificationService.init();
+      this.pushModalSub();
     });
   }
 
@@ -88,6 +92,17 @@ export class AppComponent implements OnInit, AfterViewChecked {
       } else {
         this.showAudio = false;
         this.currentPlaying = null;
+      }
+    });
+  }
+
+  pushModalSub() {
+    this.pushNotificationService.pushModalShow$.subscribe(res => {
+      if (res && res.show) {
+        this.pushNotificationService.fetchNotification(res.data).subscribe(res => {
+          this.presentPushModal(res);
+        });
+        setTimeout(() => {this.pushNotificationService.pushModalShow$.next({show: false, data: null})}, 500);
       }
     });
   }
@@ -121,6 +136,17 @@ export class AppComponent implements OnInit, AfterViewChecked {
       let result = AppConstants.PAGES.findIndex(x => x.url === url);
       result !== -1 ? this.selectedIndex = result : this.selectedIndex = 0;
     }
+  }
+
+  private async presentPushModal(data) {
+    const modal = await this.modalController.create({
+      component: PushDetailsComponent,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        pushDetails: data
+      }
+    });
+    return await modal.present();
   }
 
 

@@ -5,29 +5,16 @@
   <ion-row>
     <div class="heading fixed">
       <app-icon-bar [icon]="'megaphone-outline'" [title]="'Announcements'"></app-icon-bar>
-      <!-- <ion-row class="">
-        <ion-col size="12">
-          <ion-segment id="segment" class="segment" scrollable mode="md" [value]="activeDate" (ionChange)="updateList($event)">
-            <ion-segment-button *ngFor="let val of dates" [value]="val" id="{{val === activeDate ? 'active': ''}}">
-              <ion-label>{{ val }}</ion-label>
-            </ion-segment-button>
-          </ion-segment>
-        </ion-col>
-      </ion-row> -->
     </div>
   </ion-row>
   <ion-row class="empty-row animated fadeIn faster ion-align-self-center" *ngIf="!listUpdate && announcements && announcements.length === 0">
     <img [src]="getEmptyImage()" />
   </ion-row>
-  <ion-row *ngFor="let item of announcements" style="margin-top:0% !important">
-    <!-- <app-list-card-item [type]="'announcements'" [items]="announcements" [detailPage]="'announcement-details'" (detailNavigate)="navigationToDetail($event)"></app-list-card-item>
-     -->
-     <!-- <ion-card>   
-      
-      <ion-card-content>
-        
-      </ion-card-content>
-    </ion-card> -->
-    <ion-img class="announcement-image" [src]="loadImage(item?.image?.url)"></ion-img>
+  <ion-row *ngFor="let item of announcements" style="margin-top:0% !important; padding: 10px;">
+
+    <div class="ribbon-holder">
+      <div *ngIf="item['isNew']" class="ribbon ribbon-holder"><P>NEW</P></div>
+      <ion-img class="announcement-image" [src]="loadImage(item?.image?.url)"></ion-img>
+    </div>
     </ion-row>
 </ion-content>
