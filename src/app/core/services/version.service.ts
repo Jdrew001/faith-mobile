@@ -43,7 +43,11 @@ export class VersionService {
   }
 
   openAppstoreEntry() {
-    this.market.open('com.atkison.faithmobile')
+    if (this.platform.is('android')) {
+      this.market.open('com.atkison.faithmobile');
+    } else {
+      this.market.open('1516886398');
+    }
   }
 
   private async presentAlert(header, message, buttonText = '', allowClose = false) {
