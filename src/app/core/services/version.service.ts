@@ -71,7 +71,8 @@ export class VersionService {
       header,
       message,
       buttons,
-      backdropDismiss: allowClose
+      backdropDismiss: allowClose,
+      mode: this.platform.is('android') ? 'md': 'ios'
     });
     await alert.present();
   }
