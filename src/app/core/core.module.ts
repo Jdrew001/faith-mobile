@@ -12,7 +12,8 @@ import { AlertService } from './services/alert.service';
 import { PushNotificationService } from './services/push-notification.service';
 import { AuthorizationService } from './services/authorization.service';
 import { ToastService } from './services/toast.service';
-
+import { VersionService } from './services/version.service';
+import { Market } from '@ionic-native/market/ngx';
 
 
 @NgModule({
@@ -34,7 +35,9 @@ import { ToastService } from './services/toast.service';
     AlertService,
     PushNotificationService,
     AuthorizationService,
-    ToastService
+    ToastService,
+    VersionService,
+    Market
   ],
   exports: [LoaderComponent]
 })

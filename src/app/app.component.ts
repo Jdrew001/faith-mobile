@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
 
-import { Platform, IonContent, AnimationController, ModalController } from '@ionic/angular';
+import { Platform, IonContent, AnimationController, ModalController, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
@@ -14,6 +14,8 @@ import { AudioPlayerService } from './shared/services/audio-player.service';
 import { Sermon, SermonData } from './connect/components/sermons/sermons.model';
 import { Plugins } from '@capacitor/core';
 import { PushDetailsComponent } from './shared/components/push-details/push-details.component';
+import { VersionService } from './core/services/version.service';
+import { UpdateType } from './core/models/update.model';
 
 const { Browser } = Plugins;
 
@@ -50,7 +52,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
     private router: Router,
     private audioPlayerService: AudioPlayerService,
     private animationCtrl: AnimationController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private versionService: VersionService,
+    private alertController: AlertController
   ) {
     this.initializeApp();
     this.fetchMenuConfig();
@@ -70,6 +74,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      this.versionService.checkForUpdate();
       this.pushNotificationService.init();
       this.pushModalSub();
     });
@@ -120,6 +125,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
   async giveSelected() {
     await Browser.open({ url: AppConstants.giveUrl });
   }
+
+  
 
   async navigateToFeedback() {
     await Browser.open({ url: AppConstants.feedbackUrl });
