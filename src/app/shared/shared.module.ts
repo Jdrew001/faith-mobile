@@ -12,11 +12,13 @@ import { PhoneMaskDirective } from './directives/phone-mask.directive';
 import { MenuService } from './services/menu.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { VideoComponent } from './components/video/video.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AudioPlayerComponent } from './components/audio-player/audio-player.component';
 import { AudioPlayerService } from './services/audio-player.service';
 import { PopoverComponent } from './components/popover/popover.component';
 import { PushDetailsComponent } from './components/push-details/push-details.component';
+import { CurrencyInputComponent } from './components/currency-input/currency-input.component';
+import { IntegerInputDirectiveDirective } from './components/currency-input/integer-input-directive.directive';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { PushDetailsComponent } from './components/push-details/push-details.com
     VideoComponent,
     AudioPlayerComponent,
     PopoverComponent,
-    PushDetailsComponent
+    PushDetailsComponent,
+    CurrencyInputComponent,
+    IntegerInputDirectiveDirective
   ],
   entryComponents: [
     PopoverComponent,
@@ -41,6 +45,7 @@ import { PushDetailsComponent } from './components/push-details/push-details.com
     CommonModule,
     IonicModule,
     FormsModule,
+    ReactiveFormsModule,
     LazyLoadImageModule
   ],
   exports: [
@@ -53,7 +58,9 @@ import { PushDetailsComponent } from './components/push-details/push-details.com
     PhoneMaskDirective,
     VideoComponent,
     AudioPlayerComponent,
-    PopoverComponent
+    PopoverComponent,
+    CurrencyInputComponent,
+    IntegerInputDirectiveDirective
   ],
   providers: [
     SharedService,

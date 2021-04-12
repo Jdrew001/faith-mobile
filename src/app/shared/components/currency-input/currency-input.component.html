@@ -1,0 +1,4 @@
+<div [formGroup]="formGroup">
+  <ion-input appIntegerInput [numValue]="amount" name="dummyFacade" id="dummyFacade" #dummyFacade inputmode="numeric"
+    (keyup)="handleKeyUp($event)" (ionInput)="handleInput($event)" [formControlName]="control"></ion-input>
+</div>

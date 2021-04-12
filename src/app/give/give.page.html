@@ -1,14 +1,80 @@
-<ion-header [translucent]="true">
-  <ion-toolbar class="main-bg-color">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title class="ion-text-center">
-      Give
-    </ion-title>
-  </ion-toolbar>
+<ion-header>
+  <app-navigation></app-navigation>
 </ion-header>
 
 <ion-content>
+  <div class="heading fixed">
+    <app-icon-bar [icon]="'heart-outline'" [title]="'Give'"></app-icon-bar>
+  </div>
 
+  <ion-card [formGroup]="giveForm" class="top fixed animated fadeIn faster">
+
+    <ion-row>
+      <h5>Your Details</h5>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label class="required-field" position="floating">E-mail</ion-label>
+            <ion-input type="email" inputmode="email" maxlength="255" autocapitalize="off" class="form-control" formControlName="email" value=""></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label class="required-field" position="floating">First name</ion-label>
+            <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="firstName" value=""></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label class="required-field" position="floating">Last name</ion-label>
+            <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="lastName" value=""></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label class="required-field" position="floating">Phone</ion-label>
+            <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" value=""></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="mt-2">
+      <h5>Tithe Details</h5>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label class="required-field" position="floating">Tithe</ion-label>
+            <app-currency-input [precision]="2" [amount]="''" [control]="'tithe'" [formGroup]="giveForm"></app-currency-input> 
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="danger" size="small" (click)="reset()"><ion-icon slot="icon-only" name="close-outline"></ion-icon></ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" color="danger" size="small" (click)="submit()"><ion-icon slot="icon-only" name="checkmark-outline"></ion-icon></ion-button>
+      </ion-col>
+    </ion-row> -->
+  </ion-card>
 </ion-content>

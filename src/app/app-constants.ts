@@ -31,9 +31,9 @@ export class AppConstants {
             disabled: false
         },
         {
-            title: 'Website',
+            title: 'Give',
             url: '/give',
-            icon: 'globe',
+            icon: 'heart',
             disabled: false
         }
     ];

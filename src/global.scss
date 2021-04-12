@@ -153,6 +153,11 @@ ion-input {
     font-family: 'Oswald', sans-serif !important;
 }
 
+.required-field::after {
+    content: " *";
+    color: red !important;
+}
+
 @media screen and (max-width: 1025px) {
     .ribbon {
         width: 32% !important;

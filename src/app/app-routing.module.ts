@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'biblestudy',
     loadChildren: () => import('./biblestudy/biblestudy.module').then( m => m.BiblestudyPageModule)
+  },
+  {
+    path: 'give',
+    loadChildren: () => import('./give/give.module').then( m => m.GivePageModule)
   }
 
 ];
