@@ -3,9 +3,25 @@ ion-card.top {
 }
 
 ion-label {
-    font-size: 12px !important;
+    font-size: 15px !important;
 }
 
 ion-card ion-row {
     padding: 5px 12px !important;
+}
+
+ion-select {
+    padding-left: 0px !important;
+}
+
+ion-fab-button ion-icon {
+    color: white !important;
+}
+
+.offering-details-heading h5 {
+    margin-bottom: 0px !important;
+}
+
+p {
+    color: lightgray;
 }
