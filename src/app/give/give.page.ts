@@ -22,6 +22,7 @@ import { GivingConst } from './models/give.const';
 })
 export class GivePage implements OnInit {
 
+  activeFormIndex: number = 0;
   cardForm: FormGroup = new FormGroup({
     card: new FormControl('', [Validators.required]),
     cvv: new FormControl('', [Validators.required]),
@@ -104,5 +105,23 @@ export class GivePage implements OnInit {
         }
       });
     }
+  }
+
+  proceedToCard() {
+    this.activeFormIndex = 1;
+  }
+
+  cancelFromCard() {
+    this.activeFormIndex = 0;
+  }
+
+  submitTransaction() {
+    let data = {
+      cardDetails: this.cardForm.getRawValue(),
+      giverDetails: this.giveForm.getRawValue()
+    }
+
+    // todo: encrypt for backend
+    console.log('data', data);
   }
 }

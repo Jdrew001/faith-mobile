@@ -1,10 +1,8 @@
 ion-card.top {
-    margin-top: 10% !important;
+    margin-top: 5% !important;
 }
 
-ion-label {
-    font-size: 15px !important;
-}
+
 
 ion-card ion-row {
     padding: 5px 12px !important;
@@ -24,4 +22,15 @@ ion-fab-button ion-icon {
 
 p {
     color: lightgray;
+}
+
+p.total {
+    color: white !important;
+    font-size: 14px !important;
+    margin-left: 5em;
+    line-height: 35px;
+}
+
+ion-footer {
+    background-color: #516065;
 }

@@ -6,131 +6,161 @@
   <div class="heading fixed">
     <app-icon-bar [icon]="'heart-outline'" [title]="'Give'"></app-icon-bar>
   </div>
-
   <ion-card [formGroup]="giveForm" class="top fixed animated fadeIn faster">
-
-    <ion-row>
-      <h5>Your Details</h5>
-    </ion-row>
     <ion-row>
       <ion-col>
-        <ion-list>
-          <ion-item mode="md">
-            <ion-label class="required-field" position="floating">E-mail</ion-label>
-            <ion-input type="email" inputmode="email" maxlength="255" autocapitalize="off" class="form-control" formControlName="email" value=""></ion-input>
-          </ion-item>
-        </ion-list>
+        <ion-progress-bar color="danger" [value]="activeFormIndex"></ion-progress-bar>
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-item mode="md">
-            <ion-label class="required-field" position="floating">First name</ion-label>
-            <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="firstName" value=""></ion-input>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-
-      <ion-col>
-        <ion-list>
-          <ion-item mode="md">
-            <ion-label class="required-field" position="floating">Last name</ion-label>
-            <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="lastName" value=""></ion-input>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-item mode="md">
-            <ion-label class="required-field" position="floating">Phone</ion-label>
-            <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" value=""></ion-input>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="mt-2">
-      <h5>Tithe Details</h5>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-item mode="md">
-            <ion-label class="required-field" position="floating">Tithe</ion-label>
-            <app-currency-input [precision]="2" [amount]="''" [control]="'tithe'" [formGroup]="giveForm"></app-currency-input> 
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="mt-2 offering-details-heading">
-      <ion-col size="12">
-        <h5>Offering Details</h5>
-      </ion-col>
-      <ion-col size="12">
-        <p><em>Click to add a new offering</em></p>
-      </ion-col>
-    </ion-row> 
-
-    <ion-card formArrayName="offeringArray" *ngFor="let form of offeringArray.controls; let i = index" @fade>
-      <ng-container [formGroupName]="i">
+    <ng-container [ngSwitch]="activeFormIndex">
+      <div *ngSwitchCase="0" @fade>
+        <ion-row>
+          <h5>Your Details</h5>
+        </ion-row>
         <ion-row>
           <ion-col>
             <ion-list>
               <ion-item mode="md">
-                <ion-label class="required-field" position="floating">Offering</ion-label>
-                <app-currency-input [precision]="2" [amount]="''" [control]="'offering'" [formGroup]="form"></app-currency-input> 
+                <ion-label class="required-field" position="floating">E-mail</ion-label>
+                <ion-input type="email" inputmode="email" maxlength="255" autocapitalize="off" class="form-control" formControlName="email" value=""></ion-input>
               </ion-item>
             </ion-list>
           </ion-col>
-  
-          <ion-col>
-            <ion-item mode="md">
-              <ion-label class="required-field" position="floating">Category</ion-label>
-              <ion-select (ionChange)="onChange($event.target)" formControlName="offeringCategory" [mode]="retrieveMode()" value="brown" okText="Confirm" cancelText="Cancel">
-                <ion-select-option *ngFor="let offering of offeringCategories" [value]="offering.value" [disabled]="offering.disabled">{{ offering.label }}</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-col>
         </ion-row>
-
-        <ion-row *ngIf="isOtherSelected(form)">
+    
+        <ion-row>
           <ion-col>
             <ion-list>
               <ion-item mode="md">
-                <ion-label class="required-field" position="floating">Other Category</ion-label>
-                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="otherOffering" value=""></ion-input>
+                <ion-label class="required-field" position="floating">First name</ion-label>
+                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="firstName" value=""></ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+    
+          <ion-col>
+            <ion-list>
+              <ion-item mode="md">
+                <ion-label class="required-field" position="floating">Last name</ion-label>
+                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="lastName" value=""></ion-input>
               </ion-item>
             </ion-list>
           </ion-col>
         </ion-row>
-      </ng-container>
+    
+        <ion-row>
+          <ion-col>
+            <ion-list>
+              <ion-item mode="md">
+                <ion-label class="required-field" position="floating">Phone</ion-label>
+                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" value=""></ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+    
+        <ion-row class="mt-2">
+          <h5>Tithe Details</h5>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-list>
+              <ion-item mode="md">
+                <ion-label class="required-field" position="floating">Tithe</ion-label>
+                <app-currency-input [precision]="2" [amount]="''" [control]="'tithe'" [formGroup]="giveForm"></app-currency-input> 
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+    
+        <ion-row class="mt-2 offering-details-heading">
+          <ion-col size="12">
+            <h5>Offering Details</h5>
+          </ion-col>
+          <ion-col size="12">
+            <p><em>Click to add a new offering</em></p>
+          </ion-col>
+        </ion-row> 
+    
+        <ion-card formArrayName="offeringArray" *ngFor="let form of offeringArray.controls; let i = index" @fade>
+          <ng-container [formGroupName]="i">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-item mode="md">
+                    <ion-label class="required-field" position="floating">Offering</ion-label>
+                    <app-currency-input [precision]="2" [amount]="''" [control]="'offering'" [formGroup]="form"></app-currency-input> 
+                  </ion-item>
+                </ion-list>
+              </ion-col>
       
+            <ion-col>
+              <ion-list>
+                <ion-item mode="md">
+                  <ion-label class="required-field" position="floating">Category</ion-label>
+                  <ion-select (ionChange)="onChange($event.target)" formControlName="offeringCategory" [mode]="retrieveMode()" value="brown" okText="Confirm" cancelText="Cancel">
+                    <ion-select-option *ngFor="let offering of offeringCategories" [value]="offering.value" [disabled]="offering.disabled">{{ offering.label }}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+  
+          <ion-row *ngIf="isOtherSelected(form)">
+            <ion-col>
+              <ion-list>
+                <ion-item mode="md">
+                  <ion-label class="required-field" position="floating">Other Category</ion-label>
+                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="otherOffering" value=""></ion-input>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+          </ng-container>
+        </ion-card>
+      </div>
 
-    </ion-card>
+      <div *ngSwitchCase="1" @fade>
 
-    <ion-row>
-      <ion-col size="2">
-        <ion-fab-button (click)="addToArray()" size="small" color="danger"><ion-icon name="add-outline"></ion-icon></ion-fab-button>
-      </ion-col>
-      <ion-col size="2" *ngIf="offeringArray.length != 0">
-        <ion-fab-button (click)="popFromArray()" size="small" color="danger"><ion-icon name="remove-outline"></ion-icon></ion-fab-button>
-      </ion-col>
-      
-    </ion-row>
+      </div>
+    </ng-container>
 
-    <!-- <ion-row>
-      <ion-col>
-        <ion-button expand="block" color="danger" size="small" (click)="reset()"><ion-icon slot="icon-only" name="close-outline"></ion-icon></ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button expand="block" color="danger" size="small" (click)="submit()"><ion-icon slot="icon-only" name="checkmark-outline"></ion-icon></ion-button>
-      </ion-col>
-    </ion-row> -->
   </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary" class="main-bg-color">
+    <ion-row>
+      <ion-col class="ion-padding-start">
+        <p class="total">Total: $ 0.00</p>
+      </ion-col>
+      <ng-container [ngSwitch]="activeFormIndex">
+        <div *ngSwitchCase="0" @fade>
+          <ion-col>
+            <ion-button (click)="proceedToCard()" size="small" color="secondary" fill="outline">
+              <ion-icon slot="start" name="card-outline"></ion-icon>
+              Pay with Card
+            </ion-button>
+          </ion-col>
+        </div>
+        <div *ngSwitchCase="1" @fade>
+          <ion-col>
+            <ion-button (click)="cancelFromCard()" size="small" color="secondary" fill="outline">
+              <ion-icon slot="start" name="close-outline"></ion-icon>
+              Cancel
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button (click)="submitTransaction()" size="small" color="secondary" fill="outline">
+              <ion-icon slot="start" name="checkmark-outline"></ion-icon>
+              Submit
+            </ion-button>
+          </ion-col>
+        </div>
+      </ng-container>
+     
+      
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
