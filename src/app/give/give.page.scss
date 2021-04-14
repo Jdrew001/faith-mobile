@@ -2,7 +2,9 @@ ion-card.top {
     margin-top: 5% !important;
 }
 
-
+ion-label {
+    font-size: 12px !important;
+}
 
 ion-card ion-row {
     padding: 5px 12px !important;
@@ -10,6 +12,7 @@ ion-card ion-row {
 
 ion-select {
     padding-left: 0px !important;
+    font-size: 12px !important;
 }
 
 ion-fab-button ion-icon {
@@ -20,17 +23,24 @@ ion-fab-button ion-icon {
     margin-bottom: 0px !important;
 }
 
+h5.card-title {
+    margin-bottom: 0px !important;
+}
+
 p {
     color: lightgray;
 }
 
 p.total {
     color: white !important;
-    font-size: 14px !important;
+    font-size: 12px !important;
     margin-left: 5em;
-    line-height: 35px;
 }
 
 ion-footer {
     background-color: #516065;
+}
+
+ion-button {
+    font-size: 10px;
 }

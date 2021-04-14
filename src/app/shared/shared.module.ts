@@ -20,6 +20,7 @@ import { PushDetailsComponent } from './components/push-details/push-details.com
 import { CurrencyInputComponent } from './components/currency-input/currency-input.component';
 import { IntegerInputDirectiveDirective } from './components/currency-input/integer-input-directive.directive';
 import { CreditCardService } from './services/credit-card.service';
+import { CreditCardComponent } from './components/credit-card/credit-card.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CreditCardService } from './services/credit-card.service';
     PopoverComponent,
     PushDetailsComponent,
     CurrencyInputComponent,
-    IntegerInputDirectiveDirective
+    IntegerInputDirectiveDirective,
+    CreditCardComponent
   ],
   entryComponents: [
     PopoverComponent,
@@ -61,7 +63,8 @@ import { CreditCardService } from './services/credit-card.service';
     AudioPlayerComponent,
     PopoverComponent,
     CurrencyInputComponent,
-    IntegerInputDirectiveDirective
+    IntegerInputDirectiveDirective,
+    CreditCardComponent
   ],
   providers: [
     SharedService,

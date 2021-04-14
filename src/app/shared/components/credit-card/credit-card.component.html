@@ -1,0 +1,34 @@
+<ion-grid>
+  <ion-row>
+    <ion-col class="state">
+      <div class="msg">
+        <!-- <span [class.ON]="card.state=='ON'" [class.OFF]="card.state=='OFF'"></span>{{card.state}} -->
+      </div>
+    </ion-col>
+    <ion-col class="logo">
+      <img class="brand" [src]="retrieveImage(card.logo)">
+    </ion-col>
+  </ion-row>
+  <ion-row class="digits">
+    <ion-col class="number">
+      <span class="dot"></span> <span class="dot"></span> <span class="dot"></span> <span class="dot"></span>
+    </ion-col>
+    <ion-col class="number">
+      <span class="dot"></span> <span class="dot"></span> <span class="dot"></span> <span class="dot"></span>
+    </ion-col>
+    <ion-col class="number">
+      <span class="dot"></span> <span class="dot"></span> <span class="dot"></span> <span class="dot"></span>
+    </ion-col>
+    <ion-col class="number">
+      {{card.a}}
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="date">
+      Expires: {{card.expires}}
+    </ion-col>
+    <!-- <ion-col class="bank">
+      {{card.bank}}
+    </ion-col> -->
+  </ion-row>
+</ion-grid>

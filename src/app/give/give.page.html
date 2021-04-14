@@ -132,7 +132,48 @@
       </div>
 
       <div *ngSwitchCase="1" @fade>
+        <ion-row class="mt-2 card-title">
+          <ion-col size="12">
+            <h5 style="margin-bottom: 0px !important">Payment Information</h5>
+          </ion-col>
+        </ion-row>
+        <ion-row class="mt-2">
+          <app-credit-card></app-credit-card>
+        </ion-row>
 
+        <ion-row>
+          <ion-col>
+            <ion-list>
+              <ion-item mode="md">
+                <ion-label class="required-field" position="floating">Card Number</ion-label>
+                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" value=""></ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-list>
+              <ion-item mode="md">
+                <ion-label class="required-field" position="floating">Expiration Date</ion-label>
+                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" value=""></ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-list>
+              <ion-item mode="md">
+                <ion-label class="required-field" position="floating">CVV</ion-label>
+                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" value=""></ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        
       </div>
     </ng-container>
 
