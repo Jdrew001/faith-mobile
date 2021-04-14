@@ -23,8 +23,9 @@
             <ion-list>
               <ion-item mode="md">
                 <ion-label class="required-field" position="floating">E-mail</ion-label>
-                <ion-input type="email" inputmode="email" maxlength="255" autocapitalize="off" class="form-control" formControlName="email" value=""></ion-input>
+                <ion-input type="email" inputmode="email" maxlength="255" autocapitalize="off" class="form-control" formControlName="email"></ion-input>
               </ion-item>
+              <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="giveForm.get('email').invalid && formSubmitted">E-mail required</span>
             </ion-list>
           </ion-col>
         </ion-row>
@@ -34,8 +35,9 @@
             <ion-list>
               <ion-item mode="md">
                 <ion-label class="required-field" position="floating">First name</ion-label>
-                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="firstName" value=""></ion-input>
+                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="firstName" ></ion-input>
               </ion-item>
+              <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="giveForm.get('firstName').invalid && formSubmitted">First Name required</span>
             </ion-list>
           </ion-col>
     
@@ -43,8 +45,9 @@
             <ion-list>
               <ion-item mode="md">
                 <ion-label class="required-field" position="floating">Last name</ion-label>
-                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="lastName" value=""></ion-input>
+                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="lastName" ></ion-input>
               </ion-item>
+              <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="giveForm.get('lastName').invalid && formSubmitted">Last Name required</span>
             </ion-list>
           </ion-col>
         </ion-row>
@@ -54,8 +57,9 @@
             <ion-list>
               <ion-item mode="md">
                 <ion-label class="required-field" position="floating">Phone</ion-label>
-                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" value=""></ion-input>
+                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" ></ion-input>
               </ion-item>
+              <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="giveForm.get('phone').invalid && formSubmitted">Phone required</span>
             </ion-list>
           </ion-col>
         </ion-row>
@@ -67,8 +71,9 @@
             <ion-list>
               <ion-item mode="md">
                 <ion-label class="required-field" position="floating">Tithe</ion-label>
-                <app-currency-input [precision]="2" [amount]="''" [control]="'tithe'" [formGroup]="giveForm"></app-currency-input> 
+                <app-currency-input [precision]="2" [amount]="''" [control]="'tithe'" [formGroup]="giveForm"></app-currency-input>
               </ion-item>
+              <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="giveForm.errors && giveForm.errors.oneRequired && formSubmitted">Tithe or Offering must be provided</span>
             </ion-list>
           </ion-col>
         </ion-row>
@@ -76,6 +81,7 @@
         <ion-row class="mt-2 offering-details-heading">
           <ion-col size="12">
             <p><em>Add a new offering</em></p>
+            <span class="error" style="font-size: 10px;" *ngIf="giveForm.errors && giveForm.errors.oneRequired && formSubmitted">Tithe or Offering must be provided</span>
           </ion-col>
         </ion-row> 
     
@@ -86,8 +92,9 @@
                 <ion-list>
                   <ion-item mode="md">
                     <ion-label class="required-field" position="floating">Offering</ion-label>
-                    <app-currency-input [precision]="2" [amount]="''" [control]="'offering'" [formGroup]="form"></app-currency-input> 
+                    <app-currency-input [precision]="2" [amount]="''" [control]="'offering'" [formGroup]="form"></app-currency-input>
                   </ion-item>
+                  <span class="error" style="font-size: 10px;" *ngIf="form.errors && form.errors.offeringRequired && formSubmitted">Offering amount required</span>
                 </ion-list>
               </ion-col>
       
@@ -99,6 +106,7 @@
                     <ion-select-option *ngFor="let offering of offeringCategories" [value]="offering.value" [disabled]="offering.disabled">{{ offering.label }}</ion-select-option>
                   </ion-select>
                 </ion-item>
+                <span class="error" style="font-size: 10px;" *ngIf="form.errors && form.errors.categoryRequired && formSubmitted">A category must be selected</span>
               </ion-list>
             </ion-col>
           </ion-row>
@@ -108,7 +116,7 @@
               <ion-list>
                 <ion-item mode="md">
                   <ion-label class="required-field" position="floating">Other Category</ion-label>
-                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="otherOffering" value=""></ion-input>
+                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="otherOffering" ></ion-input>
                 </ion-item>
               </ion-list>
             </ion-col>
@@ -142,7 +150,7 @@
               <ion-list>
                 <ion-item mode="md">
                   <ion-label class="required-field" position="floating">Card Number</ion-label>
-                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="card" value=""></ion-input>
+                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="card" ></ion-input>
                 </ion-item>
               </ion-list>
             </ion-col>
@@ -153,7 +161,7 @@
               <ion-list>
                 <ion-item mode="md">
                   <ion-label class="required-field" position="floating">Expiration Date</ion-label>
-                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="cvv" value=""></ion-input>
+                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="cvv" ></ion-input>
                 </ion-item>
               </ion-list>
             </ion-col>
@@ -164,14 +172,14 @@
               <ion-list>
                 <ion-item mode="md">
                   <ion-label class="required-field" position="floating">CVV</ion-label>
-                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="expiration" value=""></ion-input>
+                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="expiration" ></ion-input>
                 </ion-item>
               </ion-list>
             </ion-col>
           </ion-row>
         </div>
-        
-        <ion-row style="padding-bottom: 20px !important" class="ion-align-items-center ion-justify-content-center">
+
+        <ion-row (click)="isFeeCovered = !isFeeCovered" style="padding-bottom: 20px !important" class="ion-align-items-center ion-justify-content-center">
           <ion-col>
             <ion-checkbox [(ngModel)]="isFeeCovered" style="float: right" color="primary"></ion-checkbox>
           </ion-col>
@@ -180,6 +188,18 @@
             <div >
               <ion-label>Cover payment proccessing fee?</ion-label>
               <p><em>Total + (2.20% + $0.30)</em></p>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row style="padding-bottom: 20px !important" class="ion-align-items-center ion-justify-content-center">
+          <ion-col>
+            <ion-checkbox  style="float: right" color="primary"></ion-checkbox>
+          </ion-col>
+
+          <ion-col size="9">
+            <div >
+              <ion-label>Remember for future use?</ion-label>
             </div>
           </ion-col>
         </ion-row>

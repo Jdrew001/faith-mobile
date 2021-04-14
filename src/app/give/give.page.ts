@@ -2,9 +2,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Platform } from '@ionic/angular';
+import { ToastService } from '../core/services/toast.service';
 import { CreditCardService } from '../shared/services/credit-card.service';
 import { GiveConstants } from './GiveConstants';
 import { GivingConst } from './models/give.const';
+import { GiveFormValidator } from './utils/GiveValidator';
 
 @Component({
   selector: 'app-give',
@@ -24,9 +26,11 @@ import { GivingConst } from './models/give.const';
 })
 export class GivePage implements OnInit, DoCheck {
 
+  giveValidator = new GiveFormValidator();
   activeFormIndex: number = 0;
   grandTotal: number = 0;
   isFeeCovered: boolean = false;
+  formSubmitted = false;
   cardForm: FormGroup = new FormGroup({
     card: new FormControl('', [Validators.required]),
     cvv: new FormControl('', [Validators.required]),
@@ -40,7 +44,7 @@ export class GivePage implements OnInit, DoCheck {
     tithe: new FormControl(0),
     offeringArray: new FormArray([]),
     feeCover: new FormControl(false),
-  }, []);
+  }, [this.giveValidator.oneRequired]);
 
   get offeringArray() {
     return this.giveForm.get('offeringArray') as FormArray;
@@ -64,7 +68,8 @@ export class GivePage implements OnInit, DoCheck {
 
   constructor(
     private platform: Platform,
-    private creditCardService: CreditCardService
+    private creditCardService: CreditCardService,
+    private toastService: ToastService 
   ) { }
 
   ngOnInit() {
@@ -86,7 +91,7 @@ export class GivePage implements OnInit, DoCheck {
       offering: new FormControl(0),
       offeringCategory: new FormControl(null),
       otherOffering: new FormControl(null)
-    }, []));
+    }, [this.giveValidator.offeringRequired, this.giveValidator.validateOffering, this.giveValidator.validateOfferingOther]));
   }
 
   popFromArray() {
@@ -120,11 +125,18 @@ export class GivePage implements OnInit, DoCheck {
   }
 
   proceedToCard() {
-    this.activeFormIndex = 1;
+    this.formSubmitted = true;
+    
+    if (this.giveForm.valid) {
+      this.activeFormIndex = 1;
+    } else {
+      this.toastService.presetToast('Please fill in all required fields', 'danger');
+    }
   }
 
   cancelFromCard() {
     this.activeFormIndex = 0;
+    console.log('log', this.giveForm);
   }
 
   submitTransaction() {
