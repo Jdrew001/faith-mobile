@@ -10,6 +10,7 @@ import { GivePage } from './give.page';
 import { SharedModule } from '../shared/shared.module';
 import { CurrencyMaskModule } from "ionicng2-currency-mask";
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from "ionicng2-currency-mask/src/currency-mask.config";
+import { ExpDateDirective } from './directives/exp-date.directive';
 
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -30,11 +31,11 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     IonicModule,
     GivePageRoutingModule,
     SharedModule,
-    CurrencyMaskModule,
+    CurrencyMaskModule
   ],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
   ],
-  declarations: [GivePage]
+  declarations: [GivePage, ExpDateDirective]
 })
 export class GivePageModule {}

@@ -27,9 +27,10 @@ import { GiveFormValidator } from './utils/GiveValidator';
 export class GivePage implements OnInit, DoCheck {
 
   giveValidator = new GiveFormValidator();
-  activeFormIndex: number = 0;
+  activeFormIndex: number = 1;
   grandTotal: number = 0;
   isFeeCovered: boolean = false;
+  isRememberChecked: boolean = false;
   formSubmitted = false;
   cardForm: FormGroup = new FormGroup({
     card: new FormControl('', [Validators.required]),
@@ -40,7 +41,7 @@ export class GivePage implements OnInit, DoCheck {
     email: new FormControl(null, [Validators.required, Validators.email]),
     firstName: new FormControl(null, [Validators.required]),
     lastName: new FormControl(null, [Validators.required]),
-    phone: new FormControl(null, [Validators.required]),
+    phone: new FormControl(null, [Validators.required, Validators.minLength(14)]),
     tithe: new FormControl(0),
     offeringArray: new FormArray([]),
     feeCover: new FormControl(false),
@@ -49,6 +50,8 @@ export class GivePage implements OnInit, DoCheck {
   get offeringArray() {
     return this.giveForm.get('offeringArray') as FormArray;
   }
+
+  get cardControl() { return this.cardForm.controls['card'] }
 
   get giveControls() {
     return {
@@ -126,7 +129,6 @@ export class GivePage implements OnInit, DoCheck {
 
   proceedToCard() {
     this.formSubmitted = true;
-    
     if (this.giveForm.valid) {
       this.activeFormIndex = 1;
     } else {
@@ -147,6 +149,24 @@ export class GivePage implements OnInit, DoCheck {
 
     // todo: encrypt for backend
     console.log('data', data);
+  }
+
+  mask(event) {
+    setTimeout(() => {
+      var inputTxt = event.srcElement.value.toString();
+      inputTxt = inputTxt ? inputTxt.split(" ").join("") : "";
+      inputTxt = inputTxt.length > 16 ? inputTxt.substring(0, 16) : inputTxt;
+      this.cardControl.setValue(this.maskString(inputTxt))
+    }, 1);
+  }
+    
+  maskString(inputTxt) {
+    inputTxt = inputTxt.replace(/\D/g, "");
+    inputTxt = inputTxt.replace(/(\d{4})(\d)/, "$1 $2");
+    inputTxt = inputTxt.replace(/(\d{4})(\d)/, "$1 $2");
+    inputTxt = inputTxt.replace(/(\d{4})(\d)/, "$1 $2");
+    inputTxt = inputTxt.replace(/(\d{4})(\d)/, "$1 $2");
+    return inputTxt;
   }
 
   private calculateTotal(tithe, offering: FormArray) : number {

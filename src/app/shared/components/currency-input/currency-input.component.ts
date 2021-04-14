@@ -28,13 +28,14 @@ export class CurrencyInputComponent implements OnInit, AfterContentInit {
 
   ngOnInit() {
     if (this.amount && this.amount.trim() !== '') {
-      this.amountEntered.emit(+this.amount);
     }
   }
 
   ngAfterContentInit() {
     if (typeof this.formGroup.controls[this.control].value !== 'string') {
       this.numControl.setValue(this.formattedAmount);
+    } else if (typeof this.formGroup.controls[this.control].value === 'string') {
+      this.amount = this.numControl.value.split("$").join("").split(",").join("").split(".").join("");
     }
   }
 
@@ -42,19 +43,15 @@ export class CurrencyInputComponent implements OnInit, AfterContentInit {
     const pattern = /[0-9.,]/;
     console.log(event);
     let inputChar = String.fromCharCode(+event.key);
-
-    if (isNaN(+event.key)) {
-      // invalid character, prevent input
-      event.preventDefault();
+    if (event.key === 'Backspace') {
+      this.delDigit();
+      this.numControl.setValue(this.formattedAmount);
     }
   }
 
   handleInput(event: CustomEvent) {
     if (event.detail.data && !isNaN(event.detail.data)) {
       this.addDigit(event.detail.data);
-      this.numControl.setValue(this.formattedAmount);
-    } else if (event.detail.inputType === CurrencyInputComponent.BACKSPACE_INPUT_TYPE) {
-      this.delDigit();
       this.numControl.setValue(this.formattedAmount);
     }
   }
@@ -66,7 +63,6 @@ export class CurrencyInputComponent implements OnInit, AfterContentInit {
 
   private delDigit() {
     this.amount = this.amount.substring(0, this.amount.length - 1);
-    this.amountEntered.emit(+this.amount);
   }
 
   private clearInput() {

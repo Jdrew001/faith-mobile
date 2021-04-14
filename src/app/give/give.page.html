@@ -57,7 +57,7 @@
             <ion-list>
               <ion-item mode="md">
                 <ion-label class="required-field" position="floating">Phone</ion-label>
-                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" ></ion-input>
+                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" appPhoneMask></ion-input>
               </ion-item>
               <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="giveForm.get('phone').invalid && formSubmitted">Phone required</span>
             </ion-list>
@@ -150,7 +150,7 @@
               <ion-list>
                 <ion-item mode="md">
                   <ion-label class="required-field" position="floating">Card Number</ion-label>
-                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="card" ></ion-input>
+                  <ion-input (ionInput)="mask($event)" type="text" inputmode="text" maxlength="19" autocapitalize="on" class="form-control" formControlName="card"></ion-input>
                 </ion-item>
               </ion-list>
             </ion-col>
@@ -172,7 +172,7 @@
               <ion-list>
                 <ion-item mode="md">
                   <ion-label class="required-field" position="floating">CVV</ion-label>
-                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="expiration" ></ion-input>
+                  <ion-input type="number" inputmode="numeric" maxlength="3" autocapitalize="on" class="form-control" formControlName="expiration" ></ion-input>
                 </ion-item>
               </ion-list>
             </ion-col>
@@ -181,7 +181,7 @@
 
         <ion-row (click)="isFeeCovered = !isFeeCovered" style="padding-bottom: 20px !important" class="ion-align-items-center ion-justify-content-center">
           <ion-col>
-            <ion-checkbox [(ngModel)]="isFeeCovered" style="float: right" color="primary"></ion-checkbox>
+            <ion-checkbox [(ngModel)]="isFeeCovered" color="primary"></ion-checkbox>
           </ion-col>
 
           <ion-col size="9">
@@ -192,9 +192,9 @@
           </ion-col>
         </ion-row>
 
-        <ion-row style="padding-bottom: 20px !important" class="ion-align-items-center ion-justify-content-center">
+        <ion-row (click)="isRememberChecked = !isRememberChecked" style="padding-bottom: 20px !important" class="ion-align-items-center ion-justify-content-center">
           <ion-col>
-            <ion-checkbox  style="float: right" color="primary"></ion-checkbox>
+            <ion-checkbox [(ngModel)]="isRememberChecked" color="primary"></ion-checkbox>
           </ion-col>
 
           <ion-col size="9">
