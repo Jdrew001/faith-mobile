@@ -16,7 +16,7 @@
     <ng-container [ngSwitch]="activeFormIndex">
       <div *ngSwitchCase="0" @fade>
         <ion-row>
-          <h5>Your Details</h5>
+          <h5>Giving Information</h5>
         </ion-row>
         <ion-row>
           <ion-col>
@@ -61,7 +61,6 @@
         </ion-row>
     
         <ion-row class="mt-2">
-          <h5>Tithe Details</h5>
         </ion-row>
         <ion-row>
           <ion-col>
@@ -76,10 +75,7 @@
     
         <ion-row class="mt-2 offering-details-heading">
           <ion-col size="12">
-            <h5>Offering Details</h5>
-          </ion-col>
-          <ion-col size="12">
-            <p><em>Click to add a new offering</em></p>
+            <p><em>Add a new offering</em></p>
           </ion-col>
         </ion-row> 
     
@@ -182,9 +178,9 @@
 
 <ion-footer>
   <ion-toolbar color="primary" class="main-bg-color">
-    <ion-row>
+    <ion-row class="ion-align-items-center">
       <ion-col class="ion-padding-start">
-        <p class="total">Total: $ 0.00</p>
+        <p class="total">Total: {{ grandTotal | currency }}</p>
       </ion-col>
       <ng-container [ngSwitch]="activeFormIndex">
         <div *ngSwitchCase="0">

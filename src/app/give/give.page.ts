@@ -1,8 +1,9 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Platform } from '@ionic/angular';
 import { CreditCardService } from '../shared/services/credit-card.service';
+import { GiveConstants } from './GiveConstants';
 import { GivingConst } from './models/give.const';
 
 @Component({
@@ -21,9 +22,10 @@ import { GivingConst } from './models/give.const';
     ])
   ]
 })
-export class GivePage implements OnInit {
+export class GivePage implements OnInit, DoCheck {
 
   activeFormIndex: number = 0;
+  grandTotal: number = 0;
   cardForm: FormGroup = new FormGroup({
     card: new FormControl('', [Validators.required]),
     cvv: new FormControl('', [Validators.required]),
@@ -68,6 +70,11 @@ export class GivePage implements OnInit {
     console.log('cc', this.creditCardService.getCardType(4610460222293664));
   }
 
+  ngDoCheck() {
+    const titheAmount = this.giveControls.tithe;
+    this.grandTotal = this.calculateTotal(titheAmount, this.offeringArray);
+  }
+
   retrieveMode() {
     return this.platform.is("ios") ? "ios": "md";
   }
@@ -84,6 +91,7 @@ export class GivePage implements OnInit {
   popFromArray() {
     const formArr = this.giveControls.offeringArray as FormArray;
     formArr.removeAt(formArr.length - 1);
+    this.checkFormArrSel(formArr);
   }
 
   onChange(e) {
@@ -126,5 +134,29 @@ export class GivePage implements OnInit {
 
     // todo: encrypt for backend
     console.log('data', data);
+  }
+
+  private calculateTotal(tithe, offering: FormArray) : number {
+    let offeringTotal = 0;
+    let newTithe = tithe.value;
+    if (typeof tithe.value === 'string') {
+      newTithe = +newTithe.split("$").join("").split(",").join("")
+    }
+    //let numTithe = tithe.value.split("$").join("").split(",").join("");
+    offering.controls.forEach(val => {
+      if (typeof val.get('offering').value === 'string') {
+        let newOfferingVal = val.get('offering').value;
+        newOfferingVal = +newOfferingVal.split("$").join("").split(",").join("");
+        offeringTotal += newOfferingVal;
+      } else {
+        offeringTotal += val.get('offering').value;
+      }
+    });
+
+    // if (this.giveControls.feeCover.value && (tithe.value + offeringTotal) !== 0) {
+    //   return +(tithe.value + offeringTotal + (((tithe.value + offeringTotal) * GiveConstants.RATE_FEE.rate) + 0.30)).toFixed(2);
+    // }
+
+    return newTithe + offeringTotal;
   }
 }

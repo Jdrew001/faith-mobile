@@ -23,6 +23,7 @@ export class CreditCardComponent implements OnInit {
   card = {
     state: 'ON',
     logo: "images/visa.png",
+    chip: "images/chip.png",
     a: 1234,
     b: 5522,
     c: 8432,
