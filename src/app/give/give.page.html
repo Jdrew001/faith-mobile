@@ -95,7 +95,7 @@
               <ion-list>
                 <ion-item mode="md">
                   <ion-label class="required-field" position="floating">Category</ion-label>
-                  <ion-select (ionChange)="onChange($event.target)" formControlName="offeringCategory" [mode]="retrieveMode()" value="brown" okText="Confirm" cancelText="Cancel">
+                  <ion-select (ionChange)="onChange($event.target)" formControlName="offeringCategory" [mode]="retrieveMode()" okText="Confirm" cancelText="Cancel">
                     <ion-select-option *ngFor="let offering of offeringCategories" [value]="offering.value" [disabled]="offering.disabled">{{ offering.label }}</ion-select-option>
                   </ion-select>
                 </ion-item>
@@ -177,7 +177,7 @@
           </ion-col>
 
           <ion-col size="9">
-            <div (click)="isFeeCovered = !isFeeCovered">
+            <div >
               <ion-label>Cover payment proccessing fee?</ion-label>
               <p><em>Total + (2.20% + $0.30)</em></p>
             </div>

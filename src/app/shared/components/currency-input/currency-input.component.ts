@@ -33,7 +33,9 @@ export class CurrencyInputComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit() {
-    this.numControl.setValue(this.formattedAmount);
+    if (typeof this.formGroup.controls[this.control].value !== 'string') {
+      this.numControl.setValue(this.formattedAmount);
+    }
   }
 
   handleKeyUp(event: KeyboardEvent) {
