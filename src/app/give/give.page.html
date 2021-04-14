@@ -6,7 +6,7 @@
   <div class="heading fixed">
     <app-icon-bar [icon]="'heart-outline'" [title]="'Give'"></app-icon-bar>
   </div>
-  <ion-card [formGroup]="giveForm" class="top fixed animated fadeIn faster">
+  <ion-card class="top fixed animated fadeIn faster">
     <ion-row>
       <ion-col>
         <ion-progress-bar color="danger" [value]="activeFormIndex"></ion-progress-bar>
@@ -14,7 +14,7 @@
     </ion-row>
 
     <ng-container [ngSwitch]="activeFormIndex">
-      <div *ngSwitchCase="0" @fade>
+      <div [formGroup]="giveForm" *ngSwitchCase="0" @fade>
         <ion-row>
           <h5>Giving Information</h5>
         </ion-row>
@@ -123,50 +123,64 @@
           <ion-col size="2" *ngIf="offeringArray.length != 0">
             <ion-fab-button (click)="popFromArray()" size="small" color="danger"><ion-icon name="remove-outline"></ion-icon></ion-fab-button>
           </ion-col>
-          
         </ion-row>
       </div>
 
       <div *ngSwitchCase="1" @fade>
-        <ion-row class="mt-2 card-title">
-          <ion-col size="12">
-            <h5 style="margin-bottom: 0px !important">Payment Information</h5>
-          </ion-col>
-        </ion-row>
-        <ion-row class="mt-2">
-          <app-credit-card></app-credit-card>
-        </ion-row>
-
-        <ion-row>
+        <div [formGroup]="cardForm">
+          <ion-row class="mt-2 card-title">
+            <ion-col size="12">
+              <h5 style="margin-bottom: 0px !important">Payment Information</h5>
+            </ion-col>
+          </ion-row>
+          <ion-row class="mt-2">
+            <app-credit-card></app-credit-card>
+          </ion-row>
+  
+          <ion-row>
+            <ion-col>
+              <ion-list>
+                <ion-item mode="md">
+                  <ion-label class="required-field" position="floating">Card Number</ion-label>
+                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="card" value=""></ion-input>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+  
+          <ion-row>
+            <ion-col>
+              <ion-list>
+                <ion-item mode="md">
+                  <ion-label class="required-field" position="floating">Expiration Date</ion-label>
+                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="cvv" value=""></ion-input>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+  
+          <ion-row>
+            <ion-col>
+              <ion-list>
+                <ion-item mode="md">
+                  <ion-label class="required-field" position="floating">CVV</ion-label>
+                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="expiration" value=""></ion-input>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+        </div>
+        
+        <ion-row style="padding-bottom: 20px !important" class="ion-align-items-center ion-justify-content-center">
           <ion-col>
-            <ion-list>
-              <ion-item mode="md">
-                <ion-label class="required-field" position="floating">Card Number</ion-label>
-                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" value=""></ion-input>
-              </ion-item>
-            </ion-list>
+            <ion-checkbox [(ngModel)]="isFeeCovered" style="float: right" color="primary"></ion-checkbox>
           </ion-col>
-        </ion-row>
 
-        <ion-row>
-          <ion-col>
-            <ion-list>
-              <ion-item mode="md">
-                <ion-label class="required-field" position="floating">Expiration Date</ion-label>
-                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" value=""></ion-input>
-              </ion-item>
-            </ion-list>
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col>
-            <ion-list>
-              <ion-item mode="md">
-                <ion-label class="required-field" position="floating">CVV</ion-label>
-                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" value=""></ion-input>
-              </ion-item>
-            </ion-list>
+          <ion-col size="9">
+            <div (click)="isFeeCovered = !isFeeCovered">
+              <ion-label>Cover payment proccessing fee?</ion-label>
+              <p><em>Total + (2.20% + $0.30)</em></p>
+            </div>
           </ion-col>
         </ion-row>
         

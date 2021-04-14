@@ -26,6 +26,7 @@ export class GivePage implements OnInit, DoCheck {
 
   activeFormIndex: number = 0;
   grandTotal: number = 0;
+  isFeeCovered: boolean = false;
   cardForm: FormGroup = new FormGroup({
     card: new FormControl('', [Validators.required]),
     cvv: new FormControl('', [Validators.required]),
@@ -38,7 +39,7 @@ export class GivePage implements OnInit, DoCheck {
     phone: new FormControl(null, [Validators.required]),
     tithe: new FormControl(0),
     offeringArray: new FormArray([]),
-    feeCover: new FormControl(true),
+    feeCover: new FormControl(false),
   }, []);
 
   get offeringArray() {
@@ -153,9 +154,9 @@ export class GivePage implements OnInit, DoCheck {
       }
     });
 
-    // if (this.giveControls.feeCover.value && (tithe.value + offeringTotal) !== 0) {
-    //   return +(tithe.value + offeringTotal + (((tithe.value + offeringTotal) * GiveConstants.RATE_FEE.rate) + 0.30)).toFixed(2);
-    // }
+    if (this.isFeeCovered && (newTithe + offeringTotal) !== 0) {
+      return +(newTithe + offeringTotal + (((newTithe + offeringTotal) * GiveConstants.RATE_FEE.rate) + 0.30)).toFixed(2);
+    }
 
     return newTithe + offeringTotal;
   }
