@@ -2,6 +2,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Platform } from '@ionic/angular';
+import { CreditCardService } from '../shared/services/credit-card.service';
 import { GivingConst } from './models/give.const';
 
 @Component({
@@ -59,10 +60,12 @@ export class GivePage implements OnInit {
   }
 
   constructor(
-    private platform: Platform
+    private platform: Platform,
+    private creditCardService: CreditCardService
   ) { }
 
   ngOnInit() {
+    console.log('cc', this.creditCardService.getCardType(4610460222293664));
   }
 
   retrieveMode() {

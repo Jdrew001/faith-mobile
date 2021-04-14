@@ -19,6 +19,7 @@ import { PopoverComponent } from './components/popover/popover.component';
 import { PushDetailsComponent } from './components/push-details/push-details.component';
 import { CurrencyInputComponent } from './components/currency-input/currency-input.component';
 import { IntegerInputDirectiveDirective } from './components/currency-input/integer-input-directive.directive';
+import { CreditCardService } from './services/credit-card.service';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { IntegerInputDirectiveDirective } from './components/currency-input/inte
   ],
   providers: [
     SharedService,
-    MenuService
+    MenuService,
+    CreditCardService
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })
