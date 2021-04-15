@@ -142,7 +142,7 @@
             </ion-col>
           </ion-row>
           <ion-row class="mt-2">
-            <app-credit-card></app-credit-card>
+            <app-credit-card [cardInfo]="cardForm?.value"></app-credit-card>
           </ion-row>
   
           <ion-row>
@@ -161,7 +161,7 @@
               <ion-list>
                 <ion-item mode="md">
                   <ion-label class="required-field" position="floating">Expiration Date</ion-label>
-                  <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="cvv" ></ion-input>
+                  <ion-input  type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="expiration" ></ion-input>
                 </ion-item>
               </ion-list>
             </ion-col>
@@ -172,7 +172,7 @@
               <ion-list>
                 <ion-item mode="md">
                   <ion-label class="required-field" position="floating">CVV</ion-label>
-                  <ion-input type="number" inputmode="numeric" maxlength="3" autocapitalize="on" class="form-control" formControlName="expiration" ></ion-input>
+                  <ion-input type="number" inputmode="numeric" maxlength="3" autocapitalize="on" class="form-control" formControlName="cvv" ></ion-input>
                 </ion-item>
               </ion-list>
             </ion-col>

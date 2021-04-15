@@ -16,21 +16,21 @@
   </ion-row>
   <ion-row class="digits">
     <ion-col class="number">
-      <span class="dot"></span> <span class="dot"></span> <span class="dot"></span> <span class="dot"></span>
+      {{cardArr && cardArr.length >= 1 ? cardArr[0] : ''}}
     </ion-col>
     <ion-col class="number">
-      <span class="dot"></span> <span class="dot"></span> <span class="dot"></span> <span class="dot"></span>
+      {{cardArr && cardArr.length >= 2 ? cardArr[1] : ''}}
     </ion-col>
     <ion-col class="number">
-      <span class="dot"></span> <span class="dot"></span> <span class="dot"></span> <span class="dot"></span>
+      {{cardArr && cardArr.length >= 3 ? cardArr[2] : ''}}
     </ion-col>
     <ion-col class="number">
-      {{card.a}}
+      {{cardArr && cardArr.length >= 4 ? cardArr[3] : ''}}
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col class="date">
-      Expires: {{card.expires}}
+    <ion-col class="date" >
+      Expires: {{cardExp}}
     </ion-col>
     <!-- <ion-col class="bank">
       {{card.bank}}

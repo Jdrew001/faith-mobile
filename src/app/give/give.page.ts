@@ -8,6 +8,7 @@ import { GiveConstants } from './GiveConstants';
 import { GivingConst } from './models/give.const';
 import { GiveFormValidator } from './utils/GiveValidator';
 
+
 @Component({
   selector: 'app-give',
   templateUrl: './give.page.html',
@@ -52,6 +53,7 @@ export class GivePage implements OnInit, DoCheck {
   }
 
   get cardControl() { return this.cardForm.controls['card'] }
+  get expControl() { return this.cardForm.controls['expiration'] }
 
   get giveControls() {
     return {
