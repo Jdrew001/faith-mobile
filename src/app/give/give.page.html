@@ -139,6 +139,7 @@
           <ion-row class="mt-2 card-title">
             <ion-col size="12">
               <h5 style="margin-bottom: 0px !important">Payment Information</h5>
+              <p>Mastercard or 14 digit card not accepted</p>
             </ion-col>
           </ion-row>
           <ion-row class="mt-2">
@@ -161,7 +162,7 @@
               <ion-list>
                 <ion-item mode="md">
                   <ion-label class="required-field" position="floating">Expiration Date</ion-label>
-                  <ion-input  type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="expiration" ></ion-input>
+                  <ion-input (ionInput)="maskExp($event)" type="text" inputmode="numeric" maxlength="5" autocapitalize="on" class="form-control" formControlName="expiration" ></ion-input>
                 </ion-item>
               </ion-list>
             </ion-col>
@@ -172,7 +173,7 @@
               <ion-list>
                 <ion-item mode="md">
                   <ion-label class="required-field" position="floating">CVV</ion-label>
-                  <ion-input type="number" inputmode="numeric" maxlength="3" autocapitalize="on" class="form-control" formControlName="cvv" ></ion-input>
+                  <ion-input (ionInput)="maskCvv($event)" type="text" inputmode="numeric" maxlength="3" autocapitalize="on" class="form-control" formControlName="cvv" ></ion-input>
                 </ion-item>
               </ion-list>
             </ion-col>

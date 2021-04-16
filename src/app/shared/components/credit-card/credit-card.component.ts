@@ -1,7 +1,8 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { HelperService } from 'src/app/core/helper.service';
-import { CardInfo } from './credit.model';
+import { CreditCardService } from '../../services/credit-card.service';
+import { CardInfo, CardLogo } from './credit.model';
 
 @Component({
   selector: 'app-credit-card',
@@ -29,15 +30,17 @@ export class CreditCardComponent implements OnInit {
       this.cardExp = this._cardInfo.expiration;
       this.cardCvv = this._cardInfo.cvv;
 
-      console.log(this.cardExp, this.cardCvv);
+      this.checkCard(this.cardArr.join(""))
     }
   }
   cardArr: Array<string>;
   cardExp: any;
   cardCvv: string;
+  cardImage: string;
 
   constructor(
-    private helperService: HelperService
+    private helperService: HelperService,
+    private creditCardService: CreditCardService
   ) { }
 
   ngOnInit(
@@ -57,6 +60,18 @@ export class CreditCardComponent implements OnInit {
     c: 8432,
     d: 2264,
     expires: '7/12'
+  }
+
+  private checkCard(val: string) {
+    const cc = val.split(" ").join("");
+    const newCc = this.creditCardService.getCardType(+cc);
+    if (newCc) {
+      this.cardImage = this.retrieveImage(`images/${CardLogo[newCc]}`)
+    } else {
+      this.cardImage = this.retrieveImage(`images/generic.png`);
+    }
+    
+    console.log(this.creditCardService.getCardType(+cc));
   }
 
 }

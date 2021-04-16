@@ -8,7 +8,6 @@ import { GiveConstants } from './GiveConstants';
 import { GivingConst } from './models/give.const';
 import { GiveFormValidator } from './utils/GiveValidator';
 
-
 @Component({
   selector: 'app-give',
   templateUrl: './give.page.html',
@@ -54,6 +53,7 @@ export class GivePage implements OnInit, DoCheck {
 
   get cardControl() { return this.cardForm.controls['card'] }
   get expControl() { return this.cardForm.controls['expiration'] }
+  get cvvControl() { return this.cardForm.controls['cvv'] }
 
   get giveControls() {
     return {
@@ -78,7 +78,7 @@ export class GivePage implements OnInit, DoCheck {
   ) { }
 
   ngOnInit() {
-    console.log('cc', this.creditCardService.getCardType(4610460222293664));
+    console.log('cc', );
   }
 
   ngDoCheck() {
@@ -158,7 +158,27 @@ export class GivePage implements OnInit, DoCheck {
       var inputTxt = event.srcElement.value.toString();
       inputTxt = inputTxt ? inputTxt.split(" ").join("") : "";
       inputTxt = inputTxt.length > 16 ? inputTxt.substring(0, 16) : inputTxt;
-      this.cardControl.setValue(this.maskString(inputTxt))
+      this.cardControl.setValue(this.maskString(inputTxt));
+    }, 1);
+  }
+
+  maskExp(event) {
+    setTimeout(() => {
+      var inputTxt = event.srcElement.value.toString();
+      inputTxt = inputTxt.replace(/[^\d\/]/g, "");
+
+      inputTxt = inputTxt.replace(/(\d{2})(\d{2})/, "$1/$2")
+      this.expControl.setValue(inputTxt);
+    }, 1);
+  }
+
+  maskCvv(event) {
+    setTimeout(() => {
+      var inputTxt = event.srcElement.value.toString();
+      inputTxt = inputTxt.replace(/[^\d\/]/g, "");
+
+      inputTxt = inputTxt.replace(/(\d{4})/, "$1")
+      this.cvvControl.setValue(inputTxt);
     }, 1);
   }
     
@@ -170,6 +190,8 @@ export class GivePage implements OnInit, DoCheck {
     inputTxt = inputTxt.replace(/(\d{4})(\d)/, "$1 $2");
     return inputTxt;
   }
+
+  
 
   private calculateTotal(tithe, offering: FormArray) : number {
     let offeringTotal = 0;

@@ -3,3 +3,9 @@ export interface CardInfo {
     cvv: any;
     expiration: any;
 }
+
+export enum CardLogo {
+    VISA = "visa.png",
+    MASTER = "mastercard.png",
+    DISCOVERY = "discovery.png"
+}

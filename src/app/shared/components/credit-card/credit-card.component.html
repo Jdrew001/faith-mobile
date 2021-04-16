@@ -6,7 +6,7 @@
       </div>
     </ion-col>
     <ion-col class="logo">
-      <img class="brand" [src]="retrieveImage(card.logo)">
+      <img class="brand" [src]="cardImage">
     </ion-col>
   </ion-row>
   <ion-row>
@@ -29,8 +29,8 @@
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col class="date" >
-      Expires: {{cardExp}}
+    <ion-col class="date">
+      Good Thru: <span class="date-value">{{cardExp}}</span>
     </ion-col>
     <!-- <ion-col class="bank">
       {{card.bank}}
