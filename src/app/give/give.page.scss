@@ -4,24 +4,24 @@ ion-card.top {
 
 ion-card.detail-card {
     padding: 1em 2em !important;
-    background-color: #fbfbfb;
+    background-color: #516065;
     margin: 1em 1em !important;
-    box-shadow: rgb(0 0 0 / 20%) 0px 4px 16px;
+    box-shadow: rgb(0 0 0 / 60%) 0px 4px 16px;
 
     p {
-        color: black !important;
+        color: white !important;
         font-size: 12px !important;
     }
 }
 
 ion-card.active-detail-card {
     padding: 1em 0.5em !important;
-    background-color: #fbfbfb;
+    background-color: #516065;
     margin: 1em 1em !important;
-    box-shadow: rgb(0 0 0 / 20%) 0px 4px 16px;
+    box-shadow: rgb(0 0 0 / 60%) 0px 4px 16px;
 
     p {
-        color: black !important;
+        color: white !important;
         font-size: 10px !important;
         padding-bottom: 0.1em !important;
     }
@@ -34,7 +34,7 @@ ion-card.active-detail-card {
     .dot {
         height: 8px;
         width: 8px;
-        background-color: lightgrey;
+        background-color: white;
         border-radius: 50%;
         display: inline-block;
         margin-bottom: 4px;
@@ -42,7 +42,7 @@ ion-card.active-detail-card {
     }
 
     .number {
-        color: lightgrey;
+        color: white;
         font-size: 0.7em;
         line-height: 2em;
         text-align: center;

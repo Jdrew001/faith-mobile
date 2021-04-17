@@ -128,7 +128,6 @@ export class GivePage implements OnInit, DoCheck {
   }
 
   onChange(e) {
-    console.log('test', e);
     const formArr = this.giveControls.offeringArray as FormArray;
     this.checkFormArrSel(formArr);
   }
@@ -151,10 +150,17 @@ export class GivePage implements OnInit, DoCheck {
     }
   }
 
-  proceedToCard() {
+  submitTransaction() {
     this.formSubmitted = true;
     if (this.giveForm.valid) {
-      this.activeFormIndex = 1;
+      let data = {
+        cardDetails: this.cardForm.getRawValue(),
+        giverDetails: this.giveForm.getRawValue()
+      }
+  
+      // todo: encrypt for backend
+      console.log('data', data);
+      this.formSubmitted = false;
     } else {
       this.toastService.presetToast('Please fill in all required fields', 'danger');
     }
@@ -165,30 +171,21 @@ export class GivePage implements OnInit, DoCheck {
     console.log('log', this.giveForm);
   }
 
-  submitTransaction() {
-    let data = {
-      cardDetails: this.cardForm.getRawValue(),
-      giverDetails: this.giveForm.getRawValue()
-    }
-
-    // todo: encrypt for backend
-    console.log('data', data);
-  }
-
   async navigationToDetail(obj = null) {
     const modal = await this.modalCtrl.create({
       component: PaymentDetailsComponent,
       cssClass: 'my-custom-class',
       componentProps: {
         giveForm: this.giveForm,
-        cardForm: this.cardForm
+        cardForm: this.cardForm,
+        detailsAdded: this.showActiveDetails
       }
     });
     await modal.present();
 
     const { data } = await modal.onWillDismiss();
-    this.updateAddedView(data);
-    this.encryptData(data);
+    console.log('data', data);
+    this.handleModalDismiss(data);
   }
 
   renderDot(text: string) {
@@ -197,6 +194,7 @@ export class GivePage implements OnInit, DoCheck {
 
   private async retrievePreviousData() {
     let eItem = await this.storageService.getItem(this.saveKey);
+    console.log('eitem', eItem);
     this.cryptService.decryptData(eItem).then(item => {
       if (item) {
         let data = JSON.parse(item);
@@ -218,15 +216,39 @@ export class GivePage implements OnInit, DoCheck {
     this.showActiveDetails = true;
   }
 
+  clearPaymentControls() {
+    this.giveControls.email.reset();
+    this.giveControls.firstName.reset();
+    this.giveControls.lastName.reset();
+    this.giveControls.phone.reset();
+
+    this.cardControls.card.reset();
+    this.cardControls.expiration.reset();
+    this.cardControls.cvv.reset();
+  }
+
   private encryptData(data) {
     if (data) {
       this.cryptService.encryptData(JSON.stringify(data)).then(async val => {
-        console.log('edata', val);
         let result = await this.storageService.setItem(this.saveKey, val);
         console.log('result', result);
       }).catch(err => {
         console.log('err', err);
       });
+    }
+  }
+
+  private async handleModalDismiss(data) {
+    switch (data['action']) {
+      case 'submit':
+        this.updateAddedView(data);
+        this.encryptData(data);
+      break;
+      case 'delete':
+        this.clearPaymentControls();
+        this.showActiveDetails = false;
+        let eItem = await this.storageService.removeItem(this.saveKey);
+      break;
     }
   }
 

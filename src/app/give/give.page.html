@@ -18,7 +18,7 @@
               </ion-row>
 
               <ion-row class="ion-justify-content-center ion-align-items-center">
-                <p>Add Info</p>
+                <p>Add Information</p>
               </ion-row>
             </ion-card>
 
@@ -53,59 +53,16 @@
               </ion-row>
 
               <ion-row>
-                <ion-col>
-                  <p>Good Thru: <span class="number black-font">{{ cardControls?.expiration?.value }}</span></p>
+                <ion-col size="8">
+                  <p>Good Thru: <span class="number">{{ cardControls?.expiration?.value }}</span></p>
+                </ion-col>
+                <ion-col size="4">
+                  <p><em>Tap to Edit</em></p>
                 </ion-col>
               </ion-row>
             </ion-card>
           </ion-col>
         </ion-row>
-
-        <!-- <ion-row>
-          <ion-col>
-            <ion-list>
-              <ion-item mode="md">
-                <ion-label class="required-field" position="floating">E-mail</ion-label>
-                <ion-input type="email" inputmode="email" maxlength="255" autocapitalize="off" class="form-control" formControlName="email"></ion-input>
-              </ion-item>
-              <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="giveForm.get('email').invalid && formSubmitted">E-mail required</span>
-            </ion-list>
-          </ion-col>
-        </ion-row>
-    
-        <ion-row>
-          <ion-col>
-            <ion-list>
-              <ion-item mode="md">
-                <ion-label class="required-field" position="floating">First name</ion-label>
-                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="firstName" ></ion-input>
-              </ion-item>
-              <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="giveForm.get('firstName').invalid && formSubmitted">First Name required</span>
-            </ion-list>
-          </ion-col>
-    
-          <ion-col>
-            <ion-list>
-              <ion-item mode="md">
-                <ion-label class="required-field" position="floating">Last name</ion-label>
-                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="lastName" ></ion-input>
-              </ion-item>
-              <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="giveForm.get('lastName').invalid && formSubmitted">Last Name required</span>
-            </ion-list>
-          </ion-col>
-        </ion-row>
-    
-        <ion-row>
-          <ion-col>
-            <ion-list>
-              <ion-item mode="md">
-                <ion-label class="required-field" position="floating">Phone</ion-label>
-                <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="phone" appPhoneMask></ion-input>
-              </ion-item>
-              <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="giveForm.get('phone').invalid && formSubmitted">Phone required</span>
-            </ion-list>
-          </ion-col>
-        </ion-row> -->
     
         <ion-row class="mt-2">
         </ion-row>
@@ -263,23 +220,9 @@
       <ng-container [ngSwitch]="activeFormIndex">
         <div *ngSwitchCase="0">
           <ion-col>
-            <ion-button (click)="proceedToCard()" size="small" color="secondary" fill="outline">
-              <ion-icon slot="start" name="card-outline"></ion-icon>
-              Pay with Card
-            </ion-button>
-          </ion-col>
-        </div>
-        <div *ngSwitchCase="1">
-          <ion-col>
-            <ion-button (click)="cancelFromCard()" size="small" color="secondary" fill="outline">
-              <ion-icon slot="start" name="close-outline"></ion-icon>
-              Cancel
-            </ion-button>
-          </ion-col>
-          <ion-col>
             <ion-button (click)="submitTransaction()" size="small" color="secondary" fill="outline">
-              <ion-icon slot="start" name="checkmark-outline"></ion-icon>
-              Submit
+              <ion-icon slot="start" name="card-outline"></ion-icon>
+              Submit Payment
             </ion-button>
           </ion-col>
         </div>

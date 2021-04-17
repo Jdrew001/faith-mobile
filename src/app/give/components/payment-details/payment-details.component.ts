@@ -13,6 +13,7 @@ export class PaymentDetailsComponent implements OnInit {
 
   @Input() cardForm: FormGroup;
   @Input() giveForm: FormGroup;
+  @Input() detailsAdded: boolean;
 
   cardData$: EventEmitter<any> = new EventEmitter();
 
@@ -25,6 +26,26 @@ export class PaymentDetailsComponent implements OnInit {
   set expControl(val) { this.cardData.expiration = val }
   set cvvControl(val) { this.cardData.cvv = val }
 
+  get giveControls() {
+    return {
+      email: this.giveForm.get('email'),
+      firstName: this.giveForm.get('firstName'),
+      lastName: this.giveForm.get('lastName'),
+      phone: this.giveForm.get('phone'),
+      tithe: this.giveForm.get('tithe'),
+      offeringArray: this.giveForm.get('offeringArray'),
+      feeCover: this.giveForm.get('feeCover')
+    }
+  }
+
+  get cardControls() {
+    return {
+      card: this.cardForm.get('card'),
+      cvv: this.cardForm.get('cvv'),
+      expiration: this.cardForm.get('expiration')
+    }
+  }
+
   get isValid() {
     return this.cardData.card.length == 19 && this.giveData.firstName !== '' 
       && this.giveData.lastName !== '' && this.validateEmail() && this.validatePhone() && this.cardData.expiration.length == 5 && this.cardData.cvv.length == 3
@@ -35,10 +56,18 @@ export class PaymentDetailsComponent implements OnInit {
     private sharedService: SharedService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.detailsAdded) {
+      this.cardData.setData(this.cardControls.card.value, this.cardControls.cvv.value, this.cardControls.expiration.value);
+      this.giveData.setData(this.giveControls.email.value, this.giveControls.firstName.value, this.giveControls.lastName.value, this.giveControls.phone.value);
+      setTimeout(() => {this.sharedService.cardData$.next(this.cardData);},100);
+    }
+  }
 
   dismissPage() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss({
+      action: 'cancel'
+    });
   }
 
   saveChanges() {
@@ -46,10 +75,15 @@ export class PaymentDetailsComponent implements OnInit {
     if (this.isValid) {
       this.formSubmitted = false;
       this.modalCtrl.dismiss({
+        'action': 'submit',
         'cardData': this.cardData,
         'giveData': this.giveData
       });
     }
+  }
+
+  deleteCard() {
+    this.modalCtrl.dismiss({action: 'delete'});
   }
 
   validateEmail() {
