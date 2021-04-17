@@ -10,3 +10,8 @@ export class GiveModel {
     lastName: string = '';
     phone: string = '';
 }
+
+export interface GivingModel {
+    cardData: CardModel;
+    giveData: GiveModel;
+}

@@ -26,7 +26,8 @@ export class PaymentDetailsComponent implements OnInit {
   set cvvControl(val) { this.cardData.cvv = val }
 
   get isValid() {
-    return 
+    return this.cardData.card.length == 19 && this.giveData.firstName !== '' 
+      && this.giveData.lastName !== '' && this.validateEmail() && this.validatePhone() && this.cardData.expiration.length == 5 && this.cardData.cvv.length == 3
   }
 
   constructor(
@@ -42,6 +43,13 @@ export class PaymentDetailsComponent implements OnInit {
 
   saveChanges() {
     this.formSubmitted = true;
+    if (this.isValid) {
+      this.formSubmitted = false;
+      this.modalCtrl.dismiss({
+        'cardData': this.cardData,
+        'giveData': this.giveData
+      });
+    }
   }
 
   validateEmail() {

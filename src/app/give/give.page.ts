@@ -2,11 +2,14 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ModalController, Platform } from '@ionic/angular';
+import { CryptService } from '../core/services/crypt.service';
+import { StorageService } from '../core/services/storage.service';
 import { ToastService } from '../core/services/toast.service';
 import { CreditCardService } from '../shared/services/credit-card.service';
 import { SharedService } from '../shared/shared.service';
 import { PaymentDetailsComponent } from './components/payment-details/payment-details.component';
 import { GiveConstants } from './GiveConstants';
+import { GivingModel } from './models/card.model';
 import { GivingConst } from './models/give.const';
 import { GiveFormValidator } from './utils/GiveValidator';
 
@@ -29,11 +32,13 @@ import { GiveFormValidator } from './utils/GiveValidator';
 export class GivePage implements OnInit, DoCheck {
 
   giveValidator = new GiveFormValidator();
+  saveKey = 'eData';
   activeFormIndex: number = 0;
   grandTotal: number = 0;
   isFeeCovered: boolean = false;
   isRememberChecked: boolean = false;
   formSubmitted = false;
+  showActiveDetails = false;
   cardForm: FormGroup = new FormGroup({
     card: new FormControl('', [Validators.required]),
     cvv: new FormControl('', [Validators.required]),
@@ -69,6 +74,14 @@ export class GivePage implements OnInit, DoCheck {
     }
   }
 
+  get cardControls() {
+    return {
+      card: this.cardForm.get('card'),
+      cvv: this.cardForm.get('cvv'),
+      expiration: this.cardForm.get('expiration')
+    }
+  }
+
   get offeringCategories() {
     return GivingConst.OFFERING_CATEGORIES;
   }
@@ -77,11 +90,13 @@ export class GivePage implements OnInit, DoCheck {
     private platform: Platform,
     private creditCardService: CreditCardService,
     private toastService: ToastService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private cryptService: CryptService,
+    private storageService: StorageService
   ) { }
 
-  ngOnInit() {
-    console.log('cc', );
+  async ngOnInit() {
+    await this.retrievePreviousData();
   }
 
   ngDoCheck() {
@@ -169,7 +184,50 @@ export class GivePage implements OnInit, DoCheck {
         cardForm: this.cardForm
       }
     });
-    return await modal.present();
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    this.updateAddedView(data);
+    this.encryptData(data);
+  }
+
+  renderDot(text: string) {
+    return text.split('');
+  }
+
+  private async retrievePreviousData() {
+    let eItem = await this.storageService.getItem(this.saveKey);
+    this.cryptService.decryptData(eItem).then(item => {
+      if (item) {
+        let data = JSON.parse(item);
+        this.updateAddedView(data);
+      }
+    });
+  }
+
+  private updateAddedView(data: GivingModel) {
+    this.giveControls.email.setValue(data.giveData.email);
+    this.giveControls.firstName.setValue(data.giveData.firstName);
+    this.giveControls.lastName.setValue(data.giveData.lastName);
+    this.giveControls.phone.setValue(data.giveData.phone);
+
+    this.cardControls.card.setValue(data.cardData.card);
+    this.cardControls.expiration.setValue(data.cardData.expiration);
+    this.cardControls.cvv.setValue(data.cardData.cvv);
+
+    this.showActiveDetails = true;
+  }
+
+  private encryptData(data) {
+    if (data) {
+      this.cryptService.encryptData(JSON.stringify(data)).then(async val => {
+        console.log('edata', val);
+        let result = await this.storageService.setItem(this.saveKey, val);
+        console.log('result', result);
+      }).catch(err => {
+        console.log('err', err);
+      });
+    }
   }
 
   private calculateTotal(tithe, offering: FormArray) : number {

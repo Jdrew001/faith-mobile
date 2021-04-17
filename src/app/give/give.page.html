@@ -12,13 +12,50 @@
       <div [formGroup]="giveForm" @fade>
         <ion-row>
           <ion-col>
-            <ion-card class="detail-card" (click)="addPaymentDetails()">
+            <ion-card *ngIf="!showActiveDetails" class="detail-card" (click)="addPaymentDetails()">
               <ion-row class="ion-justify-content-center ion-align-items-center">
                 <ion-fab-button size="small" color="danger"><ion-icon name="add-outline"></ion-icon></ion-fab-button>
               </ion-row>
 
               <ion-row class="ion-justify-content-center ion-align-items-center">
                 <p>Add Info</p>
+              </ion-row>
+            </ion-card>
+
+            <ion-card *ngIf="showActiveDetails" class="active-detail-card" (click)="addPaymentDetails()">
+              <ion-row>
+                <ion-col>
+                  <p class="heading-p">{{ giveControls?.firstName?.value }} {{ giveControls?.lastName?.value }}</p>
+                  <p>{{ giveControls?.email?.value }}</p>
+                  <p>{{ giveControls?.phone?.value }}</p>
+                </ion-col>
+              </ion-row>
+
+              <ion-row class="digits ion-align-items-center">
+                <ion-col class="">
+                  <span *ngIf="cardControls?.card?.value?.split(' ').length >= 1">
+                    <span *ngFor="let item of renderDot(cardControls?.card?.value?.split(' ')[0])" class="dot"></span>
+                  </span>
+                </ion-col>
+                <ion-col class="">
+                  <span *ngIf="cardControls?.card?.value?.split(' ').length >= 2">
+                    <span *ngFor="let item of renderDot(cardControls?.card?.value?.split(' ')[1])" class="dot"></span>
+                  </span>
+                </ion-col>
+                <ion-col class="">
+                  <span *ngIf="cardControls?.card?.value?.split(' ').length >= 3">
+                    <span *ngFor="let item of renderDot(cardControls?.card?.value?.split(' ')[2])" class="dot"></span>
+                  </span>
+                </ion-col>
+                <ion-col class="number">
+                  {{cardControls?.card?.value?.split(' ').length >= 4 ? cardControls?.card?.value?.split(' ')[3] : ''}}
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col>
+                  <p>Good Thru: <span class="number black-font">{{ cardControls?.expiration?.value }}</span></p>
+                </ion-col>
               </ion-row>
             </ion-card>
           </ion-col>

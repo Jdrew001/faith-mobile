@@ -19,7 +19,7 @@
         <ion-list>
           <ion-item mode="md">
             <ion-label class="required-field" position="floating">Card Number</ion-label>
-            <ion-input (ionInput)="mask($event)" [(ngModel)]="cardData.card" type="numeric" inputmode="text" maxlength="19" autocapitalize="on" class="form-control"></ion-input>
+            <ion-input (ionInput)="mask($event)" [(ngModel)]="cardData.card" type="numeric" inputmode="numeric" maxlength="19" autocapitalize="on" class="form-control"></ion-input>
           </ion-item>
           <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="cardData?.card?.length != 19 && formSubmitted">Card Number required</span>
         </ion-list>
