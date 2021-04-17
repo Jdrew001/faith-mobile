@@ -1,0 +1,104 @@
+<ion-content>
+  <ion-card class="top fixed animated fadeIn faster">
+    <ion-row>
+      <ion-col>
+        <ion-button class="menu-btn" (click)="dismissPage()">
+          <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <app-credit-card></app-credit-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label class="required-field" position="floating">Card Number</ion-label>
+            <ion-input (ionInput)="mask($event)" [(ngModel)]="cardData.card" type="numeric" inputmode="text" maxlength="19" autocapitalize="on" class="form-control"></ion-input>
+          </ion-item>
+          <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="cardData?.card?.length != 19 && formSubmitted">Card Number required</span>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label class="required-field" position="floating">First Name</ion-label>
+            <ion-input [(ngModel)]="giveData.firstName" type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control"></ion-input>
+          </ion-item>
+          <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="giveData?.firstName === '' && formSubmitted">First Name required</span>
+        </ion-list>
+      </ion-col>
+
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label class="required-field" position="floating">Last Name</ion-label>
+            <ion-input type="text" [(ngModel)]="giveData.lastName" inputmode="text" maxlength="255" autocapitalize="on" class="form-control"></ion-input>
+          </ion-item>
+          <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="giveData?.lastName === '' && formSubmitted">Last Name required</span>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label class="required-field" position="floating">E-mail</ion-label>
+            <ion-input type="email" [(ngModel)]="giveData.email" inputmode="email" maxlength="255" autocapitalize="off" class="form-control"></ion-input>
+          </ion-item>
+          <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="!validateEmail() && formSubmitted">E-mail required</span>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label class="required-field" position="floating">Phone</ion-label>
+            <ion-input type="text" [(ngModel)]="giveData.phone" inputmode="numeric" maxlength="255" autocapitalize="on" class="form-control" appPhoneMask></ion-input>
+          </ion-item>
+          <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="!validatePhone() && formSubmitted">Phone required</span>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label class="required-field" position="floating">Expiration Date</ion-label>
+            <ion-input (ionInput)="maskExp($event)" [(ngModel)]="cardData.expiration" type="text" inputmode="numeric" maxlength="5" autocapitalize="on" class="form-control"></ion-input>
+          </ion-item>
+          <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="cardData?.expiration?.length != 5 && formSubmitted">Expiration required</span>
+        </ion-list>
+      </ion-col>
+
+      <ion-col>
+        <ion-list>
+          <ion-item mode="md">
+            <ion-label class="required-field" position="floating">CVV</ion-label>
+            <ion-input (ionInput)="maskCvv($event)" [(ngModel)]="cardData.cvv" type="text" inputmode="numeric" maxlength="3" autocapitalize="on" class="form-control"></ion-input>
+          </ion-item>
+          <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="cardData?.cvv?.length != 3 && formSubmitted">CVV required</span>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-button (click)="saveChanges()" color="danger">
+        Save Changes
+      </ion-button>
+    </ion-row>
+
+  </ion-card>
+</ion-content>

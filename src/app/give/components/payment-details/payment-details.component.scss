@@ -1,0 +1,29 @@
+ion-button.menu-btn {
+    --box-shadow: none !important;
+    --background: transparent !important;
+    --background-activated: transparent !important;
+    z-index: 9999;
+    position: relative;
+    left: -15px;
+
+    ion-icon {
+        color: black !important;
+    }
+}
+
+ion-card {
+    margin: 1em !important;
+}
+
+ion-card ion-row {
+    padding: 5px 12px !important;
+}
+
+ion-label {
+    font-size: 12px !important;
+}
+
+span.error {
+    padding: 2px;
+    color: red !important;
+}

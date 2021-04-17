@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HelperService } from '../core/helper.service';
 import { AppConstants } from '../app-constants';
 import { Preacher, Tags } from '../connect/components/sermons/sermons.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 export class SharedService {
 
   filterTypes$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  cardData$: Subject<any> = new Subject();
 
   constructor(private http: HttpClient, private helperService: HelperService) { }
 

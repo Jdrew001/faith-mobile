@@ -7,18 +7,24 @@
     <app-icon-bar [icon]="'heart-outline'" [title]="'Give'"></app-icon-bar>
   </div>
   <ion-card class="top fixed animated fadeIn faster">
-    <ion-row>
-      <ion-col>
-        <ion-progress-bar color="danger" [value]="activeFormIndex"></ion-progress-bar>
-      </ion-col>
-    </ion-row>
 
-    <ng-container [ngSwitch]="activeFormIndex">
-      <div [formGroup]="giveForm" *ngSwitchCase="0" @fade>
+    <ng-container>
+      <div [formGroup]="giveForm" @fade>
         <ion-row>
-          <h5>Giving Information</h5>
+          <ion-col>
+            <ion-card class="detail-card" (click)="addPaymentDetails()">
+              <ion-row class="ion-justify-content-center ion-align-items-center">
+                <ion-fab-button size="small" color="danger"><ion-icon name="add-outline"></ion-icon></ion-fab-button>
+              </ion-row>
+
+              <ion-row class="ion-justify-content-center ion-align-items-center">
+                <p>Add Info</p>
+              </ion-row>
+            </ion-card>
+          </ion-col>
         </ion-row>
-        <ion-row>
+
+        <!-- <ion-row>
           <ion-col>
             <ion-list>
               <ion-item mode="md">
@@ -62,7 +68,7 @@
               <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="giveForm.get('phone').invalid && formSubmitted">Phone required</span>
             </ion-list>
           </ion-col>
-        </ion-row>
+        </ion-row> -->
     
         <ion-row class="mt-2">
         </ion-row>
@@ -134,7 +140,7 @@
         </ion-row>
       </div>
 
-      <div *ngSwitchCase="1" @fade>
+      <!-- <div *ngSwitchCase="1" @fade>
         <div [formGroup]="cardForm">
           <ion-row class="mt-2 card-title">
             <ion-col size="12">
@@ -205,7 +211,7 @@
           </ion-col>
         </ion-row>
         
-      </div>
+      </div> -->
     </ng-container>
 
   </ion-card>

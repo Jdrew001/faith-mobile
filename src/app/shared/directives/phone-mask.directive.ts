@@ -3,7 +3,7 @@ import { NgControl } from '@angular/forms';
 import { isNullOrUndefined } from 'util';
 
 @Directive({
-  selector: '[formControlName][appPhoneMask]'
+  selector: '[appPhoneMask]'
 })
 export class PhoneMaskDirective {
 

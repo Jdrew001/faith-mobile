@@ -2,6 +2,18 @@ ion-card.top {
     margin-top: 5% !important;
 }
 
+ion-card.detail-card {
+    padding: 1em 2em !important;
+    background-color: #fbfbfb;
+    margin: 1em 3em !important;
+    box-shadow: rgb(0 0 0 / 20%) 0px 4px 16px;
+
+    p {
+        color: black !important;
+        font-size: 12px !important;
+    }
+}
+
 ion-label {
     font-size: 12px !important;
 }

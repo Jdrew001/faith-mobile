@@ -10,6 +10,7 @@ import { PrayerRequestsPage } from './prayer-requests.page';
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
 import { LoaderService } from '../core/loader/loader.service';
+import { PhoneMaskDirective } from '../shared/directives/phone-mask.directive';
 
 @NgModule({
   imports: [

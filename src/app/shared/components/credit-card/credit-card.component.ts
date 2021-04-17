@@ -2,6 +2,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { HelperService } from 'src/app/core/helper.service';
 import { CreditCardService } from '../../services/credit-card.service';
+import { SharedService } from '../../shared.service';
 import { CardInfo, CardLogo } from './credit.model';
 
 @Component({
@@ -23,16 +24,6 @@ import { CardInfo, CardLogo } from './credit.model';
 export class CreditCardComponent implements OnInit {
 
   _cardInfo: CardInfo;
-  @Input() set cardInfo(val) {
-    if (val) {
-      this._cardInfo = val;
-      this.cardArr = this._cardInfo.card.split(' ');
-      this.cardExp = this._cardInfo.expiration;
-      this.cardCvv = this._cardInfo.cvv;
-
-      this.checkCard(this.cardArr.join(""))
-    }
-  }
   cardArr: Array<string>;
   cardExp: any;
   cardCvv: string;
@@ -40,12 +31,21 @@ export class CreditCardComponent implements OnInit {
 
   constructor(
     private helperService: HelperService,
-    private creditCardService: CreditCardService
+    private creditCardService: CreditCardService,
+    private sharedService: SharedService
   ) { }
 
-  ngOnInit(
-    
-  ) {}
+  ngOnInit() {
+    this.checkCard("");
+    this.sharedService.cardData$.subscribe(val => {
+      this._cardInfo = val;
+      this.cardArr = this._cardInfo.card.split(' ');
+      this.cardExp = this._cardInfo.expiration;
+      this.cardCvv = this._cardInfo.cvv;
+
+      this.checkCard(this.cardArr.join(""))
+    });
+  }
 
   retrieveImage(url) {
     return this.helperService.getResourceUrl(url, true);
@@ -60,6 +60,10 @@ export class CreditCardComponent implements OnInit {
     c: 8432,
     d: 2264,
     expires: '7/12'
+  }
+
+  renderDot(text: string) {
+    return text.split('');
   }
 
   private checkCard(val: string) {

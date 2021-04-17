@@ -1,9 +1,11 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { Platform } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { ToastService } from '../core/services/toast.service';
 import { CreditCardService } from '../shared/services/credit-card.service';
+import { SharedService } from '../shared/shared.service';
+import { PaymentDetailsComponent } from './components/payment-details/payment-details.component';
 import { GiveConstants } from './GiveConstants';
 import { GivingConst } from './models/give.const';
 import { GiveFormValidator } from './utils/GiveValidator';
@@ -27,7 +29,7 @@ import { GiveFormValidator } from './utils/GiveValidator';
 export class GivePage implements OnInit, DoCheck {
 
   giveValidator = new GiveFormValidator();
-  activeFormIndex: number = 1;
+  activeFormIndex: number = 0;
   grandTotal: number = 0;
   isFeeCovered: boolean = false;
   isRememberChecked: boolean = false;
@@ -74,7 +76,8 @@ export class GivePage implements OnInit, DoCheck {
   constructor(
     private platform: Platform,
     private creditCardService: CreditCardService,
-    private toastService: ToastService 
+    private toastService: ToastService,
+    private modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
@@ -88,6 +91,10 @@ export class GivePage implements OnInit, DoCheck {
 
   retrieveMode() {
     return this.platform.is("ios") ? "ios": "md";
+  }
+
+  async addPaymentDetails() {
+    await this.navigationToDetail();
   }
 
   addToArray() {
@@ -153,45 +160,17 @@ export class GivePage implements OnInit, DoCheck {
     console.log('data', data);
   }
 
-  mask(event) {
-    setTimeout(() => {
-      var inputTxt = event.srcElement.value.toString();
-      inputTxt = inputTxt ? inputTxt.split(" ").join("") : "";
-      inputTxt = inputTxt.length > 16 ? inputTxt.substring(0, 16) : inputTxt;
-      this.cardControl.setValue(this.maskString(inputTxt));
-    }, 1);
+  async navigationToDetail(obj = null) {
+    const modal = await this.modalCtrl.create({
+      component: PaymentDetailsComponent,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        giveForm: this.giveForm,
+        cardForm: this.cardForm
+      }
+    });
+    return await modal.present();
   }
-
-  maskExp(event) {
-    setTimeout(() => {
-      var inputTxt = event.srcElement.value.toString();
-      inputTxt = inputTxt.replace(/[^\d\/]/g, "");
-
-      inputTxt = inputTxt.replace(/(\d{2})(\d{2})/, "$1/$2")
-      this.expControl.setValue(inputTxt);
-    }, 1);
-  }
-
-  maskCvv(event) {
-    setTimeout(() => {
-      var inputTxt = event.srcElement.value.toString();
-      inputTxt = inputTxt.replace(/[^\d\/]/g, "");
-
-      inputTxt = inputTxt.replace(/(\d{4})/, "$1")
-      this.cvvControl.setValue(inputTxt);
-    }, 1);
-  }
-    
-  maskString(inputTxt) {
-    inputTxt = inputTxt.replace(/\D/g, "");
-    inputTxt = inputTxt.replace(/(\d{4})(\d)/, "$1 $2");
-    inputTxt = inputTxt.replace(/(\d{4})(\d)/, "$1 $2");
-    inputTxt = inputTxt.replace(/(\d{4})(\d)/, "$1 $2");
-    inputTxt = inputTxt.replace(/(\d{4})(\d)/, "$1 $2");
-    return inputTxt;
-  }
-
-  
 
   private calculateTotal(tithe, offering: FormArray) : number {
     let offeringTotal = 0;

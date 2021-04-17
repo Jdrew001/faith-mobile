@@ -14,15 +14,21 @@
       <img [src]="retrieveImage(card.chip)">
     </ion-col>
   </ion-row>
-  <ion-row class="digits">
-    <ion-col class="number">
-      {{cardArr && cardArr.length >= 1 ? cardArr[0] : ''}}
+  <ion-row class="digits ion-align-items-center">
+    <ion-col class="">
+      <span *ngIf="cardArr && cardArr.length >= 1">
+        <span *ngFor="let item of renderDot(cardArr[0])" class="dot"></span>
+      </span>
     </ion-col>
-    <ion-col class="number">
-      {{cardArr && cardArr.length >= 2 ? cardArr[1] : ''}}
+    <ion-col class="">
+      <span *ngIf="cardArr && cardArr.length >= 2">
+        <span *ngFor="let item of renderDot(cardArr[1])" class="dot"></span>
+      </span>
     </ion-col>
-    <ion-col class="number">
-      {{cardArr && cardArr.length >= 3 ? cardArr[2] : ''}}
+    <ion-col class="">
+      <span *ngIf="cardArr && cardArr.length >= 3">
+        <span *ngFor="let item of renderDot(cardArr[2])" class="dot"></span>
+      </span>
     </ion-col>
     <ion-col class="number">
       {{cardArr && cardArr.length >= 4 ? cardArr[3] : ''}}
