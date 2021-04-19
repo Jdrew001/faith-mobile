@@ -8,13 +8,13 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <!-- <ion-row>
       <ion-col>
         <app-credit-card></app-credit-card>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
-    <ion-row>
+    <!-- <ion-row>
       <ion-col>
         <ion-list>
           <ion-item mode="md">
@@ -23,6 +23,23 @@
           </ion-item>
           <span class="error" style="font-size: 10px;margin: 2px !important;" *ngIf="cardData?.card?.length != 19 && formSubmitted">Card Number required</span>
         </ion-list>
+      </ion-col>
+    </ion-row> -->
+
+
+    <ion-row>
+      <ion-col>
+        <!-- <ion-list>
+          <ion-item mode="md">
+            <div #numberElement></div>
+          </ion-item>
+        </ion-list> -->
+        <div class="stripe-el">
+          <div #numberElement class="input" id="numberElement"></div>
+          <label for="numberElement">Credit Card</label>
+        </div>
+        
+        
       </ion-col>
     </ion-row>
 

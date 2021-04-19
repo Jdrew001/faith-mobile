@@ -1,8 +1,10 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { SharedService } from 'src/app/shared/shared.service';
 import { CardModel, GiveModel } from '../../models/card.model';
+
+declare var Stripe;
 
 @Component({
   selector: 'app-payment-details',
@@ -15,12 +17,48 @@ export class PaymentDetailsComponent implements OnInit {
   @Input() giveForm: FormGroup;
   @Input() detailsAdded: boolean;
 
+  @ViewChild('numberElement', null) numberElement: ElementRef;
+
+  stripe;
+  number;
+  cardErrors;
+
   cardData$: EventEmitter<any> = new EventEmitter();
 
   cardData:CardModel = new CardModel();
   giveData: GiveModel = new GiveModel();
   formSubmitted = false;
   hasError = false;
+
+  elementStyles = {
+    base: {
+      color: 'black',
+      fontWeight: 500,
+      fontFamily: 'Source Code Pro, Consolas, Menlo, monospace',
+      fontSize: '16px',
+      fontSmoothing: 'antialiased',
+      borderBottom: '1px solid #DEDEDE',
+
+      '::placeholder': {
+        color: 'transparent',
+      },
+      ':-webkit-autofill': {
+        color: 'black',
+      },
+    },
+    invalid: {
+      color: '#E25950',
+      '::placeholder': {
+        color: '#FFCCA5',
+      },
+    },
+  };
+
+  elementClasses = {
+    focus: 'focused',
+    empty: 'empty',
+    invalid: 'invalid',
+  };
 
   set cardControl(val) { this.cardData.card = val }
   set expControl(val) { this.cardData.expiration = val }
@@ -57,11 +95,19 @@ export class PaymentDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.detailsAdded) {
-      this.cardData.setData(this.cardControls.card.value, this.cardControls.cvv.value, this.cardControls.expiration.value);
-      this.giveData.setData(this.giveControls.email.value, this.giveControls.firstName.value, this.giveControls.lastName.value, this.giveControls.phone.value);
-      setTimeout(() => {this.sharedService.cardData$.next(this.cardData);},100);
-    }
+
+    this.stripe = Stripe('pk_test_51IWOf3A0DJoBf0VzbZR7l3xohneGilLnLoYtjesw2BED5SqjGsV8TZa2Xx9d68RCFlmAN87ErPgQhx9UMT1yrC1400omCjotV3');
+    const elements = this.stripe.elements();
+    this.number = elements.create('cardNumber', {
+      style: this.elementStyles,
+      classes: this.elementClasses
+    });
+    this.number.mount(this.numberElement.nativeElement);
+    // if (this.detailsAdded) {
+    //   this.cardData.setData(this.cardControls.card.value, this.cardControls.cvv.value, this.cardControls.expiration.value);
+    //   this.giveData.setData(this.giveControls.email.value, this.giveControls.firstName.value, this.giveControls.lastName.value, this.giveControls.phone.value);
+    //   setTimeout(() => {this.sharedService.cardData$.next(this.cardData);},100);
+    // }
   }
 
   dismissPage() {

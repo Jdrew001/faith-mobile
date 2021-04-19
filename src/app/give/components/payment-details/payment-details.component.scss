@@ -32,3 +32,38 @@ ion-row.submit-btn {
     margin-top: 1em !important;
     margin-bottom: 2em !important;
 }
+
+.stripe-el label {
+    padding-left: 1.2em;
+    transform-origin: 20% 0;
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: absolute;
+    top: -5px;
+    color: black !important;
+    font-size: 12px !important;
+}
+
+.input {
+    width: 100%;
+    padding-bottom: 7px;
+    color: black;
+    background-color: transparent;
+  }
+
+ion-label {
+    color: black !important;
+}
+
+.input.StripeElement {
+    border-bottom: 1px solid #DEDEDE !important;
+    padding-bottom: 10px;
+    padding-left: 1.2em;
+}
+
+.input.focused + label,
+.input:not(.empty) + label {
+  transform: scale(0.75) translateY(-10px) !important;
+  cursor: default !important;
+}

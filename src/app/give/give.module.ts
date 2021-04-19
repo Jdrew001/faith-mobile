@@ -14,6 +14,7 @@ import { ExpDateDirective } from './directives/exp-date.directive';
 import { PaymentDetailsComponent } from './components/payment-details/payment-details.component';
 import { PhoneMaskDirective } from '../shared/directives/phone-mask.directive';
 import { PaymentDetailsModule } from './components/payment-details/payment-details.module';
+import { GiveService } from './services/give.service';
 
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -38,7 +39,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     PaymentDetailsModule
   ],
   providers: [
-    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
+    GiveService
   ],
   declarations: [GivePage, ExpDateDirective]
 })

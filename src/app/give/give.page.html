@@ -9,19 +9,20 @@
   <ion-card class="top fixed animated fadeIn faster">
 
     <ng-container>
+      
       <div [formGroup]="giveForm" @fade>
         <ion-row>
           <ion-col>
             <ion-card *ngIf="!showActiveDetails" class="detail-card" (click)="addPaymentDetails()">
               <ion-row class="ion-justify-content-center ion-align-items-center">
-                <ion-fab-button size="small" color="danger"><ion-icon name="add-outline"></ion-icon></ion-fab-button>
+                <ion-icon class="add-icon" name="add-circle-outline"></ion-icon>
               </ion-row>
 
               <ion-row class="ion-justify-content-center ion-align-items-center">
                 <p>Add Information</p>
               </ion-row>
             </ion-card>
-
+            
             <ion-card *ngIf="showActiveDetails" class="active-detail-card" (click)="addPaymentDetails()">
               <ion-row>
                 <ion-col>
@@ -117,10 +118,12 @@
                 <ion-item mode="md">
                   <ion-label class="required-field" position="floating">Other Category</ion-label>
                   <ion-input type="text" inputmode="text" maxlength="255" autocapitalize="on" class="form-control" formControlName="otherOffering" ></ion-input>
+                  <span class="error" style="font-size: 10px;" *ngIf="form.errors && form.errors.otherRequired && formSubmitted">An other offering type must be specified</span>
                 </ion-item>
               </ion-list>
             </ion-col>
           </ion-row>
+          
           </ng-container>
         </ion-card>
 
@@ -133,6 +136,19 @@
           </ion-col>
         </ion-row>
       </div>
+
+      <ion-row (click)="isFeeCovered = !isFeeCovered" style="padding-bottom: 20px !important" class="ion-align-items-center ion-justify-content-center">
+        <ion-col>
+          <ion-checkbox [(ngModel)]="isFeeCovered" color="primary"></ion-checkbox>
+        </ion-col>
+
+        <ion-col size="9">
+          <div >
+            <ion-label>Cover payment proccessing fee?</ion-label>
+            <p><em>Total + (2.20% + $0.30)</em></p>
+          </div>
+        </ion-col>
+      </ion-row>
 
       <!-- <div *ngSwitchCase="1" @fade>
         <div [formGroup]="cardForm">
@@ -227,8 +243,6 @@
           </ion-col>
         </div>
       </ng-container>
-     
-      
     </ion-row>
   </ion-toolbar>
 </ion-footer>

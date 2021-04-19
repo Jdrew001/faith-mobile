@@ -11,6 +11,7 @@ import { PaymentDetailsComponent } from './components/payment-details/payment-de
 import { GiveConstants } from './GiveConstants';
 import { GivingModel } from './models/card.model';
 import { GivingConst } from './models/give.const';
+import { GiveService } from './services/give.service';
 import { GiveFormValidator } from './utils/GiveValidator';
 
 @Component({
@@ -92,7 +93,8 @@ export class GivePage implements OnInit, DoCheck {
     private toastService: ToastService,
     private modalCtrl: ModalController,
     private cryptService: CryptService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private giveService: GiveService
   ) { }
 
   async ngOnInit() {
@@ -152,17 +154,35 @@ export class GivePage implements OnInit, DoCheck {
 
   submitTransaction() {
     this.formSubmitted = true;
-    if (this.giveForm.valid) {
+    if (this.giveForm.valid && this.cardForm.valid) {
+      this.giveControls.feeCover.setValue(this.isFeeCovered);
       let data = {
         cardDetails: this.cardForm.getRawValue(),
         giverDetails: this.giveForm.getRawValue()
       }
-  
-      // todo: encrypt for backend
-      console.log('data', data);
-      this.formSubmitted = false;
+
+      data.giverDetails.tithe = this.convertTitheToService(data.giverDetails.tithe);
+      data.giverDetails.offeringArray = this.convertOfferingToService(data.giverDetails.offeringArray);
+      let encryptedData = this.giveService.encryptInformation(JSON.stringify(data));
+      let body = {
+        data: encryptedData
+      }
+      this.giveService.capturePaymentForStripe(body).subscribe(async res => {
+        this.toastService.presetToast('Mobile giving successfully completed', 'success');
+        this.cardForm.reset();
+        this.giveForm.reset();
+        this.formSubmitted = false;
+        await this.retrievePreviousData();
+      }, err => {
+
+      });
+      
     } else {
-      this.toastService.presetToast('Please fill in all required fields', 'danger');
+      if (!this.showActiveDetails) {
+        this.toastService.presetToast('Please add payment information', 'danger');
+      } else {
+        this.toastService.presetToast('Please fill in all required fields', 'danger'); 
+      }
     }
   }
 
@@ -250,6 +270,20 @@ export class GivePage implements OnInit, DoCheck {
         let eItem = await this.storageService.removeItem(this.saveKey);
       break;
     }
+  }
+
+  private convertTitheToService(tithe: string) {
+    let item = tithe.split("$").join("").split(",").join("");
+    return +item;
+  }
+
+  private convertOfferingToService(offering: Array<any>) {
+    offering.forEach(val => {
+      let item = val['offering'].split("$").join("").split(",").join("");
+      val['offering'] = +item;
+    });
+
+    return offering;
   }
 
   private calculateTotal(tithe, offering: FormArray) : number {

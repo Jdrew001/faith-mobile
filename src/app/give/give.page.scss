@@ -4,12 +4,12 @@ ion-card.top {
 
 ion-card.detail-card {
     padding: 1em 2em !important;
-    background-color: #516065;
-    margin: 1em 1em !important;
-    box-shadow: rgb(0 0 0 / 60%) 0px 4px 16px;
+    background-color: #fafafa;
+    margin: 1em 3em !important;
+    box-shadow: inset rgb(0 0 0 / 10%) 0px 0px 7px;
 
     p {
-        color: white !important;
+        color: #d3d2d2 !important;
         font-size: 12px !important;
     }
 }
@@ -54,6 +54,10 @@ ion-card.active-detail-card {
     }
 }
 
+.text-center {
+    text-align: center !important;
+}
+
 ion-label {
     font-size: 12px !important;
 }
@@ -67,8 +71,9 @@ ion-select {
     font-size: 12px !important;
 }
 
-ion-fab-button ion-icon {
-    color: white !important;
+.add-icon {
+    font-size: 3em !important;
+    color: #d3d2d2 !important;
 }
 
 .offering-details-heading h5 {
