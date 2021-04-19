@@ -4,6 +4,8 @@ export class GiveConstants {
         cost: 0.30
     };
 
+    public static STRIPE_PK = 'pk_test_51IWOf3A0DJoBf0VzbZR7l3xohneGilLnLoYtjesw2BED5SqjGsV8TZa2Xx9d68RCFlmAN87ErPgQhx9UMT1yrC1400omCjotV3';
+
     public static PUBLIC_KEY = `-----BEGIN PUBLIC KEY-----
     MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAsAjdi8p0adqAiDqtY5VQ
     S6FKjiNPdspE9GceMvoZbvv2eSLiNLBnfAPLe+s7duFLZklMekc5QTzsRtIUu6Em

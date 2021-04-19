@@ -17,12 +17,14 @@ export class GiveModel {
     firstName: string = '';
     lastName: string = '';
     phone: string = '';
+    zip: string = '';
 
-    setData(email: string, firstName: string, lastName: string, phone: string) {
+    setData(email: string, firstName: string, lastName: string, phone: string, zip: string) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
+        this.zip = zip;
     }
 }
 

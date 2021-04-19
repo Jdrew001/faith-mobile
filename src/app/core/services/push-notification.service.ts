@@ -12,6 +12,7 @@ import { ToastService } from './toast.service';
 import { EmailService } from './email.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { StorageService } from './storage.service';
 const { PushNotifications } = Plugins;
 
 @Injectable({
@@ -27,7 +28,8 @@ export class PushNotificationService {
     private authorizationService: AuthorizationService,
     private toastService: ToastService,
     private emailService: EmailService,
-    private router: Router) {
+    private router: Router,
+    private storageService: StorageService) {
   }
 
   init() {
@@ -114,6 +116,8 @@ export class PushNotificationService {
   }
 
   private sendTokenToService(token, appToken) {
+    this.storageService.removeItem('apptoken');
+    this.storageService.setItem('apptoken', token);
     const url = this.helperService.getResourceUrl(`${CoreConstants.PHONE_TOKEN_URL}`);
     const headers = {
       'Content-Type': 'application/json',
