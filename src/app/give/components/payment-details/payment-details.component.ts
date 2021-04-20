@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, 
 import { FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { SharedService } from 'src/app/shared/shared.service';
+import { GiveConstants } from '../../GiveConstants';
 import { CardModel, GiveModel } from '../../models/card.model';
 
 declare var Stripe;
@@ -18,10 +19,16 @@ export class PaymentDetailsComponent implements OnInit {
   @Input() detailsAdded: boolean;
 
   @ViewChild('numberElement', null) numberElement: ElementRef;
+  @ViewChild('expElement', null) expElement: ElementRef;
+  @ViewChild('cvvElement', null) cvvElement: ElementRef;
 
   stripe;
   number;
+  exp;
+  cvv;
   cardErrors;
+  expErrors;
+  cvvErrors;
 
   cardData$: EventEmitter<any> = new EventEmitter();
 
@@ -76,17 +83,9 @@ export class PaymentDetailsComponent implements OnInit {
     }
   }
 
-  get cardControls() {
-    return {
-      card: this.cardForm.get('card'),
-      cvv: this.cardForm.get('cvv'),
-      expiration: this.cardForm.get('expiration')
-    }
-  }
-
   get isValid() {
-    return this.cardData.card.length == 19 && this.giveData.firstName !== '' 
-      && this.giveData.lastName !== '' && this.validateEmail() && this.validatePhone() && this.cardData.expiration.length == 5 && this.cardData.cvv.length == 3
+    return this.giveData.firstName !== '' 
+      && this.giveData.lastName !== '' && this.validateEmail() && this.validatePhone()
   }
 
   constructor(
@@ -95,14 +94,9 @@ export class PaymentDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    this.stripe = Stripe('pk_test_51IWOf3A0DJoBf0VzbZR7l3xohneGilLnLoYtjesw2BED5SqjGsV8TZa2Xx9d68RCFlmAN87ErPgQhx9UMT1yrC1400omCjotV3');
-    const elements = this.stripe.elements();
-    this.number = elements.create('cardNumber', {
-      style: this.elementStyles,
-      classes: this.elementClasses
-    });
-    this.number.mount(this.numberElement.nativeElement);
+    this.stripe = Stripe(GiveConstants.STRIPE_PK);
+    this.initStripeElements();
+    this.initStripeListenters();
     // if (this.detailsAdded) {
     //   this.cardData.setData(this.cardControls.card.value, this.cardControls.cvv.value, this.cardControls.expiration.value);
     //   this.giveData.setData(this.giveControls.email.value, this.giveControls.firstName.value, this.giveControls.lastName.value, this.giveControls.phone.value);
@@ -120,10 +114,11 @@ export class PaymentDetailsComponent implements OnInit {
     this.formSubmitted = true;
     if (this.isValid) {
       this.formSubmitted = false;
-      this.modalCtrl.dismiss({
-        'action': 'submit',
-        'cardData': this.cardData,
-        'giveData': this.giveData
+      this.createPaymentMethod({
+        cardElement: this.number,
+        expElement: this.exp,
+        cvvElement: this.cvv,
+        giveData: this.giveData
       });
     }
   }
@@ -139,41 +134,6 @@ export class PaymentDetailsComponent implements OnInit {
   validatePhone() {
     return this.giveData.phone && this.giveData.phone.length == 14;
   }
-
-  mask(event) {
-    setTimeout(() => {
-      var inputTxt = event.srcElement.value.toString();
-      inputTxt = inputTxt ? inputTxt.split(" ").join("") : "";
-      inputTxt = inputTxt.length > 16 ? inputTxt.substring(0, 16) : inputTxt;
-      this.cardControl = this.maskString(inputTxt);
-
-      this.sharedService.cardData$.next(this.cardData);
-    }, 1);
-  }
-
-  maskExp(event) {
-    setTimeout(() => {
-      var inputTxt = event.srcElement.value.toString();
-      inputTxt = inputTxt.replace(/[^\d\/]/g, "");
-
-      inputTxt = inputTxt.replace(/(\d{2})(\d{2})/, "$1/$2")
-      this.expControl = inputTxt;
-
-      this.sharedService.cardData$.next(this.cardData);
-    }, 1);
-  }
-
-  maskCvv(event) {
-    setTimeout(() => {
-      var inputTxt = event.srcElement.value.toString();
-      inputTxt = inputTxt.replace(/[^\d\/]/g, "");
-
-      inputTxt = inputTxt.replace(/(\d{4})/, "$1")
-      this.cvvControl = inputTxt;
-
-      this.sharedService.cardData$.next(this.cardData);
-    }, 1);
-  }
     
   maskString(inputTxt) {
     inputTxt = inputTxt.replace(/\D/g, "");
@@ -182,6 +142,99 @@ export class PaymentDetailsComponent implements OnInit {
     inputTxt = inputTxt.replace(/(\d{4})(\d)/, "$1 $2");
     inputTxt = inputTxt.replace(/(\d{4})(\d)/, "$1 $2");
     return inputTxt;
+  }
+
+  private createPaymentMethod(data) {
+    let giveData: GiveModel = data.giveData;
+    console.log('data', this.number);
+    this.stripe.createPaymentMethod({
+      type: 'card',
+      cardNumber: this.numberElement.nativeElement,
+      cardExpiry: this.expElement.nativeElement,
+      cardCvc: this.cvvElement.nativeElement,
+      billing_details: {
+        email: giveData.email,
+        name: `${giveData.firstName} ${giveData.lastName}`,
+        phone: giveData.phone,
+        address: {
+          postal_code: giveData.zip
+        }
+      },
+  })
+  .then(function(result) {
+    if (result.error) {
+
+    } else {
+      this.modalCtrl.dismiss({
+        'action': 'submit',
+        'cardData': this.cardData,
+        'giveData': this.giveData
+      });
+    }
+    // Handle result.error or result.paymentMethod
+  });
+  }
+
+
+  private initStripeElements() {
+    const elements = this.stripe.elements();
+    this.number = elements.create('cardNumber', {
+      style: this.elementStyles,
+      classes: this.elementClasses
+    });
+    this.exp = elements.create('cardExpiry', {
+      style: this.elementStyles,
+      classes: this.elementClasses
+    });
+    this.cvv = elements.create('cardCvc', {
+      style: this.elementStyles,
+      classes: this.elementClasses
+    });
+    this.number.mount(this.numberElement.nativeElement);
+    this.exp.mount(this.expElement.nativeElement);
+    this.cvv.mount(this.cvvElement.nativeElement);
+  }
+
+  private initStripeListenters() {
+    this.number.addEventListener('change', ({ error, empty }) => {
+      console.log('err num', error, empty);
+      this.cardErrors = {
+        isEmpty: empty,
+        error: error
+      }
+    });
+    this.number.addEventListener('ready', ({ error, empty }) => {
+      this.cardErrors = {
+        isEmpty: empty,
+        error: error
+      }
+    });
+
+    this.exp.addEventListener('change', ({ error, empty }) => {
+      this.expErrors = {
+        isEmpty: empty,
+        error: error
+      }
+    });
+    this.exp.addEventListener('ready', ({ error, empty }) => {
+      this.expErrors = {
+        isEmpty: empty,
+        error: error
+      }
+    });
+
+    this.cvv.addEventListener('change', ({ error, empty }) => {
+      this.cvvErrors = {
+        isEmpty: empty,
+        error: error
+      }
+    });
+    this.cvv.addEventListener('ready', ({ error, empty }) => {
+      this.cvvErrors = {
+        isEmpty: empty,
+        error: error
+      }
+    });
   }
 
 }

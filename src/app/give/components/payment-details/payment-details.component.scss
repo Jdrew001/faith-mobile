@@ -33,6 +33,10 @@ ion-row.submit-btn {
     margin-bottom: 2em !important;
 }
 
+div.stripe-elements-container ion-row {
+    margin-top: 2em;
+}
+
 .stripe-el label {
     padding-left: 1.2em;
     transform-origin: 20% 0;
@@ -67,3 +71,15 @@ ion-label {
   transform: scale(0.75) translateY(-10px) !important;
   cursor: default !important;
 }
+
+.input.StripeElement.invalid {
+    border-bottom: 1px solid #DEDEDE !important;
+}
+
+.example.example2 .error .message {
+    color: #e25950;
+  }
+  
+  .example.example2 .success .icon .border {
+    stroke: #abe9d2;
+  }

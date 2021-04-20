@@ -25,4 +25,9 @@ export class GiveService {
   encryptInformation(data) {
     return this.crypt.encrypt(GiveConstants.PUBLIC_KEY, JSON.stringify(data));
   }
+
+  fetchPaymentMethods(token) {
+    const url = this.helperService.getCMSResource('/fetchPaymentMethodsByToken');
+    return this.httpClient.post(url, {token: token});
+  }
 }

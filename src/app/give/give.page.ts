@@ -9,10 +9,16 @@ import { CreditCardService } from '../shared/services/credit-card.service';
 import { SharedService } from '../shared/shared.service';
 import { PaymentDetailsComponent } from './components/payment-details/payment-details.component';
 import { GiveConstants } from './GiveConstants';
-import { GivingModel } from './models/card.model';
+import { GiveModel, GivingModel } from './models/card.model';
 import { GivingConst } from './models/give.const';
 import { GiveService } from './services/give.service';
 import { GiveFormValidator } from './utils/GiveValidator';
+import { Plugins } from '@capacitor/core';
+
+const { Browser } = Plugins;
+
+
+declare var Stripe;
 
 @Component({
   selector: 'app-give',
@@ -40,6 +46,8 @@ export class GivePage implements OnInit, DoCheck {
   isRememberChecked: boolean = false;
   formSubmitted = false;
   showActiveDetails = false;
+  stripe;
+  mobiletoken;
   cardForm: FormGroup = new FormGroup({
     card: new FormControl('', [Validators.required]),
     cvv: new FormControl('', [Validators.required]),
@@ -98,7 +106,17 @@ export class GivePage implements OnInit, DoCheck {
   ) { }
 
   async ngOnInit() {
+    this.stripe = Stripe(GiveConstants.STRIPE_PK);
+    await this.retrieveAppToken();
     await this.retrievePreviousData();
+    this.giveService.fetchPaymentMethods(this.mobiletoken).subscribe(res => {
+      console.log('res', res);
+      let data = res[0]['data']['billing_details'];
+
+      let giveData = new GiveModel()
+      giveData.setData(data.email, data.name.split(" ")[0], data.name.split(" ")[1], data.phone, '');
+      this.updateAddedView(giveData);
+    });
   }
 
   ngDoCheck() {
@@ -111,7 +129,10 @@ export class GivePage implements OnInit, DoCheck {
   }
 
   async addPaymentDetails() {
-    await this.navigationToDetail();
+    //await this.navigationToDetail();
+    let token = await this.storageService.getItem('apptoken');
+    console.log('token!', token);
+    await Browser.open({ url: 'http://192.168.43.202:4200/give/give-details?apptoken=' + token });
   }
 
   addToArray() {
@@ -223,15 +244,15 @@ export class GivePage implements OnInit, DoCheck {
     });
   }
 
-  private updateAddedView(data: GivingModel) {
-    this.giveControls.email.setValue(data.giveData.email);
-    this.giveControls.firstName.setValue(data.giveData.firstName);
-    this.giveControls.lastName.setValue(data.giveData.lastName);
-    this.giveControls.phone.setValue(data.giveData.phone);
+  private async retrieveAppToken() {
+    this.mobiletoken = await this.storageService.getItem('apptoken');
+  }
 
-    this.cardControls.card.setValue(data.cardData.card);
-    this.cardControls.expiration.setValue(data.cardData.expiration);
-    this.cardControls.cvv.setValue(data.cardData.cvv);
+  private updateAddedView(data: GiveModel) {
+    this.giveControls.email.setValue(data.email);
+    this.giveControls.firstName.setValue(data.firstName);
+    this.giveControls.lastName.setValue(data.lastName);
+    this.giveControls.phone.setValue(data.phone);
 
     this.showActiveDetails = true;
   }
@@ -277,6 +298,7 @@ export class GivePage implements OnInit, DoCheck {
     return +item;
   }
 
+  
   private convertOfferingToService(offering: Array<any>) {
     offering.forEach(val => {
       let item = val['offering'].split("$").join("").split(",").join("");
