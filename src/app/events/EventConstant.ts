@@ -1,4 +1,5 @@
 export class EventConstant {
+    public static CALENDAR_URL = '/calendars';
     public static MONTH_FORMAT = 'MMMM';
     public static YEAR_FORMAT = 'YYYY';
     public static EVENT_URL = 'events';

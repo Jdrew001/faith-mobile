@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { AnnouncementService } from './announcement.service';
 import { LoadWorkerService } from '../core/load-worker.service';
 import { Announcement } from './announcement.model';
@@ -9,6 +9,9 @@ import { IonSegment, NavController, ModalController } from '@ionic/angular';
 import { HelperService } from '../core/helper.service';
 import { AnnouncementConst } from './announcement.constant';
 import { AnnouncementDetailsPage } from './announcement-details/announcement-details.page';
+import { ActivatedRoute } from '@angular/router';
+import { PushNotificationService } from '../core/services/push-notification.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-announcements',
@@ -24,16 +27,16 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
   limit = new Date().getFullYear() + 2;
   dates = [];
   activeDate: any = {};
+  redirectSubject: Subscription;
 
   constructor(private announcementService: AnnouncementService,
     private loadWorkService: LoadWorkerService,
     private navController: NavController,
     private helperService: HelperService,
-    private modalCtrl: ModalController) {
-      this.announcementService.announcements$.subscribe(val => {
-        this.announcements = val;
-        this.listUpdate = false;
-      });
+    private modalCtrl: ModalController,
+    private activatedRoute: ActivatedRoute,
+    private pushNotificationService: PushNotificationService,
+    private changeDetection: ChangeDetectorRef) {
     }
 
   ngOnInit() {
@@ -41,11 +44,25 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
     this.activeDate = this.dates.find(x => x.active);
     let date = this.dates[1].split(' ');
     this.activeDate = this.dates[1];
-    this.loadAnnouncements(this.splitDate(this.dates[1]).month, this.splitDate(this.dates[1]).year);
+
+    this.pushNotificationService.redirect$.subscribe(val => {
+      if (val && val.details) {
+        this.announcements = [];
+        this.loadAnnouncements();
+      }
+    });
   }
 
-  loadAnnouncements(month, year) {
-    this.announcementService.fetchFilteredAnnouncements(month, year)
+  ionViewDidEnter() {
+    this.loadAnnouncements();
+  }
+
+  loadAnnouncements() {
+    this.announcementService.fetchAnnouncements().subscribe(res => {
+      this.announcements = res;
+      this.listUpdate = false;
+      this.changeDetection.detectChanges();
+    });
   }
 
   updateList(event) {
@@ -53,7 +70,7 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
     let month = date[0];
     let year = date[1];
     this.listUpdate = true;
-    this.announcementService.fetchFilteredAnnouncements(month, year);
+    this.announcementService.fetchAnnouncements();
   }
 
   splitDate(date) {
@@ -75,8 +92,16 @@ export class AnnouncementsPage implements OnInit, OnDestroy {
     return await modal.present();
   }
 
+  getImage() {
+    return this.helperService.getResourceUrl(AnnouncementConst.EMPTY_ANNOUNCEMENT_IMAGE, true);
+  }
+
   getEmptyImage() {
     return this.helperService.getResourceUrl(AnnouncementConst.EMPTY_ANNOUNCEMENT_IMAGE, true);
+  }
+
+  loadImage(url) {
+    return this.helperService.getCMSResource(url);
   }
 
   ngOnDestroy() {

@@ -5,6 +5,7 @@ ion-toolbar {
 ion-button {
     --box-shadow: none !important;
     position: absolute;
+    top: 30px;
     z-index: 9999;
 }
 

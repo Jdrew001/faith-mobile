@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { HelperService } from '../core/helper.service';
 import * as moment from 'moment';
 import { EventConstant } from './EventConstant';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { Event } from './event.model';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Calendar, Event } from './event.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,11 @@ export class EventService {
   event_day$: Subject<any[]> = new Subject<any[]>();
 
   constructor(private httpClient: HttpClient, private helperService: HelperService) { }
+
+  fetchCalendar(): Observable<Array<Calendar>> {
+    const url = this.helperService.getCMSResource(EventConstant.CALENDAR_URL);
+    return this.httpClient.get(url) as Observable<Array<Calendar>>;
+  }
 
   fetchEventsByMonth(date) {
     const url = this.helperService.getResourceUrl(EventConstant.EVENT_URL + this.getMonthFilter(date));

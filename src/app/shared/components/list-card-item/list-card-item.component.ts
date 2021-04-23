@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { SharedService } from '../../shared.service';
 import { HelperService } from 'src/app/core/helper.service';
+import { Calendar } from 'src/app/events/event.model';
 
 enum ListType {
   announcements, events
@@ -32,7 +33,7 @@ export class ListCardItemComponent implements OnInit, OnChanges, OnDestroy {
   @Input('items') items;
   tempItems: Array<any> = [];
   @Input('detailPage') detailPage;
-  @Output('detailNavigate') detailNavigate: EventEmitter<string> = new EventEmitter();
+  @Output('detailNavigate') detailNavigate: EventEmitter<Calendar> = new EventEmitter();
 
   constructor(private sharedService: SharedService, private helperService: HelperService) { }
 
@@ -57,8 +58,8 @@ export class ListCardItemComponent implements OnInit, OnChanges, OnDestroy {
     this.hasLoaded = true;
   }
 
-  navToDetail(id) {
-    this.detailNavigate.emit(`${this.type}/${id}`);
+  navToDetail(obj) {
+    this.detailNavigate.emit(obj);
   }
 
   ngOnDestroy() {

@@ -13,6 +13,7 @@ import { EventService } from './event.service';
 import { EventDetailsPage } from './event-details/event-details.page';
 import {LazyLoadImageModule} from 'ng-lazyload-image';
 import { EventDetailsPageModule } from './event-details/event-details.module';
+import { DateUtils } from './utils/date.utils';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { EventDetailsPageModule } from './event-details/event-details.module';
     CalendarModule
   ],
   providers: [
-    EventService
+    EventService,
+    DateUtils
   ],
   declarations: [EventsPage]
 })

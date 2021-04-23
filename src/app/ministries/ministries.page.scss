@@ -1,4 +1,5 @@
 .ministry-container {
+    width: 100%;
     height: 100%;
     color: white;
     text-align: center;
@@ -11,69 +12,18 @@
     overflow-y: hidden;
 }
 
-.youth-container {
+.image-container {
     height: 100vh;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
-    background-image: url('../../assets/images/faith-youth.jpg');
-    overflow-y: hidden;
-}
-
-.kids-container {
-    height: 100vh;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-    background-image: url('../../assets/images/kids.jpg');
-    overflow-y: hidden;
-}
-
-.ladies-container {
-    height: 100vh;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-    background-image: url('../../assets/images/flowers.jpg');
-    overflow-y: hidden;
-}
-
-.mens-container {
-    height: 100vh;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-    background-image: url('../../assets/images/mens.jpg');
-    overflow-y: hidden;
-}
-
-.marrieds-container {
-    height: 100vh;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-    background-image: url('../../assets/images/marrieds.jpg');
-    overflow-y: hidden;
-}
-
-.bible-container {
-    height: 100vh;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-    background-image: url('../../assets/images/bible.jpg');
     overflow-y: hidden;
 }
 
 h4 {
     color: white !important;
     padding-top: 45%;
-    font-size: 2em;
+    font-size: 2em !important;
     vertical-align: middle;
-}
-
-p {
-    padding: 10px 10px !important;
-    font-size: 0.8em !important;
-    color: white !important;
+    font-family: 'Oswald', sans-serif !important;
 }

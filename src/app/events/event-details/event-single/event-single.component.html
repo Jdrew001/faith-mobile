@@ -2,23 +2,40 @@
   <ion-row>
     <img [defaultImage]="placeHolderImg" [lazyLoad]="getImage(details.image.url)"/>
   </ion-row>
-
-  <ng-container>
-    <ion-row>
-      <ng-container>
-        <ion-card class="container-card">
-          <ion-card-content class="container-content">
-            <h3>{{ item.title }}</h3>
-            <ng-container>
-              <h4 *ngIf="convertToLocalDate(item)">{{ convertToLocalDate(item) }}</h4>
-              <h4 *ngIf="convertToLocalTime(item)">{{ convertToLocalTime(item) }}</h4>
-            </ng-container>
-            <hr>
-    
-            <h4>{{ item.description }}</h4>
-          </ion-card-content>
-        </ion-card>
-      </ng-container>
-    </ion-row>
-  </ng-container>
+  <ion-row>
+    <ion-card class="container-card">
+      <ion-card-content class="container-content">
+        <ng-container>
+          <ion-row>
+            <div class="upcoming-container">
+              <h3>What</h3>
+              <span class="half-border"></span>
+            </div>
+          </ion-row>
+          <ion-row>
+            <h4><strong>{{ details.title }}</strong></h4>
+            <h4>{{details.description}}</h4>
+          </ion-row>
+        </ng-container>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+  
+  <ion-row>
+    <ion-card class="container-card">
+      <ion-card-content class="container-content">
+        <ng-container>
+          <ion-row>
+            <div class="upcoming-container">
+              <h3>When</h3>
+              <span class="half-border"></span>
+            </div>
+          </ion-row>
+          <ion-row>
+            <h4 *ngIf="convertToLocalDate(details.start)">{{ convertToLocalDate(details.start) }}<br> {{ convertToLocalTimeFromDate(details.start) }}</h4>
+          </ion-row>
+        </ng-container>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
 </div>

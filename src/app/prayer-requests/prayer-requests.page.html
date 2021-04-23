@@ -4,7 +4,7 @@
 
 <ion-content>
   <div class="heading fixed">
-    <app-icon-bar [icon]="'chatbubbles-outline'" [title]="'Prayer Request'"></app-icon-bar>
+    <app-icon-bar [icon]="'chatbubbles-outline'" [title]="'Contact Us'"></app-icon-bar>
   </div>
   <ion-card [formGroup]="formGroup" class="top fixed animated fadeIn faster">
     <ion-row>
@@ -49,10 +49,10 @@
       <ion-col>
         <ion-list>
           <ion-item mode="md">
-            <ion-label position="floating">Notes</ion-label>
-            <ion-textarea type="text" inputmode="text" maxlength="500" autocapitalize="on" class="form-control" formControlName="notes" rows="6" value=""></ion-textarea>
+            <ion-label position="floating">Message</ion-label>
+            <ion-textarea type="text" inputmode="text" maxlength="500" autocapitalize="on" class="form-control" formControlName="description" rows="6" value=""></ion-textarea>
           </ion-item>
-          <small>{{ 500 - notesval.length }} characters remaining</small>
+          <small>{{ 500 - descriptionVal.length }} characters remaining</small>
         </ion-list>
       </ion-col>
     </ion-row>

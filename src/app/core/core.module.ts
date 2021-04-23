@@ -12,13 +12,14 @@ import { AlertService } from './services/alert.service';
 import { PushNotificationService } from './services/push-notification.service';
 import { AuthorizationService } from './services/authorization.service';
 import { ToastService } from './services/toast.service';
+import { VersionService } from './services/version.service';
+import { Market } from '@ionic-native/market/ngx';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
 import { LoginFormComponent } from './components/authentication/login-form/login-form.component';
 import { RegistrationFormComponent } from './components/authentication/registration-form/registration-form.component';
 import { ValidationCodeComponent } from './components/authentication/validation-code/validation-code.component';
 import { AuthenticationFormService } from './services/authentication-form.service';
 import { IonicModule } from '@ionic/angular';
-
 
 
 @NgModule({
@@ -42,8 +43,9 @@ import { IonicModule } from '@ionic/angular';
     AlertService,
     PushNotificationService,
     AuthorizationService,
-    AuthenticationFormService,
-    ToastService
+    ToastService,
+    VersionService,
+    Market
   ],
   exports: [LoaderComponent]
 })

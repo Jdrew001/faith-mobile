@@ -20,13 +20,18 @@ const routes: Routes = [
     loadChildren: () => import('./ministries/ministries.module').then( m => m.MinistriesPageModule)
   },
   {
-    path: 'connect',
-    loadChildren: () => import('./connect/connect.module').then( m => m.ConnectPageModule)
+    path: 'biblestudy',
+    loadChildren: () => import('./biblestudy/biblestudy.module').then( m => m.BiblestudyPageModule)
   },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'biblestudy',
+    loadChildren: () => import('./biblestudy/biblestudy.module').then( m => m.BiblestudyPageModule)
   }
+
 ];
 
 @NgModule({

@@ -1,0 +1,31 @@
+<ion-content fullscreen>
+  <div class="exit-container">
+    <ion-button (click)="dismissPage()">
+      <ion-icon [ngStyle]="{'color': isDark ? 'white' : 'black' }" slot="icon-only" name="close-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-row>
+    <img [defaultImage]="placeHolderImg" [lazyLoad]="getImage(pushDetails.image.url)"/>
+  </ion-row>
+
+  <ion-row>
+    <ion-card class="container-card">
+      <ion-card-content class="container-content">
+        <ng-container>
+          <ion-row>
+            <div class="upcoming-container">
+              <h3>Notification</h3>
+              <span class="half-border"></span>
+            </div>
+          </ion-row>
+          <ion-row>
+            <h4><strong>{{ pushDetails.title }}</strong></h4>
+            <h4>{{pushDetails.description}}</h4>
+          </ion-row>
+        </ng-container>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+
+</ion-content>

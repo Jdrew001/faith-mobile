@@ -4,7 +4,7 @@
 
 <ion-content>
   <div class="heading fixed">
-    <app-icon-bar [icon]="'calendar-outline'" [title]="'Events'"></app-icon-bar>
+    <app-icon-bar [icon]="'calendar-outline'" [title]="'Calendar'"></app-icon-bar>
   </div>
   <ion-card class="top fixed animated fadeIn faster">
     <ion-card-content>
@@ -26,10 +26,10 @@
       
     </ion-card-content>
   </ion-card>
-  <ion-row class="empty-row animated fadeIn faster" *ngIf="events && events.length === 0">
+  <ion-row class="empty-row animated fadeIn faster" *ngIf="tempCalItems && tempCalItems.length === 0">
     <img [src]="getEmptyImage()" />
   </ion-row>
   <ion-row style="width:100%">
-    <app-list-card-item [type]="'events'" [items]="events" [detailPage]="'event-details'" (detailNavigate)="navigationToDetail($event)"></app-list-card-item>
+    <app-list-card-item [type]="'events'" [items]="tempCalItems" [detailPage]="'event-details'" (detailNavigate)="navigationToDetail($event)"></app-list-card-item>
   </ion-row>
 </ion-content>

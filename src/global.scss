@@ -40,6 +40,12 @@
     src: url(./assets/fonts/Lato-Regular.ttf);
 }
 
+.ministry-p {
+    padding: 10px 10px !important;
+    font-size: 1em !important;
+    color: white !important;
+}
+
 
 /*ion card*/
 ion-card {
@@ -68,8 +74,10 @@ h4 {
 }
 
 p {
-    font-size: 12px !important;
+    font-size: 10px !important;
     font-family: "roboto-regular", Arial, Helvetica, sans-serif;
+    padding: 0px !important;
+    margin: 0px !important;
 }
 
 div.heading {
@@ -92,4 +100,127 @@ ion-input {
 .ripple-parent {
     position: relative;
     overflow: hidden;
+}
+
+.corner-ribbon{
+    width: 200px;
+    background: #e43;
+    position: absolute;
+    top: 25px;
+    left: -50px;
+    text-align: center;
+    line-height: 50px;
+    letter-spacing: 1px;
+    color: #f0f0f0;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+/* Custom styles */
+
+.corner-ribbon.sticky{
+    position: fixed;
+}
+
+.corner-ribbon.top-right{
+    top: 25px;
+    right: -50px;
+    left: auto;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.ribbon-holder {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
   }
+  .ribbon {
+    position: absolute;
+    background: #e43;;
+    color: white;
+    transform: rotate(-45deg);
+    text-align: center;
+    top: 20px;
+    right: -50px;
+    left: auto;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    width: 40%;
+  }
+
+.ribbon p {
+    font-family: 'Oswald', sans-serif !important;
+}
+
+@media screen and (max-width: 1025px) {
+    .ribbon {
+        width: 32% !important;
+        top: 26px !important;
+        right: -115px !important;
+    }
+
+    .ribbon p {
+        font-size: 25px !important;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .ribbon {
+        width: 40% !important;
+        top: 26px !important;
+        right: -115px !important;
+    }
+
+    .ribbon p {
+        font-size: 17px !important;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .ribbon {
+        width: 40% !important;
+        top: 20px !important;
+        right: -50px !important;
+    }
+
+    .ribbon p {
+        font-size: 12px !important;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .ribbon {
+        width: 43% !important;
+        top: 20px !important;
+        right: -50px !important;
+    }
+
+    .ribbon p {
+        font-size: 12px !important;
+    }
+}
+
+@media screen and (max-width: 365px) {
+    .ribbon {
+        width: 46% !important;
+        top: 20px !important;
+        right: -50px !important;
+    }
+
+    .ribbon p {
+        font-size: 12px !important;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .ribbon {
+        width: 50% !important;
+        top: 20px !important;
+        right: -50px !important;
+    }
+
+    .ribbon p {
+        font-size: 12px !important;
+    }
+}

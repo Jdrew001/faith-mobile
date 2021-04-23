@@ -3,7 +3,7 @@
         <ion-row>
             <ion-searchbar #search placeholder="Search by title" debounce="500" [(ngModel)]="searchText" (ionInput)="searchFilter(search.value)" (ionClear)="clearSearch($event)"></ion-searchbar>
         </ion-row>
-        <ion-row class="filter-btn-container">
+        <!-- <ion-row class="filter-btn-container">
             <ion-col [size]="3">
                 <ion-button fill="outline" (click)="clearFilters()">
                     <ion-icon slot="start" name="close-outline"></ion-icon>
@@ -33,7 +33,7 @@
                     <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
                 </ion-button>
             </ion-col>
-        </ion-row>
+        </ion-row> -->
     </div>
     <ng-container>
         <div [@listAnimation]="sermons && sermons.length">

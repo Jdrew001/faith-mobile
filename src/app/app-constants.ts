@@ -7,13 +7,13 @@ export class AppConstants {
             disabled: false
         },
         {
-            title: 'Events',
+            title: 'Calendar',
             url: '/events',
             icon: 'calendar',
             disabled: false
         },
         {
-            title: 'Prayer Requests',
+            title: 'Contact Us',
             url: '/prayer-requests',
             icon: 'chatbubbles',
             disabled: false
@@ -25,8 +25,8 @@ export class AppConstants {
             disabled: false
         },
         {
-            title: 'Connect',
-            url: '/connect',
+            title: 'Bible Studies',
+            url: '/biblestudy',
             icon: 'book',
             disabled: false
         },

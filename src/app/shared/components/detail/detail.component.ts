@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SharedService } from '../../shared.service';
 import * as moment from 'moment';
 import { HelperService } from 'src/app/core/helper.service';
-import { Item, Event } from 'src/app/events/event.model';
+import { Event } from 'src/app/events/event.model';
 
 @Component({
   selector: 'app-detail',
@@ -12,7 +12,7 @@ import { Item, Event } from 'src/app/events/event.model';
 export class DetailComponent implements OnInit {
 
   @Input('details') details: Event;
-  @Input('childdetails') childDetails: Item[];
+  @Input('childdetails') childDetails: any[];
   @Input('type') type;
   placeHolderImg = '';
 

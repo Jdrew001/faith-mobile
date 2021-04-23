@@ -1,48 +1,49 @@
-export interface Event {
-    id: string;
+import { Frequency } from "./utils/date.utils";
+
+
+export interface Calendar {
+    id: number;
     title: string;
     description: string;
-    calendar_type: string;
-    isActive: boolean;
-    createdAt: string;
-    updatedAt: string;
-    month: string;
-    year: string;
+    repeatable: Frequency;
+    start: string;
+    end: string;
+    cancelledDates: any[];
     image: Image;
-    items: Array<Item>;
-    schedule: Array<Schedule>;
+    events: Array<Event>;
+    allDates: Array<string>;
+    details: Array<Detail>;
 }
 
-export enum DetailType {
-    single,
-    multi,
-    schedule
+export interface Event {
+    id: number;
+    description: string;
+    title: string;
+    time: string;
+    cancelledDates: Array<any>;
+    image: Image;
+    date: string;
+    cancelled: boolean;
 }
 
 export interface Image {
+    id: string;
+    name: string;
     url: string;
-    width: number;
-    height: number;
-    mime: string;   
 }
 
-export interface Item {
-    id: string;
+export interface Detail {
     title: string;
     description: string;
+    repeatable: string;
+    isCancelled: boolean;
+    events: Array<DetailEvent>;
+    image: Image;
     date: string;
-    users: any;
-    active: boolean;
-    createdAt: string;
-    updatedAt: string;
 }
 
-export interface Schedule {
-    id: string;
+export interface DetailEvent {
     title: string;
-    description: string;
-    date: string;
-    active: boolean;
-    createdAt: string;
-    updatedAt: string;
+    time: string;
+    isCancelled: boolean;
 }
