@@ -53,7 +53,7 @@
     "howler": "^2.2.0",
     "ion2-calendar": "^3.0.0-rc.0",
     "json-server": "^0.16.1",
-    "marked": "^1.1.0",
+    "marked": "^4.0.10",
     "moment": "^2.24.0",
     "ng-lazyload-image": "^7.1.0",
     "rxjs": "~6.5.1",
